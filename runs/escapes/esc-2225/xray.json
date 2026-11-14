@@ -1,0 +1,40 @@
+{
+  "commit": "503949862b5c237ddd3413e0f4877c71505656a4",
+  "test_project": "tests/MessagePack.Tests",
+  "filter": "FullyQualifiedName~DateTimeOffset|FullyQualifiedName~StandardClassLibraryStructFormatterTest",
+  "baseline": {
+    "exit": 1,
+    "total": "8",
+    "passed": "7",
+    "failed_count": "1",
+    "failed": [
+      "MessagePack.Tests.FormatterTest.DateTimeOffsetTest"
+    ],
+    "seconds": 49
+  },
+  "groups": [
+    {
+      "id": "g1",
+      "file": "src/MessagePack/Formatters/StandardClassLibraryFormatter.cs",
+      "header": "@@ -257,7 +257,7 @@ namespace MessagePack.Formatters",
+      "result": "breaks-existing-test",
+      "compiled": true,
+      "failing_tests": [],
+      "fixed_by_revert": [
+        "MessagePack.Tests.FormatterTest.DateTimeOffsetTest"
+      ],
+      "seconds": 36,
+      "lines": 9
+    }
+  ],
+  "scope_note": "Only the tests selected by the filter were run.",
+  "parent_baseline": {
+    "exit": 0,
+    "total": "8",
+    "failed": [],
+    "failed_only_at_introducing_commit": [
+      "MessagePack.Tests.FormatterTest.DateTimeOffsetTest"
+    ]
+  },
+  "total_seconds": 134
+}

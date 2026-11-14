@@ -1,0 +1,43 @@
+{
+  "produced_by": "fresh `claude -p` session, model claude-sonnet-5-5, no tools, empty working dir, no conversation context; never told a canary exists",
+  "prompt_sha256": "f1cea6e293a5b82f0c8f0629452c3f5a83136dce19bb0e3e3e98b7dd1f6601d9",
+  "findings": [
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 239,
+      "severity": "high",
+      "issue": "The wrapper filters every diagnostic the collector reports, not just those about metadata types. Diagnostics that are created with a null location (Location.None) are now dropped even for types declared in source. Examples are those using GetLocation(parameter), GetParameterListLocation or GetIdentifierLocation when they return null, such as implicit or record-synthesized members. This contradicts C4, C5 and NF1, and no test checks that source diagnostics still fire."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1446,
+      "severity": "medium",
+      "issue": "The check `IsInSource && ContainsSyntaxTree` silently discards any diagnostic whose location is not in this compilation. It does not distinguish 'type comes from metadata' from 'source-declared symbol with no usable location'. Dropping them hides real problems, and C8's claim that dropping is required does not justify it for source types."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1434,
+      "severity": "high",
+      "issue": "GetPropertyIdentifierLocation returns null for any property whose first syntax reference is not a PropertyDeclarationSyntax. That includes source-declared record primary-constructor properties, whose syntax is a ParameterSyntax. The BothStringAndIntKeyAreNull diagnostic at line 985 is then built with a null location and dropped by the filter. C10 is therefore false: null is not returned only for metadata properties."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 985,
+      "severity": "medium",
+      "issue": "For source-declared properties with no PropertyDeclarationSyntax, such as record positional properties, the BothStringAndIntKeyAreNull diagnostic is now silently suppressed. The old code would have thrown an InvalidCastException for them. This is a user-controlled type, so it is a lost diagnostic against S1 and NF1."
+    },
+    {
+      "path": "README.md",
+      "line": 1642,
+      "severity": "medium",
+      "issue": "The text claims members' diagnostics are reported by the defining assembly. That is not guaranteed: the defining project or NuGet package may not run the analyzer, and the generator-side diagnostics are simply dropped. The claim over-claims behaviour (NF2) and tells users the problem 'must be fixed there'."
+    },
+    {
+      "path": "doc/analyzers/MsgPack004.md",
+      "line": 52,
+      "severity": "medium",
+      "issue": "The text asserts that an unattributed public member of a referenced-assembly type is reported by the defining project. That is not verified and is not guaranteed, because it depends on the defining project having the analyzer. The change also filters diagnostics more broadly than this section implies, so the documentation is inaccurate (NF2)."
+    }
+  ],
+  "raw": null
+}

@@ -1,0 +1,56 @@
+{
+  "canary": "C1",
+  "type": "over-broad-filter",
+  "caught": true,
+  "by": [
+    "llm:claude"
+  ],
+  "by_family": {
+    "tests": false,
+    "deterministic-rules": false,
+    "gemini": false,
+    "claude": true
+  },
+  "note": "Drops the ContainsSyntaxTree check from ReportIfLocatedInCompilation, so diagnostics located in OTHER compilations are reported again (the thing the filter exists to prevent).",
+  "tests": {
+    "ran": true,
+    "compiled": true,
+    "failing_tests": [],
+    "summary_line": "",
+    "outcome": "green",
+    "seconds": 86.3,
+    "log": "runs/drill/C1/tests.log"
+  },
+  "detectors": [],
+  "gemini": {
+    "caught": false,
+    "hits": [],
+    "near_but_off_target": [],
+    "n_findings": 2
+  },
+  "claude": {
+    "caught": true,
+    "hits": [
+      {
+        "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+        "line": 1446,
+        "severity": "medium",
+        "issue": "The check is `IsInSource` rather than a check that the tree belongs to this compilation. Locations in a different compilation's syntax tree are also IsInSource, so the filter does not do what its doc comment says (\"belongs to the compilation being analyzed\"). It also keeps any diagnostic with an in-source location, which is not the same as dropping only metadata-derived ones."
+      }
+    ],
+    "near_but_off_target": [],
+    "n_findings": 7
+  },
+  "xray_routed_to_human_NOT_counted": {
+    "routed": false,
+    "why": "planted lines fall inside agent hunk h6 whose X-Ray result is 'structural' (hunk granularity cannot see a planted change inside it)"
+  },
+  "evidence_refs": [
+    "runs/drill/C1/tests.json",
+    "runs/drill/C1/tests.log",
+    "runs/drill/C1/detectors.json",
+    "runs/drill/C1/gemini_review.json",
+    "runs/drill/C1/claude_findings.json",
+    "runs/drill/C1/review_input.diff"
+  ]
+}

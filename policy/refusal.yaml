@@ -1,0 +1,10 @@
+version: refusal-1
+rules:
+  R1: {name: product-decision,       why: "Intent and user-visible behaviour belong to humans."}
+  R2: {name: silent-suppression,     why: "Silence cannot be proven safe by the absence of failures."}
+  R3: {name: unverified-root-cause,  why: "The fix may patch a symptom; no evidence links it to the named cause."}
+  R4: {name: security-ceiling,       why: "Policy: security-critical areas are always read by a human.", forces_lane: L3}
+  R5: {name: evidence-gap,           why: "A claim has E0, or only E1 on a load-bearing requirement."}
+  R6: {name: doc-overclaim,          why: "Docs assert behaviour that no claim proves; they become a false contract."}
+  R7: {name: public-api,             why: "Public surface changes are compatibility decisions.", forces_lane: L3}
+  R8: {name: requirement-ambiguity,  why: "The requirement can be read two ways; ask, do not guess."}

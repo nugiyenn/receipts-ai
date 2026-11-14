@@ -1,0 +1,34 @@
+diff --git a/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs b/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs
+index e121773d..c4ebe3e1 100644
+--- a/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs
++++ b/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs
+@@ -1426,6 +1426,29 @@ public class TypeCollector
+ 
+     private static Location? GetIdentifierLocation(INamedTypeSymbol type) => ((BaseTypeDeclarationSyntax?)type.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax())?.Identifier.GetLocation();
+ 
++    /// <summary>
++    /// Gets the location of the identifier of a property, if it is declared in source.
++    /// </summary>
++    /// <param name="property">The property symbol. It may be declared in metadata, in which case <see langword="null" /> is returned.</param>
++    /// <returns>The location of the identifier, or <see langword="null" /> if the property has no declaration in source.</returns>
++    private static Location? GetPropertyIdentifierLocation(IPropertySymbol property) => (property.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as PropertyDeclarationSyntax)?.Identifier.GetLocation();
++
++    /// <summary>
++    /// Reports a diagnostic only when its location belongs to the compilation being analyzed.
++    /// </summary>
++    /// <remarks>
++    /// Types and members that come from metadata (or from another compilation) have no location in the compilation being analyzed.
++    /// Their problems are reported by the compilation that defines them, so they are dropped here rather than being reported
++    /// against a location that does not exist, which analyzers are not permitted to do.
++    /// </remarks>
++    private void ReportIfLocatedInCompilation(Action<Diagnostic> report, Diagnostic diagnostic)
++    {
++        if (diagnostic.Location.IsInSource && this.compilation.ContainsSyntaxTree(diagnostic.Location.SourceTree))
++        {
++            report(diagnostic);
++        }
++    }
++
+     private static Location? GetLocation(IParameterSymbol parameter) => parameter.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation();
+ 
+     private static Location? GetParameterListLocation(IMethodSymbol? method) => ((BaseMethodDeclarationSyntax?)method?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax())?.ParameterList.GetLocation();

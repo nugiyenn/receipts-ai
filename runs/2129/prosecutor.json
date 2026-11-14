@@ -1,0 +1,120 @@
+{
+  "change": "2129",
+  "kind": "prosecutor",
+  "produced_by": "claude-code session, cached",
+  "model": "claude-sonnet-5-5",
+  "produced_at": "2026-11-14T23:50",
+  "static_analysis_only": false,
+  "inputs": [
+    "git show origin/ju26-issue-2129",
+    "issue #2129 body and maintainer reply (github.com page, fetched 2026-11-14)",
+    "receipts/requirements/REQ-2129.yaml",
+    "runs/2129/timemachine.json",
+    "runs/2129/probe/ (executed probes)"
+  ],
+  "prompt": "You are the prosecutor. Your job is to FALSIFY the claims below. For each claim, either:\n(a) state a concrete scenario in which it is false, AND propose a minimal test or command\n    that would demonstrate it; or (b) state you could not falsify it.\nYou may also raise NEW hypotheses about behaviour the change silently alters.\nEvery hypothesis must cite exact diff lines. No confidence numbers.",
+  "prompt_sha256": "13ea3c27169a798217bfe57294ac885b5e4965104ab863f5c4129f5abbe51f22",
+  "note": "Executed attacks carry result and result_detail; the others are hypotheses only.",
+  "attacks": [
+    {
+      "id": "P-2129-1",
+      "claim": "C2",
+      "outcome": "scenario_proposed",
+      "executed": true,
+      "result": "not reproduced",
+      "scenario": "The generated formatter diverges from the built-in contractless resolver for attribute-bearing members ([IgnoreDataMember], [DataMember(Name=)]).",
+      "test_sketch": "Probe2129Tests.DataMemberAttributes: serialize ProbeDmType with the generated resolver and ContractlessStandardResolver and compare JSON.",
+      "result_detail": "Equal output. Both write Secret and ignore the DataMember rename; see runs/2129/probe/DataMemberAttributes.txt.",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 133,
+          "quote": "List<ISymbol> targets = GetInstanceMembers(type).Where(IsPublicReadWrite).OrderBy(m => m.Name, StringComparer.Ordinal).ToList();"
+        }
+      ]
+    },
+    {
+      "id": "P-2129-2",
+      "claim": "C8",
+      "outcome": "scenario_proposed",
+      "executed": true,
+      "result": "confirmed",
+      "scenario": "Public members with no setter or a private setter vanish from the wire format without any diagnostic.",
+      "test_sketch": "Probe2129Tests.ReadOnlyAndPrivateSetters with ProbeRoType.",
+      "result_detail": "Output is {\"Id\":1}; Name, PrivSet and Internal are absent and the build reports nothing.",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 282,
+          "quote": "IFieldSymbol field => field.DeclaredAccessibility == Accessibility.Public && !field.IsReadOnly && !field.IsConst,"
+        }
+      ]
+    },
+    {
+      "id": "P-2129-3",
+      "claim": "C4",
+      "outcome": "scenario_proposed",
+      "executed": true,
+      "result": "confirmed",
+      "scenario": "Two partial formatters for the same type, or a generated formatter for a [MessagePackObject] type, leave one formatter without a body.",
+      "test_sketch": "Probe2129Dup.cs: ProbeDupFormatterA and B for ProbeDupType, and ProbeAttrTypeFormatter for a [MessagePackObject] type.",
+      "result_detail": "Build fails with CS0535 on ProbeDupFormatterB and ProbeAttrTypeFormatter; no MsgPack diagnostic names the conflict. See runs/2129/probe/probe-dup.log.",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 123,
+          "quote": "ObjectInfos = ImmutableSortedSet.Create(info),"
+        }
+      ]
+    },
+    {
+      "id": "P-2129-4",
+      "claim": "C2",
+      "outcome": "scenario_proposed",
+      "executed": true,
+      "result": "not reproduced",
+      "scenario": "init-only and required members break deserialization of the generated formatter.",
+      "test_sketch": "Probe2129Tests.InitAndRequiredRoundTrip with ProbeInitType.",
+      "result_detail": "Round trip passes and wire output equals ContractlessStandardResolver.",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 231,
+          "quote": "IsInitOnly: isInitOnly,"
+        }
+      ]
+    },
+    {
+      "id": "P-2129-5",
+      "claim": "C6",
+      "outcome": "scenario_proposed",
+      "executed": false,
+      "result": "not executed",
+      "scenario": "A hand-written formatter that is also decorated with [GeneratedMessagePackFormatter] by mistake is excluded from the resolver and also fails MsgPack020, hiding the real mistake.",
+      "test_sketch": "Roslyn test with the attribute on a class that has a full hand-written body; expect exactly one diagnostic.",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/GeneratorUtilities.cs",
+          "line": 38,
+          "quote": "&& !symbol.GetAttributes().Any(a => a.AttributeClass?.ToDisplayString() =="
+        }
+      ]
+    },
+    {
+      "id": "P-2129-6",
+      "claim": "C7",
+      "outcome": "new_hypothesis",
+      "executed": false,
+      "result": "not executed",
+      "scenario": "The README says nothing needs to be added to the library that owns T, but a struct or class that has only a parameterized constructor is rejected with NoDeserializingConstructor, so a common library shape is unsupported.",
+      "test_sketch": "Roslyn test: external type with only a ctor taking arguments; expect the existing MsgPack diagnostic at the formatter.",
+      "citations": [
+        {
+          "path": "README.md",
+          "line": 1686,
+          "quote": "- Deserialization uses an accessible parameterless constructor (any struct can be created without one)."
+        }
+      ]
+    }
+  ]
+}

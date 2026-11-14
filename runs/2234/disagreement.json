@@ -1,0 +1,54 @@
+{
+  "change": "2234",
+  "method": "match if (cited lines in same file within 8 lines AND token jaccard>=0.12) OR jaccard>=0.35; greedy per Claude claim. Heuristic, not semantic; unmatched claims need human read.",
+  "overlap": [
+    {
+      "claude": "C1",
+      "gemini": "c1",
+      "cited_lines_near": true,
+      "text_jaccard": 0.39
+    },
+    {
+      "claude": "C2",
+      "gemini": "c3",
+      "cited_lines_near": true,
+      "text_jaccard": 0.14
+    },
+    {
+      "claude": "C3",
+      "gemini": "c4",
+      "cited_lines_near": true,
+      "text_jaccard": 0.3
+    },
+    {
+      "claude": "C5",
+      "gemini": "c2",
+      "cited_lines_near": true,
+      "text_jaccard": 0.13
+    }
+  ],
+  "only_claude": [
+    "C4",
+    "C6",
+    "C7",
+    "C8"
+  ],
+  "only_gemini": [
+    {
+      "id": "c5",
+      "requirement": "REQ-2234-S1",
+      "text": "Invalid key contracts (such as mixed key kinds) are not silently dropped; a diagnostic is reported and the member is skipped to prevent further errors."
+    }
+  ],
+  "counts": {
+    "claude": 8,
+    "gemini": 5,
+    "overlap": 4
+  },
+  "only_claude_texts": {
+    "C4": "The change fixes the cause of the 3.1.1 regression, namely analyzer member validation being skipped for suppressed types.",
+    "C6": "Skipping a member whose key kind does not match, and skipping a duplicate-key insert, never hides a contract violation: a diagnostic is always reported first.",
+    "C7": "The README lists exactly which diagnostics are and are not reported for suppressed types: 011, 016 and 017 are not reported, and 004, 005, 015, 003, 012 are.",
+    "C8": "MsgPack012 (data type inaccessible to the resolver) is reported for suppressed types."
+  }
+}

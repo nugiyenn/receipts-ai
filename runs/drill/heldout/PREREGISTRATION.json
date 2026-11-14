@@ -1,0 +1,59 @@
+{
+ "at": "2026-11-15T00:43:20+0200",
+ "note": "HELD-OUT round on #2283. Frozen BEFORE any held-out bug exists. Detectors, rules, policy, reviewer prompts and the test filter must not change during this round. Bugs are authored by Gemini, not by us.",
+ "files": {
+  "receipts/evidence/canary_runner.py": "8135c11a0623770d6a2f675ac25d5be705a0133d6534a9f288cd03812558c060",
+  "receipts/drill.py": "769ad0b8ff63828489be12137412c579aebb8f6a5c1139ae653d6573f4d2759d",
+  "receipts/llm.py": "558a817c808be78cf67e61ce65c9491b94c7179119e049bd040a58ddf5e302a6",
+  "receipts/ingest.py": "b43ccd80125b033ef03eecb5a29f98c20937bec4d02bc63754f1e37bb7f1d970",
+  "policy/areas.yaml": "6e3ef003ff58d296de1ff6f1375aca9b293470f661e92d7876d3bea6ad544ba7",
+  "policy/routing.yaml": "d5f673665cd9888f6eecc224939b794e6556231b9a705109d5d4dab3dd8475eb",
+  "policy/refusal.yaml": "23be6ded8b1668b38edaca40393270970156322ed87257f4d80a3202f7aec732",
+  "requirements/REQ-2283.yaml": "52ac94151908ab2e487f5ad7289983a3d0e8f4447b2c4d48d4ae2c95859b09b7",
+  "runs/2283/claims.json": "718f9c84e13938b20264c608c7d55bd9fef98cfbea7df478c8ba25e9e2848bd4",
+  "runs/2283/xray.json": "c7a4b6695ee7595bc904238980dca8172c3b919e04629429f318174e21f17a76"
+ },
+ "detector_source_sha256": {
+  "detectors()": "00541f2698d03049fb96e00626abe813babf281ebfe571ecbad3574afd92a294",
+  "UNIVERSAL": "be6599601a44a174845b6c65797b9e39a5ca6d37cb48baeb313d3bbe9cd4e043",
+  "EMPTY_CATCH": "740d9297b6aae692ce075940ae2490b390668e91a0cf350246c2f8a464697d80",
+  "judge_reviewer+near+matches": "79273f91fc2322be44657a02278a40b89156c83dc534839a5d73564010928248"
+ },
+ "reviewer_prompt_sha256": {
+  "SYSTEM": "8cd15220221c77398f96edb8db67d45448096f504014cbccb343c3cc13fdef0b",
+  "review_input()": "e002cb9daae06a045fba23612e72d5ae8712ca28c07c4d6f19aaf88162930ae7",
+  "annotated_diff()": "1035de4c9c67e1f52733a313bd55254fdd8ff65edc28a4d371b9db8f11a20958"
+ },
+ "test_filter_sha256": "811768d3748688098da1e4fdf0d797e1e9b4910dd9ae0b900969ac2880ddcc3c",
+ "models": {
+  "gemini_reviewer": "gemini-3.1-pro-preview",
+  "claude_reviewer": "claude-sonnet-5-5",
+  "author": "gemini-3.1-pro-preview"
+ },
+ "matching_rule": "caught = a signal identifies the defect: red targeted test, deterministic rule firing on the planted file, or an LLM finding within +-2 lines of the planted hunk whose text contains one of the author-supplied detect_keywords. Same code as the 11-canary drill (judge_reviewer/near/matches).",
+ "amendments": [
+  {
+   "at": "2026-11-15T00:44:43+0200",
+   "what": "Held-out bugs H1-H6 authored by Gemini (gemini-3.1-pro-preview) from the PR diff and head source only; patches generated mechanically from Gemini's exact old/new edits with git diff. Hashes recorded BEFORE any signal ran on them. detect_keywords are Gemini's own, not edited by us.",
+   "files": {
+    "canaries/heldout/H1.patch": "bca1086225f0b57f4cb1d9f52ad4d5daa6354eba9663643b6498f34d184ee11d",
+    "canaries/heldout/H2.patch": "43780b46cc93edb64aad339948cd742ef7794bc039069df52ad16ab5c0731a0c",
+    "canaries/heldout/H3.patch": "06035657c95ad8a200305c4cde3424593d46be908519c2f3da429dff2d204142",
+    "canaries/heldout/H4.patch": "a5ea03910b6191636233b6ceeb0e8e66fc415664fe6013429ab1d31c2c640fd4",
+    "canaries/heldout/H5.patch": "da2d45f97283d909a4ad4eec9e7b6182a50287f2576db79cba1d5e84692dad81",
+    "canaries/heldout/H6.patch": "946626ccb7dd6fa2786eedc29a8dc62dfca5b8998a57d23a26f395769c094a60",
+    "canaries/heldout/canaries.yaml": "806f7f63ee1bba3fab4bba7de2ad4016c7797d722727d5f97b9ae414ada7bf19",
+    "canaries/heldout/author_heldout.py": "15e4b64965f2c80458636b3f998cc6ab60f176eb9d92f38ee81ff0ce96b00e05",
+    "canaries/heldout/make_patches.py": "867fadcd3294810f92b998f0341557bd5e236f74b30e382f528e120e7d4775fb",
+    "runs/drill/heldout/author_raw_round1.json": "2bf23cf6a078f7aefacf67350549a66b53171d60c6d9bff0f25667599bf41247",
+    "runs/drill/heldout/author_prompt_system.txt": "f7cc6fd631759a429e57c7322e8dc9b6d6e424c4f029c88d6e5b003ef74e820d"
+   },
+   "secondary_metric": "location-only: a reviewer finding within +-2 lines of the planted hunk in the planted file, regardless of keywords. Reported next to the strict metric because the author's keywords may be too strict. The strict metric stays the primary result."
+  },
+  {
+   "at": "2026-11-15T00:49:48+0200",
+   "what": "Results assembled. Frozen-hash check after the run: files changed = none, detector/matching source changed = none. No detector, rule, prompt, keyword or filter was edited during the round. All six patches compiled on the first try, so no replacement was requested.",
+   "run_heldout.py": "added after freezing; it only redirects paths and worktree roots and replicates the assemble step with an extra location-only column. Its sha256: 71ea3e717c9caccddc1cdfa7612b6ecfc69495baf408dfcfcd42c3a2eb8c997b"
+  }
+ ]
+}

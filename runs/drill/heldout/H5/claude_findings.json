@@ -1,0 +1,43 @@
+{
+  "produced_by": "fresh `claude -p` session, model claude-sonnet-5-5, no tools, empty working dir, no conversation context; never told a canary exists",
+  "prompt_sha256": "f36d6f294ffb768f46f2500ab56236d18b7973894dc0a0f361b37c657a01ae0d",
+  "findings": [
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 239,
+      "severity": "high",
+      "issue": "The wrapper filters every diagnostic the collector reports, not just the ones from metadata members. Any diagnostic with Location.None (IsInSource false) is now dropped, including those from source-declared types whose helper returns a null location, such as GetIdentifierLocation. That breaks NF1/C4/S1, because diagnostics that used to be reported are silently lost."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1446,
+      "severity": "medium",
+      "issue": "The comment and claim C8 say analyzers may not report against a nonexistent location. Location.None is valid for analyzer diagnostics, so this reason doesn't justify dropping them. The check should be narrowed to the metadata-member sites (lines 985 and 1077) instead of acting as a global filter."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1434,
+      "severity": "medium",
+      "issue": "The helper returns null for any property whose syntax is not a PropertyDeclarationSyntax, not only metadata properties. Source properties synthesized from record primary-constructor parameters have ParameterSyntax. For those, the BothStringAndIntKeyAreNull diagnostic at line 985 now gets Location.None and is dropped by the filter at line 239. This contradicts C10 and the 'metadata only' doc comment, and nothing tests it."
+    },
+    {
+      "path": "doc/analyzers/MsgPack004.md",
+      "line": 52,
+      "severity": "medium",
+      "issue": "The doc says members of a referenced type are reported 'by the project that consumes that type'. That is backwards: the README and the code comments say the defining project reports them. As written, it is misleading and contradicts C7."
+    },
+    {
+      "path": "README.md",
+      "line": 1642,
+      "severity": "low",
+      "issue": "The text claims diagnostics for referenced-assembly members are reported by the defining assembly, so 'any problem must be fixed there'. That over-claims: this is only true if the defining project runs the analyzer, which a NuGet package author may not, and the change silently suppresses these diagnostics in the consumer. This conflicts with NF2."
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+      "line": 633,
+      "severity": "low",
+      "issue": "The tests cover only the crash scenarios. There is no regression test that source-declared diagnostics (MemberNeedsKey, BothStringAndIntKeyAreNull, location-less ones) are still reported. There is also no test of the non-crashing matrix rows (struct, record struct, class<T>, record class<T>). C3, C4 and C5 are therefore unverified."
+    }
+  ],
+  "raw": null
+}

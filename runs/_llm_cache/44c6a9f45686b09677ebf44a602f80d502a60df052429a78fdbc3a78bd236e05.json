@@ -1,0 +1,19 @@
+{
+ "text": "{\n  \"findings\": [\n    {\n      \"path\": \"src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs\",\n      \"line\": 1434,\n      \"severity\": \"high\",\n      \"issue\": \"GetPropertyIdentifierLocation returns null for properties synthesized from record primary constructor parameters because their syntax is ParameterSyntax, not PropertyDeclarationSyntax. This causes the BothStringAndIntKeyAreNull diagnostic to be silently dropped for such properties (as Location.None fails the IsInSource check), violating REQ-2283-NF1, REQ-2283-S1, and Claim C10.\"\n    }\n  ]\n}",
+ "model": "gemini-3.1-pro-preview",
+ "prompt_sha256": "44c6a9f45686b09677ebf44a602f80d502a60df052429a78fdbc3a78bd236e05",
+ "ts": "2026-11-14T23:34:19+0200",
+ "usage": {
+  "promptTokenCount": 5962,
+  "candidatesTokenCount": 150,
+  "totalTokenCount": 12235,
+  "promptTokensDetails": [
+   {
+    "modality": "TEXT",
+    "tokenCount": 5962
+   }
+  ],
+  "thoughtsTokenCount": 6123,
+  "serviceTier": "standard"
+ }
+}

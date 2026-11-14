@@ -1,0 +1,12 @@
+{
+ "commit": "50394986",
+ "test": "MessagePack.Tests.FormatterTest.DateTimeOffsetTest",
+ "filter": "DateTimeOffset|StandardClassLibraryStructFormatterTest",
+ "results": {
+  "TZ=Europe/Helsinki (this machine)": "1 of 8 fail (DateTimeOffsetTest); passes at parent commit",
+  "TZ=UTC": "8 of 8 pass"
+ },
+ "log": "runs/escapes/esc-2225/xray/head-TZ-UTC.log",
+ "note": "The failure depends on the machine's local time zone. A UTC CI runner would have stayed green on the introducing commit.",
+ "ran_at": "2026-11-15T00:08:39+0200"
+}

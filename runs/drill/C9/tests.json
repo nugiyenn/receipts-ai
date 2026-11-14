@@ -1,0 +1,9 @@
+{
+  "ran": true,
+  "compiled": true,
+  "failing_tests": [],
+  "summary_line": "",
+  "outcome": "green",
+  "seconds": 64.0,
+  "log": "runs/drill/C9/tests.log"
+}

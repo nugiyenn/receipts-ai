@@ -1,0 +1,3 @@
+﻿generated:    {"Id":3,"Label":"x"}
+contractless: {"Id":3,"Label":"x"}
+equal: True

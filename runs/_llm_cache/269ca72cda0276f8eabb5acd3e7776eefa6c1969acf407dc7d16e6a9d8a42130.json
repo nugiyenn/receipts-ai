@@ -1,0 +1,19 @@
+{
+ "text": "{\n  \"findings\": [\n    {\n      \"path\": \"src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs\",\n      \"line\": 985,\n      \"severity\": \"high\",\n      \"issue\": \"The variable `item` is an `ISymbol` (which can represent either a property or a field), so passing it to `GetPropertyIdentifierLocation(IPropertySymbol)` will cause a CS1503 compiler error.\"\n    },\n    {\n      \"path\": \"src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs\",\n      \"line\": 1434,\n      \"severity\": \"medium\",\n      \"issue\": \"`GetSyntax() as PropertyDeclarationSyntax` evaluates to `null` for fields (`VariableDeclaratorSyntax`) and record primary constructor properties (`ParameterSyntax`), causing their diagnostics to be created with `Location.None` and subsequently swallowed by `ReportIfLocatedInCompilation`.\"\n    }\n  ]\n}",
+ "model": "gemini-3.1-pro-preview",
+ "prompt_sha256": "269ca72cda0276f8eabb5acd3e7776eefa6c1969acf407dc7d16e6a9d8a42130",
+ "ts": "2026-11-15T00:48:51+0200",
+ "usage": {
+  "promptTokenCount": 5959,
+  "candidatesTokenCount": 218,
+  "totalTokenCount": 17807,
+  "promptTokensDetails": [
+   {
+    "modality": "TEXT",
+    "tokenCount": 5959
+   }
+  ],
+  "thoughtsTokenCount": 11630,
+  "serviceTier": "standard"
+ }
+}

@@ -1,0 +1,43 @@
+{
+  "produced_by": "fresh `claude -p` session, model claude-sonnet-5-5, no tools, empty working dir, no conversation context; never told a canary exists",
+  "prompt_sha256": "93d1b6173c4632969d55b0c13ba98457259c191170df66b6b02c0610f4305549",
+  "findings": [
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 239,
+      "severity": "high",
+      "issue": "The wrapper drops every diagnostic whose location is not in a tree of this compilation. This includes location-less diagnostics (Location.None) for source-declared types, so existing diagnostics could be lost. That contradicts C4/C5/NF1/S1, and the fix is broader than the crash it addresses."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1077,
+      "severity": "medium",
+      "issue": "`FirstOrDefault()?.GetSyntax().GetLocation()` yields a null location for metadata members. `Diagnostic.Create` with a null location makes a location-less diagnostic, and the constructor filter then silently drops it. The crash is swallowed instead of the metadata case being handled explicitly. Members of a type from metadata are also still processed and generated, which is inconsistent."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 985,
+      "severity": "medium",
+      "issue": "`GetPropertyIdentifierLocation` returns null when the syntax is not a `PropertyDeclarationSyntax`, not only for metadata. Examples are record primary-constructor parameter properties, which are source-declared, so those lose the BothStringAndIntKeyAreNull diagnostic. The previous code would have thrown an InvalidCastException for them. This contradicts C10 and NF1."
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+      "line": 590,
+      "severity": "medium",
+      "issue": "The UnkeyedMember test locks in the silent dropping of the MsgPack004 diagnostic, and the test name and docs endorse it. Nothing tests that diagnostics for source-declared types are still reported, so NF1/S1 are unverified."
+    },
+    {
+      "path": "doc/analyzers/MsgPack004.md",
+      "line": 51,
+      "severity": "medium",
+      "issue": "The doc claims an unattributed public member of a referenced type is reported by the defining project. That is not guaranteed. The defining project reports it only if it runs the analyzer, and a NuGet package or prebuilt DLL may not. The same over-claim appears in README.md line 1642 and in the code comment at TypeCollector.cs:1441."
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+      "line": 637,
+      "severity": "low",
+      "issue": "The comment says the test fails on any diagnostic, but the test sets SkipGeneratedSourcesCheck. It also builds a separate manual compilation for the resolver check, which duplicates the setup and could drift from what the verifier actually runs."
+    }
+  ],
+  "raw": null
+}

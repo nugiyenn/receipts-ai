@@ -1,0 +1,92 @@
+{
+ "filter": "FullyQualifiedName~GenericsFormatterTests|FullyQualifiedName~MsgPack00xAnalyzerTests|FullyQualifiedName~MsgPack011|FullyQualifiedName~MsgPack012|FullyQualifiedName~MsgPack015",
+ "groups": [
+  {
+   "id": "g1",
+   "hunks": [
+    "h3"
+   ],
+   "desc": "constructor wraps reportDiagnostic with ReportIfLocatedInCompilation filter",
+   "result": "load-bearing",
+   "failing_tests": [
+    "GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference_UnkeyedMember"
+   ],
+   "seconds": 74.4,
+   "log": "runs/2283/xray/g1.log",
+   "summary_line": "",
+   "compiled": true,
+   "tests_total": "59",
+   "note": "Reverting the ReportIfLocatedInCompilation wrap: only the agent's UnkeyedMember test fails (it asserts the drop of MsgPack004 for a metadata type). The 2 crash-regression tests still pass, so this hunk does NOT fix the crash; it is a separate behaviour change."
+  },
+  {
+   "id": "g2",
+   "hunks": [
+    "h4"
+   ],
+   "desc": "BothStringAndIntKeyAreNull uses null-safe GetPropertyIdentifierLocation",
+   "result": "unprotected",
+   "failing_tests": [],
+   "seconds": 39.4,
+   "log": "runs/2283/xray/g2.log",
+   "summary_line": "",
+   "compiled": true,
+   "tests_total": "59",
+   "note": "Reverting GetPropertyIdentifierLocation: all 59 targeted tests still pass. No test notices this hunk -> unprotected; stays in the human reading budget."
+  },
+  {
+   "id": "g3",
+   "hunks": [
+    "h5"
+   ],
+   "desc": "MemberNeedsKey uses FirstOrDefault() instead of [0]",
+   "result": "load-bearing",
+   "failing_tests": [
+    "GenericsFormatterTests.ClosedGenericRecordStruct_FromMetadataReference",
+    "GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference",
+    "GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference_UnkeyedMember"
+   ],
+   "seconds": 144.9,
+   "log": "runs/2283/xray/g3.log",
+   "summary_line": "",
+   "compiled": true,
+   "tests_total": "59",
+   "note": "Reverting [0] -> FirstOrDefault(): all 3 new tests fail. This hunk is the actual crash fix."
+  },
+  {
+   "id": "g4",
+   "hunks": [
+    "h6"
+   ],
+   "desc": "adds helper methods (alone: structural, other hunks call them)",
+   "result": "structural",
+   "failing_tests": [],
+   "seconds": 9.9,
+   "log": "runs/2283/xray/g4.log",
+   "summary_line": "",
+   "compiled": false,
+   "tests_total": null,
+   "note": "Reverting helper methods alone does not compile (h3/h4 call them) -> structural."
+  },
+  {
+   "id": "g5",
+   "hunks": [
+    "h3",
+    "h4",
+    "h6"
+   ],
+   "desc": "filter + property-location helper + helpers together (structural bundle)",
+   "result": "load-bearing",
+   "failing_tests": [
+    "GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference_UnkeyedMember"
+   ],
+   "seconds": 27.0,
+   "log": "runs/2283/xray/g5.log",
+   "summary_line": "",
+   "compiled": true,
+   "tests_total": "59",
+   "note": "Filter + property-location helper + helpers reverted together: same single test fails as g1; h4 contributes nothing detectable."
+  }
+ ],
+ "baseline_head_run": "59/59 pass on unmodified head (runs/2283/xray/head-baseline.log)",
+ "evidence_note": "h1,h2 (docs) and h7,h8 (tests) are not X-Rayed; hunk ids match runs/2283/change.json"
+}

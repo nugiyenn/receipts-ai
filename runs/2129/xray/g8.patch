@@ -1,0 +1,17 @@
+diff --git a/src/MessagePack.SourceGenerator/CodeAnalysis/ObjectSerializationInfo.cs b/src/MessagePack.SourceGenerator/CodeAnalysis/ObjectSerializationInfo.cs
+index f1b4e762..c5d7422d 100644
+--- a/src/MessagePack.SourceGenerator/CodeAnalysis/ObjectSerializationInfo.cs
++++ b/src/MessagePack.SourceGenerator/CodeAnalysis/ObjectSerializationInfo.cs
+@@ -10,6 +10,12 @@ public record ObjectSerializationInfo : ResolverRegisterInfo
+ {
+     public required bool IsClass { get; init; }
+ 
++    /// <summary>
++    /// Gets a value indicating whether the formatter is a user-declared <c>partial</c> class marked with
++    /// <c>[GeneratedMessagePackFormatter]</c>, into which the generator writes the formatter body.
++    /// </summary>
++    public bool IsUserDeclaredFormatter { get; init; }
++
+     public required GenericTypeParameterInfo[] GenericTypeParameters { get; init; }
+ 
+     public required MemberSerializationInfo[] ConstructorParameters { get; init; }

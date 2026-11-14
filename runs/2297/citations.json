@@ -1,0 +1,314 @@
+{
+  "change": "2297",
+  "checked_at": "2026-11-14T23:55:26+02:00",
+  "head": "a0aa5ab2de7f5a669d97e37184a89034c1de82b6",
+  "summary": {
+    "citations": 27,
+    "valid": 27,
+    "invalid": 0,
+    "claims": 8,
+    "claims_invalid": 0,
+    "hallucination_rate": 0.0
+  },
+  "claims": [
+    {
+      "claim": "C1",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.tt",
+          "line": 15,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h9"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/StringKey/StringKeyFormatterTemplate.tt",
+          "line": 19,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h17"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/EnumTemplate.tt",
+          "line": 9,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h7"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/UnionTemplate.tt",
+          "line": 11,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h20"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/ResolverTemplate.tt",
+          "line": 15,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h13"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/ResolverTemplate.tt",
+          "line": 32,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h14"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/ResolverTemplate.tt",
+          "line": 49,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h15"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/CompositeResolverTemplate.tt",
+          "line": 8,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h4"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/CompositeResolverTemplate.tt",
+          "line": 36,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h5"
+        }
+      ]
+    },
+    {
+      "claim": "C2",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 11,
+          "quote": "/// Verifies that every type emitted by the source generator is decorated with <c>ExcludeFromCodeCoverage</c>",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h21"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 76,
+          "quote": "text.Contains(ExcludeAttribute),",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h21"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 95,
+          "quote": "Assert.Equal(attributeCount, guardedCount);",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h21"
+        }
+      ]
+    },
+    {
+      "claim": "C3",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 19,
+          "quote": "private const string Guard = \"#if !NETSTANDARD2_0 && !NETFRAMEWORK\";",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h21"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 18,
+          "quote": "The attribute is not available on netstandard2.0 or .NET Framework, so it is only emitted where it exists.",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h21"
+        },
+        {
+          "path": "README.md",
+          "line": 1640,
+          "quote": "The attribute is only emitted for targets where it is available (not `netstandard2.0` or .NET Framework).",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h1"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 95,
+          "quote": "Assert.Equal(attributeCount, guardedCount);",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h21"
+        }
+      ]
+    },
+    {
+      "claim": "C4",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/TransformUtilities.cs",
+          "line": 58,
+          "quote": "writer(anyConstraints ? \"{\\r\\n\" : \" {\\r\\n\");",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h18"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericDataTypeWithPrivateMember/Formatters.HasPrivateSerializedMemberAndIsGenericNamed`1.HasPrivateSerializedMemberAndIsGenericNamedFormatter.g.cs",
+          "line": 13,
+          "quote": "internal sealed class HasPrivateSerializedMemberAndIsGenericNamedFormatter",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h153"
+        }
+      ]
+    },
+    {
+      "claim": "C5",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.tt",
+          "line": 15,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h9"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.cs",
+          "line": 33,
+          "quote": "ExcludeFromCodeCoverage",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h8"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/ResolverTemplate.cs",
+          "line": 38,
+          "quote": "ExcludeFromCodeCoverage",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h10"
+        }
+      ]
+    },
+    {
+      "claim": "C6",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "README.md",
+          "line": 1639,
+          "quote": "All generated formatters and resolvers are decorated with `[ExcludeFromCodeCoverage]`, so generated code does not skew code coverage reports.",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h1"
+        },
+        {
+          "path": "README.md",
+          "line": 1640,
+          "quote": "The attribute is only emitted for targets where it is available (not `netstandard2.0` or .NET Framework).",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h1"
+        }
+      ]
+    },
+    {
+      "claim": "C7",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/Resources/InterfaceUnion/MessagePack.GeneratedMessagePackResolver.g.cs",
+          "line": 12,
+          "quote": "partial class GeneratedMessagePackResolver : MsgPack::IFormatterResolver",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": false,
+          "hunk": null
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NestedGenericTypes/MessagePack.GeneratedMessagePackResolver.g.cs",
+          "line": 15,
+          "quote": "partial class GeneratedMessagePackResolver : MsgPack::IFormatterResolver",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h266"
+        }
+      ]
+    },
+    {
+      "claim": "C8",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/ResolverTemplate.tt",
+          "line": 17,
+          "quote": "partial class <#= ResolverName.Name #> : MsgPack::IFormatterResolver",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h13"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 58,
+          "quote": "partial class GeneratedMessagePackResolver",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h21"
+        }
+      ]
+    }
+  ]
+}

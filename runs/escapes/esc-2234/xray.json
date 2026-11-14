@@ -1,0 +1,65 @@
+{
+  "commit": "1a74a620369ea17fdff729b6f91262b91a2f7ed0",
+  "test_project": "tests/MessagePack.SourceGenerator.Tests",
+  "filter": "FullyQualifiedName~MsgPack00x|FullyQualifiedName~Analyzer|FullyQualifiedName~Generics|FullyQualifiedName~GenerationTests",
+  "baseline": {
+    "exit": 1,
+    "total": "103",
+    "passed": "94",
+    "failed_count": "9",
+    "failed": [
+      "GenerationTests.InterfaceUnionUsedWithNullableRefAnnotation",
+      "MsgPack00xAnalyzerTests.AddAttributeToGenericType",
+      "MsgPack00xAnalyzerTests.AddAttributeToTypeForRecord1",
+      "MsgPack00xAnalyzerTests.AddAttributeToTypeForRecord2",
+      "MsgPack00xAnalyzerTests.AddAttributeToTypeForRecordPrimaryConstructor",
+      "MsgPack00xAnalyzerTests.AddAttributeToType_Fields",
+      "MsgPack00xAnalyzerTests.AddAttributeToType_Generic",
+      "MsgPack00xAnalyzerTests.AddAttributeToType_Nullable",
+      "MsgPack00xAnalyzerTests.AddAttributeToType_Properties"
+    ],
+    "seconds": 52
+  },
+  "groups": [
+    {
+      "id": "g1",
+      "file": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "header": "@@ -710,6 +710,14 @@ public class TypeCollector",
+      "result": "unprotected",
+      "compiled": true,
+      "failing_tests": [],
+      "fixed_by_revert": [],
+      "seconds": 34,
+      "lines": 15
+    },
+    {
+      "id": "g2",
+      "file": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "header": "@@ -1373,13 +1381,6 @@ public class TypeCollector",
+      "result": "unprotected",
+      "compiled": true,
+      "failing_tests": [],
+      "fixed_by_revert": [],
+      "seconds": 32,
+      "lines": 14
+    }
+  ],
+  "scope_note": "Only the tests selected by the filter were run.",
+  "parent_baseline": {
+    "exit": 1,
+    "total": "103",
+    "failed": [
+      "GenerationTests.InterfaceUnionUsedWithNullableRefAnnotation",
+      "MsgPack00xAnalyzerTests.AddAttributeToGenericType",
+      "MsgPack00xAnalyzerTests.AddAttributeToTypeForRecord1",
+      "MsgPack00xAnalyzerTests.AddAttributeToTypeForRecord2",
+      "MsgPack00xAnalyzerTests.AddAttributeToTypeForRecordPrimaryConstructor",
+      "MsgPack00xAnalyzerTests.AddAttributeToType_Fields",
+      "MsgPack00xAnalyzerTests.AddAttributeToType_Generic",
+      "MsgPack00xAnalyzerTests.AddAttributeToType_Nullable",
+      "MsgPack00xAnalyzerTests.AddAttributeToType_Properties"
+    ],
+    "failed_only_at_introducing_commit": []
+  },
+  "total_seconds": 177
+}

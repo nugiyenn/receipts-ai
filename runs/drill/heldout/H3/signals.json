@@ -1,0 +1,67 @@
+{
+  "canary": "H3",
+  "type": "wrong variable",
+  "authored_by": "gemini-3.1-pro-preview",
+  "caught": true,
+  "by": [
+    "test-fail",
+    "llm:claude"
+  ],
+  "by_family": {
+    "tests": true,
+    "deterministic-rules": false,
+    "gemini": false,
+    "claude": true
+  },
+  "location_only_secondary": {
+    "gemini": false,
+    "claude": true,
+    "any": true
+  },
+  "note": "Uses defineSource instead of usageSource when creating the usage compilation, which will cause the test to compile the wrong code.",
+  "tests": {
+    "ran": true,
+    "compiled": true,
+    "failing_tests": [
+      "GenericsFormatterTests.ClosedGenericRecordStruct_FromMetadataReference",
+      "GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference",
+      "GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference_UnkeyedMember"
+    ],
+    "summary_line": "",
+    "outcome": "red",
+    "seconds": 75.3,
+    "log": "runs/drill/heldout/H3/tests.log"
+  },
+  "detectors": [],
+  "gemini": {
+    "caught": false,
+    "hits": [],
+    "near_but_off_target": [],
+    "n_findings": 1
+  },
+  "claude": {
+    "caught": true,
+    "hits": [
+      {
+        "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+        "line": 652,
+        "severity": "high",
+        "issue": "The generator-output check builds its compilation from `defineSource` instead of `usageSource`. It never compiles the consuming type, and `defineSource` has no resolver, so `Assert.Contains(expectedResolverHintName, ...)` can't pass. The assertion that a resolver is emitted (C2/F2) is therefore broken, and it doesn't test the crash scenario."
+      }
+    ],
+    "near_but_off_target": [],
+    "n_findings": 6
+  },
+  "xray_routed_to_human_NOT_counted": {
+    "routed": false,
+    "why": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs is not a src hunk; X-Ray only covers src hunks"
+  },
+  "evidence_refs": [
+    "runs/drill/heldout/H3/tests.json",
+    "runs/drill/heldout/H3/tests.log",
+    "runs/drill/heldout/H3/detectors.json",
+    "runs/drill/heldout/H3/gemini_review.json",
+    "runs/drill/heldout/H3/claude_findings.json",
+    "runs/drill/heldout/H3/review_input.diff"
+  ]
+}

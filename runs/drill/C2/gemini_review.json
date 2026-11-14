@@ -1,0 +1,26 @@
+{
+  "model": "gemini-3.1-pro-preview",
+  "prompt_sha256": "e606067884e60d1d8470b60951d3127c3dcc8bc7021bfad7618b56f45687bdaf",
+  "cached": true,
+  "findings": [
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 985,
+      "severity": "high",
+      "issue": "Compiler error CS1503: `item` is of type `ISymbol` (it can be a field or property), but `GetPropertyIdentifierLocation` expects an `IPropertySymbol`. This will break the build."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1434,
+      "severity": "high",
+      "issue": "`GetPropertyIdentifierLocation` uses `as PropertyDeclarationSyntax`, which evaluates to `null` for record properties (`ParameterSyntax`) and fields (`VariableDeclaratorSyntax`). This causes the `BothStringAndIntKeyAreNull` diagnostic to be silently dropped for these source-declared members, violating REQ-2283-NF1."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1446,
+      "severity": "high",
+      "issue": "`ReportIfLocatedInCompilation` uses `||` instead of `&&`. For project references, `IsInSource` is true but the syntax tree belongs to another compilation. This causes the analyzer to attempt reporting diagnostics against external syntax trees, crashing with `ArgumentException` and violating REQ-2283-F1."
+    }
+  ],
+  "raw": null
+}

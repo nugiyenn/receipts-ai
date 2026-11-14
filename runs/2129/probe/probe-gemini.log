@@ -1,0 +1,55 @@
+
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.37
+
+  MessagePack.SourceGenerator -> /Users/andy/Downloads/Junction2/wt/2129-probe/bin/MessagePack.SourceGenerator/Debug/netstandard2.0/MessagePack.SourceGenerator.dll
+  MessagePack.Analyzers.CodeFixes -> /Users/andy/Downloads/Junction2/wt/2129-probe/bin/MessagePack.Analyzers.CodeFixes/Debug/netstandard2.0/MessagePack.Analyzers.CodeFixes.dll
+  MessagePack.Analyzers -> /Users/andy/Downloads/Junction2/wt/2129-probe/bin/MessagePack.Analyzers/Debug/netstandard2.0/MessagePack.Analyzers.dll
+  MessagePack.SourceGenerator.ExternalTypes -> /Users/andy/Downloads/Junction2/wt/2129-probe/bin/MessagePack.SourceGenerator.ExternalTypes/Debug/net8.0/MessagePack.SourceGenerator.ExternalTypes.dll
+  MessagePack.Annotations -> /Users/andy/Downloads/Junction2/wt/2129-probe/bin/MessagePack.Annotations/Debug/netstandard2.0/MessagePack.Annotations.dll
+  MessagePack -> /Users/andy/Downloads/Junction2/wt/2129-probe/bin/MessagePack/Debug/net8.0/MessagePack.dll
+/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypes.cs(46,27): warning CS8618: Non-nullable property 'Person' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/MessagePack.SourceGenerator.ExecutionTests.csproj]
+/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypes.cs(49,27): warning CS8618: Non-nullable property 'Widget' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/MessagePack.SourceGenerator.ExecutionTests.csproj]
+/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/Probe2129.cs(1,1): warning SA1633: The file header is missing or not located at the top of the file. (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1633.md) [/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/MessagePack.SourceGenerator.ExecutionTests.csproj]
+/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/Probe2129.cs(6,14): warning SA1649: File name should match first type name (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1649.md) [/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/MessagePack.SourceGenerator.ExecutionTests.csproj]
+/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/Probe2129Gemini.cs(1,1): warning SA1633: The file header is missing or not located at the top of the file. (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1633.md) [/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/MessagePack.SourceGenerator.ExecutionTests.csproj]
+/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/Probe2129Gemini.cs(5,14): warning SA1649: File name should match first type name (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1649.md) [/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/MessagePack.SourceGenerator.ExecutionTests.csproj]
+  MessagePack.SourceGenerator.ExecutionTests -> /Users/andy/Downloads/Junction2/wt/2129-probe/bin/MessagePack.SourceGenerator.ExecutionTests/Debug/net8.0/MessagePack.SourceGenerator.ExecutionTests.dll
+Test run for /Users/andy/Downloads/Junction2/wt/2129-probe/bin/MessagePack.SourceGenerator.ExecutionTests/Debug/net8.0/MessagePack.SourceGenerator.ExecutionTests.dll (.NETCoreApp,Version=v8.0)
+VSTest version 17.14.2 (arm64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.8)
+[xUnit.net 00:00:00.14]   Discovering: MessagePack.SourceGenerator.ExecutionTests
+[xUnit.net 00:00:00.22]   Discovered:  MessagePack.SourceGenerator.ExecutionTests
+[xUnit.net 00:00:00.23]   Starting:    MessagePack.SourceGenerator.ExecutionTests
+[xUnit.net 00:00:00.38]   Finished:    MessagePack.SourceGenerator.ExecutionTests
+  Passed Probe2129GeminiTests.SurrogateFieldMatchesProperty [61 ms]
+  Passed Probe2129GeminiTests.IgnoreMemberOnFormattedType [2 ms]
+  Passed Probe2129GeminiTests.IndexerIsSkipped [1 ms]
+  Passed Probe2129GeminiTests.CustomFormatterOnSurrogateMember [< 1 ms]
+
+Test Run Successful.
+Total tests: 4
+     Passed: 4
+ Total time: 1,7879 Seconds
+
+Build succeeded.
+
+/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypes.cs(46,27): warning CS8618: Non-nullable property 'Person' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/MessagePack.SourceGenerator.ExecutionTests.csproj]
+/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypes.cs(49,27): warning CS8618: Non-nullable property 'Widget' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/MessagePack.SourceGenerator.ExecutionTests.csproj]
+/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/Probe2129.cs(1,1): warning SA1633: The file header is missing or not located at the top of the file. (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1633.md) [/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/MessagePack.SourceGenerator.ExecutionTests.csproj]
+/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/Probe2129.cs(6,14): warning SA1649: File name should match first type name (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1649.md) [/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/MessagePack.SourceGenerator.ExecutionTests.csproj]
+/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/Probe2129Gemini.cs(1,1): warning SA1633: The file header is missing or not located at the top of the file. (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1633.md) [/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/MessagePack.SourceGenerator.ExecutionTests.csproj]
+/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/Probe2129Gemini.cs(5,14): warning SA1649: File name should match first type name (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1649.md) [/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/MessagePack.SourceGenerator.ExecutionTests.csproj]
+    6 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:10.09

@@ -1,0 +1,335 @@
+{
+  "change": "2129",
+  "checked_at": "2026-11-14T23:55:28+02:00",
+  "head": "083afd994c1c9a994cb2cd5aa0b6ad805a621457",
+  "summary": {
+    "citations": 27,
+    "valid": 27,
+    "invalid": 0,
+    "claims": 11,
+    "claims_invalid": 0,
+    "hallucination_rate": 0.0
+  },
+  "claims": [
+    {
+      "claim": "C1",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/MessagePackGenerator.cs",
+          "line": 29,
+          "quote": "var generatedFormatters = context.SyntaxProvider.ForAttributeWithMetadataName(",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h17"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 118,
+          "quote": "IsUserDeclaredFormatter = true,",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h12"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypesTests.cs",
+          "line": 12,
+          "quote": "public void ContractlessClassRoundTrips()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h26"
+        }
+      ]
+    },
+    {
+      "claim": "C2",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 133,
+          "quote": "List<ISymbol> targets = GetInstanceMembers(type).Where(IsPublicReadWrite).OrderBy(m => m.Name, StringComparer.Ordinal).ToList();",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h12"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypesTests.cs",
+          "line": 24,
+          "quote": "public void ContractlessClassUsesStringKeysForPublicReadWriteMembers()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h26"
+        }
+      ]
+    },
+    {
+      "claim": "C3",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 91,
+          "quote": "members = CreateContractlessMembers(type);",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h12"
+        },
+        {
+          "path": "README.md",
+          "line": 1655,
+          "quote": "By default the formatter serializes the type in *contractless* mode",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h1"
+        }
+      ]
+    },
+    {
+      "claim": "C4",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 123,
+          "quote": "ObjectInfos = ImmutableSortedSet.Create(info),",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h12"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypesTests.cs",
+          "line": 89,
+          "quote": "public void GeneratedFormattersAreRegisteredInGeneratedResolver()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h26"
+        }
+      ]
+    },
+    {
+      "claim": "C5",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.ExternalTypes/MessagePack.SourceGenerator.ExternalTypes.csproj",
+          "line": 4,
+          "quote": "This assembly deliberately does NOT reference MessagePack.",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h31"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypesTests.cs",
+          "line": 37,
+          "quote": "public void ContractlessClassNullRoundTrips()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h26"
+        }
+      ]
+    },
+    {
+      "claim": "C6",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/GeneratorUtilities.cs",
+          "line": 38,
+          "quote": "&& !symbol.GetAttributes().Any(a => a.AttributeClass?.ToDisplayString() ==",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h16"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.cs",
+          "line": 34,
+          "quote": "Info.IsUserDeclaredFormatter ? \"partial class\" : \"internal sealed class\"",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h20"
+        }
+      ]
+    },
+    {
+      "claim": "C7",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "README.md",
+          "line": 1639,
+          "quote": "### Formatters for types from other assemblies",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h1"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/AnalyzerReleases.Unshipped.md",
+          "line": 26,
+          "quote": "MsgPack019 | Usage | Error | Generated formatter must be partial",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h8"
+        },
+        {
+          "path": "doc/analyzers/index.md",
+          "line": 26,
+          "quote": "[MsgPack019](MsgPack019.md) | Generated formatter must be partial",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h6"
+        }
+      ]
+    },
+    {
+      "claim": "C8",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 282,
+          "quote": "IFieldSymbol field => field.DeclaredAccessibility == Accessibility.Public && !field.IsReadOnly && !field.IsConst,",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h12"
+        },
+        {
+          "path": "README.md",
+          "line": 1656,
+          "quote": "Read-only members are skipped because they cannot be deserialized.",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h1"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.ExternalTypes/ExternalPerson.cs",
+          "line": 14,
+          "quote": "public int Doubled => this.Id * 2;",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h28"
+        }
+      ]
+    },
+    {
+      "claim": "C9",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 49,
+          "quote": "reportDiagnostic?.Invoke(Diagnostic.Create(MsgPack00xMessagePackAnalyzer.GeneratedFormatterMustBePartial, location, formatterName));",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h12"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/MessagePackGenerator.cs",
+          "line": 131,
+          "quote": "context.RegisterSourceOutput(generatedFormatterDiagnostics, static (context, diagnostic) => context.ReportDiagnostic(diagnostic));",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h19"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GeneratedMessagePackFormatterTests.cs",
+          "line": 29,
+          "quote": "public async Task FormatterMustBePartial()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h33"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GeneratedMessagePackFormatterTests.cs",
+          "line": 173,
+          "quote": "public async Task SurrogateKeysMustNotMixStringAndInt()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h33"
+        }
+      ]
+    },
+    {
+      "claim": "C10",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 189,
+          "quote": "ISymbol? target = targetMembers.FirstOrDefault(m => m.Name == surrogateMember.Name);",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h12"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypesTests.cs",
+          "line": 55,
+          "quote": "public void SurrogateControlsKeysAndMembership()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h26"
+        }
+      ]
+    },
+    {
+      "claim": "C11",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "src/MessagePack.Annotations/Attributes.cs",
+          "line": 166,
+          "quote": "public class GeneratedMessagePackFormatterAttribute : Attribute",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h7"
+        },
+        {
+          "path": "src/MessagePack.Annotations/Attributes.cs",
+          "line": 176,
+          "quote": "public Type? SurrogateType { get; set; }",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h7"
+        }
+      ]
+    }
+  ]
+}

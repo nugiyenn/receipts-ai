@@ -1,0 +1,9 @@
+{
+  "ran": true,
+  "compiled": true,
+  "failing_tests": [],
+  "summary_line": "",
+  "outcome": "green",
+  "seconds": 85.7,
+  "log": "runs/drill/heldout/H6/tests.log"
+}

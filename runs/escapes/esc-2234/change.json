@@ -1,0 +1,97 @@
+{
+  "id": "esc-2234",
+  "requirement_ids": [
+    "REQ-esc-2234"
+  ],
+  "repo": "../repo",
+  "branch": "1a74a620369ea17fdff729b6f91262b91a2f7ed0",
+  "base": "f0bc35a1f84565fbb94966ec898d48bd719cb922",
+  "head": "1a74a620369ea17fdff729b6f91262b91a2f7ed0",
+  "subject": "stop collect field when object marked SuppressSourceGeneration",
+  "message": "stop collect field when object marked SuppressSourceGeneration",
+  "areas_version": "areas-1",
+  "totals": {
+    "files": 2,
+    "hunks": 3,
+    "added": 87,
+    "removed": 98,
+    "changed_lines": 185,
+    "by_kind": {
+      "src": 2
+    }
+  },
+  "files": [
+    {
+      "path": "sandbox/Sandbox/Program.cs",
+      "area": "other",
+      "kind": "src",
+      "status": "modified",
+      "added": 79,
+      "removed": 91,
+      "hunks": [
+        "h1"
+      ],
+      "binary": false
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "area": "analyzer-core",
+      "kind": "src",
+      "status": "modified",
+      "added": 8,
+      "removed": 7,
+      "hunks": [
+        "h2",
+        "h3"
+      ],
+      "binary": false
+    }
+  ],
+  "hunks": [
+    {
+      "id": "h1",
+      "path": "sandbox/Sandbox/Program.cs",
+      "kind": "src",
+      "area": "other",
+      "old_start": 5,
+      "old_len": 108,
+      "new_start": 5,
+      "new_len": 96,
+      "ctx": "",
+      "added": 79,
+      "removed": 91,
+      "text": "@@ -5,108 +5,96 @@\n \n using System;\n using System.Collections.Generic;\n-// using Issue2101;\n+using Issue2101;\n using MessagePack;\n using MessagePack.Resolvers;\n \n-//Dictionary<string, IPrimaryKeyItem> itemList = new Dictionary<string, IPrimaryKeyItem>();\n+Dictionary<string, IPrimaryKeyItem> itemList = new Dictionary<string, IPrimaryKeyItem>();\n \n //itemList.Add(\"1\", new PrimaryKeyItem<int>(1));\n //itemList.Add(\"2\", new PrimaryKeyItem<string>(\"2\"));\n \n-//var json = MessagePackSerializer.SerializeToJson(itemList, GetResolver());\n+var json = MessagePackSerializer.SerializeToJson(itemList, GetResolver());\n \n-//Console.WriteLine(json);\n+Console.WriteLine(json);\n \n-//MessagePackSerializerOptions GetResolver()\n-//{\n-//    var resolver = CompositeResolver.Create(\n-//        NativeDecimalResolver.Instance,\n-//        NativeGuidResolver.Instance,\n-//        NativeDateTimeResolver.Instance,\n-//        TypelessObjectResolver.Instance,\n-//        // StandardResolver.Instance\n+MessagePackSerializerOptions GetResolver()\n+{\n+    var resolver = CompositeResolver.Create(\n+        NativeDecimalResolver.Instance,\n+        NativeGuidResolver.Instance,\n+        NativeDateTimeResolver.Instance,\n+        TypelessObjectResolver.Instance,\n+        // StandardResolver.Instance\n \n-//        BuiltinResolver.Instance,\n-//        AttributeFormatterResolver.Instance\n-//    // SourceGeneratedFormatterResolver.Instance\n-//    );\n+        BuiltinResolver.Instance,\n+        AttributeFormatterResolver.Instance\n+    // SourceGeneratedFormatterResolver.Instance\n+    );\n \n-//    return MessagePackSerializerOptions.Standard.WithResolver(resolver).WithOmitAssemblyVersion(true);\n-//}\n+    return MessagePackSerializerOptions.Standard.WithResolver(resolver).WithOmitAssemblyVersion(true);\n+}\n \n Console.WriteLine(\"foo\");\n \n-//[MessagePack.Union(0, typeof(Foo))]\n-//public interface IUnionTest\n-//{\n-//}\n-\n-//// [MessagePackObject]\n-//public class Foo\n-//{\n-//    // [Key(0)]\n-//    public string MyProperty { get; set; }\n-//}\n-\n-//namespace Issue2101\n-//{\n-//    [MessagePackObject(AllowPrivate = true, SuppressSourceGeneration = true)]\n-//    public class PrimaryKey\n-//    {\n-//        [Key(0)]\n-//        private Dictionary<string, IPrimaryKeyItem> itemList = new Dictionary<string, IPrimaryKeyItem>();\n-//    }\n-\n-//    public interface IPrimaryKeyItem\n-//    {\n-//        object ObjectValue\n-//        {\n-//            get; // set;\n-//        }\n-//    }\n-\n-//    // [MessagePackObject(AllowPrivate = true, SuppressSourceGeneration = true)]\n-//    public abstract class PrimaryKeyItemBase\n-//    {\n-//        internal abstract void SetValue(object value);\n-//    }\n-\n-//    [MessagePackObject(AllowPrivate = true, SuppressSourceGeneration = true)]\n-//    public class PrimaryKeyItem<TType> : PrimaryKeyItemBase, IPrimaryKeyItem\n-//    {\n-//        [Key(0)]\n-//        private TType value;\n-\n-//        [SerializationConstructor]\n-//        private PrimaryKeyItem()\n-//        {\n-//        }\n-\n-//        public PrimaryKeyItem(TType value)\n-//        {\n-//            if (value == null)\n-//                throw new ArgumentNullException(\"value\");\n-\n-//            this.value = value;\n-//        }\n-\n-//        [IgnoreMember]\n-//        public object ObjectValue\n-//        {\n-//            get\n-//            {\n-//                return value;\n-//            }\n-//        }\n-\n-//        internal override void SetValue(object value)\n-//        {\n-//            this.value = (TType)value;\n-//        }\n-//    }\n-\n-\n-\n-\n-//}\n+namespace Issue2101\n+{\n+    [MessagePackObject(AllowPrivate = true, SuppressSourceGeneration = true)]\n+    public partial class PrimaryKey\n+    {\n+        [Key(0)]\n+        private Dictionary<string, IPrimaryKeyItem> itemList = new Dictionary<string, IPrimaryKeyItem>();\n+    }\n+\n+    public interface IPrimaryKeyItem\n+    {\n+        object ObjectValue\n+        {\n+            get; // set;\n+        }\n+    }\n+\n+    // [MessagePackObject(AllowPrivate = true, SuppressSourceGeneration = true)]\n+    //public abstract class PrimaryKeyItemBase\n+    //{\n+    //    internal abstract void SetValue(object value);\n+    //}\n+\n+    //[MessagePackObject(AllowPrivate = true, SuppressSourceGeneration = true)]\n+    //public class PrimaryKeyItem<TType> : PrimaryKeyItemBase, IPrimaryKeyItem\n+    //{\n+    //    [Key(0)]\n+    //    private TType value;\n+\n+    //    [SerializationConstructor]\n+    //    private PrimaryKeyItem()\n+    //    {\n+    //    }\n+\n+    //    public PrimaryKeyItem(TType value)\n+    //    {\n+    //        if (value == null)\n+    //            throw new ArgumentNullException(\"value\");\n+\n+    //        this.value = value;\n+    //    }\n+\n+    //    [IgnoreMember]\n+    //    public object ObjectValue\n+    //    {\n+    //        get\n+    //        {\n+    //            return value;\n+    //        }\n+    //    }\n+\n+    //    internal override void SetValue(object value)\n+    //    {\n+    //        this.value = (TType)value;\n+    //    }\n+    //}\n+\n+\n+\n+\n+}",
+      "group": null
+    },
+    {
+      "id": "h2",
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "kind": "src",
+      "area": "analyzer-core",
+      "old_start": 710,
+      "old_len": 6,
+      "new_start": 710,
+      "new_len": 14,
+      "ctx": "public class TypeCollector",
+      "added": 8,
+      "removed": 0,
+      "text": "@@ -710,6 +710,14 @@ public class TypeCollector\n         // Examine properties set on the attribute such that we can discern whether they were explicitly set or not.\n         // This is useful when we have assembly-level attributes or other environmentally-controlled defaults that the attribute may override either direction.\n         bool? suppressSourceGeneration = (bool?)contractAttr?.NamedArguments.FirstOrDefault(kvp => kvp.Key == Constants.SuppressSourceGenerationPropertyName).Value.Value;\n+\n+        // Do not source generate the formatter for this type if the attribute opted out.\n+        if (suppressSourceGeneration is true)\n+        {\n+            // Skip any source generation\n+            return null;\n+        }\n+\n         bool? allowPrivateAttribute = (bool?)contractAttr?.NamedArguments.FirstOrDefault(kvp => kvp.Key == Constants.AllowPrivatePropertyName).Value.Value;\n \n         if (contractAttr is null)",
+      "group": null
+    },
+    {
+      "id": "h3",
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "kind": "src",
+      "area": "analyzer-core",
+      "old_start": 1373,
+      "old_len": 13,
+      "new_start": 1381,
+      "new_len": 6,
+      "ctx": "public class TypeCollector",
+      "added": 0,
+      "removed": 7,
+      "text": "@@ -1373,13 +1381,6 @@ public class TypeCollector\n             }\n         }\n \n-        // Do not source generate the formatter for this type if the attribute opted out.\n-        if (suppressSourceGeneration is true)\n-        {\n-            // Skip any source generation\n-            return null;\n-        }\n-\n         // If any property had a private setter and does not appear in the deserializing constructor signature,\n         // we'll need a nested formatter.\n         foreach (IPropertySymbol property in nestedFormatterRequiredIfPropertyIsNotSetByDeserializingCtor)",
+      "group": null
+    }
+  ]
+}

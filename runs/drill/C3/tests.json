@@ -1,0 +1,13 @@
+{
+  "ran": true,
+  "compiled": true,
+  "failing_tests": [
+    "GenericsFormatterTests.ClosedGenericRecordStruct_FromMetadataReference",
+    "GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference",
+    "GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference_UnkeyedMember"
+  ],
+  "summary_line": "",
+  "outcome": "red",
+  "seconds": 84.1,
+  "log": "runs/drill/C3/tests.log"
+}

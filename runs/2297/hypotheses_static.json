@@ -1,0 +1,151 @@
+{
+  "change": "2297",
+  "kind": "hypotheses_static",
+  "produced_by": "claude-code session, cached",
+  "model": "claude-sonnet-5-5",
+  "produced_at": "2026-11-14T23:19",
+  "static_analysis_only": true,
+  "prompt": "List (a) facts verified statically, each with the exact command run and its captured output, and (b) hypotheses for the evidence engine to confirm or reject,\neach with a concrete test sketch and the outcome that would confirm or reject it. Static analysis only: do not run dotnet. No confidence numbers.",
+  "prompt_sha256": "16483aa1400755943731183936595a953906d028e7270724d9883f95a60608fb",
+  "inputs": [
+    "git show origin/ju26-issue-2297",
+    "issue #2297 body (github.com page, fetched 2026-11-14)",
+    "receipts/requirements/REQ-2297.yaml"
+  ],
+  "verified_facts": [
+    {
+      "id": "F-2297-1",
+      "statement": "The commit touches 222 .g.cs files; 225 exist under tests at base.",
+      "command": "bash -c echo -n 'touched: '; git -C /Users/andy/Downloads/Junction2/repo show origin/ju26-issue-2297 --format= --name-only | grep -c '\\.g\\.cs$'; echo -n 'at base: '; git -C /Users/andy/Downloads/Junction2/repo ls-tree -r --name-only origin/ju26-issue-2297~1 tests | grep -c '\\.g\\.cs$'",
+      "exit_code": 0,
+      "output": "touched: 222\nat base: 225",
+      "status": "verified-static"
+    },
+    {
+      "id": "F-2297-2",
+      "statement": "The 3 untouched .g.cs files are all under Resources/InterfaceUnion/.",
+      "command": "bash -c comm -23 <(git -C /Users/andy/Downloads/Junction2/repo ls-tree -r --name-only origin/ju26-issue-2297~1 tests | grep '\\.g\\.cs$' | sort) <(git -C /Users/andy/Downloads/Junction2/repo show origin/ju26-issue-2297 --format= --name-only | grep '\\.g\\.cs$' | sort)",
+      "exit_code": 0,
+      "output": "tests/MessagePack.SourceGenerator.Tests/Resources/InterfaceUnion/Formatters.MessagePack.GeneratedMessagePackResolver.IMyTypeFormatter.g.cs\ntests/MessagePack.SourceGenerator.Tests/Resources/InterfaceUnion/Formatters.MessagePack.GeneratedMessagePackResolver.UnionContainerFormatter.g.cs\ntests/MessagePack.SourceGenerator.Tests/Resources/InterfaceUnion/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "status": "verified-static"
+    },
+    {
+      "id": "F-2297-3",
+      "statement": "The whole commit deletes 9 lines: 7 in preprocessed template .cs files, 1 in TransformUtilities.cs and 1 in one snapshot file.",
+      "command": "bash -c git -C /Users/andy/Downloads/Junction2/repo show origin/ju26-issue-2297 --format= | grep -cE '^-[^-]'",
+      "exit_code": 0,
+      "output": "9",
+      "status": "verified-static"
+    },
+    {
+      "id": "F-2297-4",
+      "statement": "The one deleted snapshot line belongs to the HasPrivateSerializedMemberAndIsGenericNamed formatter snapshot.",
+      "command": "bash -c git -C /Users/andy/Downloads/Junction2/repo show origin/ju26-issue-2297 --format= | awk '/^diff --git/{f=$3} /^-\\{\\tinternal sealed class HasPrivate/{print f}'",
+      "exit_code": 0,
+      "output": "a/tests/MessagePack.SourceGenerator.Tests/Resources/GenericDataTypeWithPrivateMember/Formatters.HasPrivateSerializedMemberAndIsGenericNamed`1.HasPrivateSerializedMemberAndIsGenericNamedFormatter.g.cs",
+      "status": "verified-static"
+    },
+    {
+      "id": "F-2297-5",
+      "statement": "The six .tt templates each contain one or more guarded attributes at the cited lines.",
+      "command": "bash -c for f in FormatterTemplate ResolverTemplate EnumTemplate UnionTemplate CompositeResolverTemplate StringKey/StringKeyFormatterTemplate; do echo -n \"$f: \"; git -C /Users/andy/Downloads/Junction2/repo show origin/ju26-issue-2297:src/MessagePack.SourceGenerator/Transforms/$f.tt | grep -c 'ExcludeFromCodeCoverage'; done",
+      "exit_code": 0,
+      "output": "FormatterTemplate: 1\nResolverTemplate: 3\nEnumTemplate: 1\nUnionTemplate: 1\nCompositeResolverTemplate: 2\nStringKey/StringKeyFormatterTemplate: 1",
+      "status": "verified-static"
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "H6",
+      "rule": "R1",
+      "statement": "Not every .g.cs hunk is a pure attribute addition: at least one snapshot also has a changed line.",
+      "status": "static-fact",
+      "static_evidence": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericDataTypeWithPrivateMember/Formatters.HasPrivateSerializedMemberAndIsGenericNamed`1.HasPrivateSerializedMemberAndIsGenericNamedFormatter.g.cs",
+          "line": 13,
+          "quote": "internal sealed class HasPrivateSerializedMemberAndIsGenericNamedFormatter"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/TransformUtilities.cs",
+          "line": 58,
+          "quote": "writer(anyConstraints ? \"{\\r\\n\" : \" {\\r\\n\");"
+        }
+      ],
+      "static_evidence_note": "Verified fact F-2297-3 and F-2297-4: the commit deletes lines, and one deleted line belongs to a snapshot.",
+      "how_to_confirm": "P-2297-4 regex over every hunk; the regen stage's own result is the executed evidence.",
+      "if_confirmed": "claim C4 refuted for that file",
+      "if_rejected": "n/a"
+    },
+    {
+      "id": "H8",
+      "rule": "R1",
+      "statement": "The attribute on the generated part of the resolver also excludes user-written members of the partial class.",
+      "status": "unconfirmed",
+      "static_evidence": [
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/ResolverTemplate.tt",
+          "line": 17,
+          "quote": "partial class <#= ResolverName.Name #> : MsgPack::IFormatterResolver"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 58,
+          "quote": "partial class GeneratedMessagePackResolver"
+        }
+      ],
+      "how_to_confirm": "P-2297-8 (coverage run) or C# reasoning: attributes of partial declarations are combined.",
+      "if_confirmed": "refusal R-2297-2 stands",
+      "if_rejected": "n/a"
+    },
+    {
+      "id": "H9",
+      "rule": "R1",
+      "statement": "ExcludeFromCodeCoverageAttribute exists on netstandard2.0 and .NET Framework, so the guard removes decoration that compiles.",
+      "status": "unconfirmed",
+      "static_evidence": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 18,
+          "quote": "The attribute is not available on netstandard2.0 or .NET Framework, so it is only emitted where it exists."
+        }
+      ],
+      "static_evidence_note": "The statement in the test comment is an unverified assertion by the author agent; this reviewer holds a contrary recollection that is not evidence.",
+      "how_to_confirm": "P-2297-3: compile against the reference assemblies.",
+      "if_confirmed": "claim C3 refuted, refusal R-2297-1 becomes a defect",
+      "if_rejected": "guard justified"
+    },
+    {
+      "id": "H10",
+      "rule": "R5",
+      "statement": "The test checks per file, not per type, so dropping two of the three resolver attributes still passes it.",
+      "status": "unconfirmed",
+      "static_evidence": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 76,
+          "quote": "text.Contains(ExcludeAttribute),"
+        }
+      ],
+      "how_to_confirm": "P-2297-2 mutation.",
+      "if_confirmed": "C2 stays E1 and the snapshots are the only protection",
+      "if_rejected": "per-type protection exists"
+    },
+    {
+      "id": "H11",
+      "rule": "R5",
+      "statement": "The 3 untouched snapshots under InterfaceUnion/ are orphans consumed by no test.",
+      "status": "unconfirmed",
+      "static_evidence": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/Resources/InterfaceUnion/MessagePack.GeneratedMessagePackResolver.g.cs",
+          "line": 12,
+          "quote": "partial class GeneratedMessagePackResolver : MsgPack::IFormatterResolver"
+        }
+      ],
+      "how_to_confirm": "P-2297-7.",
+      "if_confirmed": "harmless, report as note",
+      "if_rejected": "stale snapshots that tests ignore"
+    }
+  ]
+}

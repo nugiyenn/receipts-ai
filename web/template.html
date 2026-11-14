@@ -1,0 +1,1087 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Receipts · Earned trust in AI code</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 16'%3E%3Cpath d='M1 1h12v12.5l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5z' fill='none' stroke='%230C66E4' stroke-width='1.5'/%3E%3Cpath d='M4 5h6M4 8h4' stroke='%230C66E4' stroke-width='1.5'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#F7F8F9; --surface:#FFFFFF; --ink:#172B4D; --dim:#44546F; --faint:#626F86; --line:#DCDFE4; --soft:#F1F2F4; --sel:#E9F2FF;
+  --brand:#0C66E4; --brandh:#0055CC; --brandp:#09326C; --onbrand:#FFFFFF; --violet:#6E5DC6; --orange:#E56910; --stamp:#C2410C;
+  --e3:#1F845A; --e3t:#216E4E; --e3b:#DFFCF0; --e2:#2898BD; --e2t:#1D6A85; --e2b:#E1F4FA; --e1:#B38600; --e1t:#7F5F01; --e1b:#FFF7D6;
+  --e0:#8590A2; --e0t:#44546F; --e0b:#F1F2F4; --ref:#C9372C; --reft:#AE2E24; --refb:#FFECEB;
+  --code:#F1F2F4; --diffa:#E3FCEF; --diffat:#14573A; --diffd:#FFEBE6; --diffdt:#8A241B;
+  --lane0:#DCE6F5; --lane1:#C4D4EE; --lane2:#9DB6E3; --lane3:#6C93D6;
+  --shadow:0 1px 1px rgba(9,30,66,.25),0 0 1px rgba(9,30,66,.31); --shadow2:0 8px 12px rgba(9,30,66,.15),0 0 1px rgba(9,30,66,.31);
+  --fs-xs:13px; --fs-md:15px; --fs-lg:17px; --fs-xl:24px; --fs-hero:56px;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{margin:0;background:var(--bg);color:var(--ink);font:var(--fs-md)/22px var(--sans);-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;overflow-x:clip}
+button,select,textarea{font:inherit;color:inherit}
+code,pre,.mono{font-family:var(--mono);font-size:var(--fs-xs)}
+#bg{display:none}
+#fx{position:fixed;inset:0;width:100%;height:100%;z-index:70;pointer-events:none}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+/* top bar */
+header.top{position:sticky;top:0;z-index:40;height:48px;display:flex;align-items:center;gap:16px;padding:0 24px;background:var(--surface);border-bottom:1px solid var(--line)}
+.wordmark{display:flex;align-items:center;gap:8px;font-weight:600;font-size:var(--fs-lg);color:var(--ink);text-decoration:none;white-space:nowrap}
+.mark{color:var(--brand);display:block}
+.tabs{display:flex;gap:4px;align-self:stretch}
+.tab{background:none;border:0;border-bottom:2px solid transparent;color:var(--dim);cursor:pointer;padding:0 12px;font-weight:500;margin-top:2px}
+.tab:hover{color:var(--ink)} .tab[aria-selected=true]{color:var(--brand);border-bottom-color:var(--brand)}
+.sp{flex:1}
+.sel{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:4px 8px;color:var(--ink);max-width:100%}
+.ghost,.solid,.opt{border-radius:3px;border:0;cursor:pointer;padding:6px 12px;font-weight:500;transition:background .15s,transform .1s}
+.ghost{background:var(--soft);color:var(--ink)} .ghost:hover{background:var(--line)}
+.solid{background:var(--brand);color:var(--onbrand)} .solid:hover{background:var(--brandh)} .solid:active{background:var(--brandp)} .solid:disabled{opacity:.4;cursor:not-allowed}
+.ghost:active,.solid:active,.opt:active{transform:translateY(1px)}
+kbd{font:600 13px/20px var(--mono);background:var(--soft);color:var(--dim);border:1px solid var(--line);border-radius:3px;padding:0 4px}
+/* page */
+main.page{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:24px 24px 48px}
+h1{font-size:var(--fs-xl);line-height:28px;font-weight:600;margin:0}
+h2{font-size:var(--fs-lg);line-height:24px;font-weight:600;margin:0 0 8px}
+.meta{color:var(--faint);font-size:var(--fs-xs);margin-top:4px}
+.muted{color:var(--dim)} .faint{color:var(--faint)} .hint{font:var(--fs-xs) var(--mono);color:var(--faint)}
+section.scene{margin:32px 0 0} section.scene:first-of-type{margin-top:24px}
+/* evidence */
+.lv-E3{--c:var(--e3);--ct:var(--e3t);--cb:var(--e3b)} .lv-E2{--c:var(--e2);--ct:var(--e2t);--cb:var(--e2b)} .lv-E1{--c:var(--e1);--ct:var(--e1t);--cb:var(--e1b)}
+.lv-E0{--c:var(--e0);--ct:var(--e0t);--cb:var(--e0b)} .lv-REF{--c:var(--ref);--ct:var(--reft);--cb:var(--refb)}
+.loz{display:inline-block;font:700 13px/20px var(--sans);letter-spacing:0;text-transform:none;color:var(--ct);background:var(--cb);padding:0 6px;border-radius:3px;white-space:nowrap}
+.key{font:500 var(--fs-xs) var(--mono);color:var(--brand);white-space:nowrap}
+.tagsyn{font:700 13px/20px var(--sans);letter-spacing:0;text-transform:none;color:var(--e1t);background:var(--e1b);padding:0 6px;border-radius:3px;margin-left:8px;vertical-align:2px}
+/* verdict */
+.bignum{all:unset;display:block;cursor:pointer;font:700 var(--fs-hero)/1 var(--sans);letter-spacing:-.03em;color:var(--ink)}
+.sentence{margin:8px 0 24px;font-size:var(--fs-lg);color:var(--dim)}
+.rows{border-top:1px solid var(--line)}
+.chk{border-bottom:1px solid var(--line);margin:0}
+.chk>summary{display:flex;align-items:center;gap:16px;padding:12px 0;cursor:pointer;list-style:none;color:var(--ink);font-size:var(--fs-md)}
+.chk>summary::-webkit-details-marker{display:none}
+.chk>summary::after{content:"";width:6px;height:6px;border-right:1.5px solid var(--faint);border-bottom:1.5px solid var(--faint);transform:rotate(-45deg);transition:transform .15s;flex:none}
+.chk[open]>summary::after{transform:rotate(45deg)}
+.chk b{width:120px;font-weight:600;flex:none} .chk .chs{flex:1;color:var(--dim)}
+.chk>div{padding:0 0 12px 136px;color:var(--dim)} .chk>div p{margin:0 0 8px;max-width:64ch}
+/* tables */
+.tbl{margin-top:8px;overflow-x:auto}
+.dense{width:100%;border-collapse:collapse;font-size:var(--fs-md)}
+.dense th{text-align:left;color:var(--faint);font-size:var(--fs-xs);font-weight:600;padding:8px;border-bottom:2px solid var(--line);white-space:nowrap}
+.dense td{height:40px;padding:4px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+.dense tr.row{cursor:pointer} .dense tr.row:hover td{background:var(--soft)}
+.dense td.k{white-space:nowrap} .num{text-align:right;font-family:var(--mono)}
+/* cards: only where a visual lives */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px;overflow:hidden}
+.lt,.arena{width:100%;display:block;height:260px}
+.lt-bar{display:flex;gap:12px;align-items:center;margin:12px 0}
+.ltcount{font:700 var(--fs-xs) var(--mono);color:var(--dim)} .ltcount.bad{color:var(--reft)}
+.lt-foot{display:grid;grid-template-columns:1fr minmax(220px,36%);gap:16px;margin-top:8px;align-items:start;color:var(--dim)}
+.shelf{border:1px dashed var(--faint);border-radius:8px;padding:8px 12px;min-height:48px}
+.shelf-t{font:700 13px/20px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+.shelfrow{padding:4px 0;color:var(--ink);font-size:var(--fs-xs)}
+details{margin-top:12px;color:var(--dim)} summary{cursor:pointer;color:var(--dim)}
+details>div,details>pre{margin-top:8px}
+.xb{all:unset;display:grid;grid-template-columns:1fr auto;gap:16px;padding:8px 0;border-bottom:1px solid var(--line);cursor:pointer;width:100%;box-sizing:border-box;font-size:var(--fs-xs)}
+.xb .tr{display:none} .xb .n{font-family:var(--mono);color:var(--dim)}
+/* refusals + receipt */
+.opts{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.opt{background:var(--surface);border:1px solid var(--line);color:var(--ink)} .opt:hover{border-color:var(--brand);color:var(--brand)}
+.opt[aria-pressed=true]{background:var(--brand);border-color:var(--brand);color:var(--onbrand)}
+textarea{width:100%;background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:8px 12px;resize:vertical;min-height:56px;color:var(--ink);font:inherit}
+textarea:focus,.sel:focus{border-color:var(--brand)}
+.guard{font:var(--fs-xs) var(--mono);color:var(--faint);margin:4px 0 12px;min-height:16px} .guard .ok{color:var(--e3t);font-weight:700}
+.signed{position:relative;margin-top:16px;padding:12px 16px;border:1px solid var(--e3);border-radius:8px}
+.signed .hash{font:700 var(--fs-xs) var(--mono);color:var(--e3t);word-break:break-all}
+.bigstamp{position:absolute;right:16px;top:-12px;font:900 var(--fs-lg) var(--sans);letter-spacing:.16em;color:var(--stamp);border:4px double var(--stamp);padding:2px 12px;border-radius:8px;transform:rotate(-8deg);background:var(--bg)}
+.rehearsal{margin-top:16px;color:var(--dim);font-size:var(--fs-xs)}
+pre.q{background:var(--code);padding:12px;border-radius:3px;white-space:pre-wrap;word-break:break-word;margin:0;color:var(--ink)}
+/* drawer */
+#drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100vw);z-index:90;background:var(--surface);border-left:1px solid var(--line);padding:48px 24px 24px;overflow:auto;transform:translateX(104%);transition:transform .3s cubic-bezier(.2,1.1,.3,1)}
+#drawer.open{transform:none;box-shadow:var(--shadow2)} #drawer .x{position:absolute;top:12px;right:16px}
+#drawer h3{margin:0 0 8px;font-size:var(--fs-lg);line-height:24px} #drawer h4{margin:16px 0 4px;font:700 13px/20px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--faint)}
+.quote{background:var(--code);padding:8px 12px;border-radius:3px;font:var(--fs-xs) var(--mono);margin:4px 0;white-space:pre-wrap;word-break:break-word;color:var(--ink)}
+.diff{font:var(--fs-xs)/16px var(--mono);overflow:auto;background:var(--code);border-radius:3px;margin:4px 0}
+.diff div{padding:0 12px;white-space:pre;min-width:max-content;color:var(--ink)} .diff .a{background:var(--diffa);color:var(--diffat)} .diff .d{background:var(--diffd);color:var(--diffdt)} .diff .h{color:var(--faint)}
+.kpis{display:flex;gap:32px;flex-wrap:wrap;margin:12px 0} .kpi b{display:block;font:700 var(--fs-xl)/1.2 var(--sans)} .kpi span{color:var(--dim);font-size:var(--fs-xs)}
+/* board */
+.board{display:flex;gap:16px;overflow-x:auto;margin-top:16px;padding-bottom:8px}
+.col{flex:1 0 190px;background:var(--soft);border-radius:8px;padding:8px;min-height:160px}
+.colh{display:flex;justify-content:space-between;align-items:center;padding:4px 4px 8px;font:700 13px/20px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--dim)}
+.kc{background:var(--surface);border-radius:3px;padding:8px 12px;box-shadow:var(--shadow);margin-bottom:8px;transition:transform .15s}
+.kc:hover{transform:translateY(-1px)} .kc-t{font:500 var(--fs-xs) var(--mono);overflow-wrap:anywhere}
+.kc-m{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:var(--fs-xs);color:var(--dim)} .kc-m .n{margin-left:auto;font-family:var(--mono)}
+.av{width:20px;height:20px;border-radius:50%;background:var(--soft);color:var(--dim);border:1px solid var(--line);font:700 9px var(--sans);display:grid;place-items:center;flex:none}
+.kc.more{background:none;box-shadow:none;border:1px dashed var(--line);text-align:center;color:var(--faint)}
+.stack{background:var(--surface);border-radius:3px;padding:12px;box-shadow:var(--shadow),4px 4px 0 -1px var(--surface),4px 4px 0 0 var(--line);margin:0 4px 12px 0}
+.stack .sn{font:700 var(--fs-xl)/1.2 var(--sans)} .stack p{margin:4px 0 8px;color:var(--dim);font-size:var(--fs-xs)}
+.empty{border:1px dashed var(--line);border-radius:8px;padding:12px 16px;color:var(--dim);margin-top:12px}
+.empty b{color:var(--ink)}
+.reco{font-size:var(--fs-lg);line-height:24px;max-width:60ch;margin:0 0 16px}
+.pgrid details{border-top:1px solid var(--line);margin:0;padding:8px 0}
+.pgrid summary{color:var(--ink);font-weight:500}
+.md h1,.md h2,.md h3{margin:16px 0 4px;font-size:var(--fs-lg)} .md p,.md li{max-width:72ch} .md code{background:var(--code);padding:0 4px;border-radius:3px}
+.footer{margin-top:48px;color:var(--faint);font-size:var(--fs-xs)}
+/* intro + presenter */
+#intro{position:fixed;inset:0;z-index:100;background:var(--bg);display:none}
+#intro canvas{position:absolute;inset:0;width:100%;height:100%}
+#iword{position:absolute;left:0;right:0;top:40%;display:flex;align-items:center;justify-content:center;gap:12px;font-weight:600;font-size:var(--fs-xl);color:var(--ink);opacity:0;transition:opacity .4s}
+#iword.on{opacity:1} #itag{position:absolute;left:0;right:0;top:50%;text-align:center;color:var(--dim);opacity:0;transition:opacity .5s} #itag.on{opacity:1}
+#iskip{position:absolute;right:24px;bottom:16px;font:var(--fs-xs) var(--mono);color:var(--faint)}
+#pbar{position:fixed;left:0;right:0;bottom:0;z-index:80;background:#172B4D;color:#fff;padding:12px 24px;display:none;gap:16px;align-items:center}
+body.presenting #pbar{display:flex} #pbar .t{font:700 var(--fs-xs) var(--mono);color:#B3C0CE;min-width:80px} #pbar .cap{flex:1;font-size:var(--fs-lg)}
+#pbar .ghost{background:transparent;color:#fff;border:1px solid #44546F} .badge-off{font:700 13px/20px var(--sans);letter-spacing:.04em;text-transform:uppercase;border:1px solid #44546F;color:#B3C0CE;border-radius:3px;padding:0 6px}
+body.presenting main.page{padding-bottom:120px}
+#print{display:none}
+
+.tg-bar{display:flex;gap:12px;align-items:center;margin:12px 0;flex-wrap:wrap}
+.linkbtn{all:unset;cursor:pointer;color:var(--brand);font-size:var(--fs-md)} .linkbtn:hover{text-decoration:underline}
+.seg2{display:inline-flex;border:1px solid var(--line);border-radius:3px;overflow:hidden} .seg2 button{background:var(--surface);border:0;padding:4px 12px;cursor:pointer;color:var(--dim);font-weight:500} .seg2 button[aria-pressed=true]{background:var(--sel);color:var(--brand)}
+.tg{position:relative;overflow-x:auto;padding:8px} .tg svg{display:block;min-width:760px;width:100%;height:auto}
+.tgtip{display:none;position:absolute;z-index:5;background:#172B4D;color:#fff;border-radius:3px;padding:4px 8px;font-size:var(--fs-xs);max-width:420px;pointer-events:none;box-shadow:var(--shadow)}
+.tgcol{font:600 13px/20px var(--sans);fill:var(--faint);letter-spacing:.04em;text-transform:uppercase}
+.tgn{cursor:pointer;outline:none;transition:opacity .2s} .tgn rect{fill:var(--surface);stroke:var(--faint);stroke-width:1}
+.tgn text{font:12px var(--sans);fill:var(--ink);pointer-events:none} .k-req text,.k-hunk text{font-family:var(--mono);font-size:11px}
+.k-req rect{fill:var(--sel);stroke:var(--brand)} .k-req text{fill:var(--brand)}
+.tgn.k-claim rect{fill:var(--cb);stroke:var(--c)} .tgn.k-claim.refused rect{fill:var(--refb);stroke:var(--ref);stroke-dasharray:4 3;stroke-width:1.5}
+.tgn.k-hunk.unp rect{stroke-dasharray:4 3;fill:var(--soft)} .tgn.k-group rect,.tgn.k-more rect{fill:var(--soft);stroke:var(--line)} .tgn.k-group text,.tgn.k-more text{fill:var(--dim)}
+.tgn.k-test.tmp rect{fill:var(--e3b);stroke:var(--e3)} .tgn.k-test.tmf rect{fill:var(--refb);stroke:var(--ref)} .tgn.k-test.fail rect{fill:var(--refb);stroke:var(--ref);stroke-width:2}
+.tgn:focus-visible rect{stroke:var(--brand);stroke-width:2}
+.tgn.dim{opacity:.2} .tgn.fade{opacity:.35}
+.tgnote{font:11px var(--sans);fill:var(--faint)} .tgfail{font:700 10px var(--sans);fill:var(--reft)}
+.tge{fill:none;stroke:var(--faint);stroke-width:1;opacity:.45} .tge.bundle{stroke-dasharray:3 3} .tge.on{opacity:1;stroke:var(--dim);stroke-width:1.5} .tge.dim{opacity:.1}
+.tgp{fill:none;stroke:var(--ref);stroke-width:2.5;stroke-linecap:round}
+
+.chk{display:flex;align-items:center;gap:16px;width:100%;padding:12px 0;background:none;border:0;border-bottom:1px solid var(--line);cursor:pointer;text-align:left;font:inherit;color:var(--ink)}
+.chk:hover{background:var(--soft)} .chk b{width:120px;font-weight:600;flex:none} .chk .chs{flex:1;color:var(--dim)}
+.chk::after{content:"";width:6px;height:6px;border-right:1.5px solid var(--faint);border-top:1.5px solid var(--faint);transform:rotate(45deg);flex:none;margin-right:4px}
+.sentence{margin:8px 0 16px} .rows{margin-bottom:0}
+.tmgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px;align-items:start}
+.tmp{border-radius:8px;padding:16px;border:1px solid var(--c);background:var(--cb);min-height:112px}
+.tmp.red{--c:var(--ref);--cb:var(--refb)} .tmp.green{--c:var(--e3);--cb:var(--e3b)}
+.tmp h3{margin:0 0 8px;font-size:var(--fs-lg);color:var(--ct,var(--ink))} .tmp.red h3{color:var(--reft)} .tmp.green h3{color:var(--e3t)}
+.tmp .big2{font:600 15px/22px var(--mono);color:var(--ink);word-break:break-word} .tmp ul{margin:8px 0 0;padding-left:20px;font-size:15px} .tmp li{margin:2px 0;font-family:var(--mono);font-size:14px;overflow-wrap:anywhere}
+.tmp .cnt{margin-top:8px;font-weight:600}
+.tmcap{margin:12px 0 0;font-size:var(--fs-md);color:var(--dim)} .tmcap.warn{color:var(--e1t);font-weight:600}
+.cl{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;width:100%;padding:8px 0;border:0;border-bottom:1px solid var(--line);background:none;cursor:pointer;text-align:left;font:inherit;color:var(--ink)}
+.cl:hover{background:var(--soft)} .cl .ct{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.cbar{display:flex;height:8px;border-radius:4px;overflow:hidden;gap:2px;margin:8px 0} .cbar i{display:block;background:var(--c);min-width:4px}
+.inp{width:100%;max-width:320px;background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:6px 12px;font:inherit;color:var(--ink);margin:4px 0 12px;display:block}
+.inp:focus{border-color:var(--brand);outline:none} .lbl{display:block;color:var(--dim);font-size:var(--fs-xs)}
+.scalebar{display:flex;height:16px;border-radius:4px;overflow:hidden;gap:2px;margin:12px 0} .scalebar i{display:block;min-width:6px}
+.scalelist{list-style:none;margin:0;padding:0} .scalelist li{padding:8px 0;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:baseline} .scalelist b{min-width:64px;font-size:var(--fs-lg)}
+.tgn text{font:13px var(--sans)} .k-req text,.k-hunk text{font-family:var(--mono);font-size:13px} .tgcol{font:600 13px var(--sans);fill:var(--faint)} .tgnote{font:13px var(--sans);fill:var(--faint)} .tgfail{font:700 13px var(--sans);fill:var(--reft)}
+.ghost.pdf{text-decoration:none;display:inline-block}
+@media(max-width:760px){.tmgrid{grid-template-columns:1fr}.chk b{width:96px}.chk{flex-wrap:wrap}.cl{grid-template-columns:1fr auto}.cl .key{grid-column:1/3}.cl .ct{white-space:normal}}
+@media print{
+  @page{margin:16mm}
+  body>*:not(#print){display:none!important}
+  #print{display:block!important;color:#000;background:#fff;font:11pt/1.4 var(--sans)}
+  #print h1{font-size:18pt;margin:0 0 4pt} #print h2{font-size:11pt;text-transform:uppercase;letter-spacing:.05em;margin:12pt 0 4pt;border-bottom:1px solid #999}
+  #print ul{margin:0;padding-left:16pt} #print pre{white-space:pre-wrap;font-size:9pt;background:#f1f2f4;padding:6pt} #print .p-sub{color:#444} #print .mono{word-break:break-all}
+}
+@media(max-width:760px){.dense th,.dense td{padding:4px}
+  header.top{padding:0 12px;gap:8px;overflow-x:auto} .wordmark span{display:none} main.page{padding:24px 16px 64px}
+  .chk>div{padding-left:0} .chk b{width:96px} .lt-foot{grid-template-columns:1fr} .bignum{font-size:48px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body class="intro">
+<canvas id="bg"></canvas><canvas id="fx"></canvas><div id="banner"></div>
+<div id="intro"><canvas id="icv"></canvas><div id="iword"><span>Receipts</span><svg class="mark" viewBox="0 0 14 16" width="14" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" aria-hidden="true"><path d="M1 1h12v12.5l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5z"/><path d="M4 5h6M4 8h4"/></svg></div><div id="itag">Don't review the code. Audit the claims.</div><div id="iskip">press any key to skip</div></div>
+<header class="top"><a class="wordmark" href="#" data-act="home">Receipts<svg class="mark" viewBox="0 0 14 16" width="14" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" aria-hidden="true"><path d="M1 1h12v12.5l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5z"/><path d="M4 5h6M4 8h4"/></svg></a><select class="sel" id="chsel" aria-label="Change"></select><nav class="tabs" id="tabs" role="tablist"></nav><div class="sp"></div><a class="ghost pdf" href="../docs/concept-card.pdf" target="_blank" rel="noopener">Concept card (PDF)</a><button class="solid" data-act="reviewsign">Review &amp; sign</button></header>
+<main class="page" id="main" tabindex="-1"></main>
+<div id="print" aria-hidden="true"></div>
+<aside id="drawer" aria-label="Details"></aside>
+<div id="pbar"><div class="t" id="pt"></div><span class="badge-off" title="All data is cached in this file. No network calls.">Offline replay</span><div class="cap" id="pcap"></div><div style="display:flex;gap:8px"><button class="ghost" id="pprev"></button><button class="ghost" id="pnext"></button><button class="ghost" id="pexit">Exit <kbd>Esc</kbd></button></div></div>
+<script>
+"use strict";
+const D = /*__DATA__*/null;
+/* ---------- helpers ---------- */
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const $ = (s, e = document) => e.querySelector(s);
+const $$ = (s, e = document) => [...e.querySelectorAll(s)];
+const arr = x => Array.isArray(x) ? x : [];
+const fmt = n => (n ?? 0).toLocaleString("en");
+const sum = (a, f) => a.reduce((t, x) => t + (f(x) || 0), 0);
+const LANES = ["L0", "L1", "L2", "L3"];
+const LANE_NAMES = {L0: "mechanical", L1: "skim", L2: "focused read", L3: "full read"};
+const AREAS = ["analyzer-core", "generator-templates", "runtime-serializer", "generated-snapshots", "tests", "docs"];
+const state = {owner: "", change: "2283", tab: "review", answers: {}, risk: "", signed: null, drillPick: "", laneNow: {}, drillLog: [], ledgerArea: "ALL"};
+const NOT_RUN = (what, how) => `<div class="empty"><b>Not run yet.</b> ${esc(what)}${how ? `<div class="hint" style="margin-top:4px">${esc(how)}</div>` : ""}</div>`;
+
+/* ---------- data access (tolerant) ---------- */
+function C(id = state.change) {
+  const r = (D.changes || {})[id] || {};
+  const ch = r.change || null;
+  return {
+    id, raw: r, change: ch,
+    route: r.route || null,
+    claims: arr((r.claims || {}).claims), uncovered: arr((r.claims || {}).uncovered_requirements),
+    hasClaims: !!r.claims,
+    story: r.story ? arr(r.story.sentences || r.story.story || r.story) : null,
+    xray: r.xray ? arr(r.xray.groups) : null,
+    tm: r.timemachine || null,
+    refusals: r.refusals ? arr(r.refusals.refusals) : null,
+    pros: r.prosecutor || null,
+    receipt: r.receipt || null,
+    regen: r.regen || null,
+    notChecked: arr(r.not_checked || (r.receipt && r.receipt.not_checked)),
+    files: mergeFiles(r, ch),
+    hunks: arr(ch && ch.hunks),
+  };
+}
+function mergeFiles(r, ch) {
+  const rf = arr(r.route && r.route.files), ff = Array.isArray(r.files) ? r.files : arr(r.files && r.files.files);
+  const lane = {}; rf.forEach(f => { if (f.lane) lane[f.path] = f.lane; }); ff.forEach(f => { if (f.lane && !lane[f.path]) lane[f.path] = f.lane; });
+  let base = arr(ch && ch.files); if (!base.length) base = ff.length ? ff : rf;
+  return base.map(f => ({...f, lane: f.lane || lane[f.path]}));
+}
+const fileLines = f => f.lines != null ? f.lines : (f.added != null ? (f.added || 0) + (f.removed || 0) : (f.changed_lines || 0));
+function routeFlags(c) {
+  const fh = c.route && c.route.flagged_hunks; if (!fh) return [];
+  if (Array.isArray(fh)) return fh;
+  return Object.keys(fh).filter(k => !c.xray || arr(fh[k]).some(x => !String(x).startsWith("xray-pending")));
+}
+const reasonText = r => typeof r === "string" ? r : (r.why || r.rule || JSON.stringify(r));
+const hunkLines = h => h.lines != null ? h.lines : h.added != null ? (h.added || 0) + (h.removed || 0) : String(h.text || "").split("\n").filter(l => /^[+-]/.test(l) && !/^(\+\+\+|---)/.test(l)).length;
+function fileLane(f, c) {
+  if (f.lane) return f.lane;
+  if (f.kind === "generated") return c.regen && (c.regen.mismatched || []).length === 0 && c.regen.identical ? "L0" : "L2";
+  if (f.kind === "test" || f.kind === "doc") return "L1";
+  if (f.area === "runtime-serializer") return "L3";
+  return "L2";
+}
+function lvOf(cl) { return cl.status === "refused" ? "REF" : (cl.evidence_level || "E0"); }
+function lvLabel(cl) { return cl.status === "refused" ? "REFUSED" : (cl.evidence_level || "E0"); }
+
+/* reading budget: computed from data, never typed */
+function budgetHunk(c) {
+  if (!c.change) return null;
+  const files = c.files;
+  const total = (c.change.totals && c.change.totals.changed_lines) || (files.length ? sum(files, fileLines) : sum(c.hunks, hunkLines));
+  const groupOf = {};
+  (c.xray || []).forEach(g => arr(g.hunks).forEach(h => groupOf[h] = g));
+  const flagged = new Set(routeFlags(c));
+  arr(c.refusals).forEach(r => arr(r.hunks).forEach(h => flagged.add(h)));
+  c.claims.forEach(cl => { if (["E1", "E0"].includes(cl.evidence_level) || cl.status === "refused") arr(cl.hunks).forEach(h => flagged.add(h)); });
+  (c.xray || []).forEach(g => { if (g.result === "unprotected") arr(g.hunks).forEach(h => flagged.add(h)); });
+  const fullRead = (c.route && c.route.lane === "L3");
+  let read = 0, ok = 0, mech = 0;
+  const segs = [];
+  const hunks = c.hunks.slice();
+  hunks.forEach(h => {
+    const n = hunkLines(h);
+    if (h.aggregate) { const fl = Math.min(n, h.flagged_lines || 0); read += fl; mech += n - fl; if (fl) segs.push({id: h.id, n: fl, t: "read"}); if (n - fl) segs.push({id: h.id, n: n - fl, t: "mech"}); return; }
+    const isSrc = h.kind === "src" || h.kind === "template" || h.kind === "template-output";
+    let t = "mech";
+    if (fullRead && isSrc) t = "read";
+    else if (flagged.has(h.id)) t = "read";
+    else if (isSrc && groupOf[h.id] && groupOf[h.id].result === "load-bearing") t = "ok";
+    else if (isSrc && !c.xray) t = "mech";
+    if (t === "read") read += n; else if (t === "ok") ok += n; else mech += n;
+    segs.push({id: h.id, n, t});
+  });
+  const hunkSum = sum(segs, s => s.n);
+  const rest = Math.max(0, total - hunkSum);
+  if (rest) { mech += rest; segs.push({id: "·", n: rest, t: "mech"}); }
+  const known = !!(c.xray || c.route || arr(c.refusals).length);
+  const rb = c.route && c.route.reading_budget;
+  return {total, read, ok, mech, segs, known, fullRead, provisional: !!(rb && rb.provisional && !c.xray)};
+}
+
+/* ---------- sha256 (fallback) ---------- */
+function sha256js(msg) {
+  const K = new Uint32Array([0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2]);
+  const b = new TextEncoder().encode(msg), l = b.length, n = ((l + 9 + 63) >> 6) << 6, p = new Uint8Array(n);
+  p.set(b); p[l] = 0x80; const dv = new DataView(p.buffer); dv.setUint32(n - 4, l * 8 >>> 0); dv.setUint32(n - 8, Math.floor(l / 0x20000000));
+  let H = new Uint32Array([0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19]); const w = new Uint32Array(64);
+  const rr = (x, k) => (x >>> k) | (x << (32 - k));
+  for (let o = 0; o < n; o += 64) {
+    for (let i = 0; i < 16; i++) w[i] = dv.getUint32(o + i * 4);
+    for (let i = 16; i < 64; i++) { const s0 = rr(w[i-15],7)^rr(w[i-15],18)^(w[i-15]>>>3), s1 = rr(w[i-2],17)^rr(w[i-2],19)^(w[i-2]>>>10); w[i] = (w[i-16] + s0 + w[i-7] + s1) | 0; }
+    let [a,b2,c,d,e,f,g,h] = H;
+    for (let i = 0; i < 64; i++) { const S1 = rr(e,6)^rr(e,11)^rr(e,25), ch = (e&f)^(~e&g), t1 = (h+S1+ch+K[i]+w[i])|0, S0 = rr(a,2)^rr(a,13)^rr(a,22), mj = (a&b2)^(a&c)^(b2&c), t2 = (S0+mj)|0; h=g; g=f; f=e; e=(d+t1)|0; d=c; c=b2; b2=a; a=(t1+t2)|0; }
+    H = H.map((v, i) => (v + [a,b2,c,d,e,f,g,h][i]) | 0);
+  }
+  return [...H].map(v => (v >>> 0).toString(16).padStart(8, "0")).join("");
+}
+async function sha256(s) {
+  try { if (crypto && crypto.subtle) { const d = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s)); return [...new Uint8Array(d)].map(x => x.toString(16).padStart(2, "0")).join(""); } } catch (e) {}
+  return sha256js(s);
+}
+
+
+/* headline reading budget comes from the router (line level); the hunk-level number is detail only */
+function budget(c) {
+  const h = budgetHunk(c); if (!h) return h;
+  const rb = c.route && c.route.reading_budget;
+  if (rb && rb.lines != null) {
+    const total = rb.total_changed_lines || h.total, read = Math.min(rb.lines, total), ok = Math.min(h.ok, Math.max(0, total - read));
+    return {...h, total, read, ok, mech: Math.max(0, total - read - ok), provisional: !!rb.provisional, known: true, fromRouter: true, hunkLevel: rb.hunk_level_lines != null ? rb.hunk_level_lines : h.read, basis: rb.basis, ratio: rb.ratio, inputs: rb.inputs};
+  }
+  return h;
+}
+function openBudget() {
+  const c = C(), b = budget(c); if (!b) return;
+  openDrawer(`<h3>How the reading budget is computed</h3><p class="muted">Line level, from runs/${esc(c.id)}/route.json. A line counts only if a hunk the router flagged contains it.</p>
+    <div class="kpis"><div class="kpi"><b>${fmt(b.read)}</b><span>lines to read</span></div><div class="kpi"><b>${fmt(b.total)}</b><span>changed lines</span></div>${b.ratio != null ? `<div class="kpi"><b>${Math.round(b.ratio * 100)}%</b><span>read ratio</span></div>` : ""}</div>
+    <h4>Basis</h4><p>${esc(b.basis || "lines in flagged hunks")}</p><h4>Hunk level (detail)</h4><p>${fmt(b.hunkLevel)} lines if every flagged hunk were read whole.</p>
+    ${c.regen && c.regen.reading_budget_lines != null ? `<h4>regen.json</h4><p>${fmt(c.regen.reading_budget_lines)} lines by regen.json's own count: ${esc(c.regen.verdict || "")} It is shown for reference. The headline number comes from route.json.</p>` : ""}${b.provisional ? `<p class="faint">Provisional: it is recomputed whenever new evidence (X-Ray, regeneration, refusals, claims) lands.</p>` : ""}${b.inputs ? `<h4>Inputs used</h4><pre class="q">${esc(JSON.stringify(b.inputs, null, 1))}</pre>` : ""}`);
+}
+function squarify(items, x, y, w, h) {
+  const out = []; items = items.filter(i => i.v > 0).sort((a, b) => b.v - a.v); let total = sum(items, i => i.v);
+  const worst = (row, side) => { const s = sum(row, r => r.v), mx = Math.max(...row.map(r => r.v)), mn = Math.min(...row.map(r => r.v)); return Math.max(side * side * mx / (s * s), s * s / (side * side * mn)); };
+  let rest = items.slice(), rx = x, ry = y, rw = w, rh = h, scale = (w * h) / total;
+  while (rest.length) {
+    const side = Math.min(rw, rh), row = [rest.shift()];
+    while (rest.length && worst([...row, rest[0]].map(r => ({v: r.v * scale})), side) <= worst(row.map(r => ({v: r.v * scale})), side)) row.push(rest.shift());
+    const rs = sum(row, r => r.v) * scale;
+    if (rw >= rh) { const cw = rs / rh; let cy = ry; row.forEach(r => { const ch = r.v * scale / cw; out.push({...r, x: rx, y: cy, w: cw, h: ch}); cy += ch; }); rx += cw; rw -= cw; }
+    else { const chh = rs / rw; let cx = rx; row.forEach(r => { const cw2 = r.v * scale / chh; out.push({...r, x: cx, y: ry, w: cw2, h: chh}); cx += cw2; }); ry += chh; rh -= chh; }
+  }
+  return out;
+}
+const LANE_FILL = {L0: "var(--lane0)", L1: "var(--lane1)", L2: "var(--lane2)", L3: "var(--lane3)"};
+function regenText(c) {
+  const g = c.regen; if (!g) return "";
+  if (g.generated_total != null) return ` (pattern check on generated snapshots: ${fmt(g.generated_matching)} of ${fmt(g.generated_total)} match the expected pattern, ${arr(g.generated_nonmatching).length} do not and go to a human)`;
+  return ` (${esc(g.method || "regeneration / pattern check")}: ${fmt(g.identical)} identical, ${arr(g.mismatched).length} mismatched)`;
+}
+function LG() {
+  const st = D.ledger_state, hist = D.ledger;
+  if (!(st && st.areas) && !(hist && hist.areas)) return null;
+  const synthetic = !!((st && st.synthetic) || (hist && hist.synthetic) || (D.meta && D.meta.mock));
+  const seed = (st && st.seed) ?? (hist && hist.seed);
+  if (st && st.areas) {
+    const glob = arr(st.global);
+    return {synthetic, seed, label: st.label, names: Object.keys(st.areas), real: arr(st.real_runs), rules: st.rules, formulas: st.formulas, baseline: st.baseline_note,
+      laneOf: a => (st.areas[a] || {}).lane, events: a => arr((st.areas[a] || {}).events),
+      series: sel => {
+        if (sel === "ALL") return glob.map(w => ({week: w.week, review_min: w.median_review_min, revert_rate: (w.revert_rate || 0) * 100, escapes: w.escapes || 0, canary_recall: w.canary_recall}));
+        const hh = hist && hist.areas ? arr(hist.areas[sel]) : [];
+        return arr((st.area_weekly || {})[sel]).map((w, i) => ({week: w.week, review_min: w.median_review_min, escapes: w.escapes || 0, canary_recall: w.trailing_canary_recall, lane: w.lane_after,
+          revert_rate: hh[i] && hh[i].receipts ? hh[i].reverts / hh[i].receipts * 100 : ((glob[i] || {}).revert_rate || 0) * 100}));
+      }};
+  }
+  const A = hist.areas;
+  return {synthetic, seed, label: hist.label, names: Object.keys(A), real: [], rules: null, formulas: null, baseline: null,
+    laneOf: a => { const w = arr((A[a] || {}).weeks); return w.length ? w[w.length - 1].lane : null; }, events: () => [],
+    series: sel => { if (sel === "ALL") { const ws = A[Object.keys(A)[0]].weeks; return ws.map((w, i) => ({week: w.week, review_min: sum(Object.values(A), x => x.weeks[i].review_min) / Object.keys(A).length, revert_rate: sum(Object.values(A), x => x.weeks[i].revert_rate) / Object.keys(A).length, escapes: sum(Object.values(A), x => x.weeks[i].escapes), canary_recall: w.canary_recall})); } return A[sel].weeks; }};
+}
+function laneNow(a) { if (state.laneNow[a]) return state.laneNow[a]; const g = LG(); return (g && g.laneOf(a)) || "L2"; }
+function lineChart(weeks, w = 760, h = 300) {
+  const pad = {l: 56, r: 56, t: 22, b: 36}, iw = w - pad.l - pad.r, ih = h - pad.t - pad.b;
+  const x = i => pad.l + (weeks.length < 2 ? 0 : i * iw / (weeks.length - 1));
+  const maxM = Math.max(...weeks.map(d => d.review_min || 0), 1) * 1.1, maxR = Math.max(...weeks.map(d => d.revert_rate || 0), 1) * 1.6;
+  const ym = v => pad.t + ih - (v || 0) / maxM * ih, yr = v => pad.t + ih - (v || 0) / maxR * ih;
+  const path = (f, g) => weeks.map((d, i) => `${i ? "L" : "M"}${x(i).toFixed(1)},${g(f(d)).toFixed(1)}`).join(" ");
+  const grid = [0, .25, .5, .75, 1].map(t => `<line x1="${pad.l}" x2="${w - pad.r}" y1="${pad.t + ih * t}" y2="${pad.t + ih * t}" stroke="var(--line)"/><text x="${pad.l - 8}" y="${pad.t + ih * t + 4}" text-anchor="end" fill="var(--e2)" font-size="12">${Math.round(maxM * (1 - t))}</text><text x="${w - pad.r + 8}" y="${pad.t + ih * t + 4}" fill="var(--ref)" font-size="12">${(maxR * (1 - t)).toFixed(1)}</text>`).join("");
+  return `<svg viewBox="0 0 ${w} ${h}" width="100%" role="img" aria-label="Review minutes per PR and revert rate by week">${grid}
+   <path d="${path(d => d.review_min, ym)}" fill="none" stroke="var(--e2)" stroke-width="3"/><path d="${path(d => d.revert_rate, yr)}" fill="none" stroke="var(--ref)" stroke-width="3"/>
+   ${weeks.map((d, i) => `<circle cx="${x(i)}" cy="${ym(d.review_min)}" r="3.5" fill="var(--e2)"><title>wk ${d.week}: ${d.review_min} min</title></circle><circle cx="${x(i)}" cy="${yr(d.revert_rate)}" r="3.5" fill="var(--ref)"><title>wk ${d.week}: ${(d.revert_rate || 0).toFixed(1)}% reverts</title></circle>${d.escapes ? `<text x="${x(i)}" y="${pad.t + 12}" text-anchor="middle" fill="var(--read)" font-size="14">▼</text>` : ""}<text x="${x(i)}" y="${h - 12}" text-anchor="middle" fill="var(--dim)" font-size="12">${d.week}</text>`).join("")}
+   <text x="${pad.l}" y="12" fill="var(--e2)" font-size="13" font-weight="700">review minutes per PR</text><text x="${w - pad.r}" y="12" text-anchor="end" fill="var(--ref)" font-size="13" font-weight="700">revert rate % (must not rise)</text><text x="${w / 2}" y="${h}" text-anchor="middle" fill="var(--faint)" font-size="11">week · ▼ = escape</text></svg>`;
+}
+const avg = a => a.length ? a.reduce((t, x) => t + (x || 0), 0) / a.length : 0;
+const PRINCIPLES = [
+ ["Review claims", "Each claim is tied to a requirement ID. The owner reviews claims and rereads lines only where evidence stops.", "Claim extraction can be wrong, so every claim is checked against the requirement and the diff."],
+ ["Evidence levels", "E3 executed, E2 mechanical, E1 argued, E0 unsupported. Code sets the level. Model confidence is never shown or used.", "Slower and more expensive than asking a model for a verdict."],
+ ["Refusals", "The reviewer hands back product decisions, root causes it cannot verify, silent suppression and security areas.", "More questions for the owner, so each one has to be answerable in a minute."],
+ ["Lanes", "L0 mechanical, L1 skim, L2 focused read, L3 full read. Security areas always get L3.", "A rule-based router can misroute. The backtest and per-area escape counts track that."],
+ ["Independent checks", "The author's commit message and docs are claims to test. A second pass tries to falsify each claim.", "A second pass costs time and tokens."],
+ ["Named owner", "Nothing merges without a receipt signed by a named person. No lane merges automatically.", "Owners can rubber-stamp, so the receipt asks for the residual risk in their own words."],
+ ["Trust per area", "The ledger tracks escapes, canary recall and finding precision for each code area. One escape demotes the area at once.", "A new area starts at L2, which is slower at first."]];
+function mdToHtml(md) {
+  const lines = md.split("\n"); let out = "", inList = false, inTable = false, inCode = false;
+  const inl = s => esc(s).replace(/`([^`]+)`/g, "<code>$1</code>").replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>");
+  const close = () => { if (inList) { out += "</ul>"; inList = false; } if (inTable) { out += "</table></div>"; inTable = false; } };
+  lines.forEach(l => {
+    if (l.startsWith("```")) { close(); out += inCode ? "</pre>" : "<pre class=quote>"; inCode = !inCode; return; }
+    if (inCode) { out += esc(l) + "\n"; return; }
+    let m;
+    if ((m = l.match(/^(#{1,4})\s+(.*)/))) { close(); out += `<h${m[1].length}>${inl(m[2])}</h${m[1].length}>`; }
+    else if (/^\s*[-*]\s+/.test(l)) { if (!inList) { close(); out += "<ul>"; inList = true; } out += `<li>${inl(l.replace(/^\s*[-*]\s+/, ""))}</li>`; }
+    else if (/^\|.*\|$/.test(l.trim())) { if (/^\|[\s:|-]+\|$/.test(l.trim())) return; const cells = l.trim().slice(1, -1).split("|").map(x => inl(x.trim())); if (!inTable) { close(); out += '<div class="tbl"><table>'; inTable = true; out += "<tr>" + cells.map(x => `<th>${x}</th>`).join("") + "</tr>"; } else out += "<tr>" + cells.map(x => `<td>${x}</td>`).join("") + "</tr>"; }
+    else if (!l.trim()) close(); else { close(); out += `<p>${inl(l)}</p>`; }
+  });
+  close(); return out;
+}
+
+
+/* ---------- icon set: one 24px grid, 2px round strokes ---------- */
+const IC = {x: '<path d="M4 4l8 8M12 4l-8 8"/>', tick: '<path d="M3 8.5l3.5 3.5L13 5"/>', arrow: '<path d="M3 8h10M9 4l4 4-4 4"/>', search: '<circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5L14 14"/>'};
+const ico = (n, s = 14) => `<svg class="ico" width="${s}" height="${s}" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true">${IC[n]}</svg>`;
+const pl = (n, w) => `${fmt(n)} ${w}${n === 1 ? "" : "s"}`;
+const NAMES = {E3: "executed", E2: "mechanical", E1: "argued", E0: "unsupported", REF: "refused"};
+const lozOf = lv => `<span class="loz lv-${lv}">${lv === "REF" ? "Refused" : lv + " " + NAMES[lv]}</span>`;
+
+/* =====================================================================
+   MOTION: spring, ambient field, intro, bursts, drill arena
+   ===================================================================== */
+const MQ = matchMedia("(prefers-reduced-motion: reduce)");
+state.calm = MQ.matches; state.refIdx = 0;
+const calm = () => state.calm;
+const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+const rnd = (a, b) => a + Math.random() * (b - a);
+const cssv = k => getComputedStyle(document.documentElement).getPropertyValue(k).trim();
+const EVC = () => ["--e3", "--e2", "--e1", "--e0", "--ref"].map(cssv);
+const BRAND3 = () => ["--brand", "--violet", "--orange"].map(cssv);
+
+/* damped harmonic oscillator: x'' = -k(x-to) - c x'  (underdamped => overshoot) */
+function spring(from, to, update, o = {}) {
+  if (calm()) { update(to); o.done && o.done(); return {cancel() {}}; }
+  const k = o.k ?? 170, c = o.c ?? 13, span = Math.max(1e-6, Math.abs(to - from));
+  let x = from, v = o.v ?? 0, t0 = performance.now(), raf = 0, dead = false;
+  const step = now => {
+    if (dead) return;
+    const dt = Math.min(0.033, (now - t0) / 1000); t0 = now;
+    for (let i = 0; i < 3; i++) { v += (-k * (x - to) - c * v) * dt / 3; x += v * dt / 3; }
+    if (Math.abs(x - to) < span * 0.002 && Math.abs(v) < span * 0.02) { update(to); o.done && o.done(); return; }
+    update(x); raf = requestAnimationFrame(step);
+  };
+  update(from); raf = requestAnimationFrame(step);
+  return {cancel() { dead = true; cancelAnimationFrame(raf); }};
+}
+function popIn(el, delay = 0, dist = 44) {
+  if (!el) return;
+  if (calm()) { el.style.opacity = ""; el.style.transform = ""; return; }
+  el.style.opacity = 0; el.style.transform = `translateY(${dist}px) scale(.96)`;
+  setTimeout(() => spring(0, 1, p => {
+    if (p === 1) { el.style.opacity = ""; el.style.transform = ""; return; }
+    el.style.opacity = clamp(p * 1.5, 0, 1); el.style.transform = `translateY(${(1 - p) * dist}px) scale(${0.96 + 0.04 * p})`;
+  }, {k: 190, c: 14}), delay);
+}
+const popAll = (sel, gap = 90, base = 0, max = 30) => $$(sel).slice(0, max).forEach((e, i) => popIn(e, base + i * gap));
+function stampIn(el) {
+  if (!el) return; if (calm()) { el.style.transform = ""; el.style.opacity = ""; return; }
+  const rot = el.dataset.rot || "-9deg";
+  el.style.opacity = 0;
+  spring(2.6, 1, s => { el.style.opacity = clamp((2.8 - s) * 1.2, 0, 1); el.style.transform = `rotate(${rot}) scale(${s})`; if (s === 1) { el.style.transform = `rotate(${rot})`; el.style.opacity = ""; } }, {k: 330, c: 15});
+}
+
+/* ---- ambient physics field: verlet bodies, gravity, collisions, cluster settling, pointer repel ---- */
+const Ambient = (() => {
+  const cv = $("#bg"), cx = cv.getContext("2d");
+  let W = 0, H = 0, dpr = 1, P = [], raf = 0, running = false, last = 0, ptr = {x: -999, y: -999}, cols = BRAND3();
+  function size() { dpr = Math.min(devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight; cv.width = W * dpr; cv.height = H * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+  function init() {
+    size(); const n = W < 700 ? 12 : 20; P = [];
+    for (let i = 0; i < n; i++) { const x = rnd(40, W - 40), y = rnd(-H * 0.2, H * 0.7); P.push({x, y, px: x + rnd(-2, 2), py: y, r: rnd(7, 17), c: i % 3}); }
+    cols = BRAND3();
+  }
+  function physics() {
+    const n = P.length, cluster = c => W * (0.2 + 0.3 * c);
+    for (const p of P) {
+      let vx = (p.x - p.px) * 0.985, vy = (p.y - p.py) * 0.985; p.px = p.x; p.py = p.y;
+      vx += (cluster(p.c) - p.x) * 0.0001;                       // drift toward its evidence cluster
+      const dx = p.x - ptr.x, dy = p.y - ptr.y, d2 = dx * dx + dy * dy;
+      if (d2 < 150 * 150 && d2 > 1) { const d = Math.sqrt(d2), f = (150 - d) / 150 * 0.7; vx += dx / d * f; vy += dy / d * f; }
+      p.x += vx; p.y += vy + 0.05;
+      if (p.x < p.r) { p.x = p.r; p.px = p.x + vx * 0.5; } if (p.x > W - p.r) { p.x = W - p.r; p.px = p.x + vx * 0.5; }
+      if (p.y > H - p.r) { p.y = H - p.r; p.py = p.y + (p.y - p.py) * 0.45; }
+    }
+    for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) {
+      const a = P[i], b = P[j], dx = b.x - a.x, dy = b.y - a.y, m = a.r + b.r, d2 = dx * dx + dy * dy;
+      if (d2 < m * m && d2 > 0.01) { const d = Math.sqrt(d2), o = (m - d) / d * 0.5; a.x -= dx * o; a.y -= dy * o; b.x += dx * o; b.y += dy * o; }
+    }
+  }
+  function draw() {
+    cx.clearRect(0, 0, W, H);
+    for (const p of P) { cx.beginPath(); cx.arc(p.x, p.y, p.r, 0, 6.2832); cx.fillStyle = cols[p.c]; cx.globalAlpha = 0.07; cx.fill(); cx.globalAlpha = 0.2; cx.lineWidth = 1.2; cx.strokeStyle = cols[p.c]; cx.stroke(); }
+    cx.globalAlpha = 1;
+  }
+  function frame(t) {
+    if (!running) return;
+    raf = requestAnimationFrame(frame);
+    if (t - last < 15) return; last = t;                       // cap at ~60fps
+    physics(); draw();
+  }
+  function start() {
+    return;   // background drift removed
+    if (running) return;
+    if (!P.length) init();
+    if (calm()) { for (let i = 0; i < 260; i++) physics(); draw(); return; }
+    running = true; raf = requestAnimationFrame(frame);
+  }
+  function stop() { running = false; cancelAnimationFrame(raf); }
+  addEventListener("pointermove", e => { ptr.x = e.clientX; ptr.y = e.clientY; }, {passive: true});
+  addEventListener("pointerleave", () => { ptr.x = ptr.y = -999; });
+  addEventListener("resize", () => { clearTimeout(Ambient._rt); Ambient._rt = setTimeout(() => { const was = running; stop(); P = []; init(); if (was || calm()) { running = false; start(); } }, 200); });
+  document.addEventListener("visibilitychange", () => document.hidden ? stop() : start());
+  return {start, stop, init, refresh: () => { cols = BRAND3(); }};
+})();
+
+/* ---- confetti-style burst in evidence colours (own canvas, only runs while particles live) ---- */
+const FX = (() => {
+  const cv = $("#fx"), cx = cv.getContext("2d"); let W, H, dpr, P = [], raf = 0, last = 0;
+  const size = () => { dpr = Math.min(devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight; cv.width = W * dpr; cv.height = H * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0); };
+  addEventListener("resize", size); size();
+  function loop(t) {
+    const dt = clamp((t - last) / 16.67, 0.2, 2.2); last = t;
+    cx.clearRect(0, 0, W, H);
+    P = P.filter(p => p.life > 0);
+    for (const p of P) {
+      p.vy += 0.34 * dt; p.vx *= 0.992; p.x += p.vx * dt; p.y += p.vy * dt; p.rot += p.vr * dt; p.life -= 0.012 * dt;
+      cx.save(); cx.translate(p.x, p.y); cx.rotate(p.rot); cx.globalAlpha = clamp(p.life * 1.6, 0, 1); cx.fillStyle = p.col; cx.fillRect(-p.s / 2, -p.s / 4, p.s, p.s / 2); cx.restore();
+    }
+    if (P.length) raf = requestAnimationFrame(loop); else { cx.clearRect(0, 0, W, H); raf = 0; }
+  }
+  return {
+    burst(x, y, n = 110, cols = [cssv("--brand"), cssv("--violet"), cssv("--orange"), cssv("--e3")]) {
+      return;
+      for (let i = 0; i < n; i++) { const a = rnd(-Math.PI * 0.95, -Math.PI * 0.05), sp = rnd(5, 17); P.push({x, y, vx: Math.cos(a) * sp * 0.9, vy: Math.sin(a) * sp, s: rnd(6, 13), rot: rnd(0, 6), vr: rnd(-.3, .3), life: rnd(0.8, 1.2), col: cols[i % cols.length]}); }
+      if (!raf) { last = performance.now(); raf = requestAnimationFrame(loop); }
+    }
+  };
+})();
+
+/* ---- intro: wordmark + tagline, a few soft particles settle, ~1.1s, once per session ---- */
+function intro(done) {
+  const ov = $("#intro"); let seen = null;
+  try { seen = sessionStorage.getItem("receipts-intro"); } catch (e) {}
+  if (calm() || /nointro/.test(location.search) || (seen && !/intro=1/.test(location.search))) { document.body.classList.remove("intro"); ov.style.display = "none"; return done(); }
+  try { sessionStorage.setItem("receipts-intro", "1"); } catch (e) {}
+  ov.style.display = "block"; ov.style.opacity = 1;
+  const cv = $("#icv"), cx = cv.getContext("2d"), dpr = Math.min(devicePixelRatio || 1, 2), W = innerWidth, H = innerHeight;
+  cv.width = W * dpr; cv.height = H * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const cols = BRAND3(), floor = H * 0.6, P = [];
+  for (let i = 0; i < 0; i++) P.push({x: W / 2 + rnd(-150, 150), y: -rnd(10, H * 0.5), vy: 0, r: rnd(3, 6), c: cols[i % 3], t0: rnd(0, 380), st: 0});
+  const T0 = performance.now(); let last = T0, finished = false, shift = 0;
+  function end() { if (finished) return; finished = true; ov.style.transition = "opacity .25s"; ov.style.opacity = 0; setTimeout(() => { ov.style.display = "none"; ov.style.transition = ""; document.body.classList.remove("intro"); removeEventListener("keydown", skip, true); removeEventListener("pointerdown", skip, true); $("#iword").classList.remove("on"); $("#itag").classList.remove("on"); done(); }, 260); }
+  function skip() { shift = 2000; }
+  addEventListener("keydown", skip, true); addEventListener("pointerdown", skip, true);
+  setTimeout(() => $("#iword").classList.add("on"), 60); setTimeout(() => $("#itag").classList.add("on"), 380);
+  (function frame(now) {
+    const t = now - T0 + shift, dtf = clamp((now - last) / 16.67, 0.3, 2.2); last = now;
+    cx.clearRect(0, 0, W, H);
+    for (const p of P) {
+      if (t < p.t0) continue;
+      p.vy += 0.7 * dtf; p.y += p.vy * dtf;
+      if (p.y >= floor - p.r) { p.y = floor - p.r; p.vy = p.vy > 2 ? -p.vy * 0.3 : 0; }
+      cx.globalAlpha = t > 880 ? Math.max(0, 1 - (t - 880) / 260) : 0.85; cx.fillStyle = p.c; cx.beginPath(); cx.arc(p.x, p.y, p.r, 0, 6.2832); cx.fill();
+    }
+    cx.globalAlpha = 1;
+    if (t > 1100) return end();
+    requestAnimationFrame(frame);
+  })(T0);
+}
+
+/* =====================================================================
+   VIEWS
+   ===================================================================== */
+const SC = (id, label, inner, extra = "") => `<section class="scene" id="${id}" data-label="${esc(label)}" ${extra}><div class="in">${inner}</div></section>`;
+const KICK = t => ``;
+const scenesOf = () => $$(".scene");
+function cstat(c) {
+  const k = counts(c), adj = (c.raw || {}).adjudication, st = adj && adj.statuses;
+  const refused = st && st.refused != null ? +st.refused : k.REF, proven = st && st.proven != null ? +st.proven : k.E3 + k.E2;
+  const total = c.claims.length || (st ? sum(Object.values(st), x => +x) : 0);
+  return {proven, refused, rest: Math.max(0, total - proven - refused), total, k};
+}
+function counts(c) { const k = {E3: 0, E2: 0, E1: 0, E0: 0, REF: 0}; c.claims.forEach(x => k[lvOf(x)]++); return k; }
+
+/* ---------- shell ---------- */
+const SCALE_OK = id => id === "2297" || id === "2129";
+const tabsFor = id => [["review", "Review"], ...(SCALE_OK(id) ? [["scale", "Scale"]] : []), ["drill", "Drill"], ["ledger", "Ledger"]];
+const initials = a => String(a || "?").split(/[-_ ]/).map(x => x[0] || "").join("").slice(0, 2).toUpperCase();
+const jump = id => { const el = document.getElementById(id); if (el) el.scrollIntoView({behavior: calm() ? "auto" : "smooth", block: "start"}); };
+function setTheme(t) {}
+function chrome() { $("#pprev").textContent = "Back"; $("#pnext").textContent = "Next"; }
+function shell() {
+  if (D.meta && D.meta.mock) $("#banner").innerHTML = `<div style="position:fixed;top:0;left:0;right:0;z-index:99;background:var(--ref);color:#fff;text-align:center;font:700 13px/20px var(--mono);padding:2px">MOCK DATA · developer build · invented verdicts · never ship this file</div>`;
+  const ids = Object.keys(D.changes || {});
+  $("#chsel").innerHTML = ids.map(id => `<option value="${id}" ${state.change === id ? "selected" : ""}>${esc(((D.changes[id].change || {}).requirement_ids || [])[0] || id)}</option>`).join("");
+  $("#tabs").innerHTML = tabsFor(state.change).map(([k, l]) => `<button class="tab" role="tab" data-act="tab" data-id="${k}" aria-selected="${state.tab === k}">${l}</button>`).join("");
+}
+function setTab(t) { state.tab = t; shell(); draw(); window.scrollTo({top: 0, behavior: "auto"}); }
+let IO = null, entered = new Set();
+function draw() {
+  if (state.tab === "scale" && !SCALE_OK(state.change)) { state.tab = "review"; shell(); }
+  const f = {review: viewReview, scale: viewScale, drill: viewDrill, ledger: viewLedger}[state.tab];
+  $("#main").innerHTML = f() + (state.tab === "review" ? `<div class="footer"><p>Model confidence never counts as evidence and is never the only reason a change skips human attention.</p><details><summary>Limits and related work</summary><div><p>Known holes: weak tests, flaky runs, equivalent mutants, and tests that fail for the wrong reason.</p><p>Trust: no promotion before 20 receipts and 5 canaries in the area. Trust drops fast and rises slowly. Outcome data per area is sparse and lags by weeks.</p><p>Owner measures: time on the receipt, edits to the residual-risk text, later disagreement with AI findings.</p><p>Built on Google's mutation testing in code review, Meta's mutation-guided test generation and UTBoost's findings on weak tests. We have not benchmarked against commercial reviewers.</p></div></details></div>` : ""); entered = new Set();
+  if (IO) IO.disconnect();
+  IO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && !entered.has(e.target.id)) { entered.add(e.target.id); (ENTER[e.target.id] || (() => {}))(false); } }), {threshold: 0.3});
+  scenesOf().forEach(s => IO.observe(s));
+  if (state.tab === "review") { wireReceipt(); TG.pin = null; traceMount(false); wireTrace(); }
+  if (state.tab === "drill") wireDrill();
+  const first = scenesOf()[0]; if (document.body.classList.contains("intro") && first) entered.add(first.id);
+}
+function swap(id, html) { const old = document.getElementById(id); if (!old) return; const t = document.createElement("div"); t.innerHTML = html; old.replaceWith(t.firstElementChild); }
+
+/* ---------- Review ---------- */
+function viewReview() {
+  const c = C();
+  if (!c.change) return SC("s-verdict", "Verdict", `<h1>Change ${esc(state.change)}</h1>${NOT_RUN("runs/" + state.change + "/change.json is missing.", "python -m receipts review --change " + state.change)}`);
+  const ch = c.change, key = (ch.requirement_ids || [])[0] || c.id, lane = c.route && c.route.lane;
+  const why = lane === "L3" && c.route && arr(c.route.reasons).length ? " (" + reasonText(arr(c.route.reasons).find(r => /api|ceiling/i.test(JSON.stringify(r))) || arr(c.route.reasons)[0]) + ")" : "";
+  const head = `<div><h1>${esc(key)} <span class="muted" style="font-weight:400">${esc(ch.subject || "Change " + c.id)}</span></h1><div class="meta">Lane ${esc(lane || "n/a")}${esc(why)} · ${esc((ch.base || "").slice(0, 8))} to ${esc((ch.head || "").slice(0, 8))}</div></div>`;
+  return head + sVerdict(c) + sTM(c) + sXray(c) + sClaims(c) + sRefusals(c) + sReceipt(c);
+}
+function checkRows(c) {
+  const tm = tmNorm(c.tm), raw = arr((c.raw.timemachine || {}).tests).filter(x => typeof x === "object"), R0 = arr(c.refusals), undec = R0.filter(r => !(state.answers[r.id] || {}).decision).length;
+  const G = xGroups(c), un = G.filter(x => x.result === "unprotected"), lb = G.filter(x => x.result === "load-bearing").length, signed = state.signed && state.signed.change === c.id;
+  const nB = raw.filter(x => x.base === "fail").length, nP = raw.filter(x => x.base === "pass").length, n = raw.length || arr(tm && tm.tests).length;
+  const tmWarn = nP > 0 || (tm && tm.outcome !== "fail->pass");
+  return [
+    {st: !tm ? "wait" : tmWarn ? "warn" : "ok", t: "Time Machine", to: "s-tm", sum: !tm ? "No test run" : nP ? `${nP} of ${n} new tests also pass on old code` : `${nB || n} of ${n} new tests fail on old code, pass on new`},
+    {st: !c.xray ? "wait" : un.length ? "warn" : "ok", t: "Hunk X-Ray", to: "s-xray", sum: !c.xray ? "Not meaningful here" : un.length ? `${lb} groups load-bearing, ${un.length} no test covers` : `All ${G.length} groups covered`},
+    {st: c.refusals === null ? "wait" : undec ? "warn" : "ok", t: "Refusals", to: "s-refusals", sum: c.refusals === null ? "Not run" : undec ? `${undec} of ${R0.length} need an answer` : `All ${R0.length} decided`, badge: c.refusals !== null && undec ? "Needs answer" : null},
+    {st: signed ? "ok" : "wait", t: "Receipt", to: "s-receipt", sum: signed ? "Signed" : "Waiting for owner"}];
+}
+function sVerdict(c) {
+  const b = budget(c), cs = cstat(c), rows = checkRows(c), stl = {ok: ["E3", "Passed"], warn: ["E1", "Needs attention"], wait: ["E0", "Waiting"]};
+  return SC("s-verdict", "Verdict", `<button class="bignum" id="bignum" data-act="budgetinfo" data-final="${b.known ? b.read : ""}" title="How this is counted">${b.known ? b.read : "?"}</button>
+    <p class="sentence">${b.known ? `of ${fmt(b.total)} changed lines need a human read${b.provisional ? " (provisional)" : ""}.` : "No reading budget yet."}${c.hasClaims ? ` ${cs.proven} of ${cs.total} claims are proven.` : ""}</p>
+    <div class="rows">${rows.map(r => `<button class="chk" data-act="jump" data-id="${r.to}"><b>${r.t}</b><span class="chs">${r.sum}</span><span class="loz lv-${r.badge ? "E1" : stl[r.st][0]}">${r.badge || stl[r.st][1]}</span></button>`).join("")}</div>`);
+}
+function sTM(c) {
+  const t = tmNorm(c.tm), raw = arr((c.raw.timemachine || {}).tests).filter(x => typeof x === "object");
+  if (!t) return SC("s-tm", "Time Machine", `<h2>Time Machine</h2><p class="muted">No tests ran for this change. Generated code is checked by regeneration.</p>`);
+  const n = raw.length || arr(t.tests).length, fail = raw.filter(x => x.base === "fail"), passOld = raw.filter(x => x.base === "pass"), passNew = raw.filter(x => x.head === "pass");
+  const nm = x => String(x.name || x).replace(/^.*\./, ""), exc = excLine(t), warn = passOld.length > 0;
+  const list = (a, k) => `<ul>${a.slice(0, k).map(x => `<li>${esc(nm(x))}</li>`).join("")}${a.length > k ? `<li>and ${a.length - k} more</li>` : ""}</ul>`;
+  const left = `<h3>Old code</h3>${exc ? `<div class="big2">${esc(exc)}</div>` : ""}<div class="cnt">${fail.length || n} of ${n} new tests fail</div>${exc ? "" : list(fail, 4)}`;
+  const right = `<h3>New code</h3><div class="cnt">${passNew.length || n} of ${n} new tests pass</div>`;
+  const cap = warn ? `${passOld.length} of ${n} new tests also pass on old code, so they give no evidence for the fix.` : `${fail.length || n} of ${n} new tests fail on the old code and pass on the new. Failure signature checked.`;
+  return SC("s-tm", "Time Machine", `<h2>Time Machine</h2><div class="tmgrid"><div class="tmp red">${left}</div><div class="tmp green" id="tmnew">${right}</div></div><p class="tmcap ${warn ? "warn" : ""}">${esc(cap)}</p>`);
+}
+function sClaims(c) {
+  if (!c.hasClaims) return SC("s-claims", "Claims", `<h2>Claims</h2>${NOT_RUN("claims.json is missing.", "runs/" + c.id + "/claims.json")}`);
+  const cs0 = cstat(c), order = {E3: 0, E2: 1, E1: 2, E0: 3, REF: 4}, cs = c.claims.slice().sort((a, b) => order[lvOf(a)] - order[lvOf(b)]), tot = Math.max(1, cs0.total);
+  return SC("s-claims", "Claims", `<h2>Claims</h2><div class="cbar" aria-hidden="true"><i class="lv-E3" style="flex:${cs0.proven}"></i><i class="lv-REF" style="flex:${cs0.refused}"></i><i class="lv-E1" style="flex:${cs0.rest}"></i></div>
+    <p class="muted" style="margin:0">${cs0.proven} proven, ${cs0.refused} refused, ${cs0.rest} unproven</p>
+    <details><summary>Show all ${cs0.total} claims</summary><div>${cs.map(cl => `<button class="cl" data-act="claim" data-id="${esc(cl.id)}" title="${esc(cl.text)}"><span class="key">${esc(cl.requirement || cl.id)}</span><span class="ct">${esc(cl.text)}</span>${lozOf(lvOf(cl))}</button>`).join("")}</div></details>`);
+}
+function tmNorm(t) {
+  if (!t || (t.base && t.head)) return t;
+  const T = arr(t.tests), allF = T.length && T.every(x => x.base === "fail"), anyF = T.some(x => x.base === "fail"), allP = T.length && T.every(x => x.head === "pass");
+  const secs = k => { const m = /secs=(\d+)/.exec(String((t.timings || {})[k] || "")); return m ? +m[1] : null; };
+  const exc = Object.values(t.base_exception_excerpts || {}).concat(T.map(x => x.base_exception_excerpt)).filter(Boolean);
+  const bst = anyF ? "fail" : (T.length ? "pass" : "?"), hst = allP ? "pass" : (T.length ? "fail" : "?");
+  return {...t, tests: T.map(x => x.name), issue_quote: t.issue_quote, base: {status: bst, seconds: secs("base_test_run"), excerpt: exc.length ? "Exception: " + exc[0] + (exc[1] ? "\n" + exc[1] : "") : "", log: (t.logs || {}).base},
+    head: {status: hst, seconds: secs("head_test_run"), excerpt: T.map(x => (x.head === "pass" ? "Passed " : "Failed ") + x.name).join("\n"), log: (t.logs || {}).head},
+    outcome: bst + "->" + hst, verdict: t.verdict, allFail: !!allF};
+}
+function excLine(t) {
+  const ex = String((t.base && (t.base.excerpt || t.base.log_excerpt)) || "").split("\n");
+  const l = ex.find(x => /Exception/.test(x)) || ex[0] || "";
+  return l.replace(/^\[xUnit\.net[^\]]*\]\s*/, "").replace(/^\/\/\s*/, "").trim().slice(0, 180);
+}
+function xGroups(c) {
+  const hs = c.hunks, byId = {}; hs.forEach(h => byId[h.id] = h);
+  const used = new Set(), out = [];
+  (c.xray || []).forEach(g => { const hh = arr(g.hunks).map(id => byId[id]).filter(Boolean); hh.forEach(h => used.add(h.id)); out.push({id: g.id, label: g.desc || (hh[0] ? hh[0].path.split("/").pop() + ":" + (hh[0].new_start || "") : g.id), lines: sum(hh, hunkLines), result: g.result, tests: arr(g.failing_tests).length, hunks: hh, seconds: g.seconds}); });
+  hs.filter(h => (h.kind === "src" || h.kind === "template" || h.kind === "template-output") && !used.has(h.id)).forEach(h => out.push({id: h.id, label: h.path.split("/").pop() + ":" + (h.new_start || ""), lines: hunkLines(h), result: "none", tests: 0, hunks: [h]}));
+  return out;
+}
+function restRows(rest) {
+  const by = {}; rest.forEach(h => { const k = h.kind + " · " + (h.aggregate ? "generated snapshots (many files)" : h.path); (by[k] = by[k] || []).push(h); });
+  return `<div class="tbl"><table>${Object.entries(by).slice(0, 30).map(([k, hh]) => `<tr><td>${esc(k)}</td><td class="num">${fmt(sum(hh, hunkLines))} lines</td></tr>`).join("")}</table></div>`;
+}
+function openXGroup(id) {
+  const c = C(), g = xGroups(c).find(x => x.id === id); if (!g) return;
+  openDrawer(`<h3>${esc(g.label)}</h3><p class="muted">${esc({unprotected: "No test goes red when this is reverted. A human reads it.", "load-bearing": "Reverting this turns tests red.", structural: "Cannot be reverted alone; checked with its group.", none: "X-Ray did not cover this hunk."}[g.result] || "")}</p>
+    ${g.tests ? `<h4>Tests that go red</h4>${(c.xray.find(x => x.id === g.id).failing_tests || []).map(t => `<div class="quote">${esc(t)}</div>`).join("")}` : ""}
+    <h4>Diff</h4>${g.hunks.map(h => `<div class="hint">${esc(h.path)}:${h.new_start || ""}</div>${diffHtml(h.text)}`).join("")}`);
+}
+function overlapMax(text, c) {
+  const mine = toks(text); if (!mine.length) return 0;
+  const src = [...c.claims.map(x => x.text), ...(c.story || []).map(s => s.text || s), ...arr(c.refusals).flatMap(r => [r.what, r.why_ai_cannot_decide, r.question_for_owner])].filter(Boolean);
+  let best = 0; src.forEach(s => { const set = new Set(toks(s)); const hit = mine.filter(t => set.has(t)).length / mine.length; if (hit > best) best = hit; }); return best;
+}
+function guardState() { const c = C(), w = toks(state.risk).length, ov = overlapMax(state.risk, c); return {w, ov, ok: w >= 15 && ov <= 0.6}; }
+function burnChart(weeks, base, w = 760, h = 320) {
+  const pad = {l: 48, r: 48, t: 28, b: 36}, iw = w - pad.l - pad.r, ih = h - pad.t - pad.b;
+  const x = i => pad.l + (weeks.length < 2 ? 0 : i * iw / (weeks.length - 1));
+  const maxM = Math.max(...weeks.map(d => d.review_min || 0), base || 0, 1) * 1.1, maxR = Math.max(...weeks.map(d => d.revert_rate || 0), 1) * 1.6;
+  const ym = v => pad.t + ih - (v || 0) / maxM * ih, yr = v => pad.t + ih - (v || 0) / maxR * ih;
+  const line = (f, g) => weeks.map((d, i) => `${i ? "L" : "M"}${x(i).toFixed(1)},${g(f(d)).toFixed(1)}`).join(" ");
+  const grid = [0, .25, .5, .75, 1].map(t => `<line x1="${pad.l}" x2="${w - pad.r}" y1="${pad.t + ih * t}" y2="${pad.t + ih * t}" stroke="var(--line)"/><text x="${pad.l - 8}" y="${pad.t + ih * t + 4}" text-anchor="end" fill="var(--faint)" font-size="12">${Math.round(maxM * (1 - t))}</text><text x="${w - pad.r + 8}" y="${pad.t + ih * t + 4}" fill="var(--faint)" font-size="12">${(maxR * (1 - t)).toFixed(1)}</text>`).join("");
+  const area = `${line(d => d.review_min, ym)} L${x(weeks.length - 1)},${pad.t + ih} L${x(0)},${pad.t + ih} Z`;
+  return `<svg viewBox="0 0 ${w} ${h}" width="100%" role="img" aria-label="Review minutes per PR and revert rate by week"><defs><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--brand)" stop-opacity=".25"/><stop offset="1" stop-color="var(--brand)" stop-opacity="0"/></linearGradient></defs>${grid}
+    <path d="${area}" fill="url(#ar)"/>${base ? `<line x1="${pad.l}" x2="${w - pad.r}" y1="${ym(base)}" y2="${ym(base)}" stroke="var(--faint)" stroke-dasharray="5 5"/><text x="${w - pad.r}" y="${ym(base) - 6}" text-anchor="end" fill="var(--faint)" font-size="12">human-only full read: ${base} min (assumption)</text>` : ""}
+    <path d="${line(d => d.review_min, ym)}" fill="none" stroke="var(--brand)" stroke-width="3" stroke-linejoin="round"/><path d="${line(d => d.revert_rate, yr)}" fill="none" stroke="var(--ref)" stroke-width="2.5" stroke-linejoin="round"/>
+    ${weeks.map((d, i) => `<circle cx="${x(i)}" cy="${ym(d.review_min)}" r="3.5" fill="var(--surface)" stroke="var(--brand)" stroke-width="2"><title>week ${d.week}: ${(d.review_min || 0).toFixed(1)} min</title></circle><circle cx="${x(i)}" cy="${yr(d.revert_rate)}" r="3" fill="var(--ref)"><title>week ${d.week}: ${(d.revert_rate || 0).toFixed(1)}% reverts</title></circle>${d.escapes ? `<path d="M${x(i) - 5},${pad.t - 10} h10 l-5 9z" fill="var(--ref)"><title>escape in week ${d.week}</title></path>` : ""}<text x="${x(i)}" y="${h - 12}" text-anchor="middle" fill="var(--faint)" font-size="12">${d.week}</text>`).join("")}
+    <text x="${pad.l}" y="14" fill="var(--brand)" font-size="12" font-weight="700">REVIEW MINUTES PER PR</text><text x="${w - pad.r}" y="14" text-anchor="end" fill="var(--reft)" font-size="12" font-weight="700">REVERT RATE % (MUST NOT RISE)</text></svg>`;
+}
+function printHtml() {
+  const c = C(), owner = (state.owner || ""), sg = state.signed && state.signed.change === c.id ? state.signed : null;
+  const proven = c.claims.filter(x => ["E3", "E2"].includes(x.evidence_level) && x.status !== "refused"), gaps = c.claims.filter(x => ["E0", "E1"].includes(x.evidence_level) && x.status !== "refused"), b = budget(c);
+  const trailer = sg ? `Requirement: ${(sg.requirements || []).join(", ")}\nReceipt: sha256:${sg.bundle_sha256}\nOwner-Accepted-Risk: ${sg.residual_risk_owner_words.slice(0, 100)}\nReviewed-by-AI: receipts (advisory)\nSigned-off-by: ${sg.owner}` : "Not signed yet.";
+  return `<h1>Receipt for change ${esc(c.id)}</h1><p class="p-sub">${esc((c.change.requirement_ids || []).join(", "))} · ${esc(c.change.branch || "")} · ${esc((c.change.base || "").slice(0, 8))} to ${esc((c.change.head || "").slice(0, 8))} · lane ${esc((c.route && c.route.lane) || "n/a")}${sg ? "" : " · UNSIGNED DRAFT"}</p>
+    ${b && b.known ? `<p><b>Reading budget:</b> ${fmt(b.read)} of ${fmt(b.total)} changed lines${b.provisional ? " (provisional)" : ""}.</p>` : ""}
+    <h2>Checked</h2><ul>${proven.map(x => `<li>${esc(x.id)} (${esc(x.evidence_level)}, ${esc(x.verifier || "")}): ${esc(x.text)}</li>`).join("") || "<li>Nothing proven by execution.</li>"}</ul>
+    <h2>Not checked</h2><ul>${c.notChecked.map(i => `<li>${esc(i.what || i)}${i.why ? " (" + esc(i.why) + ")" : ""}</li>`).join("")}${gaps.map(x => `<li>${esc(x.id)} (${esc(x.evidence_level)}): ${esc(x.text)}</li>`).join("") || (c.notChecked.length ? "" : "<li>Nothing listed.</li>")}</ul>
+    <h2>Refusal decisions</h2><ul>${arr(c.refusals).map(r => { const a = state.answers[r.id] || {}; return `<li><b>${esc(r.id)}</b> ${esc(r.question_for_owner)}<br>Decision: ${a.decision ? esc(a.decision) : "none yet"}${a.note ? ". Note: " + esc(a.note) : ""}</li>`; }).join("") || "<li>None.</li>"}</ul>
+    <h2>Residual risk, in the owner's words</h2><p>${esc(state.risk.trim() || "Not written yet.")}</p>
+    <h2>Owner and hash</h2><p>${esc(owner)}${sg ? " · signed " + esc(sg.signed_at) : ""}</p><p class="mono">${sg ? "sha256:" + esc(sg.bundle_sha256) : "No hash until signed."}</p><pre>${esc(trailer)}</pre>`;
+}
+function printReceipt() { $("#print").innerHTML = printHtml(); setTimeout(() => window.print(), 50); }
+const toks = s => String(s).toLowerCase().match(/[a-z0-9']+/g) || [];
+
+function sRefusals(c) {
+  const R = c.refusals;
+  if (R === null) return SC("s-refusals", "Refusals", `<h2>Refusals</h2>${NOT_RUN("refusals.json is missing.", "runs/" + c.id + "/refusals.json")}`);
+  if (!R.length) return SC("s-refusals", "Refusals", `<h2>Refusals</h2><p class="muted">None.</p>`);
+  return SC("s-refusals", "Refusals", `<h2>Refusals</h2><div>${R.map(r => { const a = state.answers[r.id] || {}; return `<button class="cl" data-act="refusal" data-id="${esc(r.id)}" title="${esc(r.question_for_owner)}"><span class="key">${esc(r.id)}</span><span class="ct">${esc(r.question_for_owner)}</span>${a.decision ? `<span class="loz lv-E3">${esc(a.decision)}</span>` : `<span class="loz lv-E1">Needs answer</span>`}</button>`; }).join("")}</div>`);
+}
+function openRefusal(id) {
+  const r = arr(C().refusals).find(x => x.id === id); if (!r) return; const a = state.answers[id] || {};
+  openDrawer(`<h3>${esc(r.question_for_owner)}</h3><p class="hint">${esc(r.id)} · ${esc(r.rule)}</p>
+    <div class="opts">${arr(r.options).map(o => `<button class="opt" data-act="decide" data-rid="${esc(r.id)}" data-opt="${esc(o)}" aria-pressed="${a.decision === o}">${esc(o)}</button>`).join("")}</div>
+    <details><summary>Why the reviewer handed this back</summary><div><p>${esc(r.what)}</p><p>${esc(r.why_ai_cannot_decide)}</p></div></details>
+    <h4>Note</h4><textarea data-note="${esc(r.id)}" placeholder="In your own words" aria-label="Owner note">${esc(a.note || "")}</textarea>`);
+  const stamp = $("#drawer .opts"); stamp && popIn(stamp, 0, 12);
+}
+function sReceipt(c) {
+  if (!(c.refusals !== null || c.claims.length)) return SC("s-receipt", "Receipt", `<h2>Receipt</h2>${NOT_RUN("Claims and refusals are needed first.")}`);
+  return SC("s-receipt", "Receipt", `<h2>Receipt</h2><div id="rbody"></div>`);
+}
+function rehearsalHtml() {
+  const r = D.rehearsal; if (!r) return "";
+  const h = r.bundle_sha256 || r.hash || "", tr = r.trailer || r.trailer_text || "";
+  return `<div class="rehearsal"><span class="loz lv-E0">Rehearsal</span> Rehearsal receipt, signed by ${esc(r.owner || "Rehearsal Owner")}${h ? `, sha256:${esc(String(h).slice(0, 16))}…` : ""}${tr ? `<details><summary>Trailer</summary><pre class="q">${esc(tr)}</pre></details>` : ""}</div>`;
+}
+function receiptBody() {
+  const c = C(), R = arr(c.refusals), done = R.filter(r => (state.answers[r.id] || {}).decision).length;
+  const proven = c.claims.filter(x => ["E3", "E2"].includes(x.evidence_level) && x.status !== "refused").length, nc = c.notChecked.length + c.claims.filter(x => ["E0", "E1"].includes(x.evidence_level) && x.status !== "refused").length;
+  return `<p class="muted">${proven} checked, ${nc} not checked, ${done} of ${R.length} refusals decided. A record of who decided. It does not make the change safe.</p>
+    <label class="lbl" for="owner">Your name</label><input class="inp" id="owner" value="${esc(state.owner)}" autocomplete="off">
+    <label class="lbl" for="risk">Risk you accept, in your own words (15 words or more)</label>
+    <textarea id="risk">${esc(state.risk)}</textarea><div class="guard" id="guard"></div>
+    <button class="solid" id="signbtn" disabled>Sign receipt</button> <button class="ghost" data-act="print">Print</button> <span class="hint" id="signhint"></span><div id="signout"></div>${rehearsalHtml()}`;
+}
+function wireReceipt() {
+  const box = $("#rbody"); if (!box) return; const c = C(); box.innerHTML = receiptBody();
+  const upd = () => {
+    const g = guardState(), R = arr(c.refusals), answered = R.every(r => (state.answers[r.id] || {}).decision);
+    $("#guard").innerHTML = `<span class="${g.w >= 15 ? "ok" : ""}">${g.w}/15 words</span> · <span class="${g.ov <= .6 ? "ok" : ""}">${Math.round(g.ov * 100)}% overlap with reviewer text (max 60%)</span>`;
+    const named = !!state.owner.trim(); $("#signbtn").disabled = !(g.ok && answered && named); $("#signhint").textContent = !answered ? "Decide every refusal first." : (!named ? "Enter your name." : (!g.ok ? "Write your own residual-risk statement." : ""));
+  };
+  $("#risk").addEventListener("input", e => { state.risk = e.target.value; upd(); }); $("#owner").addEventListener("input", e => { state.owner = e.target.value; upd(); }); upd();
+  if (state.signed && state.signed.change === state.change) showSigned(state.signed, false);
+  $("#signbtn").addEventListener("click", async e => {
+    const owner = (state.owner || "");
+    const rec = {change: c.id, requirements: c.change.requirement_ids || [], base: c.change.base, head: c.change.head, owner, lane: c.route && c.route.lane || null,
+      checked: c.claims.filter(x => ["E3", "E2"].includes(x.evidence_level) && x.status !== "refused").map(x => ({claim: x.id, by: x.verifier, level: x.evidence_level, refs: x.evidence_refs || []})),
+      not_checked: c.notChecked.map(i => i.what || i), refusal_decisions: arr(c.refusals).map(r => ({id: r.id, decision: (state.answers[r.id] || {}).decision, note: (state.answers[r.id] || {}).note || ""})),
+      residual_risk_owner_words: state.risk.trim(), evidence_bundle_sha256: (c.receipt && c.receipt.bundle_sha256) || null, mock: !!(D.meta && D.meta.mock)};
+    rec.bundle_sha256 = await sha256(JSON.stringify(rec, Object.keys(rec).sort())); rec.signed_at = new Date().toISOString();
+    state.signed = rec; showSigned(rec, true); swap("s-verdict", sVerdict(C()));
+  });
+}
+function showSigned(r, fx) {
+  const trailer = `Requirement: ${(r.requirements || []).join(", ")}\nReceipt: sha256:${r.bundle_sha256}\nOwner-Accepted-Risk: ${r.residual_risk_owner_words.slice(0, 100)}\nReviewed-by-AI: receipts (advisory)\nSigned-off-by: ${r.owner}`;
+  $("#signout").innerHTML = `<div class="signed"><div class="bigstamp" id="bigstamp" data-rot="-8deg">SIGNED</div><b>${esc(r.owner)}</b> <span class="faint">${esc(r.signed_at)}</span>${r.mock ? ' <span class="tagsyn">Mock</span>' : ""}<div class="hash">sha256:${esc(r.bundle_sha256)}</div><details><summary>Commit trailer</summary><pre class="q">${esc(trailer)}</pre></details><p><button class="ghost" id="copybtn">Copy trailer</button> <span class="hint" id="copyhint">Local only.</span></p></div>`;
+  $("#copybtn").onclick = () => { try { navigator.clipboard.writeText(trailer); $("#copyhint").textContent = "Copied"; } catch (e) { $("#copyhint").textContent = "Copy blocked"; } };
+  if (fx) stampIn($("#bigstamp"));
+}
+
+/* ---------- Board ---------- */
+function viewScale() {
+  const id = state.change, c = C(id); if (!SCALE_OK(id) || !c.files.length) return SC("s-scale", "Scale", `<h2>Scale</h2>${NOT_RUN("No file list for this change.")}`);
+  const L = LANES.map(l => ({l, n: c.files.filter(f => fileLane(f, c) === l).length})).filter(x => x.n), total = c.files.length, g = c.regen;
+  const nm = {L0: "verified mechanically", L1: "skimmed", L2: "read as flagged hunks", L3: "read in full"}, col = {L0: "var(--e2)", L1: "var(--e0)", L2: "var(--brand)", L3: "var(--ref)"};
+  const extra = {L0: g && g.generated_total != null ? `${fmt(g.generated_matching)} of ${fmt(g.generated_total)} snapshots match the expected pattern, the rest go to a person` : "", L1: "tests and docs", L2: "source and template files", L3: ""};
+  return SC("s-scale", "Scale", `<h2>${fmt(total)} files changed</h2><div class="scalebar" aria-hidden="true">${L.map(x => `<i style="flex:${x.n};background:${col[x.l]}"></i>`).join("")}</div>
+    <ul class="scalelist">${L.map(x => `<li><b>${fmt(x.n)}</b><span>${x.l} files ${nm[x.l]}${extra[x.l] ? `. <span class="muted">${esc(extra[x.l])}.</span>` : ""}</span></li>`).join("")}</ul>`);
+}
+/* ---------- Ledger ---------- */
+function viewLedger() {
+  const g = LG(); let a;
+  if (!g) a = SC("s-ledger", "Ledger", `<h2>Ledger</h2>${NOT_RUN("Ledger history has not been generated.", "data/ledger_state.json")}`);
+  else a = SC("s-ledger", "Ledger", `<h2>Ledger${g.synthetic ? '<span class="tagsyn">Synthetic data</span>' : ""}</h2><p class="muted">Review minutes per PR and revert rate, by week. No promotion before 20 receipts and 5 canaries in the area. Trust drops fast and rises slowly.</p><div class="card" style="margin-top:12px">${burnChart(g.series("ALL"), (D.ledger_state || {}).baseline_human_only_review_min)}</div>`);
+  return a + sBacktest();
+}
+function escapeTable(b) {
+  const ec = b && b.escape_cases, cs = arr(ec && ec.cases); if (!cs.length) return "";
+  const ev = {yes: "Pointed at the defect", no: "Did not point at it", "no machine evidence": "No machine evidence"};
+  return `<h3 style="margin:24px 0 4px;font-size:var(--fs-lg)">Escaped regressions</h3><p class="muted" style="margin:0 0 8px">Four real regressions from the project history. Not a statistic.</p><div class="tbl"><table class="dense"><thead><tr><th>Case</th><th class="num">Days to detection</th><th>Lane</th><th>Evidence at the defect</th></tr></thead><tbody>${cs.map(x => `<tr><td>${esc(x.title)}</td><td class="num">${esc(x.days_to_detection)}</td><td class="k">${esc(x.lane)}</td><td class="k">${esc(ev[(x.verdict || {}).pointed_at_defect] || (x.verdict || {}).pointed_at_defect || "")}</td></tr>`).join("")}</tbody></table></div>`;
+}
+function sBacktest() {
+  const b = D.backtest, sm = b && b.summary; if (!sm || !sm.changes) return "";
+  const cl = b.confusion_by_lane || {}, rows = LANES.filter(l => (cl[l] || {}).changes), hs = b.hand_spot_check || {}, ok = arr(hs.checked_rows).filter(r => r.heuristic_matched === "yes").length, ec = b.escape_cases || {}, cases = arr(ec.cases).length, pt = (ec.pointed_at_defect_by_evidence || {}).yes;
+  const light = (cl.L0 || {changes: 0}).changes + (cl.L1 || {changes: 0}).changes;
+  return SC("s-bt", "Backtest", `<h2>Backtest</h2><p class="muted">${sm.changes} real merged changes from the last two years were routed by the diff alone: ${sm.changes - light} to L2 or L3 and ${light} to L1. The 90-day heuristic found ${sm.escapes} escapes, so router recall cannot be measured here. ${hs.checked ? `A hand check agreed with the heuristic on ${ok} of ${hs.checked} sampled changes.` : ""}</p>
+    <div class="tbl"><table class="dense"><thead><tr><th>Lane</th><th class="num">Changes</th></tr></thead><tbody>${rows.map(l => `<tr><td>${l} ${LANE_NAMES[l]}</td><td class="num">${cl[l].changes}</td></tr>`).join("")}</tbody></table></div>${escapeTable(b)}`);
+}
+/* ---------- Drill ---------- */
+function viewDrill() {
+  const cs = drillList(), st = drillStats();
+  if (!cs.length || !st) return SC("s-drill", "Drill", `<h2>Canary drill</h2>${NOT_RUN((D.drill && D.drill.label) || "The drill has not run.", "data/drill.json has no canaries yet")}`);
+  const fam = (D.drill || {}).per_family || {}, best = Math.max(0, ...Object.values(fam).map(f => arr(f.caught).length));
+  return SC("s-drill", "Drill", `<h2>Canary drill</h2><p class="muted">Combined ${st.caught}/${st.n}${best ? `, best single reviewer ${best}/${st.n}` : ""}. Each canary is a small planted bug.</p>
+    <div class="tbl"><table class="dense"><thead><tr><th>Canary</th><th>Bug</th>${SIGNALS.map(([k, l]) => `<th>${l}</th>`).join("")}</tr></thead><tbody>${cs.map(x => `<tr title="${esc(x.note)}"><td class="k"><span class="key">${esc(x.id)}</span></td><td>${esc(x.title)}</td>${SIGNALS.map(([k]) => `<td class="k">${x.fired.includes(k) ? '<span class="loz lv-E3">Caught</span>' : '<span class="faint">None</span>'}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`);
+}
+function wireDrill() {}
+
+/* ---------- Concept ---------- */
+function viewConcept() { return ""; }
+/* ---------- Drawer ---------- */
+function openDrawer(html) { const d = $("#drawer"); d.innerHTML = `<button class="ghost x" data-act="closedrawer" aria-label="Close">${ico("x")}Close</button>${html}`; d.classList.add("open"); }
+const closeDrawer = () => $("#drawer").classList.remove("open");
+function openClaim(id) {
+  const c = C(), cl = c.claims.find(x => x.id === id); if (!cl) return; const lv = lvOf(cl);
+  openDrawer(`<div class="lv-${lv}"><span class="tag">${lvLabel(cl)}</span></div><h3 style="margin-top:12px">${esc(cl.id)} · ${esc(cl.text)}</h3>
+    <p class="muted">${esc(cl.requirement || "")} · ${esc(cl.source || "")}${cl.source === "author-narrative" ? " (a claim to test, never evidence)" : ""} · verifier: ${esc(cl.verifier || "n/a")}</p>
+    <h4>Citations (validated against the diff)</h4>${arr(cl.citations).map(x => `<div class="quote">${esc(x.path)}:${esc(x.line)}\n${esc(x.quote)}</div>`).join("") || `<p class="faint">None.</p>`}
+    <h4>Evidence</h4>${arr(cl.evidence_refs).map(x => `<div class="quote">${esc(x)}</div>`).join("") || `<p class="faint">No executed or mechanical evidence attached.</p>`}
+    <p style="margin-top:22px">${cl.verifier === "timemachine" ? `<button class="ghost" data-act="jump" data-id="s-tm">Open Time Machine</button> ` : ""}${arr(cl.hunks).length ? `<button class="ghost" data-act="jump" data-id="s-xray">Open Hunk X-Ray</button>` : ""}</p>`);
+}
+
+/* =====================================================================
+   ENTER, PRESENTER, EVENTS
+   ===================================================================== */
+const ENTER = {
+  "s-verdict"() {
+    const el = $("#bignum"), b = budget(C());
+    if (el && b && b.known) spring(b.total, b.read, v => { el.textContent = Math.max(0, Math.round(v)); }, {k: 85, c: 12, done() { el.textContent = b.read; }});
+    popAll("#s-verdict .chk", 80, 150); setTimeout(() => { const e = $("#bignum"); if (e && e.dataset.final) e.textContent = e.dataset.final; }, 2400);
+  },
+  "s-tm"() { const n = $("#tmnew"); if (n && !calm()) { n.style.opacity = 0; setTimeout(() => popIn(n, 0, 12), 700); } },
+  "s-xray"() { traceMount(true); if (pstep >= 0 && !calm()) setTimeout(tgRun, 900); }
+};
+const STEPS = [
+ {id: "verdict", tab: "review", scene: "s-verdict", cap: "Reading budget and checks"},
+ {id: "tm", tab: "review", scene: "s-tm", cap: "Time Machine: old code, new code"},
+ {id: "xray", tab: "review", scene: "s-xray", cap: "Run X-Ray"},
+ {id: "refusals", tab: "review", scene: "s-refusals", cap: "Decisions for the owner"},
+ {id: "receipt", tab: "review", scene: "s-receipt", cap: "Sign the receipt"}];
+let pstep = -1;
+function present(i) {
+  pstep = clamp(i, 0, STEPS.length - 1); const st = STEPS[pstep]; document.body.classList.add("presenting");
+  if (state.tab !== st.tab || st.id === "scale") { state.tab = st.tab; shell(); draw(); }
+  const el = document.getElementById(st.scene); if (el) { el.scrollIntoView({behavior: "auto", block: "start"}); setTimeout(() => { entered.add(st.scene); (ENTER[st.scene] || (() => {}))(true); }, 60); }
+  $("#pt").textContent = `${pstep + 1} of ${STEPS.length}`; $("#pcap").textContent = st.cap;
+}
+function stopPresent() { document.body.classList.remove("presenting"); pstep = -1; }
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-act]"); if (!t) { if (!e.target.closest("#drawer")) closeDrawer(); return; }
+  const a = t.dataset.act;
+  if (a === "tab") setTab(t.dataset.id);
+  else if (a === "home") { e.preventDefault(); setTab("review"); }
+  else if (a === "claim") openClaim(t.dataset.id);
+  else if (a === "xgroup") openXGroup(t.dataset.id);
+  else if (a === "refusal") openRefusal(t.dataset.id);
+  else if (a === "closedrawer") closeDrawer();
+  else if (a === "jump") { closeDrawer(); jump(t.dataset.id); }
+  else if (a === "budgetinfo") openBudget();
+  else if (a === "print") printReceipt();
+  else if (a === "tgrun") tgRun()
+  else if (a === "tgreset") tgReset()
+  else if (a === "tgmode") tgState(t.dataset.m)
+  else if (a === "reviewsign") { if (state.tab !== "review") setTab("review"); setTimeout(() => jump(arr(C().refusals).some(r => !(state.answers[r.id] || {}).decision) ? "s-refusals" : "s-receipt"), 60); }
+  else if (a === "decide") {
+    const r = t.dataset.rid; state.answers[r] = {...(state.answers[r] || {}), decision: t.dataset.opt}; $$("#drawer .opt").forEach(o => o.setAttribute("aria-pressed", o === t));
+    swap("s-refusals", sRefusals(C())); swap("s-verdict", sVerdict(C())); wireReceipt();
+  }
+});
+document.addEventListener("input", e => { if (e.target.dataset && e.target.dataset.note) { const r = e.target.dataset.note; state.answers[r] = {...(state.answers[r] || {}), note: e.target.value}; } });
+document.addEventListener("change", e => { if (e.target.id === "chsel") { state.change = e.target.value; state.signed = null; shell(); draw(); } });
+function setCalm(v) { state.calm = v; document.body.classList.toggle("calm", v); if (v) Ambient.stop(); Ambient.start(); }
+document.addEventListener("keydown", e => {
+  if (/^(TEXTAREA|INPUT|SELECT)$/.test(e.target.tagName) || document.body.classList.contains("intro")) return;
+  const k = e.key.toLowerCase();
+  if (k === "p") { document.body.classList.contains("presenting") ? stopPresent() : present(0); }
+  else if (k === "m") setCalm(!state.calm);
+  else if (k === "escape") { stopPresent(); closeDrawer(); }
+  else if (document.body.classList.contains("presenting")) { if (["arrowright", " ", "pagedown", "enter"].includes(k)) { e.preventDefault(); present(pstep + 1); } else if (["arrowleft", "pageup", "backspace"].includes(k)) { e.preventDefault(); present(pstep - 1); } }
+  else if (/^[1-4]$/.test(k)) { const t = tabsFor(state.change)[+k - 1]; if (t) setTab(t[0]); }
+});
+$("#pnext").onclick = () => present(pstep + 1); $("#pprev").onclick = () => present(pstep - 1); $("#pexit").onclick = stopPresent;
+MQ.addEventListener && MQ.addEventListener("change", e => setCalm(e.matches));
+
+/* =====================================================================
+   TRACE GRAPH: requirement > claim > hunk > test, from real run files
+   layered layout + light spring/repulsion relaxation, SVG, no libs
+   ===================================================================== */
+const TG = {S: null, mode: "head", pin: null, expand: {}, runId: 0};
+const isSrcH = h => h.kind === "src" || h.kind === "template" || h.kind === "template-output";
+const baseName = p => String(p).split("/").pop();
+function tgWrap(s, max = 28) {
+  if (s.length <= max) return [s];
+  const parts = s.split(/(?<=_)|(?=[A-Z][a-z])/); let a = "", b = "";
+  for (const p of parts) { if (!b && (a + p).length <= max) a += p; else b += p; }
+  return [a, b.length > max ? b.slice(0, max - 1) + "…" : b];
+}
+function tgModel(c) {
+  const nodes = [], edges = [], by = {}, add = n => (by[n.id] = n, nodes.push(n), n);
+  const cov = {}; arr(((c.raw.adjudication || {}).requirement_coverage)).forEach(r => cov[r.id] = r.text);
+  const reqs = [...new Set([...c.claims.map(x => x.requirement).filter(Boolean), ...c.uncovered.map(u => typeof u === "string" ? u : u.id)])];
+  reqs.forEach(r => add({id: "q:" + r, col: 0, kind: "req", label: r, tip: r + (cov[r] ? ": " + cov[r].slice(0, 110) : "")}));
+  c.claims.forEach(cl => { add({id: "c:" + cl.id, col: 1, kind: "claim", label: cl.id, lv: lvOf(cl), refused: cl.status === "refused", tip: `${cl.id}, ${lvLabel(cl).toLowerCase()}, ${cl.status || "no status"}: ${cl.text.slice(0, 90)}`}); if (cl.requirement && by["q:" + cl.requirement]) edges.push({a: "q:" + cl.requirement, b: "c:" + cl.id}); });
+  const hs = c.hunks, groups = arr(c.xray), single = {}, hres = {};
+  groups.forEach(g => { if (arr(g.hunks).length === 1) single[g.hunks[0]] = g; });
+  hs.forEach(h => { const g = single[h.id]; if (g) hres[h.id] = {result: g.result, tests: arr(g.failing_tests), bundle: false}; });
+  groups.filter(g => arr(g.hunks).length > 1).forEach(g => g.hunks.forEach(id => { if (!hres[id]) hres[id] = {result: g.result, tests: arr(g.failing_tests), bundle: true}; }));
+  const cit = {}, cited = new Set();
+  c.claims.forEach(cl => arr(cl.citations).forEach(ct => { const h = hs.find(h => h.path === ct.path && ct.line >= h.new_start && ct.line < h.new_start + Math.max(1, h.new_len || 1)); if (h) { (cit[cl.id] = cit[cl.id] || new Set()).add(h.id); cited.add(h.id); } }));
+  let hl = hs.filter(h => isSrcH(h) || cited.has(h.id)); const rest = hs.filter(h => !hl.includes(h) && h.kind !== "generated" || (h.kind === "generated" && !hl.includes(h)));
+  let hidden = [];
+  if (hl.length > 10 && !TG.expand[c.id]) { const pr = h => (hres[h.id] || {}).result === "unprotected" ? 0 : cited.has(h.id) ? 1 : 2; const sorted = hl.slice().sort((a, b) => pr(a) - pr(b)); const keep = new Set(sorted.slice(0, 10).map(h => h.id)); hidden = hl.filter(h => !keep.has(h.id)); hl = hl.filter(h => keep.has(h.id)); }
+  const tmRaw = arr((c.raw.timemachine || {}).tests).filter(t => typeof t === "object");
+  const tmInfo = {}; tmRaw.forEach(t => tmInfo[t.name] = t);
+  const names = new Set(); groups.forEach(g => arr(g.failing_tests).forEach(n => names.add(n))); tmRaw.forEach(t => names.add(t.name));
+  hl.forEach(h => { const r = hres[h.id] || {result: "none", tests: []}; add({id: "h:" + h.id, col: 2, kind: "hunk", label: (b => (b.length > 24 ? b.slice(0, 23) + "…" : b))(baseName(h.path)) + ":" + h.new_start, unp: r.result === "unprotected", res: r.result, tip: `${h.path}:${h.new_start}, ${pl(hunkLines(h), "line")}, ${r.result === "unprotected" ? "not noticed: no test fails when reverted" : r.result === "load-bearing" ? "noticed: reverting fails " + pl(r.tests.length, "test") : r.result === "structural" ? "cannot tell: does not compile alone" : "not X-rayed"}`});
+    r.tests.forEach(n => edges.push({a: "h:" + h.id, b: "t:" + n, bundle: r.bundle})); });
+  if (hidden.length) { add({id: "m:hunks", col: 2, kind: "more", label: `+${hidden.length} more hunks`, tip: "Show the other source hunks"}); hidden.forEach(h => { (hres[h.id] || {tests: []}).tests.forEach(n => edges.push({a: "m:hunks", b: "t:" + n})); }); }
+  const shownH = new Set(hl.map(h => h.id));
+  c.claims.forEach(cl => arr([...(cit[cl.id] || [])]).forEach(id => { if (shownH.has(id)) edges.push({a: "c:" + cl.id, b: "h:" + id}); else if (hidden.length && hidden.some(h => h.id === id)) edges.push({a: "c:" + cl.id, b: "m:hunks"}); }));
+  const named = [...names]; named.forEach(n => { const t = tmInfo[n]; add({id: "t:" + n, col: 3, kind: "test", label: baseName(n.replace(/\./g, "/")), full: n, tm: !!t, tip: `${n}${t ? `, ${t.base === "fail" ? "fails on base" : t.base}, ${t.head === "pass" ? "passes on head" : t.head}` : ""}`}); });
+  const total = (groups.find(g => g.tests_total) || {}).tests_total, other = total ? +total - named.length : 0;
+  if (other > 0) add({id: "g:tests", col: 3, kind: "group", label: `${other} other tests pass`, tip: `${total} targeted tests ran on the head commit`});
+  if (rest.length) add({id: "g:rest", col: 2, kind: "group", label: `${rest.length} docs, test and generated hunks`, tip: "Checked mechanically, not X-rayed"});
+  c.claims.filter(cl => cl.verifier === "timemachine").forEach(cl => named.filter(n => tmInfo[n]).forEach(n => edges.push({a: "c:" + cl.id, b: "t:" + n})));
+  const leaf = c.claims.filter(cl => !edges.some(e => e.a === "c:" + cl.id));
+  if (leaf.length >= 2) {
+    const ids = new Set(leaf.map(cl => "c:" + cl.id)); const idx = nodes.findIndex(n => ids.has(n.id)); const keep = nodes.filter(n => !ids.has(n.id));
+    const g = {id: "g:claims", col: 1, kind: "group", label: `${leaf.length} claims`, tip: `${leaf.length} claims with no code link: ${leaf.map(cl => cl.id).join(", ")}`};
+    keep.splice(Math.max(0, idx), 0, g); nodes.length = 0; keep.forEach(n => nodes.push(n)); by["g:claims"] = g;
+    edges.forEach(e => { if (ids.has(e.b)) e.b = "g:claims"; });
+  }
+  const seen = new Set(); const E = edges.filter(e => by[e.a] && by[e.b] && !seen.has(e.a + ">" + e.b) && seen.add(e.a + ">" + e.b));
+  return {nodes, edges: E, by, groups, hres, total, tmInfo};
+}
+function tgBuild(c, svg) {
+  const M = tgModel(c), W = 910, cx = [78, 258, 486, 796], wd = {req: 136, claim: 52, hunk: 210, test: 216, more: 160, group: 220, claimg: 96};
+  M.nodes.forEach(n => { n.lines = n.kind === "test" ? tgWrap(n.label, 24) : [n.label]; n.w = n.id === "g:claims" ? 96 : n.kind === "hunk" ? Math.max(wd.hunk, Math.ceil(n.label.length * 7.9 + 20)) : wd[n.kind]; n.h = n.lines.length > 1 ? 40 : 28; n.x = cx[n.col]; n.pad = n.unp ? 14 : 0; n.vy = 0; });
+  const cols = [0, 1, 2, 3].map(k => M.nodes.filter(n => n.col === k)), mx = Math.max(1, ...cols.map(a => a.length));
+  const colH = a => sum(a, n => n.h + 8 + (n.pad || 0)), H = Math.max(200, Math.max(...cols.map(colH)) + 64);
+  cols.forEach(a => a.forEach((n, i) => { n.y = n.ty = (i + 1) * H / (a.length + 1); }));
+  const nb = n => M.edges.filter(e => e.a === n.id || e.b === n.id).map(e => M.by[e.a === n.id ? e.b : e.a]);
+  for (let pass = 0; pass < 3; pass++) for (let k = 1; k < 4; k++) { cols[k].forEach(n => { const ns = nb(n); n.bc = ns.length ? ns.reduce((t, o) => t + o.y, 0) / ns.length : H + n.y; }); cols[k].sort((a, b) => a.bc - b.bc); cols[k].forEach((n, i) => { n.y = (i + 1) * H / (cols[k].length + 1); }); }
+  const S = {M, H, W, cols, nb}; relax(S, 220); M.nodes.forEach(n => { n.ty = n.y; });
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.style.aspectRatio = `${W} / ${H}`;
+  const hdr = ["Requirements", "Claims", "Source hunks", "Tests"].map((t, k) => `<text class="tgcol" x="${cx[k]}" y="14" text-anchor="middle">${t}</text>`).join("");
+  svg.innerHTML = `${hdr}<g id="tge">${M.edges.map((e, i) => `<path class="tge${e.bundle ? " bundle" : ""}" data-i="${i}"/>`).join("")}</g><g id="tgp"></g><g id="tgn">${M.nodes.map(n => {
+    const cls = ["tgn", "k-" + n.kind, n.unp ? "unp" : "", n.kind === "claim" ? "lv-" + n.lv : "", n.refused ? "refused" : ""].join(" ");
+    const tx = n.lines.length > 1 ? [-2, 11] : [4];
+    return `<g class="${cls}" data-id="${esc(n.id)}" tabindex="0" role="button" aria-label="${esc(n.tip)}"><title>${esc(n.tip)}</title><rect x="${-n.w / 2}" y="${-n.h / 2}" width="${n.w}" height="${n.h}" rx="3"/>${n.lines.map((l, i) => `<text x="0" y="${tx[i] - (n.lines.length > 1 ? 0 : 0)}" text-anchor="middle">${esc(l)}</text>`).join("")}<text class="tgfail" x="${n.w / 2 - 6}" y="${-n.h / 2 - 4}" text-anchor="end"></text>${n.unp ? `<text class="tgnote" x="${-n.w / 2}" y="${n.h / 2 + 14}">not noticed by any test</text>` : ""}</g>`; }).join("")}</g>`;
+  S.el = {}; $$("#tgn .tgn", svg).forEach(g => S.el[g.dataset.id] = g); S.pe = $$("#tge path", svg); S.svg = svg;
+  tgDraw(S); return S;
+}
+function relax(S, iters) {
+  const {M, H} = S;
+  for (let it = 0; it < iters; it++) tgStep(S, 1);
+}
+function tgStep(S, k) {
+  const {M, H, cols} = S;
+  M.edges.forEach(e => { const a = M.by[e.a], b = M.by[e.b], d = (b.y - a.y) * 0.03 * k; a.vy += d; b.vy -= d; });
+  cols.forEach(a => { for (let i = 0; i < a.length; i++) for (let j = i + 1; j < a.length; j++) { const p = a[i], q = a[j], gap = (p.h + q.h) / 2 + 8 + (p.pad || 0), d = q.y - p.y; if (Math.abs(d) < gap) { const f = (gap - Math.abs(d)) * 0.25 * (d >= 0 ? 1 : -1); p.vy -= f; q.vy += f; } } });
+  M.nodes.forEach(n => { n.vy += (n.ty - n.y) * 0.02 * k; n.vy *= 0.8; n.y = clamp(n.y + n.vy, 30, H - 30); });
+  tgSeparate(S);
+}
+function tgSeparate(S) {
+  S.cols.forEach(a => {
+    const s = a.slice().sort((p, q) => p.y - q.y), gp = (p, q) => (p.h + q.h) / 2 + 6 + (p.pad || 0);
+    for (let i = 1; i < s.length; i++) if (s[i].y < s[i - 1].y + gp(s[i - 1], s[i])) s[i].y = s[i - 1].y + gp(s[i - 1], s[i]);
+    const over = s.length ? s[s.length - 1].y - (S.H - 24) : 0; if (over > 0) s.forEach(n => { n.y -= over; });
+    for (let i = s.length - 2; i >= 0; i--) if (s[i].y > s[i + 1].y - gp(s[i], s[i + 1])) s[i].y = s[i + 1].y - gp(s[i], s[i + 1]);
+    if (s.length && s[0].y < 24) { const d = 24 - s[0].y; s.forEach(n => { n.y += d; }); }
+  });
+}
+function tgPath(M, e) { const a = M.by[e.a], b = M.by[e.b], x1 = a.x + a.w / 2, x2 = b.x - b.w / 2, m = (x1 + x2) / 2; return `M${x1},${a.y} C${m},${a.y} ${m},${b.y} ${x2},${b.y}`; }
+function tgDraw(S) { S.M.nodes.forEach(n => S.el[n.id].setAttribute("transform", `translate(${n.x},${n.y})`)); S.M.edges.forEach((e, i) => S.pe[i].setAttribute("d", tgPath(S.M, e))); }
+function tgPaths(S, id) {
+  const {M} = S, set = new Set([id]), up = [id], dn = [id];
+  while (up.length) { const x = up.pop(); M.edges.forEach(e => { if (e.b === x && !set.has(e.a)) { set.add(e.a); up.push(e.a); } }); }
+  while (dn.length) { const x = dn.pop(); M.edges.forEach(e => { if (e.a === x && !set.has(e.b)) { set.add(e.b); dn.push(e.b); } }); }
+  return set;
+}
+function tgHighlight(id) {
+  const S = TG.S; if (!S) return; const set = id ? tgPaths(S, id) : null;
+  S.M.nodes.forEach(n => S.el[n.id].classList.toggle("dim", !!set && !set.has(n.id)));
+  S.M.edges.forEach((e, i) => { const on = !!set && set.has(e.a) && set.has(e.b); S.pe[i].classList.toggle("on", on); S.pe[i].classList.toggle("dim", !!set && !on); });
+}
+function tgTip(id) {
+  const S = TG.S, tip = $("#tgtip"); if (!S || !tip) return; if (!id) { tip.style.display = "none"; return; }
+  const n = S.M.by[id], card = $("#tgcard"), r = S.el[id].getBoundingClientRect(), cr = card.getBoundingClientRect();
+  tip.textContent = n.tip; tip.style.display = "block"; tip.style.left = clamp(r.left - cr.left + card.scrollLeft, 8, cr.width - 8) + "px"; tip.style.top = (r.bottom - cr.top + 6) + "px";
+}
+function tgState(mode) {
+  const S = TG.S; if (!S) return; TG.mode = mode;
+  S.M.nodes.filter(n => n.kind === "test").forEach(n => { const el = S.el[n.id]; el.classList.remove("tmp", "tmf"); if (n.tm) el.classList.add(mode === "base" ? "tmf" : "tmp"); });
+  $$("[data-act=tgmode]").forEach(b => b.setAttribute("aria-pressed", b.dataset.m === mode));
+}
+function tgReset() {
+  const S = TG.S; if (!S) return; TG.runId++; S.M.nodes.forEach(n => { const el = S.el[n.id]; el.classList.remove("fade", "fail"); el.querySelector(".tgfail").textContent = ""; }); $("#tgp").innerHTML = ""; tgState(TG.mode);
+  const cap = $("#tgcap"); if (cap) cap.textContent = "";
+}
+async function tgRun() {
+  const S = TG.S, c = C(); if (!S) return; tgReset(); const id = TG.runId, wait = ms => new Promise(r => setTimeout(r, calm() ? 0 : ms)), cap = $("#tgcap"), M = S.M;
+  const total = S.M.total ? ` of ${S.M.total}` : "";
+  for (const g of arr(c.xray)) {
+    if (id !== TG.runId) return; const hn = arr(g.hunks).map(h => "h:" + h).filter(h => M.by[h]), fails = arr(g.failing_tests);
+    cap.textContent = `Reverting ${g.id}: ${g.desc || ""}`; hn.forEach(h => S.el[h].classList.add("fade")); await wait(600);
+    if (g.result === "structural") cap.textContent = `${g.id}: cannot tell. It does not compile alone.`;
+    else if (!fails.length) cap.textContent = `${g.id}: all${S.M.total ? " " + S.M.total : ""} tests still pass, so the change is not noticed.`;
+    else {
+      cap.textContent = `${g.id}: ${pl(fails.length, "test")} fail${fails.length === 1 ? "s" : ""}${S.M.total ? " out of " + S.M.total : ""}.`;
+      if (!calm()) { const ps = []; M.edges.forEach((e, i) => { if (hn.includes(e.a) && fails.includes(e.b.slice(2))) ps.push(i); }); const layer = $("#tgp"); ps.forEach(i => { const p = document.createElementNS("http://www.w3.org/2000/svg", "path"); p.setAttribute("d", S.pe[i].getAttribute("d")); p.setAttribute("class", "tgp"); p.setAttribute("pathLength", "100"); p.setAttribute("stroke-dasharray", "14 200"); p.setAttribute("stroke-dashoffset", "14"); layer.appendChild(p); spring(14, -100, v => p.setAttribute("stroke-dashoffset", v), {k: 60, c: 14}); }); await wait(650); }
+      fails.forEach(f => { const el = S.el["t:" + f]; if (el) { el.classList.add("fail"); el.querySelector(".tgfail").textContent = "fails"; } });
+    }
+    await wait(1300); if (id !== TG.runId) return;
+    hn.forEach(h => S.el[h].classList.remove("fade")); S.M.nodes.forEach(n => { const el = S.el[n.id]; el.classList.remove("fail"); el.querySelector(".tgfail").textContent = ""; }); $("#tgp").innerHTML = ""; tgState(TG.mode); await wait(250);
+  }
+  if (id === TG.runId) { const un = arr(c.xray).filter(g => g.result === "unprotected"); cap.textContent = un.length ? `Done. ${un.map(g => g.id).join(", ")} ${un.length === 1 ? "has" : "have"} no failing test.` : "Done. Every reverted group fails at least one test."; }
+}
+function sXray(c) {
+  if (!c.xray) {
+    const gen = c.regen && c.regen.generated_total != null;
+    return SC("s-xray", "Hunk X-Ray", `<h2>Hunk X-Ray</h2>${gen ? `<p class="muted">Not meaningful here. ${fmt(c.regen.generated_total)} of ${c.files.length} files are generated snapshots, so reverting a hunk only shows that a snapshot comparison fails. ${fmt(c.regen.generated_matching)} of ${fmt(c.regen.generated_total)} match the expected pattern.</p>` : NOT_RUN("xray.json is missing.", "runs/" + c.id + "/xray.json")}`);
+  }
+  const G = xGroups(c);
+  return SC("s-xray", "Hunk X-Ray", `<h2>Hunk X-Ray</h2>
+    <div class="tg-bar"><button class="solid" data-act="tgrun">Run X-Ray</button><button class="linkbtn" data-act="tgreset">Reset</button><span class="seg2" role="group" aria-label="Time Machine view"><button data-act="tgmode" data-m="head" aria-pressed="true">Head</button><button data-act="tgmode" data-m="base" aria-pressed="false">Base</button></span><span id="tgcap" class="muted" aria-live="polite"></span></div>
+    <div class="card tg" id="tgcard"><svg id="tg" role="group" aria-label="Trace graph"></svg><div id="tgtip" class="tgtip" role="tooltip"></div></div>
+    <p class="muted" style="margin:8px 0 0">Not noticed means no test would catch a change here. It does not mean a bug is here.</p><details><summary>Results as a table</summary><div class="tbl"><table class="dense"><thead><tr><th>Group</th><th>Change</th><th class="num">Lines</th><th>Result</th><th class="num">Failing tests</th></tr></thead><tbody>${G.map(g => `<tr><td class="k"><span class="key">${esc(g.id)}</span></td><td>${esc(g.label)}</td><td class="num">${g.lines}</td><td>${({unprotected: "not noticed", "load-bearing": "noticed", structural: "cannot tell"})[g.result] || esc(g.result)}</td><td class="num">${g.tests}</td></tr>`).join("")}</tbody></table></div></details>`);
+}
+function traceMount(animate) {
+  const svg = $("#tg"); if (!svg) return; const c = C(); const S = TG.S = tgBuild(c, svg); tgState(TG.mode);
+  if (animate && !calm()) { S.M.nodes.forEach(n => { n.y += rnd(-60, 60); n.vy = 0; }); tgDraw(S); let f = 0; const loop = () => { if (TG.S !== S || f++ > 90) { S.M.nodes.forEach(n => { n.y = n.ty; }); tgDraw(S); return; } tgStep(S, 1); tgDraw(S); requestAnimationFrame(loop); }; requestAnimationFrame(loop); }
+}
+function wireTrace() {
+  const svg = $("#tg"); if (!svg) return;
+  svg.addEventListener("pointerover", e => { const g = e.target.closest(".tgn"); if (g) { if (!TG.pin) tgHighlight(g.dataset.id); tgTip(g.dataset.id); } });
+  svg.addEventListener("pointerout", e => { if (!TG.pin) tgHighlight(null); tgTip(null); });
+  svg.addEventListener("focusin", e => { const g = e.target.closest(".tgn"); if (g) { if (!TG.pin) tgHighlight(g.dataset.id); tgTip(g.dataset.id); } });
+  svg.addEventListener("focusout", () => { if (!TG.pin) tgHighlight(null); tgTip(null); });
+  svg.addEventListener("click", e => { const g = e.target.closest(".tgn"); if (!g) return; if (g.dataset.id === "m:hunks") { TG.expand[state.change] = true; swap("s-xray", sXray(C())); traceMount(false); wireTrace(); return; } TG.pin = TG.pin === g.dataset.id ? null : g.dataset.id; tgHighlight(TG.pin); });
+  svg.addEventListener("keydown", e => { const g = e.target.closest(".tgn"); if (g && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); g.dispatchEvent(new MouseEvent("click", {bubbles: true})); } if (e.key === "Escape") { TG.pin = null; tgHighlight(null); } });
+}
+
+/* =====================================================================
+   CANARY DROP: one ball per signal lane; a shield that fired catches it
+   ===================================================================== */
+const SIGNALS = [["tests", "Tests"], ["deterministic-rules", "Rules"], ["gemini", "Gemini"], ["claude", "Claude"]];
+function firedOf(x) {
+  const s = ((D.drill || {}).per_canary_signals || {})[x.id]; if (s) return arr(s.fired);
+  if (arr(x.by).length) return [...new Set(x.by.map(v => /^(test-fail|assertion-drop)/.test(v) ? "tests" : /^refusal|rule/.test(v) ? "deterministic-rules" : /gemini/.test(v) ? "gemini" : /claude/.test(v) ? "claude" : null).filter(Boolean))];
+  return x.caught ? ["deterministic-rules"] : [];
+}
+function drillList() {
+  return arr(D.drill && D.drill.canaries).map(x => {
+    const nr = x.status === "not_run" || x.result === "not_run" || x.not_run === true;
+    const t = x.type ? String(x.type).replace(/-/g, " ") : (x.title || x.name || x.description || x.id);
+    const o = {...x, title: t, area: x.area || x.target_area || "other", notRun: nr, caught: !nr && (x.caught === true || x.status === "caught" || x.result === "caught"), note: x.description || x.note || x.evidence || x.reason || x.how || ""};
+    o.fired = firedOf(o); return o;
+  });
+}
+function drillStats() {
+  const all = drillList(), cs = all.filter(x => !x.notRun); if (!cs.length) return null;
+  const caught = cs.filter(x => x.caught).length, by = {};
+  cs.forEach(x => { const k = x.area; by[k] = by[k] || {n: 0, c: 0}; by[k].n++; if (x.caught) by[k].c++; });
+  return {n: cs.length, caught, recall: caught / cs.length, by, notRun: all.length - cs.length};
+}
+/* ---------- boot ---------- */
+document.body.classList.toggle("calm", state.calm);
+chrome(); shell(); draw();
+intro(() => {
+  Ambient.start(); ENTER["s-verdict"]();
+  if (new URLSearchParams(location.search).get("present") === "1") setTimeout(() => present(0), 100);
+});
+if (!document.body.classList.contains("intro")) Ambient.start();
+window.__receipts = {tgRun, tgReset, tgHighlight, TG, present, state, C, budget, STEPS, stepId: () => (pstep >= 0 ? STEPS[pstep].id : null), ENTER, setCalm, drillList, printReceipt, setTheme};
+</script>
+</body>
+</html>

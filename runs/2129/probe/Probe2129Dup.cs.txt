@@ -1,0 +1,72 @@
+using System.Text;
+using MessagePack.Formatters;
+
+public class ProbeDupType
+{
+    public int Id { get; set; }
+}
+
+[GeneratedMessagePackFormatter]
+public partial class ProbeDupFormatterA : IMessagePackFormatter<ProbeDupType>
+{
+}
+
+[GeneratedMessagePackFormatter]
+public partial class ProbeDupFormatterB : IMessagePackFormatter<ProbeDupType>
+{
+}
+
+[MessagePackObject]
+public class ProbeAttrType
+{
+    [Key(0)]
+    public int Id { get; set; }
+
+    [Key(1)]
+    public string Name { get; set; } = "n";
+}
+
+[GeneratedMessagePackFormatter]
+public partial class ProbeAttrTypeFormatter : IMessagePackFormatter<ProbeAttrType>
+{
+}
+
+public class Probe2129DupTests
+{
+    private static void Write(string name, string text)
+    {
+        string dir = Environment.GetEnvironmentVariable("PROBE_OUT") ?? Path.GetTempPath();
+        Directory.CreateDirectory(dir);
+        File.WriteAllText(Path.Combine(dir, name + ".txt"), text, Encoding.UTF8);
+    }
+
+    [Fact]
+    public void TwoFormattersForSameType()
+    {
+        try
+        {
+            object? f = GeneratedMessagePackResolver.Instance.GetFormatter<ProbeDupType>();
+            Write("TwoFormattersForSameType", $"resolver returned {f?.GetType().Name ?? "null"}");
+        }
+        catch (Exception ex)
+        {
+            Write("TwoFormattersForSameType", $"resolver threw {ex.GetType().Name}: {ex.Message} / inner: {ex.InnerException?.GetType().Name}: {ex.InnerException?.Message}");
+        }
+    }
+
+    [Fact]
+    public void GeneratedFormatterForMessagePackObjectType()
+    {
+        try
+        {
+            object? f = GeneratedMessagePackResolver.Instance.GetFormatter<ProbeAttrType>();
+            var opts = MessagePackSerializerOptions.Standard.WithResolver(CompositeResolver.Create(GeneratedMessagePackResolver.Instance, StandardResolver.Instance));
+            string json = MessagePackSerializer.ConvertToJson(MessagePackSerializer.Serialize(new ProbeAttrType { Id = 1 }, opts), opts);
+            Write("GeneratedFormatterForMessagePackObjectType", $"resolver returned {f?.GetType().Name ?? "null"}; wire: {json}");
+        }
+        catch (Exception ex)
+        {
+            Write("GeneratedFormatterForMessagePackObjectType", $"threw {ex.GetType().Name}: {ex.Message} / inner: {ex.InnerException?.GetType().Name}: {ex.InnerException?.Message}");
+        }
+    }
+}

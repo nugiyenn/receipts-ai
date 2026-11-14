@@ -1,0 +1,66 @@
+{
+  "change": "2234",
+  "kind": "story",
+  "produced_by": "claude-code session, cached",
+  "model": "claude-sonnet-5-5",
+  "produced_at": "2026-11-14T23:19",
+  "static_analysis_only": true,
+  "prompt": "You write the story panel. Write 4-6 plain-language sentences describing what the change does and what is and is not proven.\nEvery sentence must end with one or more claim references like [C1]. A sentence with no claim reference is invalid.\nState facts, not opinions of quality. No confidence numbers.",
+  "prompt_sha256": "bb1f6929722c00e9545c08ad9decf403843c7bb52073f8be9f44d375195e82df",
+  "inputs": [
+    "git show origin/ju26-issue-2234",
+    "issue #2234 body (github.com page, fetched 2026-11-14)",
+    "receipts/requirements/REQ-2234.yaml",
+    "git history: commit 1a74a620, v3.1.0..v3.1.1 TypeCollector.cs diff"
+  ],
+  "sentences": [
+    {
+      "text": "Issue #2234 says the analyzer stopped validating types marked SuppressSourceGeneration since version 3.1.1.",
+      "claims": [
+        "C1",
+        "C4"
+      ],
+      "text_with_refs": "Issue #2234 says the analyzer stopped validating types marked SuppressSourceGeneration since version 3.1.1. [C1][C4]"
+    },
+    {
+      "text": "The diff does not touch the place where a suppressed type returns early; it adds duplicate-key guards and a skip for members whose key kind does not match.",
+      "claims": [
+        "C2",
+        "C4"
+      ],
+      "text_with_refs": "The diff does not touch the place where a suppressed type returns early; it adds duplicate-key guards and a skip for members whose key kind does not match. [C2][C4]"
+    },
+    {
+      "text": "Eight new analyzer tests assert diagnostics for suppressed types, plus one for non-suppressed duplicate keys, and two run-time tests assert no formatter is generated and a dynamic round-trip.",
+      "claims": [
+        "C1",
+        "C2",
+        "C3",
+        "C5"
+      ],
+      "text_with_refs": "Eight new analyzer tests assert diagnostics for suppressed types, plus one for non-suppressed duplicate keys, and two run-time tests assert no formatter is generated and a dynamic round-trip. [C1][C2][C3][C5]"
+    },
+    {
+      "text": "The README now lists which diagnostics apply to suppressed types, but the MsgPack012 and MsgPack016 behaviours it lists have no test.",
+      "claims": [
+        "C7",
+        "C8"
+      ],
+      "text_with_refs": "The README now lists which diagnostics apply to suppressed types, but the MsgPack012 and MsgPack016 behaviours it lists have no test. [C7][C8]"
+    },
+    {
+      "text": "After a mismatched member is reported and skipped, the generator alone omits it from the formatter with no error, which turns a crash into a silent omission when the analyzer is not what stops the build.",
+      "claims": [
+        "C6"
+      ],
+      "text_with_refs": "After a mismatched member is reported and skipped, the generator alone omits it from the formatter with no error, which turns a crash into a silent omission when the analyzer is not what stops the build. [C6]"
+    },
+    {
+      "text": "Nothing in the change shows that its base contains the 3.1.1 regression it is meant to fix.",
+      "claims": [
+        "C4"
+      ],
+      "text_with_refs": "Nothing in the change shows that its base contains the 3.1.1 regression it is meant to fix. [C4]"
+    }
+  ]
+}

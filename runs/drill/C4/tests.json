@@ -1,0 +1,5 @@
+{
+  "ran": false,
+  "outcome": "not-applicable",
+  "note": "docs-only patch cannot change a test outcome; not run"
+}

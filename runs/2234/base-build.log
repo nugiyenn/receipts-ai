@@ -1,0 +1,40 @@
+Sat Nov 14 23:07:01 EET 2026
+
+  Determining projects to restore...
+/Users/andy/Downloads/Junction2/wt/2234-base/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+  Restored /Users/andy/Downloads/Junction2/wt/2234-base/src/MessagePack.Analyzers/MessagePack.Analyzers.csproj (in 908 ms).
+  Restored /Users/andy/Downloads/Junction2/wt/2234-base/src/MessagePack.Analyzers.CodeFixes/MessagePack.Analyzers.CodeFixes.csproj (in 907 ms).
+  Restored /Users/andy/Downloads/Junction2/wt/2234-base/src/MessagePack.SourceGenerator/MessagePack.SourceGenerator.csproj (in 899 ms).
+  Restored /Users/andy/Downloads/Junction2/wt/2234-base/src/MessagePack.Annotations/MessagePack.Annotations.csproj (in 904 ms).
+  Restored /Users/andy/Downloads/Junction2/wt/2234-base/src/MessagePack/MessagePack.csproj (in 1.26 sec).
+  Restored /Users/andy/Downloads/Junction2/wt/2234-base/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj (in 2.66 sec).
+
+Build succeeded.
+
+/Users/andy/Downloads/Junction2/wt/2234-base/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:07.12
+
+/Users/andy/Downloads/Junction2/wt/2234-base/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+  MessagePack.SourceGenerator -> /Users/andy/Downloads/Junction2/wt/2234-base/bin/MessagePack.SourceGenerator/Debug/netstandard2.0/MessagePack.SourceGenerator.dll
+  MessagePack.Analyzers.CodeFixes -> /Users/andy/Downloads/Junction2/wt/2234-base/bin/MessagePack.Analyzers.CodeFixes/Debug/netstandard2.0/MessagePack.Analyzers.CodeFixes.dll
+  MessagePack.Analyzers -> /Users/andy/Downloads/Junction2/wt/2234-base/bin/MessagePack.Analyzers/Debug/netstandard2.0/MessagePack.Analyzers.dll
+  Unable to use package assets cache due to I/O error. This can occur when the same project is built more than once in parallel. Performance may be degraded, but the build result will not be impacted.
+  MessagePack.Annotations -> /Users/andy/Downloads/Junction2/wt/2234-base/bin/MessagePack.Annotations/Debug/netstandard2.0/MessagePack.Annotations.dll
+  MessagePack -> /Users/andy/Downloads/Junction2/wt/2234-base/bin/MessagePack/Debug/net8.0/MessagePack.dll
+  MessagePack.SourceGenerator.Tests -> /Users/andy/Downloads/Junction2/wt/2234-base/bin/MessagePack.SourceGenerator.Tests/Debug/net8.0/MessagePack.SourceGenerator.Tests.dll
+
+Build succeeded.
+
+/Users/andy/Downloads/Junction2/wt/2234-base/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:03:07.65
+
+real	3m15.513s
+user	0m25.591s
+sys	0m7.212s
+Sat Nov 14 23:10:16 EET 2026

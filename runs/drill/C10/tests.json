@@ -1,0 +1,11 @@
+{
+  "ran": true,
+  "compiled": true,
+  "failing_tests": [
+    "MsgPack00xAnalyzerTests.AddAttributesToMembers_MixedVisibility"
+  ],
+  "summary_line": "",
+  "outcome": "red",
+  "seconds": 64.5,
+  "log": "runs/drill/C10/tests.log"
+}

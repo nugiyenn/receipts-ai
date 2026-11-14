@@ -1,0 +1,20 @@
+{
+  "model": "gemini-3.1-pro-preview",
+  "prompt_sha256": "75777e8f417aded779519c45f97472f82d794fb4ae6638c2568c6ecb1e44997f",
+  "cached": false,
+  "findings": [
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1446,
+      "severity": "high",
+      "issue": "The condition `!this.compilation.ContainsSyntaxTree(...)` is inverted. It drops all diagnostics for the current compilation (violating REQ-2283-NF1 and REQ-2283-S1) and attempts to report diagnostics for syntax trees outside the compilation, which will crash the analyzer."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1434,
+      "severity": "medium",
+      "issue": "`GetPropertyIdentifierLocation` returns null for record properties because their syntax is `ParameterSyntax`, not `PropertyDeclarationSyntax`. This causes their diagnostics to lose location or be dropped entirely, violating REQ-2283-NF1 and contradicting Claim C10."
+    }
+  ],
+  "raw": null
+}

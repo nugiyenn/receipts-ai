@@ -1,0 +1,21 @@
+{
+ "reviewer": "gemini",
+ "model": "gemini-3.1-pro-preview",
+ "prompt_sha256": "68f9eb9c700454144f3b6285e2a1c2e1c224be7c76a9058d3bd2aab5bb419f66",
+ "ts": "2026-11-15T00:11:01+0200",
+ "seconds": 48.0,
+ "text": "This is a solid pull request that addresses a critical issue where the analyzer/source generator would crash when encountering invalid key configurations (duplicate or mixed keys). \n\nHere is a review of the changes:\n\n### Code Analysis & Fixes\n1. **Preventing Dictionary Crashes (`ArgumentException`)**: \n   Previously, if a type had duplicate keys, `intMembers.Add(...)` or `stringMembers.Add(...)` would throw an `ArgumentException` because the key already existed in the dictionary. This unhandled exception would crash the analyzer entirely. Wrapping the `Add` calls in `if (!...ContainsKey(...))` is the correct and safe way to handle this. The analyzer now gracefully ignores the duplicate during collection while still allowing the diagnostic pass to report `MsgPack005`.\n2. **Graceful Recovery on Mixed Keys**: \n   Adding the `continue;` statement after reporting the `DoNotMixStringAndIntKeys` diagnostic is a great fix. It prevents the invalid member from being processed further down the pipeline, which could have led to unexpected behavior or `NullReferenceException`s.\n3. **Broader Impact**: \n   Although the bug report specifically mentions `SuppressSourceGeneration = true`, your test `DuplicateKeysAreReportedWithoutAnalyzerFailureForGeneratedTypes` correctly proves that this crash also affected standard generated types that had duplicate keys. This makes the fix even more valuable!\n\n### Tests\nThe tests are excellent and comprehensive. \n- **Execution Tests**: You correctly verified that the dynamic resolver still successfully serializes/deserializes the suppressed type at runtime.\n- **Analyzer Tests**: You thoroughly tested that the analyzer continues to validate the contract (missing keys, private members, serializable types) while correctly suppressing generation-only diagnostics (partial class, AOT checks). Testing that the analyzer no longer fails/crashes on duplicate/mixed keys proves the fix works perfectly.\n\n### Documentation\nThe updates to `README.md` are clear and accurately describe the behavior, limitations, and analyzer expectations when opting out of source generation.\n\n### Conclusion\n**No bugs, risks, or concerns found.** The logic is sound, standard practices for Roslyn analyzers/generators (report diagnostic and recover gracefully) are followed, and the test coverage is thorough. \n\n**I approve this PR.** Great work!",
+ "usage": {
+  "promptTokenCount": 3609,
+  "candidatesTokenCount": 482,
+  "totalTokenCount": 9483,
+  "promptTokensDetails": [
+   {
+    "modality": "TEXT",
+    "tokenCount": 3609
+   }
+  ],
+  "thoughtsTokenCount": 5392,
+  "serviceTier": "standard"
+ }
+}

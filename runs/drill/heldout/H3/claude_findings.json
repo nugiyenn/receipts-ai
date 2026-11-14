@@ -1,0 +1,43 @@
+{
+  "produced_by": "fresh `claude -p` session, model claude-sonnet-5-5, no tools, empty working dir, no conversation context; never told a canary exists",
+  "prompt_sha256": "8bb00b3f55e997abda7663ea2e6da69ad76ceddfff1786f4e33badae79e509a8",
+  "findings": [
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+      "line": 652,
+      "severity": "high",
+      "issue": "The generator-output check builds its compilation from `defineSource` instead of `usageSource`. It never compiles the consuming type, and `defineSource` has no resolver, so `Assert.Contains(expectedResolverHintName, ...)` can't pass. The assertion that a resolver is emitted (C2/F2) is therefore broken, and it doesn't test the crash scenario."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 239,
+      "severity": "high",
+      "issue": "The wrapper filters every diagnostic the collector reports, not just the metadata cases. It drops any diagnostic whose location isn't a source tree in this compilation. That includes `Location.None` diagnostics, which analyzers are allowed to report, and diagnostics for source-declared types that were reported without a location before. This contradicts C4, C5 and NF1, and it is broader than the requirement needs."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1446,
+      "severity": "medium",
+      "issue": "The `IsInSource` / `ContainsSyntaxTree` check silently suppresses diagnostics, including the `MemberNeedsKey` diagnostic at line 1077, which now gets a null location for metadata members. The remark at lines 1440-1443 claims analyzers can't report without a location. That is false, because `Location.None` is valid, so C8's justification is wrong."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1434,
+      "severity": "medium",
+      "issue": "`GetPropertyIdentifierLocation` returns null whenever the syntax isn't a `PropertyDeclarationSyntax`, not only for metadata properties. A source-declared positional record property comes from a `ParameterSyntax`, so it also returns null. The `BothStringAndIntKeyAreNull` diagnostic for it is then dropped by the filter. That contradicts C10 and the doc comment at line 1433, and it hides a diagnostic the user controls."
+    },
+    {
+      "path": "README.md",
+      "line": 1642,
+      "severity": "low",
+      "issue": "The README states as fact that the defining assembly reports diagnostics for these members. That only happens if the defining assembly runs the analyzer. The change just drops the diagnostics in the consuming project, so this over-claims (NF2)."
+    },
+    {
+      "path": "doc/analyzers/MsgPack004.md",
+      "line": 52,
+      "severity": "low",
+      "issue": "The doc claims the defining project reports an unattributed public member of a referenced type. That isn't guaranteed, because the defining project may not use the analyzer or may have it disabled. It also overstates what the code does, which is to silently drop the diagnostic."
+    }
+  ],
+  "raw": null
+}

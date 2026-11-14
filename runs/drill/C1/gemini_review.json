@@ -1,0 +1,20 @@
+{
+  "model": "gemini-3.1-pro-preview",
+  "prompt_sha256": "3846235d0b6db4c9d405d3d8b61dfde87ef947ddc5cbcd93b715eea6ca0938c7",
+  "cached": true,
+  "findings": [
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 985,
+      "severity": "high",
+      "issue": "The variable 'item' is an ISymbol (representing either a field or a property), so passing it to GetPropertyIdentifierLocation(IPropertySymbol) will cause a compiler error (CS1503)."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1434,
+      "severity": "high",
+      "issue": "For record properties and fields, GetSyntax() returns a ParameterSyntax or VariableDeclaratorSyntax respectively, so 'as PropertyDeclarationSyntax' evaluates to null. This causes valid diagnostics for source-declared members to be silently dropped by ReportIfLocatedInCompilation."
+    }
+  ],
+  "raw": null
+}

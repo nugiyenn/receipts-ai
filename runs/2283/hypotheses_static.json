@@ -1,0 +1,160 @@
+{
+  "change": "2283",
+  "kind": "hypotheses_static",
+  "produced_by": "claude-code session, cached",
+  "model": "claude-sonnet-5-5",
+  "produced_at": "2026-11-14T23:19",
+  "static_analysis_only": true,
+  "prompt": "List (a) facts verified statically, each with the exact command run and its captured output, and (b) hypotheses for the evidence engine to confirm or reject,\neach with a concrete test sketch and the outcome that would confirm or reject it. Static analysis only: do not run dotnet. No confidence numbers.",
+  "prompt_sha256": "16483aa1400755943731183936595a953906d028e7270724d9883f95a60608fb",
+  "inputs": [
+    "git show origin/ju26-issue-2283",
+    "issue #2283 body (github.com page, fetched 2026-11-14)",
+    "receipts/requirements/REQ-2283.yaml",
+    "git history: v3.1.8 TypeCollector.cs"
+  ],
+  "verified_facts": [
+    {
+      "id": "F-2283-1",
+      "statement": "The head file has 28 live call sites through the wrapped delegate (this.reportDiagnostic / reportDiagnostic), not counting commented-out lines.",
+      "command": "bash -c git -C /Users/andy/Downloads/Junction2/repo show origin/ju26-issue-2283:src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs | grep -nE '(this\\.)?reportDiagnostic\\?\\.Invoke\\(|this\\.reportDiagnostic\\(deferred\\)' | grep -v '////' | grep -v '// this' | wc -l",
+      "exit_code": 0,
+      "output": "28",
+      "status": "verified-static"
+    },
+    {
+      "id": "F-2283-2",
+      "statement": "At head the only DeclaringSyntaxReferences[0] occurrence is a commented-out line.",
+      "command": "bash -c git -C /Users/andy/Downloads/Junction2/repo show origin/ju26-issue-2283:src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs | grep -n 'DeclaringSyntaxReferences\\[0\\]' | cut -c1-120",
+      "exit_code": 0,
+      "output": "715:            ////this.reportDiagnostic?.Invoke(Diagnostic.Create(MsgPack00xMessagePackAnalyzer.TypeMustBeMessagePackO",
+      "status": "verified-static"
+    },
+    {
+      "id": "F-2283-3",
+      "statement": "At base the two live sites were the BothStringAndIntKeyAreNull cast and the MemberNeedsKey location (plus the same commented line).",
+      "command": "bash -c git -C /Users/andy/Downloads/Junction2/repo show origin/ju26-issue-2283~1:src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs | grep -n 'DeclaringSyntaxReferences\\[0\\]' | cut -c1-140",
+      "exit_code": 0,
+      "output": "715:            ////this.reportDiagnostic?.Invoke(Diagnostic.Create(MsgPack00xMessagePackAnalyzer.TypeMustBeMessagePackObject, ((BaseTypeDec\n985:                        this.reportDiagnostic?.Invoke(Diagnostic.Create(MsgPack00xMessagePackAnalyzer.BothStringAndIntKeyAreNull, ((Prop\n1077:                                    : Diagnostic.Create(MsgPack00xMessagePackAnalyzer.MemberNeedsKey, item.DeclaringSyntaxReferences[0]",
+      "status": "verified-static"
+    },
+    {
+      "id": "F-2283-4",
+      "statement": "In v3.1.8 (the version in the issue) three DeclaringSyntaxReferences[0] sites are live: lines 735, 1009 and 1101.",
+      "command": "bash -c git -C /Users/andy/Downloads/Junction2/repo show v3.1.8:src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs | grep -n 'DeclaringSyntaxReferences\\[0\\]' | cut -c1-140",
+      "exit_code": 0,
+      "output": "735:                var diagnostics = Diagnostic.Create(MsgPack00xMessagePackAnalyzer.TypeMustBeMessagePackObject, ((BaseTypeDeclarationSynt\n1009:                        this.reportDiagnostic?.Invoke(Diagnostic.Create(MsgPack00xMessagePackAnalyzer.BothStringAndIntKeyAreNull, ((Pro\n1101:                                    : Diagnostic.Create(MsgPack00xMessagePackAnalyzer.MemberNeedsKey, item.DeclaringSyntaxReferences[0]",
+      "status": "verified-static"
+    },
+    {
+      "id": "F-2283-5",
+      "statement": "The branch base is described as v3.0.238-rc.1-66-g32258fdb.",
+      "command": "git -C /Users/andy/Downloads/Junction2/repo describe --tags 32258fdb",
+      "exit_code": 0,
+      "output": "v3.0.238-rc.1-66-g32258fdb",
+      "status": "verified-static"
+    },
+    {
+      "id": "F-2283-6",
+      "statement": "The branch base is not an ancestor of v3.1.8 (exit code 1 = not an ancestor).",
+      "command": "git -C /Users/andy/Downloads/Junction2/repo merge-base --is-ancestor 32258fdb v3.1.8",
+      "exit_code": 1,
+      "output": "",
+      "status": "verified-static"
+    },
+    {
+      "id": "F-2283-7",
+      "statement": "The three new tests are Fact methods in GenericsFormatterTests.cs starting at the cited lines; the shared helper asserts the resolver hint name.",
+      "command": "bash -c git -C /Users/andy/Downloads/Junction2/repo show origin/ju26-issue-2283:tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs | grep -n 'ClosedGeneric\\|Assert.Contains(expectedResolverHintName' ",
+      "exit_code": 0,
+      "output": "507:    public async Task ClosedGenericStruct_FromMetadataReference()\n551:    public async Task ClosedGenericRecordStruct_FromMetadataReference()\n590:    public async Task ClosedGenericStruct_FromMetadataReference_UnkeyedMember()\n658:        Assert.Contains(expectedResolverHintName, hintNames);",
+      "status": "verified-static"
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "H1",
+      "rule": "R2",
+      "statement": "The constructor-level filter drops diagnostics that were reported before for source-declared types.",
+      "status": "unconfirmed",
+      "how_to_confirm": "Base-vs-head diagnostic multiset over the existing analyzer inputs (P-2283-4); any difference for a source-only input confirms.",
+      "if_confirmed": "headline finding, refusal R-2283-1 stays",
+      "if_rejected": "show as 'prosecutor hypothesis rejected by evidence'; refusal R-2283-1 still stands for the scope decision",
+      "static_evidence": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 239,
+          "quote": "this.reportDiagnostic = reportAnalyzerDiagnostic is null ? null : diagnostic => ReportIfLocatedInCompilation(reportAnalyzerDiagnostic, diagnostic);"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1446,
+          "quote": "if (diagnostic.Location.IsInSource && this.compilation.ContainsSyntaxTree(diagnostic.Location.SourceTree))"
+        }
+      ]
+    },
+    {
+      "id": "H2",
+      "rule": "R6",
+      "statement": "The 'reported by the defining assembly' documentation holds only when the defining assembly ran this analyzer.",
+      "status": "unconfirmed",
+      "how_to_confirm": "P-2283-6: compile lib without analyzers, run analyzer on consumer, expect no MsgPack004 anywhere.",
+      "if_confirmed": "refusal R-2283-2 keeps its premise",
+      "if_rejected": "not applicable (the premise is a build property)"
+    },
+    {
+      "id": "H3",
+      "rule": "R5",
+      "statement": "The new tests prove only 'no crash', not 'resolver emitted'.",
+      "status": "rejected-statically",
+      "static_evidence_note": "The shared helper asserts Assert.Contains(expectedResolverHintName, hintNames). Execution still required to confirm the assertion is reached and passes on head.",
+      "how_to_confirm": "Time Machine run (claim C2).",
+      "if_confirmed": "n/a",
+      "if_rejected": "F2 is executed evidence"
+    },
+    {
+      "id": "H4",
+      "rule": "R3",
+      "statement": "The fix is incomplete on the 3.1.x line: the third live DeclaringSyntaxReferences[0] site (v3.1.8 line 735) is commented out in this base.",
+      "status": "unconfirmed",
+      "how_to_confirm": "N-2283-1: apply the diff to a master worktree, test a metadata generic struct without [MessagePackObject].",
+      "if_confirmed": "refusal R-2283-4 gains a failing test",
+      "if_rejected": "fix transfers to 3.1.x for the issue's repro"
+    },
+    {
+      "id": "H5",
+      "rule": "R2",
+      "statement": "Source-declared record primary-constructor properties with a null key lose BothStringAndIntKeyAreNull silently (base crashed with an invalid cast).",
+      "status": "unconfirmed",
+      "how_to_confirm": "P-2283-10.",
+      "if_confirmed": "crash-to-silence example for the demo",
+      "if_rejected": "helper contract holds"
+    },
+    {
+      "id": "H6",
+      "rule": "R6",
+      "statement": "The code comment's premise (analyzers are not permitted to report Location.None or metadata locations) is wrong.",
+      "status": "unconfirmed",
+      "how_to_confirm": "P-2283-8.",
+      "if_confirmed": "filter is broader than the stated justification",
+      "if_rejected": "comment is accurate"
+    },
+    {
+      "id": "H7",
+      "rule": "R2",
+      "statement": "The InaccessibleDataType report bypasses the filter while the 28 later sites are filtered.",
+      "status": "static-fact",
+      "static_evidence_note": "Verified in the head file: reportAnalyzerDiagnostic?.Invoke(... InaccessibleDataType ...) uses the raw delegate.",
+      "how_to_confirm": "P-2283-5 dynamic half.",
+      "if_confirmed": "inconsistent policy shown",
+      "if_rejected": "n/a",
+      "static_evidence": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 248,
+          "quote": "reportAnalyzerDiagnostic?.Invoke(Diagnostic.Create(MsgPack00xMessagePackAnalyzer.InaccessibleDataType"
+        }
+      ]
+    }
+  ]
+}

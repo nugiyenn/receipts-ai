@@ -1,0 +1,19 @@
+{
+ "text": "{\n  \"findings\": [\n    {\n      \"path\": \"src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs\",\n      \"line\": 985,\n      \"severity\": \"high\",\n      \"issue\": \"Compiler error CS1503: `item` is of type `ISymbol` (it can be a field or property), but `GetPropertyIdentifierLocation` expects an `IPropertySymbol`. This will break the build.\"\n    },\n    {\n      \"path\": \"src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs\",\n      \"line\": 1434,\n      \"severity\": \"high\",\n      \"issue\": \"`GetPropertyIdentifierLocation` uses `as PropertyDeclarationSyntax`, which evaluates to `null` for record properties (`ParameterSyntax`) and fields (`VariableDeclaratorSyntax`). This causes the `BothStringAndIntKeyAreNull` diagnostic to be silently dropped for these source-declared members, violating REQ-2283-NF1.\"\n    },\n    {\n      \"path\": \"src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs\",\n      \"line\": 1446,\n      \"severity\": \"high\",\n      \"issue\": \"`ReportIfLocatedInCompilation` uses `||` instead of `&&`. For project references, `IsInSource` is true but the syntax tree belongs to another compilation. This causes the analyzer to attempt reporting diagnostics against external syntax trees, crashing with `ArgumentException` and violating REQ-2283-F1.\"\n    }\n  ]\n}",
+ "model": "gemini-3.1-pro-preview",
+ "prompt_sha256": "e606067884e60d1d8470b60951d3127c3dcc8bc7021bfad7618b56f45687bdaf",
+ "ts": "2026-11-14T23:25:20+0200",
+ "usage": {
+  "promptTokenCount": 5961,
+  "candidatesTokenCount": 352,
+  "totalTokenCount": 20437,
+  "promptTokensDetails": [
+   {
+    "modality": "TEXT",
+    "tokenCount": 5961
+   }
+  ],
+  "thoughtsTokenCount": 14124,
+  "serviceTier": "standard"
+ }
+}

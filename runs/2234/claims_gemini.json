@@ -1,0 +1,185 @@
+{
+  "claims": [
+    {
+      "id": "c1",
+      "requirement": "REQ-2234-F1",
+      "text": "The analyzer reports contract diagnostics for types with SuppressSourceGeneration = true.",
+      "source": "author-narrative",
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 21,
+          "quote": "public async Task MemberWithoutKeyIsReported()"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 81,
+          "quote": "public async Task DuplicateIntKeysAreReportedWithoutAnalyzerFailure()"
+        }
+      ],
+      "verifier": "static",
+      "citations_checked": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 21,
+          "quote": "public async Task MemberWithoutKeyIsReported()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h9"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 81,
+          "quote": "public async Task DuplicateIntKeysAreReportedWithoutAnalyzerFailure()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h9"
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "requirement": "REQ-2234-F2",
+      "text": "No source is generated for types with SuppressSourceGeneration = true.",
+      "source": "author-narrative",
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.ExecutionTests/SuppressedSourceGenerationTests.cs",
+          "line": 21,
+          "quote": "public void NoFormatterIsGeneratedForSuppressedType()"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.ExecutionTests/SuppressedSourceGenerationTests.cs",
+          "line": 23,
+          "quote": "Assert.Null(GeneratedMessagePackResolver.Instance.GetFormatter<SuppressedSourceGenerationType>());"
+        }
+      ],
+      "verifier": "static",
+      "citations_checked": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.ExecutionTests/SuppressedSourceGenerationTests.cs",
+          "line": 21,
+          "quote": "public void NoFormatterIsGeneratedForSuppressedType()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h8"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.ExecutionTests/SuppressedSourceGenerationTests.cs",
+          "line": 23,
+          "quote": "Assert.Null(GeneratedMessagePackResolver.Instance.GetFormatter<SuppressedSourceGenerationType>());",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h8"
+        }
+      ]
+    },
+    {
+      "id": "c3",
+      "requirement": "REQ-2234-NF1",
+      "text": "The fix targets the root cause of the regression by preventing dictionary collisions on duplicate keys, which previously crashed the analyzer.",
+      "source": "author-narrative",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1023,
+          "quote": "if (!intMembers.ContainsKey(member.IntKey))"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1039,
+          "quote": "if (!stringMembers.ContainsKey(member.StringKey))"
+        }
+      ],
+      "verifier": "static",
+      "citations_checked": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1023,
+          "quote": "if (!intMembers.ContainsKey(member.IntKey))",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h3"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1039,
+          "quote": "if (!stringMembers.ContainsKey(member.StringKey))",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h4"
+        }
+      ]
+    },
+    {
+      "id": "c4",
+      "requirement": "REQ-2234-NF2",
+      "text": "Behavior for types without SuppressSourceGeneration is unchanged, as duplicate keys are still reported without analyzer failure for generated types.",
+      "source": "author-narrative",
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 147,
+          "quote": "public async Task DuplicateKeysAreReportedWithoutAnalyzerFailureForGeneratedTypes()"
+        }
+      ],
+      "verifier": "static",
+      "citations_checked": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 147,
+          "quote": "public async Task DuplicateKeysAreReportedWithoutAnalyzerFailureForGeneratedTypes()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h9"
+        }
+      ]
+    },
+    {
+      "id": "c5",
+      "requirement": "REQ-2234-S1",
+      "text": "Invalid key contracts (such as mixed key kinds) are not silently dropped; a diagnostic is reported and the member is skipped to prevent further errors.",
+      "source": "author-narrative",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1008,
+          "quote": "continue; // The key kind does not match the other members; the diagnostic is reported, so skip this member."
+        }
+      ],
+      "verifier": "static",
+      "citations_checked": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1008,
+          "quote": "continue; // The key kind does not match the other members; the diagnostic is reported, so skip this member.",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h2"
+        }
+      ]
+    }
+  ],
+  "uncovered_requirements": [],
+  "change": "2234",
+  "kind": "claims_gemini",
+  "model": "gemini-3.1-pro-preview",
+  "produced_by": "gemini api, cached",
+  "produced_at": "2026-11-14T23:22:52+02:00",
+  "prompt_sha256": "982b3d8c981904d6eb2ed3320b622292a92099473516ec1cf2e5ea49c662cf2c",
+  "prompt": "You are a code-review claim extractor. You do NOT judge whether the change is good.\nProduce the minimal set of falsifiable claims this change makes or must satisfy.\nRules:\n1. Every requirement item (F*, NF*, S*) must be covered by >=1 claim, or listed in uncovered_requirements.\n2. Statements from the commit message, README or docs written by the author agent are\n   CLAIMS TO TEST (source=\"author-narrative\"), never evidence.\n3. Every claim must cite >=1 exact diff line: {path, line, quote}. 'line' is the NEW-file line number shown\n   in the numbered diff; 'quote' must be a verbatim substring of that line.\n4. For each claim propose a verifier: timemachine | xray | regen | matrix | static | argued.\n5. Never output confidence numbers or words like \"likely correct\".\nOutput JSON: {\"claims\":[{\"id\",\"requirement\",\"text\",\"source\",\"citations\":[{\"path\",\"line\",\"quote\"}],\"verifier\"}],\"uncovered_requirements\":[...]}. No prose.",
+  "citation_summary": {
+    "citations": 8,
+    "invalid": 0,
+    "hallucinated": 0,
+    "wrong_line_only": 0
+  }
+}

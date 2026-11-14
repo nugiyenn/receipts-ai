@@ -1,0 +1,13 @@
+diff --git a/src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedNamedTypeName.cs b/src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedNamedTypeName.cs
+index 5023ed83..97d51d97 100644
+--- a/src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedNamedTypeName.cs
++++ b/src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedNamedTypeName.cs
+@@ -3,8 +3,6 @@
+ 
+ #pragma warning disable SA1402 // File may only contain a single type
+ 
+-using System;
+-using System.Collections.Generic;
+ using System.Collections.Immutable;
+ using System.Diagnostics;
+ using System.Diagnostics.CodeAnalysis;

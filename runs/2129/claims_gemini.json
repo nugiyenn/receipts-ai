@@ -1,0 +1,293 @@
+{
+  "claims": [
+    {
+      "id": "claim-REQ-2129-F1",
+      "requirement": "REQ-2129-F1",
+      "text": "A partial class marked [GeneratedMessagePackFormatter] that implements IMessagePackFormatter<T> gets its body generated for a T from a referenced assembly.",
+      "source": "code",
+      "citations": [
+        {
+          "path": "src/MessagePack.Annotations/Attributes.cs",
+          "line": 166,
+          "quote": "public class GeneratedMessagePackFormatterAttribute : Attribute"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 47,
+          "quote": "if (!IsPartial(formatter, cancellationToken))"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.tt",
+          "line": 14,
+          "quote": "\t<#= Info.IsUserDeclaredFormatter ? \"partial class\" : \"internal sealed class\" #> <#= Info.Formatter.GetQualifiedName(Qualifiers.None) #> : MsgPack::Formatters.IMessagePackFormatter<<#= Info.DataType.GetQualifiedName(genericStyle: GenericParameterStyle.Identifiers) #>>"
+        }
+      ],
+      "verifier": "static",
+      "citations_checked": [
+        {
+          "path": "src/MessagePack.Annotations/Attributes.cs",
+          "line": 166,
+          "quote": "public class GeneratedMessagePackFormatterAttribute : Attribute",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h7"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 47,
+          "quote": "if (!IsPartial(formatter, cancellationToken))",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h12"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.tt",
+          "line": 14,
+          "quote": "\t<#= Info.IsUserDeclaredFormatter ? \"partial class\" : \"internal sealed class\" #> <#= Info.Formatter.GetQualifiedName(Qualifiers.None) #> : MsgPack::Formatters.IMessagePackFormatter<<#= Info.DataType.GetQualifiedName(genericStyle: GenericParameterStyle.Identifiers) #>>",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h21"
+        }
+      ]
+    },
+    {
+      "id": "claim-REQ-2129-F2",
+      "requirement": "REQ-2129-F2",
+      "text": "With no MessagePack attributes on T, serialization defaults to contractless behaviour over public members.",
+      "source": "code",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 91,
+          "quote": "members = CreateContractlessMembers(type);"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 133,
+          "quote": "List<ISymbol> targets = GetInstanceMembers(type).Where(IsPublicReadWrite).OrderBy(m => m.Name, StringComparer.Ordinal).ToList();"
+        }
+      ],
+      "verifier": "static",
+      "citations_checked": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 91,
+          "quote": "members = CreateContractlessMembers(type);",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h12"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 133,
+          "quote": "List<ISymbol> targets = GetInstanceMembers(type).Where(IsPublicReadWrite).OrderBy(m => m.Name, StringComparer.Ordinal).ToList();",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h12"
+        }
+      ]
+    },
+    {
+      "id": "claim-REQ-2129-F4",
+      "requirement": "REQ-2129-F4",
+      "text": "The generated resolver registers the generated formatter so MessagePackSerializer finds it.",
+      "source": "code",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/MessagePackGenerator.cs",
+          "line": 37,
+          "quote": "messagePackObjectTypes.Collect().Combine(unionTypes.Collect()).Combine(generatedFormatters.Collect());"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypesTests.cs",
+          "line": 91,
+          "quote": "Assert.IsType<ExternalPersonFormatter>(GeneratedMessagePackResolver.Instance.GetFormatter<ExternalPerson>());"
+        }
+      ],
+      "verifier": "static",
+      "citations_checked": [
+        {
+          "path": "src/MessagePack.SourceGenerator/MessagePackGenerator.cs",
+          "line": 37,
+          "quote": "messagePackObjectTypes.Collect().Combine(unionTypes.Collect()).Combine(generatedFormatters.Collect());",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h17"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypesTests.cs",
+          "line": 91,
+          "quote": "Assert.IsType<ExternalPersonFormatter>(GeneratedMessagePackResolver.Instance.GetFormatter<ExternalPerson>());",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h26"
+        }
+      ]
+    },
+    {
+      "id": "claim-REQ-2129-NF1",
+      "requirement": "REQ-2129-NF1",
+      "text": "Nothing needs to be added to the assembly that declares T, and no new runtime dependency or runtime reflection over user-defined attribute copies is introduced.",
+      "source": "code",
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.ExternalTypes/MessagePack.SourceGenerator.ExternalTypes.csproj",
+          "line": 4,
+          "quote": "This assembly deliberately does NOT reference MessagePack."
+        },
+        {
+          "path": "src/MessagePack.Annotations/Attributes.cs",
+          "line": 155,
+          "quote": "The surrogate is only read at compile time and is never instantiated at run time."
+        }
+      ],
+      "verifier": "static",
+      "citations_checked": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.ExternalTypes/MessagePack.SourceGenerator.ExternalTypes.csproj",
+          "line": 4,
+          "quote": "This assembly deliberately does NOT reference MessagePack.",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h31"
+        },
+        {
+          "path": "src/MessagePack.Annotations/Attributes.cs",
+          "line": 155,
+          "quote": "The surrogate is only read at compile time and is never instantiated at run time.",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h7"
+        }
+      ]
+    },
+    {
+      "id": "claim-REQ-2129-NF2",
+      "requirement": "REQ-2129-NF2",
+      "text": "Behaviour of existing [MessagePackObject] types and existing formatters is unchanged.",
+      "source": "code",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/GeneratorUtilities.cs",
+          "line": 38,
+          "quote": "&& !symbol.GetAttributes().Any(a => a.AttributeClass?.ToDisplayString() == $\"{AttributeNamespace}.{GeneratedMessagePackFormatterAttributeName}\")"
+        }
+      ],
+      "verifier": "static",
+      "citations_checked": [
+        {
+          "path": "src/MessagePack.SourceGenerator/GeneratorUtilities.cs",
+          "line": 38,
+          "quote": "&& !symbol.GetAttributes().Any(a => a.AttributeClass?.ToDisplayString() == $\"{AttributeNamespace}.{GeneratedMessagePackFormatterAttributeName}\")",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h16"
+        }
+      ]
+    },
+    {
+      "id": "claim-REQ-2129-NF3",
+      "requirement": "REQ-2129-NF3",
+      "text": "New public API and diagnostics are documented and listed in the analyzer release notes.",
+      "source": "code",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/AnalyzerReleases.Unshipped.md",
+          "line": 26,
+          "quote": "MsgPack019 | Usage | Error | Generated formatter must be partial"
+        },
+        {
+          "path": "README.md",
+          "line": 1642,
+          "quote": "You can still get a source-generated formatter for it by declaring a `partial` formatter class in your own project and marking it with `[GeneratedMessagePackFormatter]`:"
+        }
+      ],
+      "verifier": "static",
+      "citations_checked": [
+        {
+          "path": "src/MessagePack.SourceGenerator/AnalyzerReleases.Unshipped.md",
+          "line": 26,
+          "quote": "MsgPack019 | Usage | Error | Generated formatter must be partial",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h8"
+        },
+        {
+          "path": "README.md",
+          "line": 1642,
+          "quote": "You can still get a source-generated formatter for it by declaring a `partial` formatter class in your own project and marking it with `[GeneratedMessagePackFormatter]`:",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h1"
+        }
+      ]
+    },
+    {
+      "id": "claim-REQ-2129-S1",
+      "requirement": "REQ-2129-S1",
+      "text": "Only public members of T are serialized, and nothing silently changes what is written to the wire for members the owner did not intend to expose.",
+      "source": "code",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 279,
+          "quote": "IPropertySymbol property => property.DeclaredAccessibility == Accessibility.Public"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 282,
+          "quote": "IFieldSymbol field => field.DeclaredAccessibility == Accessibility.Public && !field.IsReadOnly && !field.IsConst,"
+        }
+      ],
+      "verifier": "static",
+      "citations_checked": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 279,
+          "quote": "IPropertySymbol property => property.DeclaredAccessibility == Accessibility.Public",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h12"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 282,
+          "quote": "IFieldSymbol field => field.DeclaredAccessibility == Accessibility.Public && !field.IsReadOnly && !field.IsConst,",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h12"
+        }
+      ]
+    }
+  ],
+  "uncovered_requirements": [
+    "REQ-2129-F3"
+  ],
+  "change": "2129",
+  "kind": "claims_gemini",
+  "model": "gemini-3.1-pro-preview",
+  "produced_by": "gemini api, cached",
+  "produced_at": "2026-11-14T23:48:42+02:00",
+  "prompt_sha256": "0c43d126dadc1f381f6eb467d86b46e59f4eb23abe04e1fef2d4593ddad53d99",
+  "prompt": "You are a code-review claim extractor. You do NOT judge whether the change is good.\nProduce the minimal set of falsifiable claims this change makes or must satisfy.\nRules:\n1. Every requirement item (F*, NF*, S*) must be covered by >=1 claim, or listed in uncovered_requirements.\n2. Statements from the commit message, README or docs written by the author agent are\n   CLAIMS TO TEST (source=\"author-narrative\"), never evidence.\n3. Every claim must cite >=1 exact diff line: {path, line, quote}. 'line' is the NEW-file line number shown\n   in the numbered diff; 'quote' must be a verbatim substring of that line.\n4. For each claim propose a verifier: timemachine | xray | regen | matrix | static | argued.\n5. Never output confidence numbers or words like \"likely correct\".\nOutput JSON: {\"claims\":[{\"id\",\"requirement\",\"text\",\"source\",\"citations\":[{\"path\",\"line\",\"quote\"}],\"verifier\"}],\"uncovered_requirements\":[...]}. No prose.",
+  "citation_summary": {
+    "citations": 14,
+    "invalid": 0,
+    "hallucinated": 0,
+    "wrong_line_only": 0
+  }
+}

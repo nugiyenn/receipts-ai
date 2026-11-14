@@ -1,0 +1,49 @@
+{
+  "produced_by": "fresh `claude -p` session, model claude-sonnet-5-5, no tools, empty working dir, no conversation context; never told a canary exists",
+  "prompt_sha256": "71123b756db0994e235ddf08638de4cbec6d33d6245e1d914e057da0474a544e",
+  "findings": [
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 239,
+      "severity": "high",
+      "issue": "The wrapper drops every diagnostic whose Location is not IsInSource, not only the ones from metadata types. Diagnostics created with a null or Location.None location and reported on user types are now silently suppressed, e.g. the MemberNeedsKey and BothStringAndIntKeyAreNull diagnostics whose location lookup returns null. This goes beyond the requirement and contradicts claims C4, C5 and C8. Also, `diagnostic.Location.IsInSource` is false for locations in other syntax trees or generated files that are still in the compilation."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1446,
+      "severity": "medium",
+      "issue": "The check is `IsInSource` rather than a check that the tree belongs to this compilation. Locations in a different compilation's syntax tree are also IsInSource, so the filter does not do what its doc comment says (\"belongs to the compilation being analyzed\"). It also keeps any diagnostic with an in-source location, which is not the same as dropping only metadata-derived ones."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1077,
+      "severity": "medium",
+      "issue": "`FirstOrDefault()?.GetSyntax().GetLocation()` yields null for a metadata member, and the diagnostic is then silently dropped by the new filter. Nothing is reported for a missing key on a non-source member. The diagnostic is also created before the accessibility check, and for partial or multi-declaration members only the first declaration is used."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1434,
+      "severity": "medium",
+      "issue": "GetPropertyIdentifierLocation returns null whenever the first syntax is not a PropertyDeclarationSyntax, not only for metadata properties. Source-declared properties with other syntax forms, such as positional record parameters (ParameterSyntax) and indexers, lose their BothStringAndIntKeyAreNull diagnostic. The old code would have thrown an InvalidCastException for those, but the new code silently drops them. This contradicts claim C10."
+    },
+    {
+      "path": "README.md",
+      "line": 1642,
+      "severity": "low",
+      "issue": "The documentation over-claims. It says problems with a referenced type's members must be fixed in the defining assembly. In practice the consumer gets no diagnostic at all, and diagnostics are dropped on any null location, not only for referenced-assembly types. The README also says the support covers value types and record structs generally, but the tests only check a few shapes."
+    },
+    {
+      "path": "doc/analyzers/MsgPack004.md",
+      "line": 52,
+      "severity": "low",
+      "issue": "The statement that members of a referenced type are reported by the defining project is not guaranteed. The defining project may not run the analyzer or may suppress it, and the consumer's TypeCollector drops the diagnostic with no trace."
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+      "line": 590,
+      "severity": "low",
+      "issue": "The test expects no diagnostics for the unkeyed-member case, which locks in the suppression of MsgPack004 for a type the consumer does not control. It does not cover a source-declared case that would show the filter's regression risk, such as a null-location diagnostic on a source type. There is also no regression test for the class<T>, record class<T>, struct and record struct rows of the matrix."
+    }
+  ],
+  "raw": null
+}

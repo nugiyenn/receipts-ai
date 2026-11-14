@@ -1,0 +1,70 @@
+{
+  "canary": "H1",
+  "type": "missed null case",
+  "authored_by": "gemini-3.1-pro-preview",
+  "caught": true,
+  "by": [
+    "llm:gemini",
+    "llm:claude"
+  ],
+  "by_family": {
+    "tests": false,
+    "deterministic-rules": false,
+    "gemini": true,
+    "claude": true
+  },
+  "location_only_secondary": {
+    "gemini": true,
+    "claude": true,
+    "any": true
+  },
+  "note": "Removes the null-conditional operator when accessing the Identifier property, causing a NullReferenceException if the syntax is not a PropertyDeclarationSyntax.",
+  "tests": {
+    "ran": true,
+    "compiled": true,
+    "failing_tests": [],
+    "summary_line": "",
+    "outcome": "green",
+    "seconds": 81.3,
+    "log": "runs/drill/heldout/H1/tests.log"
+  },
+  "detectors": [],
+  "gemini": {
+    "caught": true,
+    "hits": [
+      {
+        "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+        "line": 1434,
+        "severity": "high",
+        "issue": "Missing null-conditional operator before '.Identifier' causes a NullReferenceException when the syntax is not a PropertyDeclarationSyntax (e.g., for metadata properties, record primary constructor properties, or indexers)."
+      }
+    ],
+    "near_but_off_target": [],
+    "n_findings": 2
+  },
+  "claude": {
+    "caught": true,
+    "hits": [
+      {
+        "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+        "line": 1434,
+        "severity": "high",
+        "issue": "`(… as PropertyDeclarationSyntax).Identifier` has no null-conditional. For a metadata property, FirstOrDefault()?.GetSyntax() is null, so `.Identifier` throws NullReferenceException. This replaces the original IndexOutOfRange crash and does not return null as the doc comment and C10 claim. The same happens for a source property that is not a PropertyDeclarationSyntax, such as a record positional parameter."
+      }
+    ],
+    "near_but_off_target": [],
+    "n_findings": 6
+  },
+  "xray_routed_to_human_NOT_counted": {
+    "routed": false,
+    "why": "planted lines fall inside agent hunk h6 whose X-Ray result is 'structural' (hunk granularity cannot see a planted change inside it)"
+  },
+  "evidence_refs": [
+    "runs/drill/heldout/H1/tests.json",
+    "runs/drill/heldout/H1/tests.log",
+    "runs/drill/heldout/H1/detectors.json",
+    "runs/drill/heldout/H1/gemini_review.json",
+    "runs/drill/heldout/H1/claude_findings.json",
+    "runs/drill/heldout/H1/review_input.diff"
+  ]
+}

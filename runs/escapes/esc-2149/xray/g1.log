@@ -1,0 +1,15 @@
+/Users/andy/Downloads/Junction2/wt/esc-2149-head/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+/Users/andy/Downloads/Junction2/wt/esc-2149-head/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+/Users/andy/Downloads/Junction2/wt/esc-2149-head/src/MessagePack.SourceGenerator/CodeAnalysis/CodeAnalysisUtilities.cs(86,105): error CS0117: 'GenericTypeParameterInfo' does not contain a definition for 'Create' [/Users/andy/Downloads/Junction2/wt/esc-2149-head/src/MessagePack.SourceGenerator/MessagePack.SourceGenerator.csproj]
+/Users/andy/Downloads/Junction2/wt/esc-2149-head/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs(1408,132): error CS0117: 'GenericTypeParameterInfo' does not contain a definition for 'Create' [/Users/andy/Downloads/Junction2/wt/esc-2149-head/src/MessagePack.SourceGenerator/MessagePack.SourceGenerator.csproj]
+
+Build FAILED.
+
+/Users/andy/Downloads/Junction2/wt/esc-2149-head/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+/Users/andy/Downloads/Junction2/wt/esc-2149-head/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+/Users/andy/Downloads/Junction2/wt/esc-2149-head/src/MessagePack.SourceGenerator/CodeAnalysis/CodeAnalysisUtilities.cs(86,105): error CS0117: 'GenericTypeParameterInfo' does not contain a definition for 'Create' [/Users/andy/Downloads/Junction2/wt/esc-2149-head/src/MessagePack.SourceGenerator/MessagePack.SourceGenerator.csproj]
+/Users/andy/Downloads/Junction2/wt/esc-2149-head/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs(1408,132): error CS0117: 'GenericTypeParameterInfo' does not contain a definition for 'Create' [/Users/andy/Downloads/Junction2/wt/esc-2149-head/src/MessagePack.SourceGenerator/MessagePack.SourceGenerator.csproj]
+    2 Warning(s)
+    2 Error(s)
+
+Time Elapsed 00:00:08.81

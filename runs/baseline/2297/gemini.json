@@ -1,0 +1,21 @@
+{
+ "reviewer": "gemini",
+ "model": "gemini-3.1-pro-preview",
+ "prompt_sha256": "01415d4370b19b5d12e6b70c241e454b7956e2356e5f977fd1dfe4adb1d22be5",
+ "ts": "2026-11-15T00:11:38+0200",
+ "seconds": 59.3,
+ "text": "This is a great addition! Excluding generated code from code coverage is a highly requested feature and will definitely help keep coverage metrics accurate for large projects. \n\nI have reviewed the pull request and found one main concern regarding the `#if` guards that should be addressed before merging.\n\n### Bugs, Risks, or Concerns\n\n1. **Unnecessary `#if` guards:** \n   The PR wraps the `[ExcludeFromCodeCoverage]` attribute in `#if !NETSTANDARD2_0 && !NETFRAMEWORK`. However, `System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute` **is** actually available in both .NET Standard 2.0 and .NET Framework 4.0+. \n   \n   It is a common misconception that it isn't available because many *other* attributes in the `System.Diagnostics.CodeAnalysis` namespace (like the Nullable reference type attributes `[NotNull]`, `[MaybeNull]`, etc.) were only added in .NET Standard 2.1 / .NET Core 3.0. But `[ExcludeFromCodeCoverage]` has been around since .NET Framework 4.0 and is part of the `netstandard2.0` API surface.\n   \n   By including this guard, the attribute will be omitted for any projects targeting `netstandard2.0` or `net4x`, which actively disables the feature for a large portion of users. **The `#if` guards should be removed entirely.**\n\n2. **Test Updates:** \n   In `CodeCoverageExclusionTests.cs`, the test `ExcludeAttributeIsGuardedForTargetsWhereItIsUnavailable` explicitly checks for the presence of the `#if` guard. Once the guards are removed from the templates, this test should be deleted (or updated), and the `Guard` constant can be removed. The other test (`AllGeneratedTypesAreExcludedFromCodeCoverage`) is sufficient to verify the attribute is being emitted.\n\n3. **T4 Templates vs Generated `.cs` files:** \n   You correctly updated both the `.tt` files and their corresponding `.cs` files. When you remove the `#if` guards, please make sure to update the `.tt` files and re-run the T4 templates (or manually update the `.cs` files again) so they stay in sync.\n\n4. **Formatting Fix:**\n   The small fix in `TransformUtilities.cs` (`writer(anyConstraints ? \"{\\r\\n\" : \" {\\r\\n\");`) is a nice catch to fix the missing newline when generic constraints are present!\n\n### Conclusion\n\nI would **approve** this PR once the `#if !NETSTANDARD2_0 && !NETFRAMEWORK` guards are removed and the tests are updated to reflect that change. This will ensure that all users, regardless of their target framework, benefit from accurate code coverage reports.",
+ "usage": {
+  "promptTokenCount": 96720,
+  "candidatesTokenCount": 593,
+  "totalTokenCount": 104108,
+  "promptTokensDetails": [
+   {
+    "modality": "TEXT",
+    "tokenCount": 96720
+   }
+  ],
+  "thoughtsTokenCount": 6795,
+  "serviceTier": "standard"
+ }
+}

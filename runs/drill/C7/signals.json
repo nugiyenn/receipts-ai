@@ -1,0 +1,67 @@
+{
+  "canary": "C7",
+  "type": "drive-by-ceiling",
+  "caught": true,
+  "by": [
+    "refusal:R4",
+    "llm:gemini",
+    "llm:claude"
+  ],
+  "by_family": {
+    "tests": false,
+    "deterministic-rules": true,
+    "gemini": true,
+    "claude": true
+  },
+  "note": "Unrelated edit in src/MessagePack/ExtensionHeader.cs: Equals ignores Length.",
+  "tests": {
+    "ran": true,
+    "compiled": true,
+    "failing_tests": [],
+    "summary_line": "",
+    "outcome": "green",
+    "seconds": 125.3,
+    "log": "runs/drill/C7/tests.log"
+  },
+  "detectors": [
+    "R4"
+  ],
+  "gemini": {
+    "caught": true,
+    "hits": [
+      {
+        "path": "src/MessagePack/ExtensionHeader.cs",
+        "line": 31,
+        "severity": "high",
+        "issue": "The Equals method was modified to ignore the Length property, which is a correctness bug and scope creep that breaks equality comparisons for ExtensionHeader."
+      }
+    ],
+    "near_but_off_target": [],
+    "n_findings": 2
+  },
+  "claude": {
+    "caught": true,
+    "hits": [
+      {
+        "path": "src/MessagePack/ExtensionHeader.cs",
+        "line": 31,
+        "severity": "high",
+        "issue": "Unrelated change: Equals no longer compares Length, so headers with the same TypeCode but different Length are considered equal. This is out of scope and a correctness regression (it also breaks consistency with GetHashCode/operators if they use Length)."
+      }
+    ],
+    "near_but_off_target": [],
+    "n_findings": 7
+  },
+  "xray_routed_to_human_NOT_counted": {
+    "routed": true,
+    "why": "planted lines form a new hunk; reverting it leaves tests green"
+  },
+  "evidence_refs": [
+    "runs/drill/C7/tests.json",
+    "runs/drill/C7/tests.log",
+    "runs/drill/C7/detectors.json",
+    "runs/drill/C7/gemini_review.json",
+    "runs/drill/C7/claude_findings.json",
+    "runs/drill/C7/review_input.diff"
+  ]
+}

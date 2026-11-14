@@ -1,0 +1,485 @@
+{
+  "change": "2129",
+  "lane": "L3",
+  "reasons": [
+    {
+      "rule": "areas",
+      "lane": "L3",
+      "why": "highest default lane of the touched areas"
+    },
+    {
+      "rule": "LR1",
+      "lane": "L3",
+      "why": "touches ceiling area(s): runtime-serializer"
+    },
+    {
+      "rule": "LR2",
+      "lane": "L3",
+      "why": "refusal R4/R7 present"
+    },
+    {
+      "rule": "LR3",
+      "lane": "L2",
+      "why": "blast radius: Collect has 19 references (threshold 10)"
+    },
+    {
+      "rule": "LR4",
+      "lane": "L2",
+      "why": "13 source hunk(s) unprotected by tests"
+    }
+  ],
+  "areas": [
+    "analyzer-core",
+    "docs",
+    "generator-other",
+    "generator-templates",
+    "runtime-serializer",
+    "test-fixtures",
+    "tests"
+  ],
+  "ceiling_areas": [
+    "runtime-serializer"
+  ],
+  "blast_radius": {
+    "threshold": 10,
+    "max_references": 19,
+    "top_symbol": "Collect",
+    "per_hunk": {
+      "h7": [],
+      "h9": [],
+      "h10": [],
+      "h11": [],
+      "h12": [
+        {
+          "symbol": "Collect",
+          "why": "declared",
+          "references": 19
+        },
+        {
+          "symbol": "GetInstanceMembers",
+          "why": "declared",
+          "references": 5
+        },
+        {
+          "symbol": "CreateMember",
+          "why": "declared",
+          "references": 4
+        },
+        {
+          "symbol": "IsPublicReadWrite",
+          "why": "declared",
+          "references": 3
+        },
+        {
+          "symbol": "GetMemberType",
+          "why": "declared",
+          "references": 3
+        },
+        {
+          "symbol": "CreateContractlessMembers",
+          "why": "declared",
+          "references": 2
+        },
+        {
+          "symbol": "CreateSurrogateMembers",
+          "why": "declared",
+          "references": 2
+        },
+        {
+          "symbol": "IsPartial",
+          "why": "declared",
+          "references": 2
+        }
+      ],
+      "h13": [
+        {
+          "symbol": "GeneratedFormatterRequest",
+          "why": "declared",
+          "references": 3
+        }
+      ],
+      "h14": [],
+      "h15": [],
+      "h16": [],
+      "h17": [],
+      "h18": [],
+      "h19": [],
+      "h21": [],
+      "h23": [],
+      "h24": []
+    }
+  },
+  "flagged_hunks": {
+    "h1": [
+      "refusal R-2129-2 (R1-product-decision)",
+      "refusal R-2129-3 (R2-silent-suppression)",
+      "claim C3 has only E1 evidence",
+      "claim C7 has only E1 evidence",
+      "claim C8 has only E1 evidence"
+    ],
+    "h6": [
+      "claim C7 has only E1 evidence"
+    ],
+    "h7": [
+      "not-covered-by-xray",
+      "refusal R-2129-1 (R7-public-api)",
+      "refusal R-2129-1 (R7-public-api)",
+      "claim C11 has only E1 evidence",
+      "claim C11 has only E1 evidence"
+    ],
+    "h8": [
+      "claim C7 has only E1 evidence"
+    ],
+    "h9": [
+      "not-covered-by-xray"
+    ],
+    "h10": [
+      "not-covered-by-xray"
+    ],
+    "h11": [
+      "unprotected: reverting this hunk breaks no test"
+    ],
+    "h12": [
+      "not-covered-by-xray",
+      "blast-radius: touches a symbol with 19 references (threshold 10)",
+      "refusal R-2129-2 (R1-product-decision)",
+      "refusal R-2129-3 (R2-silent-suppression)",
+      "refusal R-2129-4 (R8-requirement-ambiguity)",
+      "refusal R-2129-4 (R8-requirement-ambiguity)",
+      "refusal R-2129-5 (R5-evidence-gap)",
+      "refusal R-2129-6 (R2-silent-suppression)",
+      "refusal R-2129-6 (R2-silent-suppression)",
+      "claim C3 has only E1 evidence",
+      "claim C8 has only E1 evidence"
+    ],
+    "h13": [
+      "not-covered-by-xray"
+    ],
+    "h14": [
+      "not-covered-by-xray: hunk could not be reverted in isolation (structural), not shown to be protected"
+    ],
+    "h15": [
+      "unprotected: reverting this hunk breaks no test"
+    ],
+    "h17": [
+      "not-covered-by-xray: hunk could not be reverted in isolation (structural), not shown to be protected",
+      "refusal R-2129-5 (R5-evidence-gap)"
+    ],
+    "h18": [
+      "not-covered-by-xray: hunk could not be reverted in isolation (structural), not shown to be protected"
+    ],
+    "h20": [
+      "regen-unverified: output of src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.tt not proven by regeneration"
+    ],
+    "h21": [
+      "not-covered-by-xray"
+    ],
+    "h22": [
+      "regen-unverified: output of src/MessagePack.SourceGenerator/Transforms/StringKey/StringKeyFormatterTemplate.tt not proven by regeneration"
+    ],
+    "h23": [
+      "not-covered-by-xray"
+    ],
+    "h24": [
+      "not-covered-by-xray: hunk could not be reverted in isolation (structural), not shown to be protected"
+    ],
+    "h26": [
+      "claim C5 has only E1 evidence"
+    ],
+    "h28": [
+      "claim C8 has only E1 evidence"
+    ],
+    "h31": [
+      "claim C5 has only E1 evidence"
+    ]
+  },
+  "reading_budget": {
+    "lines": 1043,
+    "hunks": 33,
+    "total_changed_lines": 1043,
+    "ratio": 1.0,
+    "basis": "L3: full read",
+    "inputs": {
+      "xray": true,
+      "regen": false,
+      "refusals": true,
+      "claims": true
+    },
+    "provisional": false
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "area": "docs",
+      "kind": "doc",
+      "lane": "L3",
+      "changed_lines": 52,
+      "flagged_hunks": [
+        "h1"
+      ]
+    },
+    {
+      "path": "doc/analyzers/MsgPack019.md",
+      "area": "docs",
+      "kind": "doc",
+      "lane": "L3",
+      "changed_lines": 26,
+      "flagged_hunks": []
+    },
+    {
+      "path": "doc/analyzers/MsgPack020.md",
+      "area": "docs",
+      "kind": "doc",
+      "lane": "L3",
+      "changed_lines": 23,
+      "flagged_hunks": []
+    },
+    {
+      "path": "doc/analyzers/MsgPack021.md",
+      "area": "docs",
+      "kind": "doc",
+      "lane": "L3",
+      "changed_lines": 23,
+      "flagged_hunks": []
+    },
+    {
+      "path": "doc/analyzers/MsgPack022.md",
+      "area": "docs",
+      "kind": "doc",
+      "lane": "L3",
+      "changed_lines": 31,
+      "flagged_hunks": []
+    },
+    {
+      "path": "doc/analyzers/index.md",
+      "area": "docs",
+      "kind": "doc",
+      "lane": "L3",
+      "changed_lines": 4,
+      "flagged_hunks": [
+        "h6"
+      ]
+    },
+    {
+      "path": "src/MessagePack.Annotations/Attributes.cs",
+      "area": "runtime-serializer",
+      "kind": "src",
+      "lane": "L3",
+      "changed_lines": 36,
+      "flagged_hunks": [
+        "h7"
+      ]
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/AnalyzerReleases.Unshipped.md",
+      "area": "generator-other",
+      "kind": "doc",
+      "lane": "L3",
+      "changed_lines": 4,
+      "flagged_hunks": [
+        "h8"
+      ]
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs",
+      "area": "analyzer-core",
+      "kind": "src",
+      "lane": "L3",
+      "changed_lines": 46,
+      "flagged_hunks": [
+        "h9",
+        "h10",
+        "h11"
+      ]
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+      "area": "analyzer-core",
+      "kind": "src",
+      "lane": "L3",
+      "changed_lines": 300,
+      "flagged_hunks": [
+        "h12"
+      ]
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterRequest.cs",
+      "area": "analyzer-core",
+      "kind": "src",
+      "lane": "L3",
+      "changed_lines": 13,
+      "flagged_hunks": [
+        "h13"
+      ]
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/ObjectSerializationInfo.cs",
+      "area": "analyzer-core",
+      "kind": "src",
+      "lane": "L3",
+      "changed_lines": 7,
+      "flagged_hunks": [
+        "h14",
+        "h15"
+      ]
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/GeneratorUtilities.cs",
+      "area": "generator-other",
+      "kind": "src",
+      "lane": "L3",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/MessagePackGenerator.cs",
+      "area": "generator-other",
+      "kind": "src",
+      "lane": "L3",
+      "changed_lines": 39,
+      "flagged_hunks": [
+        "h17",
+        "h18"
+      ]
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.cs",
+      "area": "generator-templates",
+      "kind": "template-output",
+      "lane": "L3",
+      "changed_lines": 4,
+      "flagged_hunks": [
+        "h20"
+      ]
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.tt",
+      "area": "generator-templates",
+      "kind": "template",
+      "lane": "L3",
+      "changed_lines": 2,
+      "flagged_hunks": [
+        "h21"
+      ]
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/Transforms/StringKey/StringKeyFormatterTemplate.cs",
+      "area": "generator-templates",
+      "kind": "template-output",
+      "lane": "L3",
+      "changed_lines": 4,
+      "flagged_hunks": [
+        "h22"
+      ]
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/Transforms/StringKey/StringKeyFormatterTemplate.tt",
+      "area": "generator-templates",
+      "kind": "template",
+      "lane": "L3",
+      "changed_lines": 2,
+      "flagged_hunks": [
+        "h23"
+      ]
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/Utils/Constants.cs",
+      "area": "generator-other",
+      "kind": "src",
+      "lane": "L3",
+      "changed_lines": 2,
+      "flagged_hunks": [
+        "h24"
+      ]
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypes.cs",
+      "area": "tests",
+      "kind": "test",
+      "lane": "L3",
+      "changed_lines": 50,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypesTests.cs",
+      "area": "tests",
+      "kind": "test",
+      "lane": "L3",
+      "changed_lines": 95,
+      "flagged_hunks": [
+        "h26"
+      ]
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.ExecutionTests/MessagePack.SourceGenerator.ExecutionTests.csproj",
+      "area": "tests",
+      "kind": "test",
+      "lane": "L3",
+      "changed_lines": 5,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.ExternalTypes/ExternalPerson.cs",
+      "area": "test-fixtures",
+      "kind": "test",
+      "lane": "L3",
+      "changed_lines": 15,
+      "flagged_hunks": [
+        "h28"
+      ]
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.ExternalTypes/ExternalPoint.cs",
+      "area": "test-fixtures",
+      "kind": "test",
+      "lane": "L3",
+      "changed_lines": 12,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.ExternalTypes/ExternalWidget.cs",
+      "area": "test-fixtures",
+      "kind": "test",
+      "lane": "L3",
+      "changed_lines": 15,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.ExternalTypes/MessagePack.SourceGenerator.ExternalTypes.csproj",
+      "area": "test-fixtures",
+      "kind": "test",
+      "lane": "L3",
+      "changed_lines": 17,
+      "flagged_hunks": [
+        "h31"
+      ]
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.MapModeExecutionTests/MessagePack.SourceGenerator.MapModeExecutionTests.csproj",
+      "area": "tests",
+      "kind": "test",
+      "lane": "L3",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/GeneratedMessagePackFormatterTests.cs",
+      "area": "tests",
+      "kind": "test",
+      "lane": "L3",
+      "changed_lines": 210,
+      "flagged_hunks": []
+    }
+  ],
+  "policy": {
+    "areas": "areas-1",
+    "routing": "routing-1"
+  },
+  "budget_note": {
+    "headline_line_level": 1043,
+    "hunk_level": null,
+    "regen_ceiling": null,
+    "explanation": "Headline 1043 of 1043 changed lines is the line-level budget (route.json).",
+    "derived_by": "receipts/budget.py"
+  }
+}

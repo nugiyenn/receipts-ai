@@ -1,0 +1,8 @@
+C1 green []
+C2 green []
+C3 red ['GenericsFormatterTests.ClosedGenericRecordStruct_FromMetadataReference', 'GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference', 'GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference_UnkeyedMember']
+C4 not-applicable []
+C5 green []
+C6 red ['MsgPack00xAnalyzerTests.NullStringKey']
+C7 green []
+C8 green []

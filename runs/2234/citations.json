@@ -1,0 +1,305 @@
+{
+  "change": "2234",
+  "checked_at": "2026-11-14T23:55:24+02:00",
+  "head": "9007cee1163c4a274fd60c3cc20c21ae63622786",
+  "summary": {
+    "citations": 26,
+    "valid": 26,
+    "invalid": 0,
+    "claims": 8,
+    "claims_invalid": 0,
+    "hallucination_rate": 0.0
+  },
+  "claims": [
+    {
+      "claim": "C1",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 21,
+          "quote": "public async Task MemberWithoutKeyIsReported()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h9"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 39,
+          "quote": "public async Task AllowPrivateRequiredIsReported()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h9"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 58,
+          "quote": "public async Task MemberTypeMustBeMessagePackObjectIsReported()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h9"
+        }
+      ]
+    },
+    {
+      "claim": "C2",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1008,
+          "quote": "continue; // The key kind does not match the other members; the diagnostic is reported, so skip this member.",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h2"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1023,
+          "quote": "if (!intMembers.ContainsKey(member.IntKey))",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h3"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 834,
+          "quote": "if (!stringMembers.ContainsKey(member.StringKey))",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": false,
+          "hunk": null
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 81,
+          "quote": "public async Task DuplicateIntKeysAreReportedWithoutAnalyzerFailure()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h9"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 125,
+          "quote": "public async Task MixedKeyKindsAreReportedWithoutAnalyzerFailure()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h9"
+        }
+      ]
+    },
+    {
+      "claim": "C3",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 147,
+          "quote": "public async Task DuplicateKeysAreReportedWithoutAnalyzerFailureForGeneratedTypes()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h9"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1023,
+          "quote": "if (!intMembers.ContainsKey(member.IntKey))",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h3"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1148,
+          "quote": "continue; // The key kind does not match the other members; the diagnostic is reported, so skip this member.",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h5"
+        }
+      ]
+    },
+    {
+      "claim": "C4",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1383,
+          "quote": "if (suppressSourceGeneration is true)",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": false,
+          "hunk": null
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 21,
+          "quote": "public async Task MemberWithoutKeyIsReported()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h9"
+        }
+      ]
+    },
+    {
+      "claim": "C5",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.ExecutionTests/SuppressedSourceGenerationTests.cs",
+          "line": 23,
+          "quote": "Assert.Null(GeneratedMessagePackResolver.Instance.GetFormatter<SuppressedSourceGenerationType>());",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h8"
+        }
+      ]
+    },
+    {
+      "claim": "C6",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1007,
+          "quote": "Diagnostic.Create(MsgPack00xMessagePackAnalyzer.DoNotMixStringAndIntKeys",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h2"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1008,
+          "quote": "continue; // The key kind does not match the other members; the diagnostic is reported, so skip this member.",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h2"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1016,
+          "quote": "Diagnostic.Create(MsgPack00xMessagePackAnalyzer.KeysMustBeUnique",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": false,
+          "hunk": null
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1023,
+          "quote": "if (!intMembers.ContainsKey(member.IntKey))",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h3"
+        }
+      ]
+    },
+    {
+      "claim": "C7",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "README.md",
+          "line": 1625,
+          "quote": "The analyzer still validates these types, because they are serialized at run time and must still have a valid contract:",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h1"
+        },
+        {
+          "path": "README.md",
+          "line": 1632,
+          "quote": "The analyzer does not report the partial-class requirement ([MsgPack011]",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h1"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 169,
+          "quote": "public async Task SourceGenerationOnlyDiagnosticsAreNotReportedWhenSuppressed()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h9"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 174,
+          "quote": "[MessagePackObject(AllowPrivate = true, SuppressSourceGeneration = true)]",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h9"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 181,
+          "quote": "public string Prop1 { get; init; }",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h9"
+        }
+      ]
+    },
+    {
+      "claim": "C8",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "README.md",
+          "line": 1630,
+          "quote": "Types are accessible to the resolver ([MsgPack012](doc/analyzers/MsgPack012.md)).",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h1"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 58,
+          "quote": "public async Task MemberTypeMustBeMessagePackObjectIsReported()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h9"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 921,
+          "quote": "if (derivedKeyAttribute is null || suppressSourceGeneration is not true)",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": false,
+          "hunk": null
+        }
+      ]
+    }
+  ]
+}

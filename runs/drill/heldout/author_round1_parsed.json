@@ -1,0 +1,91 @@
+{
+ "bugs": [
+  {
+   "id": "H1",
+   "type": "missed null case",
+   "description": "Removes the null-conditional operator when accessing the Identifier property, causing a NullReferenceException if the syntax is not a PropertyDeclarationSyntax.",
+   "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+   "old": "    private static Location? GetPropertyIdentifierLocation(IPropertySymbol property) => (property.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as PropertyDeclarationSyntax)?.Identifier.GetLocation();",
+   "new": "    private static Location? GetPropertyIdentifierLocation(IPropertySymbol property) => (property.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as PropertyDeclarationSyntax).Identifier.GetLocation();",
+   "detect_keywords": [
+    "null reference",
+    "null-conditional",
+    "missing question mark"
+   ]
+  },
+  {
+   "id": "H2",
+   "type": "logic inversion",
+   "description": "Inverts the condition that checks if the diagnostic is located in the current compilation, causing valid diagnostics to be dropped and invalid ones to be reported.",
+   "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+   "old": "        if (diagnostic.Location.IsInSource && this.compilation.ContainsSyntaxTree(diagnostic.Location.SourceTree))\n        {\n            report(diagnostic);\n        }",
+   "new": "        if (diagnostic.Location.IsInSource && !this.compilation.ContainsSyntaxTree(diagnostic.Location.SourceTree))\n        {\n            report(diagnostic);\n        }",
+   "detect_keywords": [
+    "logic inversion",
+    "negation",
+    "contains syntax tree"
+   ]
+  },
+  {
+   "id": "H3",
+   "type": "wrong variable",
+   "description": "Uses defineSource instead of usageSource when creating the usage compilation, which will cause the test to compile the wrong code.",
+   "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+   "old": "        Compilation usageCompilation = CreateCompilation(\"App\", usageSource, languageVersion, frameworkReferences.Concat(ReferencesHelper.GetReferences(ReferencesSet.MessagePack)).Append(definingAssembly));",
+   "new": "        Compilation usageCompilation = CreateCompilation(\"App\", defineSource, languageVersion, frameworkReferences.Concat(ReferencesHelper.GetReferences(ReferencesSet.MessagePack)).Append(definingAssembly));",
+   "detect_keywords": [
+    "wrong variable",
+    "definesource",
+    "usagesource"
+   ]
+  },
+  {
+   "id": "H4",
+   "type": "weakened test assertion",
+   "description": "Changes the diagnostic severity check from >= Warning to > Warning, which would allow warnings to pass the test silently.",
+   "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+   "old": "        Assert.Empty(runResult.Diagnostics.Where(d => d.Severity >= DiagnosticSeverity.Warning));",
+   "new": "        Assert.Empty(runResult.Diagnostics.Where(d => d.Severity > DiagnosticSeverity.Warning));",
+   "detect_keywords": [
+    "weakened assertion",
+    "severity",
+    "greater than"
+   ]
+  },
+  {
+   "id": "H5",
+   "type": "false documentation claim",
+   "description": "Falsely claims that members of a type defined in a referenced assembly are reported by the consuming project, contradicting the actual behavior implemented in the PR.",
+   "path": "doc/analyzers/MsgPack004.md",
+   "old": "Members of a type defined in a referenced assembly are reported by the project that defines that type, so an unattributed public member of such a type must be fixed in its defining project.",
+   "new": "Members of a type defined in a referenced assembly are reported by the project that consumes that type, so an unattributed public member of such a type must be fixed in its consuming project.",
+   "detect_keywords": [
+    "documentation",
+    "consumes",
+    "consuming project"
+   ]
+  },
+  {
+   "id": "H6",
+   "type": "silent exception swallow",
+   "description": "Swallows the compilation failure by removing the exception throw and instead just logging to the console, which will cause downstream failures when trying to use the invalid image.",
+   "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+   "old": "        if (!emitResult.Success)\n        {\n            throw new InvalidOperationException(\"Failed to compile referenced assembly: \" + string.Join(Environment.NewLine, emitResult.Diagnostics));\n        }",
+   "new": "        if (!emitResult.Success)\n        {\n            Console.WriteLine(\"Failed to compile referenced assembly: \" + string.Join(Environment.NewLine, emitResult.Diagnostics));\n        }",
+   "detect_keywords": [
+    "swallow",
+    "exception",
+    "console.writeline"
+   ]
+  }
+ ],
+ "valid": [
+  "H1",
+  "H2",
+  "H3",
+  "H4",
+  "H5",
+  "H6"
+ ],
+ "bad": []
+}

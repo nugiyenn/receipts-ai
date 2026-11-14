@@ -1,0 +1,12 @@
+diff --git a/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs b/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs
+index e121773d..470c93fc 100644
+--- a/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs
++++ b/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs
+@@ -1138,6 +1145,7 @@ public class TypeCollector
+                         if ((isIntKey && intKey == null) || (!isIntKey && stringKey == null))
+                         {
+                             this.reportDiagnostic?.Invoke(Diagnostic.Create(MsgPack00xMessagePackAnalyzer.DoNotMixStringAndIntKeys, item.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation()));
++                            continue; // The key kind does not match the other members; the diagnostic is reported, so skip this member.
+                         }
+                     }
+ 

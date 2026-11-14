@@ -1,0 +1,163 @@
+{
+  "change": "2283",
+  "kind": "refusals",
+  "produced_by": "claude-code session, cached",
+  "model": "claude-sonnet-5-5",
+  "produced_at": "2026-11-14T23:19",
+  "static_analysis_only": true,
+  "prompt": "You are the refusal writer. A deterministic policy (policy/refusal.yaml, rules R1-R8) decides WHEN the reviewer must refuse; you only word the refusal.\nFor each triggered rule write: what (the decision the AI will not make), why_ai_cannot_decide (the specific reason evidence cannot settle it),\nquestion_for_owner (one question answerable in under a minute), options (2-4 short strings), and resolvable_by (the evidence that would settle it, or \"human only\").\nCite exact diff lines. No confidence numbers. Do not recommend approving or rejecting the change.",
+  "prompt_sha256": "463eb717dbebf461ac3f21d903c076b5bc3d683aff49287e4efbdedaea6e398d",
+  "inputs": [
+    "git show origin/ju26-issue-2283",
+    "issue #2283 body (github.com page, fetched 2026-11-14)",
+    "receipts/requirements/REQ-2283.yaml",
+    "git history: v3.1.8 TypeCollector.cs"
+  ],
+  "refusals": [
+    {
+      "id": "R-2283-1",
+      "rule": "R2-silent-suppression",
+      "claims": [
+        "C4",
+        "C5"
+      ],
+      "what": "Whether it is acceptable that ReportIfLocatedInCompilation drops every analyzer diagnostic that has no in-compilation source location, across all 28 reporting call sites, instead of making only the two crashing sites null-safe.",
+      "why_ai_cannot_decide": "A dropped diagnostic leaves no trace, so the absence of failing tests cannot show that nothing valuable was dropped. The filter's intent (silence metadata types) and its effect (silence anything unlocated, including record primary-constructor properties) are different sets, and which set the maintainers want is a product decision.",
+      "question_for_owner": "Do you accept a blanket drop of unlocated diagnostics, or must the drop be limited to symbols that are actually declared in metadata?",
+      "options": [
+        "Accept as designed",
+        "Require narrowing to metadata symbols",
+        "Require a follow-up issue and a differential test",
+        "Reject"
+      ],
+      "resolvable_by": "Partly by evidence: a base-vs-head diagnostic differential over the analyzer suite and the record primary-constructor test (hypotheses H1, H5). The scope decision stays human.",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 239,
+          "quote": "this.reportDiagnostic = reportAnalyzerDiagnostic is null ? null : diagnostic => ReportIfLocatedInCompilation(reportAnalyzerDiagnostic, diagnostic);"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1446,
+          "quote": "if (diagnostic.Location.IsInSource && this.compilation.ContainsSyntaxTree(diagnostic.Location.SourceTree))"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 248,
+          "quote": "reportAnalyzerDiagnostic?.Invoke(Diagnostic.Create(MsgPack00xMessagePackAnalyzer.InaccessibleDataType"
+        }
+      ],
+      "evidence_refs": [],
+      "owner_decision": null,
+      "owner_note": null
+    },
+    {
+      "id": "R-2283-2",
+      "rule": "R6-doc-overclaim",
+      "claims": [
+        "C6",
+        "C7"
+      ],
+      "what": "Whether the README and MsgPack004.md may state as fact that problems in members of referenced-assembly types are reported by the defining assembly.",
+      "why_ai_cannot_decide": "The sentence is a guarantee about builds the reviewer cannot see. A package built without this analyzer, with an older MessagePack, or with the diagnostic severity set to none reports nothing, and then the consuming project's former warning has been removed with no replacement. Only the maintainers know which defining assemblies they want to promise this for.",
+      "question_for_owner": "Is the documented guarantee true for the packages your users reference, and should it say 'may be reported' instead?",
+      "options": [
+        "Keep wording",
+        "Soften to 'may be reported by the defining assembly'",
+        "Remove the claim from the docs",
+        "Reject"
+      ],
+      "resolvable_by": "human only (the executable half, lib compiled with and without the analyzer, only shows when the claim holds).",
+      "citations": [
+        {
+          "path": "README.md",
+          "line": 1642,
+          "quote": "Diagnostics about the members of such a type are reported by the assembly that defines it rather than by the consuming project"
+        },
+        {
+          "path": "doc/analyzers/MsgPack004.md",
+          "line": 52,
+          "quote": "Members of a type defined in a referenced assembly are reported by the project that defines that type"
+        }
+      ],
+      "evidence_refs": [],
+      "owner_decision": null,
+      "owner_note": null
+    },
+    {
+      "id": "R-2283-3",
+      "rule": "R1-product-decision",
+      "claims": [
+        "C7",
+        "C3"
+      ],
+      "what": "Whether consumers should lose all diagnostics about members of metadata-defined generic types, which the third new test hard-codes as the expected behaviour.",
+      "why_ai_cannot_decide": "The test named ..._UnkeyedMember asserts zero diagnostics for a metadata struct with an unattributed public member. That turns a design choice (who warns about this member) into a passing test, so a green run cannot tell the owner whether the choice is right.",
+      "question_for_owner": "Should a consuming project get at least an informational diagnostic when a referenced generic type has an unattributed public member?",
+      "options": [
+        "No, defining project only",
+        "Yes, informational in the consumer",
+        "Decide later, track in an issue"
+      ],
+      "resolvable_by": "human only",
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 590,
+          "quote": "public async Task ClosedGenericStruct_FromMetadataReference_UnkeyedMember()"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 603,
+          "quote": "public int Unkeyed { get; set; }"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 584,
+          "quote": "since its member diagnostics belong to the defining assembly."
+        }
+      ],
+      "evidence_refs": [],
+      "owner_decision": null,
+      "owner_note": null
+    },
+    {
+      "id": "R-2283-4",
+      "rule": "R3-unverified-root-cause",
+      "claims": [
+        "C1",
+        "C9"
+      ],
+      "what": "Whether this fix addresses the defect as reported against MessagePack 3.1.8, rather than a similar defect on the older development line it was written on.",
+      "why_ai_cannot_decide": "The issue reports 3.1.8 and says the reporter did not narrow down which of three DeclaringSyntaxReferences[0] sites fires. The branch is based on commit 32258fdb, which git describes as v3.0.238-rc.1-66 and which is not an ancestor of v3.1.8. At that base only two of the three sites are live: the TypeMustBeMessagePackObject site is commented out (see the cited line), whereas v3.1.8 has it live at line 735. A fix verified on one line says nothing about the other.",
+      "question_for_owner": "Which branch does this fix target, and must the new tests be re-run on that branch before you sign?",
+      "options": [
+        "Targets this base, accept",
+        "Re-run on master (3.1.x) first",
+        "Reject until re-based"
+      ],
+      "resolvable_by": "Partly by evidence: apply the diff to a master worktree and run the new tests (hypothesis H4). The target-branch decision stays human.",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 715,
+          "quote": "////this.reportDiagnostic?.Invoke(Diagnostic.Create(MsgPack00xMessagePackAnalyzer.TypeMustBeMessagePackObject"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1077,
+          "quote": "Diagnostic.Create(MsgPack00xMessagePackAnalyzer.MemberNeedsKey, item.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation()"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 985,
+          "quote": "GetPropertyIdentifierLocation(item), formattedType.ToDisplayString"
+        }
+      ],
+      "evidence_refs": [],
+      "owner_decision": null,
+      "owner_note": null
+    }
+  ]
+}

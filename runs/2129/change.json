@@ -1,0 +1,867 @@
+{
+  "id": "2129",
+  "requirement_ids": [
+    "REQ-2129"
+  ],
+  "repo": "../repo",
+  "branch": "ju26-issue-2129",
+  "base": "32258fdbee4bcd653c79f51b4376b5103c6f4d27",
+  "head": "083afd994c1c9a994cb2cd5aa0b6ad805a621457",
+  "subject": "Agentic implementation of #2129 Feature Request: Allow generation of Formatter for a type in a referenced assembly",
+  "message": "Agentic implementation of #2129 Feature Request: Allow generation of Formatter for a type in a referenced assembly",
+  "areas_version": "areas-1",
+  "totals": {
+    "files": 28,
+    "hunks": 33,
+    "added": 1034,
+    "removed": 9,
+    "changed_lines": 1043,
+    "by_kind": {
+      "doc": 7,
+      "src": 8,
+      "template": 2,
+      "template-output": 2,
+      "test": 9
+    }
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "area": "docs",
+      "kind": "doc",
+      "status": "modified",
+      "added": 52,
+      "removed": 0,
+      "hunks": [
+        "h1"
+      ],
+      "binary": false
+    },
+    {
+      "path": "doc/analyzers/MsgPack019.md",
+      "area": "docs",
+      "kind": "doc",
+      "status": "added",
+      "added": 26,
+      "removed": 0,
+      "hunks": [
+        "h2"
+      ],
+      "binary": false
+    },
+    {
+      "path": "doc/analyzers/MsgPack020.md",
+      "area": "docs",
+      "kind": "doc",
+      "status": "added",
+      "added": 23,
+      "removed": 0,
+      "hunks": [
+        "h3"
+      ],
+      "binary": false
+    },
+    {
+      "path": "doc/analyzers/MsgPack021.md",
+      "area": "docs",
+      "kind": "doc",
+      "status": "added",
+      "added": 23,
+      "removed": 0,
+      "hunks": [
+        "h4"
+      ],
+      "binary": false
+    },
+    {
+      "path": "doc/analyzers/MsgPack022.md",
+      "area": "docs",
+      "kind": "doc",
+      "status": "added",
+      "added": 31,
+      "removed": 0,
+      "hunks": [
+        "h5"
+      ],
+      "binary": false
+    },
+    {
+      "path": "doc/analyzers/index.md",
+      "area": "docs",
+      "kind": "doc",
+      "status": "modified",
+      "added": 4,
+      "removed": 0,
+      "hunks": [
+        "h6"
+      ],
+      "binary": false
+    },
+    {
+      "path": "src/MessagePack.Annotations/Attributes.cs",
+      "area": "runtime-serializer",
+      "kind": "src",
+      "status": "modified",
+      "added": 36,
+      "removed": 0,
+      "hunks": [
+        "h7"
+      ],
+      "binary": false
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/AnalyzerReleases.Unshipped.md",
+      "area": "generator-other",
+      "kind": "doc",
+      "status": "modified",
+      "added": 4,
+      "removed": 0,
+      "hunks": [
+        "h8"
+      ],
+      "binary": false
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs",
+      "area": "analyzer-core",
+      "kind": "src",
+      "status": "modified",
+      "added": 45,
+      "removed": 1,
+      "hunks": [
+        "h9",
+        "h10",
+        "h11"
+      ],
+      "binary": false
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+      "area": "analyzer-core",
+      "kind": "src",
+      "status": "added",
+      "added": 300,
+      "removed": 0,
+      "hunks": [
+        "h12"
+      ],
+      "binary": false
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterRequest.cs",
+      "area": "analyzer-core",
+      "kind": "src",
+      "status": "added",
+      "added": 13,
+      "removed": 0,
+      "hunks": [
+        "h13"
+      ],
+      "binary": false
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/ObjectSerializationInfo.cs",
+      "area": "analyzer-core",
+      "kind": "src",
+      "status": "modified",
+      "added": 7,
+      "removed": 0,
+      "hunks": [
+        "h14",
+        "h15"
+      ],
+      "binary": false
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/GeneratorUtilities.cs",
+      "area": "generator-other",
+      "kind": "src",
+      "status": "modified",
+      "added": 3,
+      "removed": 0,
+      "hunks": [
+        "h16"
+      ],
+      "binary": false
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/MessagePackGenerator.cs",
+      "area": "generator-other",
+      "kind": "src",
+      "status": "modified",
+      "added": 36,
+      "removed": 3,
+      "hunks": [
+        "h17",
+        "h18",
+        "h19"
+      ],
+      "binary": false
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.cs",
+      "area": "generator-templates",
+      "kind": "template-output",
+      "status": "modified",
+      "added": 3,
+      "removed": 1,
+      "hunks": [
+        "h20"
+      ],
+      "binary": false
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.tt",
+      "area": "generator-templates",
+      "kind": "template",
+      "status": "modified",
+      "added": 1,
+      "removed": 1,
+      "hunks": [
+        "h21"
+      ],
+      "binary": false
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/Transforms/StringKey/StringKeyFormatterTemplate.cs",
+      "area": "generator-templates",
+      "kind": "template-output",
+      "status": "modified",
+      "added": 3,
+      "removed": 1,
+      "hunks": [
+        "h22"
+      ],
+      "binary": false
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/Transforms/StringKey/StringKeyFormatterTemplate.tt",
+      "area": "generator-templates",
+      "kind": "template",
+      "status": "modified",
+      "added": 1,
+      "removed": 1,
+      "hunks": [
+        "h23"
+      ],
+      "binary": false
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/Utils/Constants.cs",
+      "area": "generator-other",
+      "kind": "src",
+      "status": "modified",
+      "added": 2,
+      "removed": 0,
+      "hunks": [
+        "h24"
+      ],
+      "binary": false
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypes.cs",
+      "area": "tests",
+      "kind": "test",
+      "status": "added",
+      "added": 50,
+      "removed": 0,
+      "hunks": [
+        "h25"
+      ],
+      "binary": false
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypesTests.cs",
+      "area": "tests",
+      "kind": "test",
+      "status": "added",
+      "added": 95,
+      "removed": 0,
+      "hunks": [
+        "h26"
+      ],
+      "binary": false
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.ExecutionTests/MessagePack.SourceGenerator.ExecutionTests.csproj",
+      "area": "tests",
+      "kind": "test",
+      "status": "modified",
+      "added": 5,
+      "removed": 0,
+      "hunks": [
+        "h27"
+      ],
+      "binary": false
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.ExternalTypes/ExternalPerson.cs",
+      "area": "test-fixtures",
+      "kind": "test",
+      "status": "added",
+      "added": 15,
+      "removed": 0,
+      "hunks": [
+        "h28"
+      ],
+      "binary": false
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.ExternalTypes/ExternalPoint.cs",
+      "area": "test-fixtures",
+      "kind": "test",
+      "status": "added",
+      "added": 12,
+      "removed": 0,
+      "hunks": [
+        "h29"
+      ],
+      "binary": false
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.ExternalTypes/ExternalWidget.cs",
+      "area": "test-fixtures",
+      "kind": "test",
+      "status": "added",
+      "added": 15,
+      "removed": 0,
+      "hunks": [
+        "h30"
+      ],
+      "binary": false
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.ExternalTypes/MessagePack.SourceGenerator.ExternalTypes.csproj",
+      "area": "test-fixtures",
+      "kind": "test",
+      "status": "added",
+      "added": 17,
+      "removed": 0,
+      "hunks": [
+        "h31"
+      ],
+      "binary": false
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.MapModeExecutionTests/MessagePack.SourceGenerator.MapModeExecutionTests.csproj",
+      "area": "tests",
+      "kind": "test",
+      "status": "modified",
+      "added": 2,
+      "removed": 1,
+      "hunks": [
+        "h32"
+      ],
+      "binary": false
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/GeneratedMessagePackFormatterTests.cs",
+      "area": "tests",
+      "kind": "test",
+      "status": "added",
+      "added": 210,
+      "removed": 0,
+      "hunks": [
+        "h33"
+      ],
+      "binary": false
+    }
+  ],
+  "hunks": [
+    {
+      "id": "h1",
+      "path": "README.md",
+      "kind": "doc",
+      "area": "docs",
+      "old_start": 1636,
+      "old_len": 6,
+      "new_start": 1636,
+      "new_len": 58,
+      "ctx": "Two assembly-level attributes exist to help with mixing in your own custom forma",
+      "added": 52,
+      "removed": 0,
+      "text": "@@ -1636,6 +1636,58 @@ Two assembly-level attributes exist to help with mixing in your own custom forma\n \n Learn more about using a mix of your own custom formatters and automatically generated ones in [the Analyzer section](#analyzer).\n \n+### Formatters for types from other assemblies\n+\n+A type that comes from an assembly you cannot change, such as a dependency-free library, may have no MessagePack attributes at all.\n+You can still get a source-generated formatter for it by declaring a `partial` formatter class in your own project and marking it with `[GeneratedMessagePackFormatter]`:\n+\n+```cs\n+// ProjectA.MyObject lives in a library that does not reference MessagePack.\n+[GeneratedMessagePackFormatter]\n+public partial class MyObjectFormatter : IMessagePackFormatter<ProjectA.MyObject>\n+{\n+}\n+```\n+\n+The source generator writes the body of `MyObjectFormatter`, and the generated `GeneratedMessagePackResolver` registers it automatically.\n+Nothing needs to be added to `ProjectA`.\n+\n+By default the formatter serializes the type in *contractless* mode: every public, read-write instance property and field is serialized under its name as a string key.\n+Read-only members are skipped because they cannot be deserialized.\n+\n+To control keys and membership without touching the type, name a *surrogate* type in the attribute.\n+The surrogate's `[Key]` and `[IgnoreMember]` attributes describe the wire contract, and its members are matched to members of the formatted type by name and type.\n+The surrogate is only read at compile time and is never instantiated.\n+\n+```cs\n+public class MyObjectSurrogate\n+{\n+    [Key(0)]\n+    public int Id { get; set; }\n+\n+    [Key(1)]\n+    public string Label { get; set; }\n+\n+    [IgnoreMember]\n+    public string Secret { get; set; }\n+}\n+\n+[GeneratedMessagePackFormatter(SurrogateType = typeof(MyObjectSurrogate))]\n+public partial class MyObjectFormatter : IMessagePackFormatter<ProjectA.MyObject>\n+{\n+}\n+```\n+\n+When a surrogate is used, only the members it lists are serialized.\n+All of its keys must be integers or all must be strings.\n+\n+Limitations of this feature:\n+- Only classes and structs are supported. Generic types, abstract types, and unions from other assemblies are not.\n+- Deserialization uses an accessible parameterless constructor (any struct can be created without one). Constructor parameters are not matched, so types that only have a parameterized constructor are not supported yet.\n+- Nested member types are not generated from the formatter. They are resolved through the other resolvers in your composite resolver, as usual.\n+- Formatter diagnostics are reported as `MsgPack019` through `MsgPack022`, listed in the [analyzers](doc/analyzers/index.md).\n+\n+\n ### MagicOnion\n \n [MagicOnion](https://github.com/Cysharp/MagicOnion) is a code-first gRPC framework based on grpc-dotnet and MessagePack. gRPC usually communicates with Protocol Buffers using IDL. But MagicOnion uses MessagePack for C# and does not need IDL. When communicating C# to C#, schemaless (or rather C# classes as schema) is better than using IDL.",
+      "group": null
+    },
+    {
+      "id": "h2",
+      "path": "doc/analyzers/MsgPack019.md",
+      "kind": "doc",
+      "area": "docs",
+      "old_start": 0,
+      "old_len": 0,
+      "new_start": 1,
+      "new_len": 26,
+      "ctx": "",
+      "added": 26,
+      "removed": 0,
+      "text": "@@ -0,0 +1,26 @@\n+# MsgPack019 Generated formatter must be partial\n+\n+A class marked with `[GeneratedMessagePackFormatter]` is the target of source generation. The generator writes the body of the formatter into the class, so the class must be declared `partial`.\n+\n+## Examples of patterns that are flagged by this analyzer\n+\n+```cs\n+[GeneratedMessagePackFormatter]\n+public class MyObjectFormatter : IMessagePackFormatter<ProjectA.MyObject> // Diagnostic reported here: not partial\n+{\n+    // ...\n+}\n+```\n+\n+## Typical fix\n+\n+Declare the class `partial` and leave its body empty:\n+\n+```cs\n+[GeneratedMessagePackFormatter]\n+public partial class MyObjectFormatter : IMessagePackFormatter<ProjectA.MyObject>\n+{\n+}\n+```\n+\n+Any nesting types that contain the formatter must also be declared `partial`.",
+      "group": null
+    },
+    {
+      "id": "h3",
+      "path": "doc/analyzers/MsgPack020.md",
+      "kind": "doc",
+      "area": "docs",
+      "old_start": 0,
+      "old_len": 0,
+      "new_start": 1,
+      "new_len": 23,
+      "ctx": "",
+      "added": 23,
+      "removed": 0,
+      "text": "@@ -0,0 +1,23 @@\n+# MsgPack020 Generated formatter must implement IMessagePackFormatter<T>\n+\n+A class marked with `[GeneratedMessagePackFormatter]` identifies the data type to serialize by its `IMessagePackFormatter<T>` interface. The class must implement exactly one such interface.\n+\n+## Examples of patterns that are flagged by this analyzer\n+\n+```cs\n+[GeneratedMessagePackFormatter]\n+public partial class MyObjectFormatter // Diagnostic reported here: no IMessagePackFormatter<T>\n+{\n+}\n+```\n+\n+## Typical fix\n+\n+Implement `IMessagePackFormatter<T>` for the type to be serialized:\n+\n+```cs\n+[GeneratedMessagePackFormatter]\n+public partial class MyObjectFormatter : IMessagePackFormatter<ProjectA.MyObject>\n+{\n+}\n+```",
+      "group": null
+    },
+    {
+      "id": "h4",
+      "path": "doc/analyzers/MsgPack021.md",
+      "kind": "doc",
+      "area": "docs",
+      "old_start": 0,
+      "old_len": 0,
+      "new_start": 1,
+      "new_len": 23,
+      "ctx": "",
+      "added": 23,
+      "removed": 0,
+      "text": "@@ -0,0 +1,23 @@\n+# MsgPack021 Generated formatter data type not supported\n+\n+The source generator writes formatters for non-generic, non-abstract classes and structs that the formatter can access. The data type named by the formatter's `IMessagePackFormatter<T>` interface must meet these requirements.\n+\n+## Examples of patterns that are flagged by this analyzer\n+\n+```cs\n+public abstract class MyBase { }\n+\n+[GeneratedMessagePackFormatter]\n+public partial class MyBaseFormatter : IMessagePackFormatter<MyBase> // Diagnostic reported here: abstract\n+{\n+}\n+\n+[GeneratedMessagePackFormatter]\n+public partial class ListFormatter : IMessagePackFormatter<List<int>> // Diagnostic reported here: generic\n+{\n+}\n+```\n+\n+## Typical fix\n+\n+Use a concrete, non-generic class or struct as the data type. For an abstract base type, use [`[Union]`](../../README.md#union) with the derived types instead.",
+      "group": null
+    },
+    {
+      "id": "h5",
+      "path": "doc/analyzers/MsgPack022.md",
+      "kind": "doc",
+      "area": "docs",
+      "old_start": 0,
+      "old_len": 0,
+      "new_start": 1,
+      "new_len": 31,
+      "ctx": "",
+      "added": 31,
+      "removed": 0,
+      "text": "@@ -0,0 +1,31 @@\n+# MsgPack022 Surrogate member does not match the formatted type\n+\n+When `[GeneratedMessagePackFormatter(SurrogateType = typeof(...))]` is used, each keyed member of the surrogate must match a public, read-write instance member of the formatted type, with the same name and type.\n+\n+## Examples of patterns that are flagged by this analyzer\n+\n+```cs\n+// ProjectA.MyObject has `public int Id { get; set; }` and no `Missing` member.\n+public class MyObjectSurrogate\n+{\n+    [Key(0)]\n+    public int Missing { get; set; } // Diagnostic reported here\n+}\n+\n+[GeneratedMessagePackFormatter(SurrogateType = typeof(MyObjectSurrogate))]\n+public partial class MyObjectFormatter : IMessagePackFormatter<ProjectA.MyObject>\n+{\n+}\n+```\n+\n+## Typical fix\n+\n+Rename the surrogate member to match a public, read-write member of the formatted type, and make sure the types are identical:\n+\n+```cs\n+public class MyObjectSurrogate\n+{\n+    [Key(0)]\n+    public int Id { get; set; }\n+}\n+```",
+      "group": null
+    },
+    {
+      "id": "h6",
+      "path": "doc/analyzers/index.md",
+      "kind": "doc",
+      "area": "docs",
+      "old_start": 23,
+      "old_len": 5,
+      "new_start": 23,
+      "new_len": 9,
+      "ctx": "ID | Title",
+      "added": 4,
+      "removed": 0,
+      "text": "@@ -23,5 +23,9 @@ ID | Title\n [MsgPack016](MsgPack016.md) | KeyAttribute-derived attributes are not supported by AOT formatters\n [MsgPack017](MsgPack017.md) | Property with init accessor and initializer\n [MsgPack018](MsgPack018.md) | Unique names required in force map mode\n+[MsgPack019](MsgPack019.md) | Generated formatter must be partial\n+[MsgPack020](MsgPack020.md) | Generated formatter must implement `IMessagePackFormatter<T>`\n+[MsgPack021](MsgPack021.md) | Generated formatter data type not supported\n+[MsgPack022](MsgPack022.md) | Surrogate member does not match the formatted type\n \n [1]: https://nuget.org/packages/MessagePackAnalyzer",
+      "group": null
+    },
+    {
+      "id": "h7",
+      "path": "src/MessagePack.Annotations/Attributes.cs",
+      "kind": "src",
+      "area": "runtime-serializer",
+      "old_start": 139,
+      "old_len": 4,
+      "new_start": 139,
+      "new_len": 40,
+      "ctx": "namespace MessagePack",
+      "added": 36,
+      "removed": 0,
+      "text": "@@ -139,4 +139,40 @@ namespace MessagePack\n             this.Arguments = arguments;\n         }\n     }\n+\n+    /// <summary>\n+    /// Marks a <see langword=\"partial\"/> class that implements <c>IMessagePackFormatter&lt;T&gt;</c> so that the MessagePack source generator\n+    /// writes the formatter implementation for <c>T</c>, even when <c>T</c> is declared in another assembly that cannot reference MessagePack.\n+    /// </summary>\n+    /// <remarks>\n+    /// <para>\n+    /// The formatted type <c>T</c> is serialized in contractless mode: every public, non-static, read-write instance property and field\n+    /// is serialized using its name as a string key. No attributes are required on <c>T</c>.\n+    /// </para>\n+    /// <para>\n+    /// To control keys and membership without touching <c>T</c>, set <see cref=\"SurrogateType\"/> to a type whose\n+    /// <see cref=\"KeyAttribute\"/> and <see cref=\"IgnoreMemberAttribute\"/> annotations describe the wire contract.\n+    /// The surrogate is only read at compile time and is never instantiated at run time.\n+    /// Surrogate members are matched to members of <c>T</c> by name.\n+    /// </para>\n+    /// </remarks>\n+    /// <example>\n+    /// <code>\n+    /// [GeneratedMessagePackFormatter]\n+    /// public partial class MyObjectFormatter : IMessagePackFormatter&lt;ProjectA.MyObject&gt; { }\n+    /// </code>\n+    /// </example>\n+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]\n+    public class GeneratedMessagePackFormatterAttribute : Attribute\n+    {\n+        /// <summary>\n+        /// Gets or sets a type whose <see cref=\"KeyAttribute\"/> members define the keys and membership of the formatted type.\n+        /// </summary>\n+        /// <remarks>\n+        /// Each surrogate member that carries a <see cref=\"KeyAttribute\"/> must match a public, read-write instance member of the formatted type by name.\n+        /// Surrogate members that carry <see cref=\"IgnoreMemberAttribute\"/> are excluded.\n+        /// All keys in the surrogate must be the same kind (all integer or all string).\n+        /// </remarks>\n+        public Type? SurrogateType { get; set; }\n+    }\n }",
+      "group": null
+    },
+    {
+      "id": "h8",
+      "path": "src/MessagePack.SourceGenerator/AnalyzerReleases.Unshipped.md",
+      "kind": "doc",
+      "area": "generator-other",
+      "old_start": 23,
+      "old_len": 3,
+      "new_start": 23,
+      "new_len": 7,
+      "ctx": "MsgPack015 | Usage | Warning | MessagePackObjectAttribute.AllowPrivate should be",
+      "added": 4,
+      "removed": 0,
+      "text": "@@ -23,3 +23,7 @@ MsgPack015 | Usage | Warning | MessagePackObjectAttribute.AllowPrivate should be\n MsgPack016 | Usage | Error | KeyAttribute-derived attributes are not supported by AOT formatters\n MsgPack017 | Usage | Warning | Property with init accessor and initializer\n MsgPack018 | Usage | Error | Unique names required in force map mode\n+MsgPack019 | Usage | Error | Generated formatter must be partial\n+MsgPack020 | Usage | Error | Generated formatter must implement IMessagePackFormatter<T>\n+MsgPack021 | Usage | Error | Generated formatter data type not supported\n+MsgPack022 | Usage | Error | Surrogate member does not match the formatted type",
+      "group": null
+    },
+    {
+      "id": "h9",
+      "path": "src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs",
+      "kind": "src",
+      "area": "analyzer-core",
+      "old_start": 29,
+      "old_len": 6,
+      "new_start": 29,
+      "new_len": 10,
+      "ctx": "public class MsgPack00xMessagePackAnalyzer : DiagnosticAnalyzer",
+      "added": 4,
+      "removed": 0,
+      "text": "@@ -29,6 +29,10 @@ public class MsgPack00xMessagePackAnalyzer : DiagnosticAnalyzer\n     public const string AOTDerivedKeyId = \"MsgPack016\";\n     public const string AOTInitPropertyId = \"MsgPack017\";\n     public const string CollidingMemberNamesInForceMapModeId = \"MsgPack018\";\n+    public const string GeneratedFormatterMustBePartialId = \"MsgPack019\";\n+    public const string GeneratedFormatterMustImplementFormatterId = \"MsgPack020\";\n+    public const string GeneratedFormatterDataTypeNotSupportedId = \"MsgPack021\";\n+    public const string SurrogateMemberNotFoundId = \"MsgPack022\";\n \n     internal const string Category = \"Usage\";\n ",
+      "group": null
+    },
+    {
+      "id": "h10",
+      "path": "src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs",
+      "kind": "src",
+      "area": "analyzer-core",
+      "old_start": 311,
+      "old_len": 6,
+      "new_start": 315,
+      "new_len": 42,
+      "ctx": "public class MsgPack00xMessagePackAnalyzer : DiagnosticAnalyzer",
+      "added": 36,
+      "removed": 0,
+      "text": "@@ -311,6 +315,42 @@ public class MsgPack00xMessagePackAnalyzer : DiagnosticAnalyzer\n         isEnabledByDefault: true,\n         helpLinkUri: AnalyzerUtilities.GetHelpLink(CollidingMemberNamesInForceMapModeId));\n \n+    public static readonly DiagnosticDescriptor GeneratedFormatterMustBePartial = new(\n+        id: GeneratedFormatterMustBePartialId,\n+        title: \"Generated formatter must be partial\",\n+        category: Category,\n+        messageFormat: \"The formatter '{0}' is marked with [GeneratedMessagePackFormatter] and must be declared 'partial' so the source generator can write its implementation\",\n+        defaultSeverity: DiagnosticSeverity.Error,\n+        isEnabledByDefault: true,\n+        helpLinkUri: AnalyzerUtilities.GetHelpLink(GeneratedFormatterMustBePartialId));\n+\n+    public static readonly DiagnosticDescriptor GeneratedFormatterMustImplementFormatter = new(\n+        id: GeneratedFormatterMustImplementFormatterId,\n+        title: \"Generated formatter must implement IMessagePackFormatter<T>\",\n+        category: Category,\n+        messageFormat: \"The formatter '{0}' is marked with [GeneratedMessagePackFormatter] but does not implement IMessagePackFormatter<T> for exactly one data type\",\n+        defaultSeverity: DiagnosticSeverity.Error,\n+        isEnabledByDefault: true,\n+        helpLinkUri: AnalyzerUtilities.GetHelpLink(GeneratedFormatterMustImplementFormatterId));\n+\n+    public static readonly DiagnosticDescriptor GeneratedFormatterDataTypeNotSupported = new(\n+        id: GeneratedFormatterDataTypeNotSupportedId,\n+        title: \"Generated formatter data type not supported\",\n+        category: Category,\n+        messageFormat: \"The formatter '{0}' cannot generate a formatter for '{1}': only accessible, non-generic, non-abstract classes and structs are supported\",\n+        defaultSeverity: DiagnosticSeverity.Error,\n+        isEnabledByDefault: true,\n+        helpLinkUri: AnalyzerUtilities.GetHelpLink(GeneratedFormatterDataTypeNotSupportedId));\n+\n+    public static readonly DiagnosticDescriptor SurrogateMemberNotFound = new(\n+        id: SurrogateMemberNotFoundId,\n+        title: \"Surrogate member does not match the formatted type\",\n+        category: Category,\n+        messageFormat: \"The surrogate member '{0}' has no matching public, read-write instance member with the same name and type on '{1}'\",\n+        defaultSeverity: DiagnosticSeverity.Error,\n+        isEnabledByDefault: true,\n+        helpLinkUri: AnalyzerUtilities.GetHelpLink(SurrogateMemberNotFoundId));\n+\n     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(\n         TypeMustBeMessagePackObject,\n         MessageFormatterMustBeMessagePackFormatter,",
+      "group": null
+    },
+    {
+      "id": "h11",
+      "path": "src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs",
+      "kind": "src",
+      "area": "analyzer-core",
+      "old_start": 338,
+      "old_len": 7,
+      "new_start": 378,
+      "new_len": 11,
+      "ctx": "public class MsgPack00xMessagePackAnalyzer : DiagnosticAnalyzer",
+      "added": 5,
+      "removed": 1,
+      "text": "@@ -338,7 +378,11 @@ public class MsgPack00xMessagePackAnalyzer : DiagnosticAnalyzer\n         InaccessibleDataType,\n         NullableReferenceTypeFormatter,\n         MessagePackObjectAllowPrivateRequired,\n-        CollidingMemberNamesInForceMapMode);\n+        CollidingMemberNamesInForceMapMode,\n+        GeneratedFormatterMustBePartial,\n+        GeneratedFormatterMustImplementFormatter,\n+        GeneratedFormatterDataTypeNotSupported,\n+        SurrogateMemberNotFound);\n \n     public override void Initialize(AnalysisContext context)\n     {",
+      "group": null
+    },
+    {
+      "id": "h12",
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+      "kind": "src",
+      "area": "analyzer-core",
+      "old_start": 0,
+      "old_len": 0,
+      "new_start": 1,
+      "new_len": 300,
+      "ctx": "",
+      "added": 300,
+      "removed": 0,
+      "text": "@@ -0,0 +1,300 @@\n+// Copyright (c) All contributors. All rights reserved.\n+// Licensed under the MIT license. See LICENSE file in the project root for full license information.\n+\n+using System.Collections.Immutable;\n+using MessagePack.SourceGenerator.Analyzers;\n+using Microsoft.CodeAnalysis;\n+using Microsoft.CodeAnalysis.CSharp;\n+using Microsoft.CodeAnalysis.CSharp.Syntax;\n+\n+namespace MessagePack.SourceGenerator.CodeAnalysis;\n+\n+/// <summary>\n+/// Builds the serialization model for a partial formatter marked with <c>[GeneratedMessagePackFormatter]</c>.\n+/// The formatted type may come from an assembly that carries no MessagePack attributes, so its members are read\n+/// in contractless mode, or through the keys declared on an optional surrogate type.\n+/// </summary>\n+internal static class GeneratedFormatterCollector\n+{\n+    private static readonly SymbolDisplayFormat BinaryWriteTypeFormat = new(\n+        genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,\n+        miscellaneousOptions: SymbolDisplayMiscellaneousOptions.ExpandNullable,\n+        typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameOnly);\n+\n+    /// <summary>\n+    /// Creates the model for one generated formatter.\n+    /// </summary>\n+    /// <param name=\"compilation\">The compilation that contains the formatter.</param>\n+    /// <param name=\"options\">The analyzer options for the compilation.</param>\n+    /// <param name=\"referenceSymbols\">The MessagePack reference symbols.</param>\n+    /// <param name=\"reportDiagnostic\">Receives diagnostics about the formatter. May be <see langword=\"null\"/>.</param>\n+    /// <param name=\"formatter\">The user-declared partial formatter class.</param>\n+    /// <param name=\"surrogate\">The surrogate type, or <see langword=\"null\"/> for contractless mode.</param>\n+    /// <param name=\"cancellationToken\">A cancellation token.</param>\n+    /// <returns>The model, or <see langword=\"null\"/> if the formatter cannot be generated.</returns>\n+    internal static FullModel? Collect(\n+        Compilation compilation,\n+        AnalyzerOptions options,\n+        ReferenceSymbols referenceSymbols,\n+        Action<Diagnostic>? reportDiagnostic,\n+        INamedTypeSymbol formatter,\n+        INamedTypeSymbol? surrogate,\n+        CancellationToken cancellationToken)\n+    {\n+        Location location = formatter.Locations.FirstOrDefault() ?? Location.None;\n+        string formatterName = formatter.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);\n+\n+        if (!IsPartial(formatter, cancellationToken))\n+        {\n+            reportDiagnostic?.Invoke(Diagnostic.Create(MsgPack00xMessagePackAnalyzer.GeneratedFormatterMustBePartial, location, formatterName));\n+            return null;\n+        }\n+\n+        INamedTypeSymbol? openFormatterInterface = compilation.GetTypeByMetadataName($\"{Constants.IMessagePackFormatterInterfaceNamespace}.{Constants.IMessagePackFormatterInterfaceName}`1\");\n+        ImmutableArray<INamedTypeSymbol> formatterInterfaces = formatter.AllInterfaces\n+            .Where(i => i.IsGenericType && SymbolEqualityComparer.Default.Equals(i.OriginalDefinition, openFormatterInterface))\n+            .ToImmutableArray();\n+        if (formatterInterfaces.Length != 1)\n+        {\n+            reportDiagnostic?.Invoke(Diagnostic.Create(MsgPack00xMessagePackAnalyzer.GeneratedFormatterMustImplementFormatter, location, formatterName));\n+            return null;\n+        }\n+\n+        ITypeSymbol dataTypeSymbol = formatterInterfaces[0].TypeArguments[0];\n+        if (dataTypeSymbol is not INamedTypeSymbol { IsGenericType: false, IsAbstract: false } type\n+            || type.TypeKind is not (TypeKind.Class or TypeKind.Struct)\n+            || !compilation.IsSymbolAccessibleWithin(type, formatter))\n+        {\n+            reportDiagnostic?.Invoke(Diagnostic.Create(\n+                MsgPack00xMessagePackAnalyzer.GeneratedFormatterDataTypeNotSupported,\n+                location,\n+                formatterName,\n+                dataTypeSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)));\n+            return null;\n+        }\n+\n+        bool isClass = type.TypeKind == TypeKind.Class;\n+        if (isClass && !type.InstanceConstructors.Any(c => c.Parameters.Length == 0 && compilation.IsSymbolAccessibleWithin(c, formatter)))\n+        {\n+            reportDiagnostic?.Invoke(Diagnostic.Create(MsgPack00xMessagePackAnalyzer.NoDeserializingConstructor, location));\n+            return null;\n+        }\n+\n+        bool hasCallbackReceiver = type.AllInterfaces.Any(i => SymbolEqualityComparer.Default.Equals(i, referenceSymbols.IMessagePackSerializationCallbackReceiver));\n+        bool needsCast = hasCallbackReceiver && type.GetMembers().OfType<IMethodSymbol>().Any(m =>\n+            m.ExplicitInterfaceImplementations.Length > 0 && (m.Name == \"OnBeforeSerialize\" || m.Name == \"OnAfterDeserialize\"));\n+\n+        IReadOnlyList<MemberSerializationInfo>? members;\n+        bool isIntKey;\n+        if (surrogate is null)\n+        {\n+            members = CreateContractlessMembers(type);\n+            isIntKey = false;\n+        }\n+        else\n+        {\n+            members = CreateSurrogateMembers(type, surrogate, referenceSymbols, reportDiagnostic, location, out isIntKey);\n+        }\n+\n+        if (members is null)\n+        {\n+            return null;\n+        }\n+\n+        ObjectSerializationInfo info = ObjectSerializationInfo.Create(\n+            type,\n+            isClass: isClass,\n+            nestedFormatterRequired: false,\n+            genericTypeParameters: Array.Empty<GenericTypeParameterInfo>(),\n+            constructorParameters: Array.Empty<MemberSerializationInfo>(),\n+            isIntKey: isIntKey,\n+            members: members.ToArray(),\n+            hasIMessagePackSerializationCallbackReceiver: hasCallbackReceiver,\n+            needsCastOnAfter: needsCast,\n+            needsCastOnBefore: needsCast,\n+            resolverOptions: options.Generator.Resolver) with\n+        {\n+            Formatter = new QualifiedNamedTypeName(formatter),\n+            IsUserDeclaredFormatter = true,\n+        };\n+\n+        return FullModel.Empty with\n+        {\n+            ObjectInfos = ImmutableSortedSet.Create(info),\n+            Options = options,\n+        };\n+    }\n+\n+    /// <summary>\n+    /// Contractless mode: every public, read-write instance property and field is serialized under its name as a string key.\n+    /// </summary>\n+    private static IReadOnlyList<MemberSerializationInfo> CreateContractlessMembers(INamedTypeSymbol type)\n+    {\n+        List<ISymbol> targets = GetInstanceMembers(type).Where(IsPublicReadWrite).OrderBy(m => m.Name, StringComparer.Ordinal).ToList();\n+        List<MemberSerializationInfo> members = new(targets.Count);\n+        for (int i = 0; i < targets.Count; i++)\n+        {\n+            members.Add(CreateMember(targets[i], intKey: i, stringKey: targets[i].Name));\n+        }\n+\n+        return members;\n+    }\n+\n+    /// <summary>\n+    /// Surrogate mode: keys and membership come from the surrogate's <c>[Key]</c> and <c>[IgnoreMember]</c> annotations.\n+    /// Each keyed surrogate member is matched by name, and type, to a public read-write member of the formatted type.\n+    /// </summary>\n+    private static IReadOnlyList<MemberSerializationInfo>? CreateSurrogateMembers(\n+        INamedTypeSymbol type,\n+        INamedTypeSymbol surrogate,\n+        ReferenceSymbols referenceSymbols,\n+        Action<Diagnostic>? reportDiagnostic,\n+        Location location,\n+        out bool isIntKey)\n+    {\n+        isIntKey = false;\n+        bool? keyKindIsInt = null;\n+        HashSet<object> claimedKeys = new();\n+        List<MemberSerializationInfo> members = new();\n+        List<ISymbol> targetMembers = GetInstanceMembers(type);\n+\n+        foreach (ISymbol surrogateMember in GetInstanceMembers(surrogate))\n+        {\n+            ImmutableArray<AttributeData> attributes = surrogateMember.GetAttributes();\n+            if (attributes.Any(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, referenceSymbols.IgnoreAttribute)))\n+            {\n+                continue;\n+            }\n+\n+            AttributeData? keyAttribute = attributes.FirstOrDefault(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, referenceSymbols.KeyAttribute));\n+            object? key = keyAttribute is { ConstructorArguments.Length: 1 } ? keyAttribute.ConstructorArguments[0].Value : null;\n+            if (key is not (int or string))\n+            {\n+                reportDiagnostic?.Invoke(Diagnostic.Create(\n+                    MsgPack00xMessagePackAnalyzer.MemberNeedsKey,\n+                    surrogateMember.Locations.FirstOrDefault() ?? location,\n+                    surrogate.Name,\n+                    surrogateMember.Name));\n+                return null;\n+            }\n+\n+            bool memberIsIntKey = key is int;\n+            keyKindIsInt ??= memberIsIntKey;\n+            if (keyKindIsInt != memberIsIntKey)\n+            {\n+                reportDiagnostic?.Invoke(Diagnostic.Create(MsgPack00xMessagePackAnalyzer.DoNotMixStringAndIntKeys, surrogateMember.Locations.FirstOrDefault() ?? location));\n+                return null;\n+            }\n+\n+            ISymbol? target = targetMembers.FirstOrDefault(m => m.Name == surrogateMember.Name);\n+            if (target is null || !IsPublicReadWrite(target) || !SymbolEqualityComparer.Default.Equals(GetMemberType(target), GetMemberType(surrogateMember)))\n+            {\n+                reportDiagnostic?.Invoke(Diagnostic.Create(\n+                    MsgPack00xMessagePackAnalyzer.SurrogateMemberNotFound,\n+                    surrogateMember.Locations.FirstOrDefault() ?? location,\n+                    surrogateMember.Name,\n+                    type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)));\n+                return null;\n+            }\n+\n+            if (!claimedKeys.Add(key))\n+            {\n+                reportDiagnostic?.Invoke(Diagnostic.Create(MsgPack00xMessagePackAnalyzer.KeysMustBeUnique, surrogateMember.Locations.FirstOrDefault() ?? location));\n+                return null;\n+            }\n+\n+            members.Add(key is int intKey\n+                ? CreateMember(target, intKey: intKey, stringKey: target.Name)\n+                : CreateMember(target, intKey: members.Count, stringKey: (string)key));\n+        }\n+\n+        isIntKey = keyKindIsInt ?? false;\n+        return members;\n+    }\n+\n+    private static MemberSerializationInfo CreateMember(ISymbol target, int intKey, string stringKey)\n+    {\n+        ITypeSymbol memberType = GetMemberType(target);\n+        bool isProperty = target is IPropertySymbol;\n+        bool isInitOnly = target is IPropertySymbol { SetMethod.IsInitOnly: true };\n+        bool isRequired = target switch\n+        {\n+            IPropertySymbol property => property.IsRequired,\n+            IFieldSymbol field => field.IsRequired,\n+            _ => false,\n+        };\n+\n+        return new MemberSerializationInfo(\n+            IsProperty: isProperty,\n+            IsWritable: true,\n+            IsReadable: true,\n+            IsInitOnly: isInitOnly,\n+            IsRequired: isRequired,\n+            IntKey: intKey,\n+            StringKey: stringKey,\n+            Name: target.Name,\n+            Type: memberType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),\n+            ShortTypeName: memberType.ToDisplayString(BinaryWriteTypeFormat),\n+            CustomFormatter: null)\n+        {\n+            // Members of the formatted type are never colliding with a base-type member of the same name here,\n+            // because GetInstanceMembers keeps only the most derived member of each name.\n+            DeclaringType = null,\n+        };\n+    }\n+\n+    /// <summary>\n+    /// Enumerates the instance fields and properties of a type and its base types, keeping only the most derived member of each name.\n+    /// </summary>\n+    private static List<ISymbol> GetInstanceMembers(INamedTypeSymbol type)\n+    {\n+        HashSet<string> seen = new(StringComparer.Ordinal);\n+        List<ISymbol> result = new();\n+        for (INamedTypeSymbol? current = type; current is not null && current.SpecialType != SpecialType.System_Object; current = current.BaseType)\n+        {\n+            foreach (ISymbol member in current.GetMembers())\n+            {\n+                if (member.IsStatic || member.IsImplicitlyDeclared || member is not (IPropertySymbol or IFieldSymbol))\n+                {\n+                    continue;\n+                }\n+\n+                if (member is IPropertySymbol { IsIndexer: true })\n+                {\n+                    continue;\n+                }\n+\n+                if (seen.Add(member.Name))\n+                {\n+                    result.Add(member);\n+                }\n+            }\n+        }\n+\n+        return result;\n+    }\n+\n+    private static bool IsPublicReadWrite(ISymbol member) => member switch\n+    {\n+        IPropertySymbol property => property.DeclaredAccessibility == Accessibility.Public\n+            && property.GetMethod is { DeclaredAccessibility: Accessibility.Public }\n+            && property.SetMethod is { DeclaredAccessibility: Accessibility.Public },\n+        IFieldSymbol field => field.DeclaredAccessibility == Accessibility.Public && !field.IsReadOnly && !field.IsConst,\n+        _ => false,\n+    };\n+\n+    private static ITypeSymbol GetMemberType(ISymbol member) => member switch\n+    {\n+        IPropertySymbol property => property.Type,\n+        IFieldSymbol field => field.Type,\n+        _ => throw new ArgumentOutOfRangeException(nameof(member)),\n+    };\n+\n+    private static bool IsPartial(INamedTypeSymbol symbol, CancellationToken cancellationToken)\n+    {\n+        return symbol.DeclaringSyntaxReferences\n+            .Select(r => r.GetSyntax(cancellationToken))\n+            .OfType<ClassDeclarationSyntax>()\n+            .Any(c => c.Modifiers.Any(SyntaxKind.PartialKeyword));\n+    }\n+}",
+      "group": null
+    },
+    {
+      "id": "h13",
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterRequest.cs",
+      "kind": "src",
+      "area": "analyzer-core",
+      "old_start": 0,
+      "old_len": 0,
+      "new_start": 1,
+      "new_len": 13,
+      "ctx": "",
+      "added": 13,
+      "removed": 0,
+      "text": "@@ -0,0 +1,13 @@\n+// Copyright (c) All contributors. All rights reserved.\n+// Licensed under the MIT license. See LICENSE file in the project root for full license information.\n+\n+using Microsoft.CodeAnalysis;\n+\n+namespace MessagePack.SourceGenerator.CodeAnalysis;\n+\n+/// <summary>\n+/// A partial formatter class marked with <c>[GeneratedMessagePackFormatter]</c>, and the optional surrogate type it names.\n+/// </summary>\n+/// <param name=\"Formatter\">The user-declared partial formatter class.</param>\n+/// <param name=\"Surrogate\">The surrogate type named by <c>SurrogateType</c>, or <see langword=\"null\"/> for contractless mode.</param>\n+public sealed record GeneratedFormatterRequest(INamedTypeSymbol Formatter, INamedTypeSymbol? Surrogate);",
+      "group": null
+    },
+    {
+      "id": "h14",
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/ObjectSerializationInfo.cs",
+      "kind": "src",
+      "area": "analyzer-core",
+      "old_start": 10,
+      "old_len": 6,
+      "new_start": 10,
+      "new_len": 12,
+      "ctx": "public record ObjectSerializationInfo : ResolverRegisterInfo",
+      "added": 6,
+      "removed": 0,
+      "text": "@@ -10,6 +10,12 @@ public record ObjectSerializationInfo : ResolverRegisterInfo\n {\n     public required bool IsClass { get; init; }\n \n+    /// <summary>\n+    /// Gets a value indicating whether the formatter is a user-declared <c>partial</c> class marked with\n+    /// <c>[GeneratedMessagePackFormatter]</c>, into which the generator writes the formatter body.\n+    /// </summary>\n+    public bool IsUserDeclaredFormatter { get; init; }\n+\n     public required GenericTypeParameterInfo[] GenericTypeParameters { get; init; }\n \n     public required MemberSerializationInfo[] ConstructorParameters { get; init; }",
+      "group": null
+    },
+    {
+      "id": "h15",
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/ObjectSerializationInfo.cs",
+      "kind": "src",
+      "area": "analyzer-core",
+      "old_start": 159,
+      "old_len": 6,
+      "new_start": 165,
+      "new_len": 7,
+      "ctx": "public record ObjectSerializationInfo : ResolverRegisterInfo",
+      "added": 1,
+      "removed": 0,
+      "text": "@@ -159,6 +165,7 @@ public record ObjectSerializationInfo : ResolverRegisterInfo\n         // Compare all the properties by value\n         return base.Equals(other)\n             && IsClass == other.IsClass\n+            && IsUserDeclaredFormatter == other.IsUserDeclaredFormatter\n             && GenericTypeParameters.SequenceEqual(other.GenericTypeParameters)\n             && ConstructorParameters.SequenceEqual(other.ConstructorParameters)\n             && IsIntKey == other.IsIntKey",
+      "group": null
+    },
+    {
+      "id": "h16",
+      "path": "src/MessagePack.SourceGenerator/GeneratorUtilities.cs",
+      "kind": "src",
+      "area": "generator-other",
+      "old_start": 32,
+      "old_len": 7,
+      "new_start": 32,
+      "new_len": 10,
+      "ctx": "internal static class GeneratorUtilities",
+      "added": 3,
+      "removed": 0,
+      "text": "@@ -32,7 +32,10 @@ internal static class GeneratorUtilities\n             predicate: static (node, ct) => node is ClassDeclarationSyntax { BaseList.Types.Count: > 0 },\n             transform: (ctxt, ct) =>\n             {\n+                // Formatters marked with [GeneratedMessagePackFormatter] are generated by the source generator\n+                // and are registered as ObjectSerializationInfo, so they must not also be registered as hand-written formatters.\n                 return ctxt.SemanticModel.GetDeclaredSymbol(ctxt.Node, ct) is INamedTypeSymbol symbol\n+                    && !symbol.GetAttributes().Any(a => a.AttributeClass?.ToDisplayString() == $\"{AttributeNamespace}.{GeneratedMessagePackFormatterAttributeName}\")\n                     && FormatterDescriptor.TryCreate(symbol, out FormatterDescriptor? formatter)\n                     && !formatter.ExcludeFromSourceGeneratedResolver\n                     ? formatter",
+      "group": null
+    },
+    {
+      "id": "h17",
+      "path": "src/MessagePack.SourceGenerator/MessagePackGenerator.cs",
+      "kind": "src",
+      "area": "generator-other",
+      "old_start": 26,
+      "old_len": 8,
+      "new_start": 26,
+      "new_len": 15,
+      "ctx": "public partial class MessagePackGenerator : IIncrementalGenerator",
+      "added": 8,
+      "removed": 1,
+      "text": "@@ -26,8 +26,15 @@ public partial class MessagePackGenerator : IIncrementalGenerator\n             predicate: static (node, _) => node is InterfaceDeclarationSyntax,\n             transform: static (context, _) => (ITypeSymbol)context.TargetSymbol);\n \n+        var generatedFormatters = context.SyntaxProvider.ForAttributeWithMetadataName(\n+            $\"{AttributeNamespace}.{GeneratedMessagePackFormatterAttributeName}\",\n+            predicate: static (node, _) => node is ClassDeclarationSyntax,\n+            transform: static (context, _) => new GeneratedFormatterRequest(\n+                (INamedTypeSymbol)context.TargetSymbol,\n+                context.Attributes[0].NamedArguments.FirstOrDefault(kvp => kvp.Key == GeneratedMessagePackFormatterSurrogatePropertyName).Value.Value as INamedTypeSymbol));\n+\n         var combined =\n-            messagePackObjectTypes.Collect().Combine(unionTypes.Collect());\n+            messagePackObjectTypes.Collect().Combine(unionTypes.Collect()).Combine(generatedFormatters.Collect());\n \n         var source = combined\n             .Combine(context.CompilationProvider)",
+      "group": null
+    },
+    {
+      "id": "h18",
+      "path": "src/MessagePack.SourceGenerator/MessagePackGenerator.cs",
+      "kind": "src",
+      "area": "generator-other",
+      "old_start": 50,
+      "old_len": 16,
+      "new_start": 57,
+      "new_len": 24,
+      "ctx": "public partial class MessagePackGenerator : IIncrementalGenerator",
+      "added": 10,
+      "removed": 2,
+      "text": "@@ -50,16 +57,24 @@ public partial class MessagePackGenerator : IIncrementalGenerator\n                     }\n                 }\n \n-                foreach (var typeSymbol in s.Left.Left.Left)\n+                foreach (var typeSymbol in s.Left.Left.Left.Left)\n                 {\n                     Collect(typeSymbol);\n                 }\n \n-                foreach (var typeSymbol in s.Left.Left.Right)\n+                foreach (var typeSymbol in s.Left.Left.Left.Right)\n                 {\n                     Collect(typeSymbol);\n                 }\n \n+                foreach (GeneratedFormatterRequest request in s.Left.Left.Right)\n+                {\n+                    if (GeneratedFormatterCollector.Collect(s.Left.Right, options, referenceSymbols, reportDiagnostic: null, request.Formatter, request.Surrogate, ct) is FullModel generatedModel)\n+                    {\n+                        modelPerType.Add(generatedModel);\n+                    }\n+                }\n+\n                 if (!options.KnownFormatters.IsEmpty)\n                 {\n                     var customFormatterInfos = FullModel.Empty.CustomFormatterInfos.Union(",
+      "group": null
+    },
+    {
+      "id": "h19",
+      "path": "src/MessagePack.SourceGenerator/MessagePackGenerator.cs",
+      "kind": "src",
+      "area": "generator-other",
+      "old_start": 97,
+      "old_len": 6,
+      "new_start": 112,
+      "new_len": 24,
+      "ctx": "public partial class MessagePackGenerator : IIncrementalGenerator",
+      "added": 18,
+      "removed": 0,
+      "text": "@@ -97,6 +112,24 @@ public partial class MessagePackGenerator : IIncrementalGenerator\n                 return models.ToImmutableArray();\n             });\n \n+        // Diagnostics for [GeneratedMessagePackFormatter] classes are reported separately from the models,\n+        // so that a rejected formatter produces a diagnostic and no partial output.\n+        var generatedFormatterDiagnostics = generatedFormatters\n+            .Combine(context.CompilationProvider)\n+            .Combine(options)\n+            .SelectMany(static (s, ct) =>\n+            {\n+                List<Diagnostic> diagnostics = new();\n+                if (ReferenceSymbols.TryCreate(s.Left.Right, out ReferenceSymbols? referenceSymbols))\n+                {\n+                    GeneratedFormatterCollector.Collect(s.Left.Right, s.Right, referenceSymbols, diagnostics.Add, s.Left.Left.Formatter, s.Left.Left.Surrogate, ct);\n+                }\n+\n+                return diagnostics.ToImmutableArray();\n+            });\n+\n+        context.RegisterSourceOutput(generatedFormatterDiagnostics, static (context, diagnostic) => context.ReportDiagnostic(diagnostic));\n+\n         context.RegisterSourceOutput(source, static (context, source) =>\n         {\n             if (source is { Options.IsGeneratingSource: true })",
+      "group": null
+    },
+    {
+      "id": "h20",
+      "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.cs",
+      "kind": "template-output",
+      "area": "generator-templates",
+      "old_start": 30,
+      "old_len": 7,
+      "new_start": 30,
+      "new_len": 9,
+      "ctx": "namespace MessagePack.SourceGenerator.Transforms",
+      "added": 3,
+      "removed": 1,
+      "text": "@@ -30,7 +30,9 @@ namespace MessagePack.SourceGenerator.Transforms\n  using (this.EmitNestingTypesAndNamespaces(this.Write)) { \n             this.Write(\"\\r\\n\");\n   bool isFormatterResolverNecessary = GeneratorUtilities.ShouldUseFormatterResolver(Info.Members);\n-            this.Write(\"\\tinternal sealed class \");\n+            this.Write(\"\\t\");\n+            this.Write(this.ToStringHelper.ToStringWithCulture(Info.IsUserDeclaredFormatter ? \"partial class\" : \"internal sealed class\"));\n+            this.Write(\" \");\n             this.Write(this.ToStringHelper.ToStringWithCulture(Info.Formatter.GetQualifiedName(Qualifiers.None)));\n             this.Write(\" : MsgPack::Formatters.IMessagePackFormatter<\");\n             this.Write(this.ToStringHelper.ToStringWithCulture(Info.DataType.GetQualifiedName(genericStyle: GenericParameterStyle.Identifiers)));",
+      "group": null
+    },
+    {
+      "id": "h21",
+      "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.tt",
+      "kind": "template",
+      "area": "generator-templates",
+      "old_start": 11,
+      "old_len": 7,
+      "new_start": 11,
+      "new_len": 7,
+      "ctx": "using MsgPack = global::MessagePack;",
+      "added": 1,
+      "removed": 1,
+      "text": "@@ -11,7 +11,7 @@ using MsgPack = global::MessagePack;\n <# using (this.EmitNestingTypesAndNamespaces(this.Write)) { #>\n \n <#  bool isFormatterResolverNecessary = GeneratorUtilities.ShouldUseFormatterResolver(Info.Members);#>\n-\tinternal sealed class <#= Info.Formatter.GetQualifiedName(Qualifiers.None) #> : MsgPack::Formatters.IMessagePackFormatter<<#= Info.DataType.GetQualifiedName(genericStyle: GenericParameterStyle.Identifiers) #>>\n+\t<#= Info.IsUserDeclaredFormatter ? \"partial class\" : \"internal sealed class\" #> <#= Info.Formatter.GetQualifiedName(Qualifiers.None) #> : MsgPack::Formatters.IMessagePackFormatter<<#= Info.DataType.GetQualifiedName(genericStyle: GenericParameterStyle.Identifiers) #>>\n <# TransformUtilities.EmitTypeConstraints(Info.Formatter, this.Write); #>\n \t{\n <# foreach (var item in Info.Members) { #>",
+      "group": null
+    },
+    {
+      "id": "h22",
+      "path": "src/MessagePack.SourceGenerator/Transforms/StringKey/StringKeyFormatterTemplate.cs",
+      "kind": "template-output",
+      "area": "generator-templates",
+      "old_start": 34,
+      "old_len": 7,
+      "new_start": 34,
+      "new_len": 9,
+      "ctx": "namespace MessagePack.SourceGenerator.Transforms",
+      "added": 3,
+      "removed": 1,
+      "text": "@@ -34,7 +34,9 @@ namespace MessagePack.SourceGenerator.Transforms\n \n \tbool isFormatterResolverNecessary = GeneratorUtilities.ShouldUseFormatterResolver(Info.Members); \n  using (this.EmitNestingTypesAndNamespaces(this.Write)) { \n-            this.Write(\"\\tinternal sealed class \");\n+            this.Write(\"\\t\");\n+            this.Write(this.ToStringHelper.ToStringWithCulture(Info.IsUserDeclaredFormatter ? \"partial class\" : \"internal sealed class\"));\n+            this.Write(\" \");\n             this.Write(this.ToStringHelper.ToStringWithCulture(Info.Formatter.GetQualifiedName(Qualifiers.None)));\n             this.Write(\" : global::MessagePack.Formatters.IMessagePackFormatter<\");\n             this.Write(this.ToStringHelper.ToStringWithCulture(Info.DataType.GetQualifiedName()));",
+      "group": null
+    },
+    {
+      "id": "h23",
+      "path": "src/MessagePack.SourceGenerator/Transforms/StringKey/StringKeyFormatterTemplate.tt",
+      "kind": "template",
+      "area": "generator-templates",
+      "old_start": 15,
+      "old_len": 7,
+      "new_start": 15,
+      "new_len": 7,
+      "ctx": "using MsgPack = global::MessagePack;",
+      "added": 1,
+      "removed": 1,
+      "text": "@@ -15,7 +15,7 @@ using MsgPack = global::MessagePack;\n \n \tbool isFormatterResolverNecessary = GeneratorUtilities.ShouldUseFormatterResolver(Info.Members); #>\n <# using (this.EmitNestingTypesAndNamespaces(this.Write)) { #>\n-\tinternal sealed class <#= Info.Formatter.GetQualifiedName(Qualifiers.None) #> : global::MessagePack.Formatters.IMessagePackFormatter<<#= Info.DataType.GetQualifiedName() #>>\n+\t<#= Info.IsUserDeclaredFormatter ? \"partial class\" : \"internal sealed class\" #> <#= Info.Formatter.GetQualifiedName(Qualifiers.None) #> : global::MessagePack.Formatters.IMessagePackFormatter<<#= Info.DataType.GetQualifiedName() #>>\n <# TransformUtilities.EmitTypeConstraints(Info.Formatter, this.Write); #>\n \t{\n <# foreach (var item in Info.Members) { #>",
+      "group": null
+    },
+    {
+      "id": "h24",
+      "path": "src/MessagePack.SourceGenerator/Utils/Constants.cs",
+      "kind": "src",
+      "area": "generator-other",
+      "old_start": 14,
+      "old_len": 6,
+      "new_start": 14,
+      "new_len": 8,
+      "ctx": "internal static class Constants",
+      "added": 2,
+      "removed": 0,
+      "text": "@@ -14,6 +14,8 @@ internal static class Constants\n     internal const string MessagePackAssumedFormattableAttributeName = \"MessagePackAssumedFormattableAttribute\";\n     internal const string MessagePackObjectAttributeName = \"MessagePackObjectAttribute\";\n     internal const string MessagePackUnionAttributeName = \"UnionAttribute\";\n+    internal const string GeneratedMessagePackFormatterAttributeName = \"GeneratedMessagePackFormatterAttribute\";\n+    internal const string GeneratedMessagePackFormatterSurrogatePropertyName = \"SurrogateType\";\n     internal const string SuppressSourceGenerationPropertyName = \"SuppressSourceGeneration\";\n     internal const string AllowPrivatePropertyName = \"AllowPrivate\";\n ",
+      "group": null
+    },
+    {
+      "id": "h25",
+      "path": "tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypes.cs",
+      "kind": "test",
+      "area": "tests",
+      "old_start": 0,
+      "old_len": 0,
+      "new_start": 1,
+      "new_len": 50,
+      "ctx": "",
+      "added": 50,
+      "removed": 0,
+      "text": "@@ -0,0 +1,50 @@\n+// Copyright (c) All contributors. All rights reserved.\n+// Licensed under the MIT license. See LICENSE file in the project root for full license information.\n+\n+using ExternalTypes.Library;\n+using MessagePack.Formatters;\n+\n+// Formatter bodies for types from ExternalTypes that carry no MessagePack attributes.\n+// The source generator writes the members of each partial class (https://github.com/MessagePack-CSharp/MessagePack-CSharp/issues/2129).\n+[GeneratedMessagePackFormatter]\n+public partial class ExternalPersonFormatter : IMessagePackFormatter<ExternalPerson>\n+{\n+}\n+\n+[GeneratedMessagePackFormatter]\n+public partial class ExternalPointFormatter : IMessagePackFormatter<ExternalPoint>\n+{\n+}\n+\n+[GeneratedMessagePackFormatter(SurrogateType = typeof(ExternalWidgetSurrogate))]\n+public partial class ExternalWidgetFormatter : IMessagePackFormatter<ExternalWidget>\n+{\n+}\n+\n+/// <summary>\n+/// Describes the wire contract of <see cref=\"ExternalWidget\"/>. It is only read at compile time and is never instantiated.\n+/// </summary>\n+public class ExternalWidgetSurrogate\n+{\n+    [Key(3)]\n+    public int Id { get; set; }\n+\n+    [Key(7)]\n+    public string Name { get; set; } = string.Empty;\n+\n+    [IgnoreMember]\n+    public int Internal { get; set; }\n+}\n+\n+/// <summary>\n+/// A serializable type that refers to <see cref=\"ExternalPerson\"/>, whose formatter is generated by <see cref=\"ExternalPersonFormatter\"/>.\n+/// </summary>\n+[MessagePackObject]\n+public class ContainsExternalPerson\n+{\n+    [Key(0)]\n+    public ExternalPerson Person { get; set; }\n+\n+    [Key(1)]\n+    public ExternalWidget Widget { get; set; }\n+}",
+      "group": null
+    },
+    {
+      "id": "h26",
+      "path": "tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypesTests.cs",
+      "kind": "test",
+      "area": "tests",
+      "old_start": 0,
+      "old_len": 0,
+      "new_start": 1,
+      "new_len": 95,
+      "ctx": "",
+      "added": 95,
+      "removed": 0,
+      "text": "@@ -0,0 +1,95 @@\n+// Copyright (c) All contributors. All rights reserved.\n+// Licensed under the MIT license. See LICENSE file in the project root for full license information.\n+\n+using ExternalTypes.Library;\n+\n+public class GeneratedFormatterForExternalTypesTests\n+{\n+    private static readonly MessagePackSerializerOptions Options = MessagePackSerializerOptions.Standard\n+        .WithResolver(CompositeResolver.Create(GeneratedMessagePackResolver.Instance, StandardResolver.Instance));\n+\n+    [Fact]\n+    public void ContractlessClassRoundTrips()\n+    {\n+        var person = new ExternalPerson { Id = 7, Label = \"seven\" };\n+\n+        byte[] bytes = MessagePackSerializer.Serialize(person, Options);\n+        ExternalPerson result = MessagePackSerializer.Deserialize<ExternalPerson>(bytes, Options);\n+\n+        Assert.Equal(7, result.Id);\n+        Assert.Equal(\"seven\", result.Label);\n+    }\n+\n+    [Fact]\n+    public void ContractlessClassUsesStringKeysForPublicReadWriteMembers()\n+    {\n+        byte[] bytes = MessagePackSerializer.Serialize(new ExternalPerson { Id = 1, Label = \"x\" }, Options);\n+\n+        // A fixmap with two entries: Id and Label. The read-only Doubled member is not serialized.\n+        Assert.Equal(0x82, bytes[0]);\n+        string json = MessagePackSerializer.ConvertToJson(bytes, Options);\n+        Assert.Contains(\"\\\"Id\\\":1\", json);\n+        Assert.Contains(\"\\\"Label\\\":\\\"x\\\"\", json);\n+        Assert.DoesNotContain(\"Doubled\", json);\n+    }\n+\n+    [Fact]\n+    public void ContractlessClassNullRoundTrips()\n+    {\n+        byte[] bytes = MessagePackSerializer.Serialize(default(ExternalPerson), Options);\n+        Assert.Null(MessagePackSerializer.Deserialize<ExternalPerson>(bytes, Options));\n+    }\n+\n+    [Fact]\n+    public void ContractlessStructRoundTrips()\n+    {\n+        var point = new ExternalPoint { X = 3, Y = -4 };\n+\n+        ExternalPoint result = MessagePackSerializer.Deserialize<ExternalPoint>(MessagePackSerializer.Serialize(point, Options), Options);\n+\n+        Assert.Equal(3, result.X);\n+        Assert.Equal(-4, result.Y);\n+    }\n+\n+    [Fact]\n+    public void SurrogateControlsKeysAndMembership()\n+    {\n+        var widget = new ExternalWidget { Id = 1, Name = \"w\", Internal = 99 };\n+\n+        byte[] bytes = MessagePackSerializer.Serialize(widget, Options);\n+\n+        // The surrogate uses integer keys 3 and 7, so the array has MaxKey + 1 = 8 slots.\n+        var reader = new MessagePackReader(bytes);\n+        Assert.Equal(8, reader.ReadArrayHeader());\n+\n+        ExternalWidget result = MessagePackSerializer.Deserialize<ExternalWidget>(bytes, Options);\n+        Assert.Equal(1, result.Id);\n+        Assert.Equal(\"w\", result.Name);\n+        Assert.Equal(0, result.Internal);\n+    }\n+\n+    [Fact]\n+    public void MessagePackObjectCanContainExternalTypes()\n+    {\n+        var value = new ContainsExternalPerson\n+        {\n+            Person = new ExternalPerson { Id = 5, Label = \"five\" },\n+            Widget = new ExternalWidget { Id = 6, Name = \"six\" },\n+        };\n+\n+        ContainsExternalPerson result = MessagePackSerializer.Deserialize<ContainsExternalPerson>(MessagePackSerializer.Serialize(value, Options), Options);\n+\n+        Assert.Equal(5, result.Person.Id);\n+        Assert.Equal(\"five\", result.Person.Label);\n+        Assert.Equal(6, result.Widget.Id);\n+        Assert.Equal(\"six\", result.Widget.Name);\n+    }\n+\n+    [Fact]\n+    public void GeneratedFormattersAreRegisteredInGeneratedResolver()\n+    {\n+        Assert.IsType<ExternalPersonFormatter>(GeneratedMessagePackResolver.Instance.GetFormatter<ExternalPerson>());\n+        Assert.IsType<ExternalPointFormatter>(GeneratedMessagePackResolver.Instance.GetFormatter<ExternalPoint>());\n+        Assert.IsType<ExternalWidgetFormatter>(GeneratedMessagePackResolver.Instance.GetFormatter<ExternalWidget>());\n+    }\n+}",
+      "group": null
+    },
+    {
+      "id": "h27",
+      "path": "tests/MessagePack.SourceGenerator.ExecutionTests/MessagePack.SourceGenerator.ExecutionTests.csproj",
+      "kind": "test",
+      "area": "tests",
+      "old_start": 14,
+      "old_len": 5,
+      "new_start": 14,
+      "new_len": 10,
+      "ctx": "",
+      "added": 5,
+      "removed": 0,
+      "text": "@@ -14,5 +14,10 @@\n     <PackageReference Include=\"xunit.runner.visualstudio\" />\n   </ItemGroup>\n \n+  <ItemGroup>\n+    <!-- Types from an assembly that does not reference MessagePack (https://github.com/MessagePack-CSharp/MessagePack-CSharp/issues/2129). -->\n+    <ProjectReference Include=\"..\\MessagePack.SourceGenerator.ExternalTypes\\MessagePack.SourceGenerator.ExternalTypes.csproj\" />\n+  </ItemGroup>\n+\n   <Import Project=\"..\\SourceGeneratorConsumer.targets\" />\n </Project>",
+      "group": null
+    },
+    {
+      "id": "h28",
+      "path": "tests/MessagePack.SourceGenerator.ExternalTypes/ExternalPerson.cs",
+      "kind": "test",
+      "area": "test-fixtures",
+      "old_start": 0,
+      "old_len": 0,
+      "new_start": 1,
+      "new_len": 15,
+      "ctx": "",
+      "added": 15,
+      "removed": 0,
+      "text": "@@ -0,0 +1,15 @@\n+// Copyright (c) All contributors. All rights reserved.\n+// Licensed under the MIT license. See LICENSE file in the project root for full license information.\n+\n+namespace ExternalTypes.Library;\n+\n+/// <summary>A type with no serialization attributes. Its public read-write members are serialized in contractless mode.</summary>\n+public class ExternalPerson\n+{\n+    public int Id { get; set; }\n+\n+    public string Label { get; set; }\n+\n+    /// <summary>Gets a value derived from <see cref=\"Id\"/>. Contractless mode skips it because it cannot be deserialized.</summary>\n+    public int Doubled => this.Id * 2;\n+}",
+      "group": null
+    },
+    {
+      "id": "h29",
+      "path": "tests/MessagePack.SourceGenerator.ExternalTypes/ExternalPoint.cs",
+      "kind": "test",
+      "area": "test-fixtures",
+      "old_start": 0,
+      "old_len": 0,
+      "new_start": 1,
+      "new_len": 12,
+      "ctx": "",
+      "added": 12,
+      "removed": 0,
+      "text": "@@ -0,0 +1,12 @@\n+// Copyright (c) All contributors. All rights reserved.\n+// Licensed under the MIT license. See LICENSE file in the project root for full license information.\n+\n+namespace ExternalTypes.Library;\n+\n+/// <summary>A struct with no serialization attributes.</summary>\n+public struct ExternalPoint\n+{\n+    public int X { get; set; }\n+\n+    public int Y { get; set; }\n+}",
+      "group": null
+    },
+    {
+      "id": "h30",
+      "path": "tests/MessagePack.SourceGenerator.ExternalTypes/ExternalWidget.cs",
+      "kind": "test",
+      "area": "test-fixtures",
+      "old_start": 0,
+      "old_len": 0,
+      "new_start": 1,
+      "new_len": 15,
+      "ctx": "",
+      "added": 15,
+      "removed": 0,
+      "text": "@@ -0,0 +1,15 @@\n+// Copyright (c) All contributors. All rights reserved.\n+// Licensed under the MIT license. See LICENSE file in the project root for full license information.\n+\n+namespace ExternalTypes.Library;\n+\n+/// <summary>A type with no serialization attributes whose wire contract is described by a surrogate type in the consuming assembly.</summary>\n+public class ExternalWidget\n+{\n+    public int Id { get; set; }\n+\n+    public string Name { get; set; }\n+\n+    /// <summary>Gets or sets a value that is not part of the surrogate's contract, so it is not serialized.</summary>\n+    public int Internal { get; set; }\n+}",
+      "group": null
+    },
+    {
+      "id": "h31",
+      "path": "tests/MessagePack.SourceGenerator.ExternalTypes/MessagePack.SourceGenerator.ExternalTypes.csproj",
+      "kind": "test",
+      "area": "test-fixtures",
+      "old_start": 0,
+      "old_len": 0,
+      "new_start": 1,
+      "new_len": 17,
+      "ctx": "",
+      "added": 17,
+      "removed": 0,
+      "text": "@@ -0,0 +1,17 @@\n+<Project Sdk=\"Microsoft.NET.Sdk\">\n+\n+  <!--\n+    This assembly deliberately does NOT reference MessagePack.\n+    It models a dependency-free library (Project A in https://github.com/MessagePack-CSharp/MessagePack-CSharp/issues/2129)\n+    whose types are serialized by generated formatters declared in a consuming assembly.\n+  -->\n+  <PropertyGroup>\n+    <TargetFramework>net8.0</TargetFramework>\n+    <ImplicitUsings>disable</ImplicitUsings>\n+    <Nullable>disable</Nullable>\n+    <IsTestProject>false</IsTestProject>\n+    <NonShipping>true</NonShipping>\n+    <NoWarn>$(NoWarn);CS1591</NoWarn>\n+  </PropertyGroup>\n+\n+</Project>",
+      "group": null
+    },
+    {
+      "id": "h32",
+      "path": "tests/MessagePack.SourceGenerator.MapModeExecutionTests/MessagePack.SourceGenerator.MapModeExecutionTests.csproj",
+      "kind": "test",
+      "area": "tests",
+      "old_start": 10,
+      "old_len": 7,
+      "new_start": 10,
+      "new_len": 8,
+      "ctx": "",
+      "added": 2,
+      "removed": 1,
+      "text": "@@ -10,7 +10,8 @@\n   </PropertyGroup>\n \n   <ItemGroup>\n-    <Compile Include=\"..\\MessagePack.SourceGenerator.ExecutionTests\\**\\*.cs\" Exclude=\"..\\MessagePack.SourceGenerator.ExecutionTests\\**\\GeneratedMessagePackResolver.cs\" />\n+    <!-- GeneratedFormatterForExternalTypes*.cs need the ExternalTypes assembly, which this project does not reference. -->\n+    <Compile Include=\"..\\MessagePack.SourceGenerator.ExecutionTests\\**\\*.cs\" Exclude=\"..\\MessagePack.SourceGenerator.ExecutionTests\\**\\GeneratedMessagePackResolver.cs;..\\MessagePack.SourceGenerator.ExecutionTests\\**\\GeneratedFormatterForExternalTypes*.cs\" />\n   </ItemGroup>\n \n   <ItemGroup>",
+      "group": null
+    },
+    {
+      "id": "h33",
+      "path": "tests/MessagePack.SourceGenerator.Tests/GeneratedMessagePackFormatterTests.cs",
+      "kind": "test",
+      "area": "tests",
+      "old_start": 0,
+      "old_len": 0,
+      "new_start": 1,
+      "new_len": 210,
+      "ctx": "",
+      "added": 210,
+      "removed": 0,
+      "text": "@@ -0,0 +1,210 @@\n+// Copyright (c) All contributors. All rights reserved.\n+// Licensed under the MIT license. See LICENSE file in the project root for full license information.\n+\n+using MessagePack.SourceGenerator.Tests;\n+using Microsoft.CodeAnalysis.Testing;\n+using VerifyCS = CSharpSourceGeneratorVerifier<MessagePack.SourceGenerator.MessagePackGenerator>;\n+\n+/// <summary>\n+/// Tests for <c>[GeneratedMessagePackFormatter]</c>, which lets the generator write a formatter for a type from another assembly (https://github.com/MessagePack-CSharp/MessagePack-CSharp/issues/2129).\n+/// </summary>\n+public class GeneratedMessagePackFormatterTests\n+{\n+    private readonly ITestOutputHelper testOutputHelper;\n+\n+    public GeneratedMessagePackFormatterTests(ITestOutputHelper testOutputHelper)\n+    {\n+        this.testOutputHelper = testOutputHelper;\n+    }\n+\n+    // Formatter members are written by hand in the diagnostic tests, so the compiler accepts the source\n+    // even when the generator declines to write them.\n+    private const string Members = \"\"\"\n+            public void Serialize(ref MessagePackWriter writer, MyType value, MessagePackSerializerOptions options) => throw new System.NotImplementedException();\n+\n+            public MyType Deserialize(ref MessagePackReader reader, MessagePackSerializerOptions options) => throw new System.NotImplementedException();\n+        \"\"\";\n+\n+    [Fact]\n+    public async Task FormatterMustBePartial()\n+    {\n+        string testSource = /* lang=c#-test */ $$\"\"\"\n+            using MessagePack;\n+            using MessagePack.Formatters;\n+\n+            public class MyType\n+            {\n+                public int Id { get; set; }\n+            }\n+\n+            [GeneratedMessagePackFormatter]\n+            public class {|MsgPack019:MyFormatter|} : IMessagePackFormatter<MyType>\n+            {\n+            {{Members}}\n+            }\n+            \"\"\";\n+\n+        await new VerifyCS.Test\n+        {\n+            TestState =\n+            {\n+                Sources = { testSource },\n+            },\n+        }.RunDefaultAsync(this.testOutputHelper);\n+    }\n+\n+    [Fact]\n+    public async Task FormatterMustImplementFormatterOfT()\n+    {\n+        string testSource = /* lang=c#-test */ \"\"\"\n+            using MessagePack;\n+\n+            [GeneratedMessagePackFormatter]\n+            public partial class {|MsgPack020:MyFormatter|}\n+            {\n+            }\n+            \"\"\";\n+\n+        await new VerifyCS.Test\n+        {\n+            TestState =\n+            {\n+                Sources = { testSource },\n+            },\n+        }.RunDefaultAsync(this.testOutputHelper);\n+    }\n+\n+    [Fact]\n+    public async Task FormattedTypeMustNotBeAbstract()\n+    {\n+        string testSource = /* lang=c#-test */ $$\"\"\"\n+            using MessagePack;\n+            using MessagePack.Formatters;\n+\n+            public abstract class MyType\n+            {\n+            }\n+\n+            [GeneratedMessagePackFormatter]\n+            public partial class {|MsgPack021:MyFormatter|} : IMessagePackFormatter<MyType>\n+            {\n+            {{Members}}\n+            }\n+            \"\"\";\n+\n+        await new VerifyCS.Test\n+        {\n+            TestState =\n+            {\n+                Sources = { testSource },\n+            },\n+        }.RunDefaultAsync(this.testOutputHelper);\n+    }\n+\n+    [Fact]\n+    public async Task SurrogateMemberMustMatchFormattedType()\n+    {\n+        string testSource = /* lang=c#-test */ $$\"\"\"\n+            using MessagePack;\n+            using MessagePack.Formatters;\n+\n+            public class MyType\n+            {\n+                public int Id { get; set; }\n+            }\n+\n+            public class MySurrogate\n+            {\n+                [Key(0)]\n+                public int {|MsgPack022:Missing|} { get; set; }\n+            }\n+\n+            [GeneratedMessagePackFormatter(SurrogateType = typeof(MySurrogate))]\n+            public partial class MyFormatter : IMessagePackFormatter<MyType>\n+            {\n+            {{Members}}\n+            }\n+            \"\"\";\n+\n+        await new VerifyCS.Test\n+        {\n+            TestState =\n+            {\n+                Sources = { testSource },\n+            },\n+        }.RunDefaultAsync(this.testOutputHelper);\n+    }\n+\n+    [Fact]\n+    public async Task SurrogateMemberMustHaveMatchingType()\n+    {\n+        string testSource = /* lang=c#-test */ $$\"\"\"\n+            using MessagePack;\n+            using MessagePack.Formatters;\n+\n+            public class MyType\n+            {\n+                public int Id { get; set; }\n+            }\n+\n+            public class MySurrogate\n+            {\n+                [Key(0)]\n+                public string {|MsgPack022:Id|} { get; set; }\n+            }\n+\n+            [GeneratedMessagePackFormatter(SurrogateType = typeof(MySurrogate))]\n+            public partial class MyFormatter : IMessagePackFormatter<MyType>\n+            {\n+            {{Members}}\n+            }\n+            \"\"\";\n+\n+        await new VerifyCS.Test\n+        {\n+            TestState =\n+            {\n+                Sources = { testSource },\n+            },\n+        }.RunDefaultAsync(this.testOutputHelper);\n+    }\n+\n+    [Fact]\n+    public async Task SurrogateKeysMustNotMixStringAndInt()\n+    {\n+        string testSource = /* lang=c#-test */ $$\"\"\"\n+            using MessagePack;\n+            using MessagePack.Formatters;\n+\n+            public class MyType\n+            {\n+                public int Id { get; set; }\n+                public string Name { get; set; }\n+            }\n+\n+            public class MySurrogate\n+            {\n+                [Key(0)]\n+                public int Id { get; set; }\n+\n+                [Key(\"Name\")]\n+                public string {|#0:Name|} { get; set; }\n+            }\n+\n+            [GeneratedMessagePackFormatter(SurrogateType = typeof(MySurrogate))]\n+            public partial class MyFormatter : IMessagePackFormatter<MyType>\n+            {\n+            {{Members}}\n+            }\n+            \"\"\";\n+\n+        await new VerifyCS.Test\n+        {\n+            TestState =\n+            {\n+                Sources = { testSource },\n+            },\n+            ExpectedDiagnostics = { DiagnosticResult.CompilerError(\"MsgPack005\").WithLocation(0) },\n+        }.RunDefaultAsync(this.testOutputHelper);\n+    }\n+}",
+      "group": null
+    }
+  ]
+}

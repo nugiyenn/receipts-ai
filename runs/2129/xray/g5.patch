@@ -1,0 +1,29 @@
+diff --git a/src/MessagePack.SourceGenerator/MessagePackGenerator.cs b/src/MessagePack.SourceGenerator/MessagePackGenerator.cs
+index 66db96c2..4246a4e4 100644
+--- a/src/MessagePack.SourceGenerator/MessagePackGenerator.cs
++++ b/src/MessagePack.SourceGenerator/MessagePackGenerator.cs
+@@ -97,6 +112,24 @@ public partial class MessagePackGenerator : IIncrementalGenerator
+                 return models.ToImmutableArray();
+             });
+ 
++        // Diagnostics for [GeneratedMessagePackFormatter] classes are reported separately from the models,
++        // so that a rejected formatter produces a diagnostic and no partial output.
++        var generatedFormatterDiagnostics = generatedFormatters
++            .Combine(context.CompilationProvider)
++            .Combine(options)
++            .SelectMany(static (s, ct) =>
++            {
++                List<Diagnostic> diagnostics = new();
++                if (ReferenceSymbols.TryCreate(s.Left.Right, out ReferenceSymbols? referenceSymbols))
++                {
++                    GeneratedFormatterCollector.Collect(s.Left.Right, s.Right, referenceSymbols, diagnostics.Add, s.Left.Left.Formatter, s.Left.Left.Surrogate, ct);
++                }
++
++                return diagnostics.ToImmutableArray();
++            });
++
++        context.RegisterSourceOutput(generatedFormatterDiagnostics, static (context, diagnostic) => context.ReportDiagnostic(diagnostic));
++
+         context.RegisterSourceOutput(source, static (context, source) =>
+         {
+             if (source is { Options.IsGeneratingSource: true })

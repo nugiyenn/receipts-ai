@@ -1,0 +1,59 @@
+{
+ "change": "2283",
+ "executed_at": "2026-11-14T23:25:30+02:00",
+ "harness": "dotnet test, GemProbeTests.cs on wt/gem-2283-base and wt/gem-2283-head (net8.0, 5/5 pass both)",
+ "raised": 6,
+ "confirmed": 3,
+ "not_reproduced": 0,
+ "inconclusive": 3,
+ "precision": 0.5,
+ "results": [
+  {
+   "attack": "C3",
+   "outcome": "confirmed",
+   "evidence": [
+    "runs/2283/h1/base.tsv#S4",
+    "runs/2283/h1/head.tsv#S4"
+   ],
+   "note": "Behaviour change real: closed generic CLASS from metadata with an unkeyed member: base reported MsgPack004 twice (Location.None), head reports nothing. Gemini's stated mechanism ('previously threw') is WRONG: base reported, it did not throw."
+  },
+  {
+   "attack": "C8",
+   "outcome": "confirmed",
+   "evidence": [
+    "runs/2283/h1/base.tsv#S4"
+   ],
+   "note": "Base analyzer reported MsgPack004 with Location.None and no AD0001/exception, so location-less diagnostics are accepted; the code comment 'analyzers are not permitted to report against a location that does not exist' overstates (that is true for locations in a foreign syntax tree, not Location.None). The filter drops Location.None diagnostics too."
+  },
+  {
+   "attack": "C10",
+   "outcome": "confirmed",
+   "evidence": [
+    "runs/2283/gemini_tests/base.tsv#G2",
+    "runs/2283/gemini_tests/head.tsv#G2",
+    "runs/2283/gemini_tests/GemProbeTests.cs"
+   ],
+   "note": "Positional record `[property: Key((string)null)] int V`: base crashes (AD0001 InvalidCastException), head reports only MsgPack007 and silently omits the MsgPack005 that the equivalent class (G1) and body-property record (G5) get. A SOURCE-declared type loses its correct diagnostic (loud crash became silent omission). Claude's H1 probe had no such case."
+  },
+  {
+   "attack": "C5",
+   "outcome": "inconclusive",
+   "evidence": [
+    "runs/2283/h1/head.tsv#S4"
+   ],
+   "note": "Depends on a defining assembly built without the analyzer; not testable in the Roslyn harness. Same as H2."
+  },
+  {
+   "attack": "C6",
+   "outcome": "inconclusive",
+   "evidence": [],
+   "note": "Same deployment dependency as C5/H2; README claim cannot be proven or refuted in-harness."
+  },
+  {
+   "attack": "C7",
+   "outcome": "inconclusive",
+   "evidence": [],
+   "note": "Same as C6 (doc/analyzers/MsgPack004.md line)."
+  }
+ ]
+}

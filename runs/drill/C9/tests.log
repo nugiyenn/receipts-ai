@@ -1,0 +1,107 @@
+
+  Determining projects to restore...
+/Users/andy/Downloads/Junction2/wt/canary-2283-C9/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+  Restored /Users/andy/Downloads/Junction2/wt/canary-2283-C9/src/MessagePack.Annotations/MessagePack.Annotations.csproj (in 2.02 sec).
+  Restored /Users/andy/Downloads/Junction2/wt/canary-2283-C9/src/MessagePack.SourceGenerator/MessagePack.SourceGenerator.csproj (in 2.06 sec).
+  Restored /Users/andy/Downloads/Junction2/wt/canary-2283-C9/src/MessagePack.Analyzers/MessagePack.Analyzers.csproj (in 2.04 sec).
+  Restored /Users/andy/Downloads/Junction2/wt/canary-2283-C9/src/MessagePack.Analyzers.CodeFixes/MessagePack.Analyzers.CodeFixes.csproj (in 2.04 sec).
+  Restored /Users/andy/Downloads/Junction2/wt/canary-2283-C9/src/MessagePack/MessagePack.csproj (in 2.1 sec).
+  Restored /Users/andy/Downloads/Junction2/wt/canary-2283-C9/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj (in 2.4 sec).
+
+Build succeeded.
+
+/Users/andy/Downloads/Junction2/wt/canary-2283-C9/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:05.14
+
+/Users/andy/Downloads/Junction2/wt/canary-2283-C9/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+  MessagePack.SourceGenerator -> /Users/andy/Downloads/Junction2/wt/canary-2283-C9/bin/MessagePack.SourceGenerator/Debug/netstandard2.0/MessagePack.SourceGenerator.dll
+  MessagePack.Analyzers.CodeFixes -> /Users/andy/Downloads/Junction2/wt/canary-2283-C9/bin/MessagePack.Analyzers.CodeFixes/Debug/netstandard2.0/MessagePack.Analyzers.CodeFixes.dll
+  MessagePack.Analyzers -> /Users/andy/Downloads/Junction2/wt/canary-2283-C9/bin/MessagePack.Analyzers/Debug/netstandard2.0/MessagePack.Analyzers.dll
+  MessagePack.Annotations -> /Users/andy/Downloads/Junction2/wt/canary-2283-C9/bin/MessagePack.Annotations/Debug/netstandard2.0/MessagePack.Annotations.dll
+  MessagePack -> /Users/andy/Downloads/Junction2/wt/canary-2283-C9/bin/MessagePack/Debug/net8.0/MessagePack.dll
+  MessagePack.SourceGenerator.Tests -> /Users/andy/Downloads/Junction2/wt/canary-2283-C9/bin/MessagePack.SourceGenerator.Tests/Debug/net8.0/MessagePack.SourceGenerator.Tests.dll
+Test run for /Users/andy/Downloads/Junction2/wt/canary-2283-C9/bin/MessagePack.SourceGenerator.Tests/Debug/net8.0/MessagePack.SourceGenerator.Tests.dll (.NETCoreApp,Version=v8.0)
+VSTest version 17.11.0 (arm64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.8)
+[xUnit.net 00:00:00.20]   Discovering: MessagePack.SourceGenerator.Tests
+[xUnit.net 00:00:00.33]   Discovered:  MessagePack.SourceGenerator.Tests
+[xUnit.net 00:00:00.34]   Starting:    MessagePack.SourceGenerator.Tests
+  Passed MsgPack012InaccessibleDataTypeTests.InaccessibleNestedDataType_OuterNesting [6 s]
+  Passed MsgPack012InaccessibleDataTypeTests.InaccessibleNestedDataType [1 s]
+  Passed GenericsFormatterTests.RecursiveGenerics_Direct [8 s]
+  Passed MsgPack015AllowPrivateRequiredTests.SetWhenNonPublicPropertyIsAnnotated [8 s]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToTypeForRecord1 [9 s]
+  Passed MsgPack011PartialTypeRequiredTests.NestedPartialTypeRequiresPartialSelfAndDeclaringType [9 s]
+  Passed MsgPack015AllowPrivateRequiredTests.AddForPublicTypeNestedUnderNonPublicType [484 ms]
+  Passed MsgPack011PartialTypeRequiredTests.NestedPartialTypeRequiresPartialDeclaringType [890 ms]
+  Passed MsgPack015AllowPrivateRequiredTests.AddWhenNonPublicPropertyIsAnnotated [869 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributesToMembersOfRecordStruct [1 s]
+  Passed MsgPack015AllowPrivateRequiredTests.AddForNonPublicDeserializingConstructor [492 ms]
+  Passed MsgPack011PartialTypeRequiredTests.CodeFixOffered [918 ms]
+  Passed MsgPack00xAnalyzerTests.CodeFixAppliesAcrossFiles [703 ms]
+  Passed MsgPack015AllowPrivateRequiredTests.AddForNonPublicType [470 ms]
+  Passed GenericsFormatterTests.ClosedGenericRecordStruct_FromMetadataReference [2 s]
+  Passed GenericsFormatterTests.Generics_Constraints_Struct [176 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributesToMembersOfRecordWithPrimaryCtor [652 ms]
+  Passed GenericsFormatterTests.GenericsUnionFormatter_Nested [490 ms]
+  Passed MsgPack00xAnalyzerTests.DerivedAttributes [396 ms]
+  Passed GenericsFormatterTests.Generics_Constraints_NullableReferenceType [397 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToType_Properties [335 ms]
+  Passed MsgPack00xAnalyzerTests.MessageFormatterAttribute [92 ms]
+  Passed GenericsFormatterTests.GenericsOfTFormatter [273 ms]
+  Passed MsgPack00xAnalyzerTests.InitPropertyInitializer [66 ms]
+  Passed GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference_UnkeyedMember [392 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributesToMembers [427 ms]
+  Passed MsgPack00xAnalyzerTests.NoMessagePackReference [11 ms]
+  Passed GenericsFormatterTests.GenericsUnionFormatter [131 ms]
+  Passed GenericsFormatterTests.GenericsOfTFormatter_WithKnownTypes [185 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToField_WithComment [325 ms]
+  Passed GenericsFormatterTests.Generics_Constraints_ReferenceType_Nullable [169 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToTypeForRecord2 [569 ms]
+  Passed GenericsFormatterTests.NullableFormatter [518 ms]
+  Passed GenericsFormatterTests.Generics_Constraints_Type [88 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributesToMembersOfRecordStructWithPrimaryCtor [323 ms]
+  Passed GenericsFormatterTests.Generics_Defined_In_ReferencedProject [318 ms]
+  Passed GenericsFormatterTests.WellKnownGenericsFormatter [147 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToGenericType [297 ms]
+  Passed GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference [333 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToType_Generic [405 ms]
+  Passed GenericsFormatterTests.Generics_Constraints_Multiple [133 ms]
+  Passed MsgPack00xAnalyzerTests.NameCollisionsInForceMapMode [112 ms]
+  Passed GenericsFormatterTests.GenericsOfTFormatter_FormatterOnly [82 ms]
+  Passed MsgPack00xAnalyzerTests.NullStringKey [45 ms]
+  Passed GenericsFormatterTests.GenericsOfT1T2Formatter [214 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributesToMembersOfRecord [387 ms]
+  Passed GenericsFormatterTests.NestedGenericTypes [201 ms]
+  Passed MsgPack00xAnalyzerTests.DerivedAttributes_SourceGenerationDisabled [52 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToType_Nullable [194 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToTypeForRecordPrimaryConstructor [493 ms]
+  Passed MsgPack00xAnalyzerTests.PrivateMembersInBaseClassNeedNoAttribution [85 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToType_Fields [289 ms]
+[xUnit.net 00:00:18.55]   Finished:    MessagePack.SourceGenerator.Tests
+  Passed MsgPack00xAnalyzerTests.AddAttributesToMembers_AllowPrivateAttribute [408 ms]
+  Passed MsgPack00xAnalyzerTests.DoNotAddAttributesToClassWithPrimaryCtor [217 ms]
+  Passed MsgPack00xAnalyzerTests.AbstractFormatterDoesNotAttractAttention [16 ms]
+  Passed MsgPack00xAnalyzerTests.InvalidMessageFormatterType [47 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributesToMembers_MixedVisibility [458 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributesToMembers_PublicOnly [138 ms]
+  Passed MsgPack00xAnalyzerTests.AddIgnoreAttributesToMembers [149 ms]
+
+Test Run Successful.
+Total tests: 59
+     Passed: 59
+ Total time: 19.6506 Seconds
+
+Build succeeded.
+
+/Users/andy/Downloads/Junction2/wt/canary-2283-C9/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:58.17

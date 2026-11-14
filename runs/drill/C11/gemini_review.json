@@ -1,0 +1,14 @@
+{
+  "model": "gemini-3.1-pro-preview",
+  "prompt_sha256": "41153b810a30efd48c8fc84293b8eee57362bccb48867ca11c40ee4a4d0c9fbc",
+  "cached": false,
+  "findings": [
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1434,
+      "severity": "high",
+      "issue": "GetPropertyIdentifierLocation returns null for properties declared via record primary constructors because their syntax is ParameterSyntax, not PropertyDeclarationSyntax. This causes the BothStringAndIntKeyAreNull diagnostic to be silently dropped for source-declared record properties, violating claims C4, C5, and C10."
+    }
+  ],
+  "raw": null
+}

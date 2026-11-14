@@ -1,0 +1,19 @@
+{
+ "text": "{\n  \"findings\": [\n    {\n      \"path\": \"src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs\",\n      \"line\": 1138,\n      \"severity\": \"high\",\n      \"issue\": \"The condition `(isIntKey && stringKey == null)` incorrectly checks `stringKey` instead of `intKey`. This breaks the logic for reporting `DoNotMixStringAndIntKeys` and violates the requirement that no existing diagnostic is changed.\"\n    },\n    {\n      \"path\": \"src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs\",\n      \"line\": 1434,\n      \"severity\": \"medium\",\n      \"issue\": \"`GetPropertyIdentifierLocation` returns `null` for properties declared as record primary constructor parameters because their syntax is `ParameterSyntax`, not `PropertyDeclarationSyntax`. This causes diagnostics like `BothStringAndIntKeyAreNull` to be silently dropped for source-declared record properties.\"\n    }\n  ]\n}",
+ "model": "gemini-3.1-pro-preview",
+ "prompt_sha256": "47d96ebb45aa420f2393944c4c551df5e9e1484241f8d6abff83212ed5dc6805",
+ "ts": "2026-11-14T23:34:24+0200",
+ "usage": {
+  "promptTokenCount": 6125,
+  "candidatesTokenCount": 223,
+  "totalTokenCount": 13618,
+  "promptTokensDetails": [
+   {
+    "modality": "TEXT",
+    "tokenCount": 6125
+   }
+  ],
+  "thoughtsTokenCount": 7270,
+  "serviceTier": "standard"
+ }
+}

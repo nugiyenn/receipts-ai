@@ -1,0 +1,19 @@
+{
+ "text": "{\n  \"findings\": [\n    {\n      \"path\": \"src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs\",\n      \"line\": 1434,\n      \"severity\": \"high\",\n      \"issue\": \"GetPropertyIdentifierLocation returns null for properties declared as primary constructor parameters in records (which use ParameterSyntax, not PropertyDeclarationSyntax), causing their diagnostics to be silently dropped.\"\n    },\n    {\n      \"path\": \"src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs\",\n      \"line\": 1446,\n      \"severity\": \"medium\",\n      \"issue\": \"ReportIfLocatedInCompilation silently drops diagnostics with Location.None (since IsInSource evaluates to false), which swallows valid compilation-wide errors or diagnostics for symbols lacking source locations.\"\n    }\n  ]\n}",
+ "model": "gemini-3.1-pro-preview",
+ "prompt_sha256": "301df94f4a499d2df5fa2010a03b5a9c171b975e29bb493bca5826243e4f3c7d",
+ "ts": "2026-11-14T23:24:59+0200",
+ "usage": {
+  "promptTokenCount": 5688,
+  "candidatesTokenCount": 189,
+  "totalTokenCount": 17180,
+  "promptTokensDetails": [
+   {
+    "modality": "TEXT",
+    "tokenCount": 5688
+   }
+  ],
+  "thoughtsTokenCount": 11303,
+  "serviceTier": "standard"
+ }
+}

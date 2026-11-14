@@ -1,0 +1,19 @@
+{
+ "text": "{\n  \"findings\": [\n    {\n      \"path\": \"src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs\",\n      \"line\": 1446,\n      \"severity\": \"high\",\n      \"issue\": \"The condition `!this.compilation.ContainsSyntaxTree(...)` is inverted. It drops all diagnostics for the current compilation (violating REQ-2283-NF1 and REQ-2283-S1) and attempts to report diagnostics for syntax trees outside the compilation, which will crash the analyzer.\"\n    },\n    {\n      \"path\": \"src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs\",\n      \"line\": 1434,\n      \"severity\": \"medium\",\n      \"issue\": \"`GetPropertyIdentifierLocation` returns null for record properties because their syntax is `ParameterSyntax`, not `PropertyDeclarationSyntax`. This causes their diagnostics to lose location or be dropped entirely, violating REQ-2283-NF1 and contradicting Claim C10.\"\n    }\n  ]\n}",
+ "model": "gemini-3.1-pro-preview",
+ "prompt_sha256": "75777e8f417aded779519c45f97472f82d794fb4ae6638c2568c6ecb1e44997f",
+ "ts": "2026-11-15T00:46:09+0200",
+ "usage": {
+  "promptTokenCount": 5961,
+  "candidatesTokenCount": 240,
+  "totalTokenCount": 13332,
+  "promptTokensDetails": [
+   {
+    "modality": "TEXT",
+    "tokenCount": 5961
+   }
+  ],
+  "thoughtsTokenCount": 7131,
+  "serviceTier": "standard"
+ }
+}

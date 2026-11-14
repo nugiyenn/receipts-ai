@@ -1,0 +1,109 @@
+{
+  "canary": "H2",
+  "type": "logic inversion",
+  "authored_by": "gemini-3.1-pro-preview",
+  "caught": true,
+  "by": [
+    "test-fail"
+  ],
+  "by_family": {
+    "tests": true,
+    "deterministic-rules": false,
+    "gemini": false,
+    "claude": false
+  },
+  "location_only_secondary": {
+    "gemini": true,
+    "claude": true,
+    "any": true
+  },
+  "note": "Inverts the condition that checks if the diagnostic is located in the current compilation, causing valid diagnostics to be dropped and invalid ones to be reported.",
+  "tests": {
+    "ran": true,
+    "compiled": true,
+    "failing_tests": [
+      "MsgPack00xAnalyzerTests.AddAttributeToField_WithComment",
+      "MsgPack00xAnalyzerTests.AddAttributeToGenericType",
+      "MsgPack00xAnalyzerTests.AddAttributeToTypeForRecord1",
+      "MsgPack00xAnalyzerTests.AddAttributeToTypeForRecord2",
+      "MsgPack00xAnalyzerTests.AddAttributeToTypeForRecordPrimaryConstructor",
+      "MsgPack00xAnalyzerTests.AddAttributeToType_Fields",
+      "MsgPack00xAnalyzerTests.AddAttributeToType_Generic",
+      "MsgPack00xAnalyzerTests.AddAttributeToType_Nullable",
+      "MsgPack00xAnalyzerTests.AddAttributeToType_Properties",
+      "MsgPack00xAnalyzerTests.AddAttributesToMembers",
+      "MsgPack00xAnalyzerTests.AddAttributesToMembersOfRecord",
+      "MsgPack00xAnalyzerTests.AddAttributesToMembersOfRecordStruct",
+      "MsgPack00xAnalyzerTests.AddAttributesToMembersOfRecordStructWithPrimaryCtor",
+      "MsgPack00xAnalyzerTests.AddAttributesToMembersOfRecordWithPrimaryCtor",
+      "MsgPack00xAnalyzerTests.AddAttributesToMembers_AllowPrivateAttribute",
+      "MsgPack00xAnalyzerTests.AddAttributesToMembers_MixedVisibility",
+      "MsgPack00xAnalyzerTests.AddAttributesToMembers_PublicOnly",
+      "MsgPack00xAnalyzerTests.AddIgnoreAttributesToMembers",
+      "MsgPack00xAnalyzerTests.CodeFixAppliesAcrossFiles",
+      "MsgPack00xAnalyzerTests.DerivedAttributes",
+      "MsgPack00xAnalyzerTests.DoNotAddAttributesToClassWithPrimaryCtor",
+      "MsgPack00xAnalyzerTests.InitPropertyInitializer",
+      "MsgPack00xAnalyzerTests.InvalidMessageFormatterType",
+      "MsgPack00xAnalyzerTests.NameCollisionsInForceMapMode",
+      "MsgPack00xAnalyzerTests.NullStringKey",
+      "MsgPack011PartialTypeRequiredTests.CodeFixOffered",
+      "MsgPack011PartialTypeRequiredTests.NestedPartialTypeRequiresPartialDeclaringType",
+      "MsgPack011PartialTypeRequiredTests.NestedPartialTypeRequiresPartialSelfAndDeclaringType",
+      "MsgPack015AllowPrivateRequiredTests.AddForNonPublicDeserializingConstructor",
+      "MsgPack015AllowPrivateRequiredTests.AddForNonPublicType",
+      "MsgPack015AllowPrivateRequiredTests.AddForPublicTypeNestedUnderNonPublicType",
+      "MsgPack015AllowPrivateRequiredTests.AddWhenNonPublicPropertyIsAnnotated",
+      "MsgPack015AllowPrivateRequiredTests.SetWhenNonPublicPropertyIsAnnotated"
+    ],
+    "summary_line": "",
+    "outcome": "red",
+    "seconds": 67.8,
+    "log": "runs/drill/heldout/H2/tests.log"
+  },
+  "detectors": [],
+  "gemini": {
+    "caught": false,
+    "hits": [],
+    "near_but_off_target": [
+      {
+        "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+        "line": 1446,
+        "severity": "high",
+        "issue": "The condition `!this.compilation.ContainsSyntaxTree(...)` is inverted. It drops all diagnostics for the current compilation (violating REQ-2283-NF1 and REQ-2283-S1) and attempts to report diagnostics for syntax trees outside the compilation, which will crash the analyzer."
+      }
+    ],
+    "n_findings": 2
+  },
+  "claude": {
+    "caught": false,
+    "hits": [],
+    "near_but_off_target": [
+      {
+        "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+        "line": 1446,
+        "severity": "high",
+        "issue": "The condition is inverted. `IsInSource && !ContainsSyntaxTree(...)` reports only diagnostics located in a different compilation. It drops every diagnostic for source types in this compilation, which is the diagnostic loss that C4, C5, NF1 and S1 rule out. The existing analyzer diagnostics (MsgPack00x) would stop firing. The new tests would not catch this, because they only assert that no diagnostics appear."
+      },
+      {
+        "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+        "line": 1446,
+        "severity": "medium",
+        "issue": "Even with the check un-inverted, `IsInSource` is false for `Location.None`. That covers the null locations produced at lines 1077 and 985 and by `GetIdentifierLocation`. So a diagnostic on a type declared in source (for example one with no identifier syntax) would still be silently dropped. This contradicts C4, C5 and C8's framing."
+      }
+    ],
+    "n_findings": 6
+  },
+  "xray_routed_to_human_NOT_counted": {
+    "routed": false,
+    "why": "planted lines fall inside agent hunk h6 whose X-Ray result is 'structural' (hunk granularity cannot see a planted change inside it)"
+  },
+  "evidence_refs": [
+    "runs/drill/heldout/H2/tests.json",
+    "runs/drill/heldout/H2/tests.log",
+    "runs/drill/heldout/H2/detectors.json",
+    "runs/drill/heldout/H2/gemini_review.json",
+    "runs/drill/heldout/H2/claude_findings.json",
+    "runs/drill/heldout/H2/review_input.diff"
+  ]
+}

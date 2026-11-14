@@ -1,0 +1,20 @@
+{
+  "model": "gemini-3.1-pro-preview",
+  "prompt_sha256": "38c08d90af7132585c8451daafdfb1dadda464c52338daf0b4f3f3fbad5a463d",
+  "cached": false,
+  "findings": [
+    {
+      "path": "src/MessagePack/ExtensionHeader.cs",
+      "line": 31,
+      "severity": "high",
+      "issue": "The Equals method was modified to ignore the Length property, which is a correctness bug and scope creep that breaks equality comparisons for ExtensionHeader."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1434,
+      "severity": "medium",
+      "issue": "GetPropertyIdentifierLocation uses 'as PropertyDeclarationSyntax', which evaluates to null for record properties and indexers. This causes their diagnostics to be created with Location.None and silently swallowed by ReportIfLocatedInCompilation."
+    }
+  ],
+  "raw": null
+}

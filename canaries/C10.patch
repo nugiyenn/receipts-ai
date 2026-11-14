@@ -1,0 +1,13 @@
+diff --git a/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs b/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs
+index c4ebe3e1..0e6d6166 100644
+--- a/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs
++++ b/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs
+@@ -1135,7 +1135,7 @@ public class TypeCollector
+                     }
+                     else
+                     {
+-                        if ((isIntKey && intKey == null) || (!isIntKey && stringKey == null))
++                        if ((isIntKey && stringKey == null) || (!isIntKey && stringKey == null))
+                         {
+                             this.reportDiagnostic?.Invoke(Diagnostic.Create(MsgPack00xMessagePackAnalyzer.DoNotMixStringAndIntKeys, item.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation()));
+                         }

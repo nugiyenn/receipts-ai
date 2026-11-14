@@ -1,0 +1,50 @@
+
+Welcome to .NET 8.0!
+---------------------
+SDK Version: 8.0.402
+
+----------------
+Installed an ASP.NET Core HTTPS development certificate.
+To trust the certificate, run 'dotnet dev-certs https --trust'
+Learn about HTTPS: https://aka.ms/dotnet-https
+
+----------------
+Write your first app: https://aka.ms/dotnet-hello-world
+Find out what's new: https://aka.ms/dotnet-whats-new
+Explore documentation: https://aka.ms/dotnet-docs
+Report issues and find source on GitHub: https://github.com/dotnet/core
+Use 'dotnet --help' to see available commands or visit: https://aka.ms/dotnet-cli
+--------------------------------------------------------------------------------------
+
+  Determining projects to restore...
+  Restored /Users/andy/Downloads/Junction2/wt/2283-base/src/MessagePack.Annotations/MessagePack.Annotations.csproj (in 6.6 sec).
+  Restored /Users/andy/Downloads/Junction2/wt/2283-base/src/MessagePack/MessagePack.csproj (in 10.79 sec).
+  Restored /Users/andy/Downloads/Junction2/wt/2283-base/src/MessagePack.SourceGenerator/MessagePack.SourceGenerator.csproj (in 11.51 sec).
+  Restored /Users/andy/Downloads/Junction2/wt/2283-base/src/MessagePack.Analyzers.CodeFixes/MessagePack.Analyzers.CodeFixes.csproj (in 11.82 sec).
+  Restored /Users/andy/Downloads/Junction2/wt/2283-base/src/MessagePack.Analyzers/MessagePack.Analyzers.csproj (in 11.83 sec).
+/Users/andy/Downloads/Junction2/wt/2283-base/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+  Restored /Users/andy/Downloads/Junction2/wt/2283-base/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj (in 34.36 sec).
+
+Build succeeded.
+
+/Users/andy/Downloads/Junction2/wt/2283-base/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:37.82
+
+/Users/andy/Downloads/Junction2/wt/2283-base/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+  MessagePack.SourceGenerator -> /Users/andy/Downloads/Junction2/wt/2283-base/bin/MessagePack.SourceGenerator/Debug/netstandard2.0/MessagePack.SourceGenerator.dll
+  MessagePack.Analyzers.CodeFixes -> /Users/andy/Downloads/Junction2/wt/2283-base/bin/MessagePack.Analyzers.CodeFixes/Debug/netstandard2.0/MessagePack.Analyzers.CodeFixes.dll
+  MessagePack.Analyzers -> /Users/andy/Downloads/Junction2/wt/2283-base/bin/MessagePack.Analyzers/Debug/netstandard2.0/MessagePack.Analyzers.dll
+  MessagePack.Annotations -> /Users/andy/Downloads/Junction2/wt/2283-base/bin/MessagePack.Annotations/Debug/netstandard2.0/MessagePack.Annotations.dll
+  MessagePack -> /Users/andy/Downloads/Junction2/wt/2283-base/bin/MessagePack/Debug/net8.0/MessagePack.dll
+  MessagePack.SourceGenerator.Tests -> /Users/andy/Downloads/Junction2/wt/2283-base/bin/MessagePack.SourceGenerator.Tests/Debug/net8.0/MessagePack.SourceGenerator.Tests.dll
+
+Build succeeded.
+
+/Users/andy/Downloads/Junction2/wt/2283-base/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:02:10.50

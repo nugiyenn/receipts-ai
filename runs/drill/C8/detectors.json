@@ -1,0 +1,22 @@
+{
+  "signals": {
+    "R4": null,
+    "R2": {
+      "fired": true,
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "why": "added empty catch block (silent suppression)"
+    },
+    "R6": null,
+    "assertion_drop": null
+  },
+  "fired": [
+    "R2"
+  ],
+  "planted_ranges": [
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "start": 1443,
+      "end": 1457
+    }
+  ]
+}

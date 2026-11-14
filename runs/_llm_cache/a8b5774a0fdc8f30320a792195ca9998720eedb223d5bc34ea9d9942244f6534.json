@@ -1,0 +1,19 @@
+{
+ "text": "{\n  \"findings\": [\n    {\n      \"path\": \"src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs\",\n      \"line\": 985,\n      \"severity\": \"high\",\n      \"issue\": \"Compiler error (CS1503): 'item' is an 'ISymbol' (which can be a field), but 'GetPropertyIdentifierLocation' expects an 'IPropertySymbol'.\"\n    },\n    {\n      \"path\": \"src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs\",\n      \"line\": 1434,\n      \"severity\": \"high\",\n      \"issue\": \"Missing null-conditional operator before '.Identifier' causes a NullReferenceException when the syntax is not a PropertyDeclarationSyntax (e.g., for metadata properties, record primary constructor properties, or indexers).\"\n    }\n  ]\n}",
+ "model": "gemini-3.1-pro-preview",
+ "prompt_sha256": "a8b5774a0fdc8f30320a792195ca9998720eedb223d5bc34ea9d9942244f6534",
+ "ts": "2026-11-15T00:46:47+0200",
+ "usage": {
+  "promptTokenCount": 5960,
+  "candidatesTokenCount": 197,
+  "totalTokenCount": 19103,
+  "promptTokensDetails": [
+   {
+    "modality": "TEXT",
+    "tokenCount": 5960
+   }
+  ],
+  "thoughtsTokenCount": 12946,
+  "serviceTier": "standard"
+ }
+}

@@ -1,0 +1,218 @@
+{
+  "change": "2234",
+  "kind": "prosecutor",
+  "produced_by": "claude-code session, cached",
+  "model": "claude-sonnet-5-5",
+  "produced_at": "2026-11-14T23:19",
+  "static_analysis_only": true,
+  "prompt": "You are the prosecutor. Your job is to FALSIFY the claims below. For each claim, either:\n(a) state a concrete scenario in which it is false, AND propose a minimal test or command\n    that would demonstrate it; or (b) state you could not falsify it.\nYou may also raise NEW hypotheses about behaviour the change silently alters.\nEvery hypothesis must cite exact diff lines. No confidence numbers.",
+  "prompt_sha256": "13ea3c27169a798217bfe57294ac885b5e4965104ab863f5c4129f5abbe51f22",
+  "inputs": [
+    "git show origin/ju26-issue-2234",
+    "issue #2234 body (github.com page, fetched 2026-11-14)",
+    "receipts/requirements/REQ-2234.yaml",
+    "git history: commit 1a74a620, v3.1.0..v3.1.1 TypeCollector.cs diff"
+  ],
+  "note": "Hypotheses only. A hypothesis counts as a finding only after the evidence engine runs its test_sketch and it reproduces. Nothing here was executed.",
+  "attacks": [
+    {
+      "id": "P-2234-1",
+      "claim": "C1",
+      "outcome": "scenario_proposed",
+      "scenario": "The three tests already pass on the base commit, because the regression introduced in v3.1.1 is not in the base. Then the tests are evidence of behaviour, not of a fix.",
+      "test_sketch": "Copy SuppressSourceGenerationAnalyzerTests.cs into a base worktree and run: dotnet test tests/MessagePack.SourceGenerator.Tests -f net8.0 --filter FullyQualifiedName~SuppressSourceGenerationAnalyzerTests. Expected if the claim needs the fix: 3 failures. Expected if the regression is absent: all pass.",
+      "holds_if": "MemberWithoutKey, AllowPrivateRequired, MemberTypeMustBeMessagePackObject fail on base",
+      "falsified_if": "they pass on base",
+      "cited_lines": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 21,
+          "quote": "public async Task MemberWithoutKeyIsReported()"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 39,
+          "quote": "public async Task AllowPrivateRequiredIsReported()"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 58,
+          "quote": "public async Task MemberTypeMustBeMessagePackObjectIsReported()"
+        }
+      ]
+    },
+    {
+      "id": "P-2234-2",
+      "claim": "C2",
+      "outcome": "scenario_proposed",
+      "scenario": "Duplicate keys already produce MsgPack005 without a crash on base for suppressed types, so the new guards change nothing observable there.",
+      "test_sketch": "Same run as P-2234-1 for DuplicateIntKeys, DuplicateStringKeys, MixedKeyKinds; then revert only the two ContainsKey guards on head and rerun; record which tests go red.",
+      "holds_if": "tests go red when the guards are reverted",
+      "falsified_if": "tests stay green with the guards reverted",
+      "cited_lines": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1023,
+          "quote": "if (!intMembers.ContainsKey(member.IntKey))"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 834,
+          "quote": "if (!stringMembers.ContainsKey(member.StringKey))"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 81,
+          "quote": "public async Task DuplicateIntKeysAreReportedWithoutAnalyzerFailure()"
+        }
+      ]
+    },
+    {
+      "id": "P-2234-3",
+      "claim": "C3",
+      "outcome": "scenario_proposed",
+      "scenario": "A valid contract whose members are all attributed with unique, same-kind keys is untouched by the hunk; a contract with a skipped member differs only in invalid code. Attack: a type with int keys and a member whose key attribute carries a null string value reaches the skip path although the code is not obviously invalid.",
+      "test_sketch": "Generator run on [MessagePackObject] class with [Key(0)] int A and [Key((string)null)] int B; compare formatter output base vs head.",
+      "holds_if": "identical output for valid contracts",
+      "falsified_if": "output differs for a contract with no analyzer error",
+      "cited_lines": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1148,
+          "quote": "continue; // The key kind does not match the other members; the diagnostic is reported, so skip this member."
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1023,
+          "quote": "if (!intMembers.ContainsKey(member.IntKey))"
+        }
+      ]
+    },
+    {
+      "id": "P-2234-4",
+      "claim": "C4",
+      "outcome": "scenario_proposed",
+      "scenario": "The cause of the regression is the placement of the suppression early return (top of the method in v3.1.1+, end of the method here). The diff does not move it. Run the tests on a v3.1.1 worktree (which has the regression) without the diff: expected red; then with the diff applied: if still red, the diff does not fix #2234.",
+      "test_sketch": "git worktree add ../wt-311 v3.1.1 (no commit); copy the 3 tests; run; then git diff base..head | git apply in that worktree; run again.",
+      "holds_if": "red on v3.1.1 without the diff and green with it",
+      "falsified_if": "red with the diff applied",
+      "cited_lines": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1383,
+          "quote": "if (suppressSourceGeneration is true)"
+        }
+      ]
+    },
+    {
+      "id": "P-2234-5",
+      "claim": "C5",
+      "outcome": "could_not_falsify_statically",
+      "scenario": "The runtime test asserts behaviour that no hunk in the diff modifies; it should pass on base and on head.",
+      "test_sketch": "dotnet test tests/MessagePack.SourceGenerator.ExecutionTests -f net8.0 --filter FullyQualifiedName~SuppressedSourceGenerationTests on both worktrees.",
+      "holds_if": "pass on both",
+      "falsified_if": "fails on either",
+      "cited_lines": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.ExecutionTests/SuppressedSourceGenerationTests.cs",
+          "line": 23,
+          "quote": "Assert.Null(GeneratedMessagePackResolver.Instance.GetFormatter<SuppressedSourceGenerationType>());"
+        }
+      ]
+    },
+    {
+      "id": "P-2234-6",
+      "claim": "C6",
+      "outcome": "scenario_proposed",
+      "scenario": "Generator-only build with the analyzer disabled: a mixed-key type loses a member from the formatter and nothing is reported.",
+      "test_sketch": "CSharpGeneratorDriver run (no analyzer) on [MessagePackObject] class M { [Key(0)] public int A {get;set;} [Key(\"b\")] public int B {get;set;} }; read the generated formatter and check that B is absent; check runResult.Diagnostics is empty.",
+      "holds_if": "B is serialized or an error is produced",
+      "falsified_if": "B is silently absent",
+      "cited_lines": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1008,
+          "quote": "continue; // The key kind does not match the other members; the diagnostic is reported, so skip this member."
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1007,
+          "quote": "Diagnostic.Create(MsgPack00xMessagePackAnalyzer.DoNotMixStringAndIntKeys"
+        }
+      ]
+    },
+    {
+      "id": "P-2234-7",
+      "claim": "C7",
+      "outcome": "scenario_proposed",
+      "scenario": "A suppressed type with a member attributed by a type derived from KeyAttribute reaches the MsgPack016 condition; the README says 016 is not reported but the condition cited keeps MemberNeedsKey for suppressed types with a derived key.",
+      "test_sketch": "Analyzer test: [MessagePackObject(SuppressSourceGeneration = true)] class with [DerivedKey(0)] member; expect no MsgPack016 per README.",
+      "holds_if": "no MsgPack016 reported",
+      "falsified_if": "MsgPack016 or MsgPack004 reported",
+      "cited_lines": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 921,
+          "quote": "if (derivedKeyAttribute is null || suppressSourceGeneration is not true)"
+        },
+        {
+          "path": "README.md",
+          "line": 1632,
+          "quote": "The analyzer does not report the partial-class requirement ([MsgPack011]"
+        }
+      ]
+    },
+    {
+      "id": "P-2234-8",
+      "claim": "C8",
+      "outcome": "scenario_proposed",
+      "scenario": "An inaccessible (private nested) suppressed type: the README says MsgPack012 applies, but no test exercises it.",
+      "test_sketch": "Analyzer test: private nested class marked [MessagePackObject(SuppressSourceGeneration = true)]; expect {|MsgPack012:...|}.",
+      "holds_if": "MsgPack012 reported",
+      "falsified_if": "not reported",
+      "cited_lines": [
+        {
+          "path": "README.md",
+          "line": 1630,
+          "quote": "Types are accessible to the resolver ([MsgPack012](doc/analyzers/MsgPack012.md))."
+        }
+      ]
+    }
+  ],
+  "new_hypotheses": [
+    {
+      "id": "N-2234-1",
+      "text": "The base commit predates the regression: the eight analyzer tests pass on base, so Time Machine will show pass-to-pass for the tests that claim to evidence #2234.",
+      "cited_lines": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1383,
+          "quote": "if (suppressSourceGeneration is true)"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 21,
+          "quote": "public async Task MemberWithoutKeyIsReported()"
+        }
+      ],
+      "test_sketch": "See P-2234-1."
+    },
+    {
+      "id": "N-2234-2",
+      "text": "Duplicate keys crashed the analyzer for every type, not only suppressed ones, because the Add calls were unconditional; the real #2234 symptom on master may be a different failure from the one these guards remove.",
+      "cited_lines": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 147,
+          "quote": "public async Task DuplicateKeysAreReportedWithoutAnalyzerFailureForGeneratedTypes()"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1023,
+          "quote": "if (!intMembers.ContainsKey(member.IntKey))"
+        }
+      ],
+      "test_sketch": "Run DuplicateKeysAreReportedWithoutAnalyzerFailureForGeneratedTypes on base: if it passes, the guards were not needed for non-suppressed types."
+    }
+  ]
+}

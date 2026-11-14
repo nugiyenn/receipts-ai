@@ -1,0 +1,43 @@
+
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.09
+
+  MessagePack.SourceGenerator -> /Users/andy/Downloads/Junction2/wt/2129-xray/bin/MessagePack.SourceGenerator/Debug/netstandard2.0/MessagePack.SourceGenerator.dll
+  MessagePack.Analyzers.CodeFixes -> /Users/andy/Downloads/Junction2/wt/2129-xray/bin/MessagePack.Analyzers.CodeFixes/Debug/netstandard2.0/MessagePack.Analyzers.CodeFixes.dll
+  MessagePack.Analyzers -> /Users/andy/Downloads/Junction2/wt/2129-xray/bin/MessagePack.Analyzers/Debug/netstandard2.0/MessagePack.Analyzers.dll
+  MessagePack.Annotations -> /Users/andy/Downloads/Junction2/wt/2129-xray/bin/MessagePack.Annotations/Debug/netstandard2.0/MessagePack.Annotations.dll
+  MessagePack -> /Users/andy/Downloads/Junction2/wt/2129-xray/bin/MessagePack/Debug/net8.0/MessagePack.dll
+  MessagePack.SourceGenerator.Tests -> /Users/andy/Downloads/Junction2/wt/2129-xray/bin/MessagePack.SourceGenerator.Tests/Debug/net8.0/MessagePack.SourceGenerator.Tests.dll
+Test run for /Users/andy/Downloads/Junction2/wt/2129-xray/bin/MessagePack.SourceGenerator.Tests/Debug/net8.0/MessagePack.SourceGenerator.Tests.dll (.NETCoreApp,Version=v8.0)
+VSTest version 17.14.2 (arm64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.8)
+[xUnit.net 00:00:00.10]   Discovering: MessagePack.SourceGenerator.Tests
+[xUnit.net 00:00:00.16]   Discovered:  MessagePack.SourceGenerator.Tests
+[xUnit.net 00:00:00.16]   Starting:    MessagePack.SourceGenerator.Tests
+[xUnit.net 00:00:01.96]   Finished:    MessagePack.SourceGenerator.Tests
+  Passed GeneratedMessagePackFormatterTests.SurrogateMemberMustMatchFormattedType [1 s]
+  Passed GeneratedMessagePackFormatterTests.FormatterMustBePartial [43 ms]
+  Passed GeneratedMessagePackFormatterTests.FormatterMustImplementFormatterOfT [36 ms]
+  Passed GeneratedMessagePackFormatterTests.SurrogateMemberMustHaveMatchingType [38 ms]
+  Passed GeneratedMessagePackFormatterTests.SurrogateKeysMustNotMixStringAndInt [35 ms]
+  Passed GeneratedMessagePackFormatterTests.FormattedTypeMustNotBeAbstract [26 ms]
+
+Test Run Successful.
+Total tests: 6
+     Passed: 6
+ Total time: 2,5433 Seconds
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:10.21

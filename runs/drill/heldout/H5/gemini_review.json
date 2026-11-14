@@ -1,0 +1,14 @@
+{
+  "model": "gemini-3.1-pro-preview",
+  "prompt_sha256": "27df05cee24efffa42563af0c6aa329ff82778cca28b8f6f81a5d77eea7deb7a",
+  "cached": false,
+  "findings": [
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1434,
+      "severity": "high",
+      "issue": "GetPropertyIdentifierLocation uses 'as PropertyDeclarationSyntax', which evaluates to null for record properties (whose syntax is ParameterSyntax) and indexers (IndexerDeclarationSyntax). This causes their diagnostics to be silently dropped, violating the requirement that no existing diagnostic for types declared in source is lost."
+    }
+  ],
+  "raw": null
+}

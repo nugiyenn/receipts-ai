@@ -1,0 +1,16 @@
+diff --git a/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs b/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs
+index e121773d..470c93fc 100644
+--- a/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs
++++ b/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs
+@@ -1165,7 +1176,10 @@ public class TypeCollector
+                         {
+                             DeclaringType = GetDeclaringTypeIfColliding(item),
+                         };
+-                        stringMembers.Add(member.StringKey, (member, item.Type));
++                        if (!stringMembers.ContainsKey(member.StringKey))
++                        {
++                            stringMembers.Add(member.StringKey, (member, item.Type));
++                        }
+                     }
+ 
+                     var messagePackFormatter = item.GetAttributes().FirstOrDefault(x => x.AttributeClass.ApproximatelyEqual(this.typeReferences.FormatterAttribute))?.ConstructorArguments[0];

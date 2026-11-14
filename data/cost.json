@@ -1,0 +1,184 @@
+{
+ "generated_at": "2026-11-14T23:58",
+ "formula": "cost_per_PR = gemini_tokens(claims+prosecutor) x rate_per_token + executed_seconds(time_machine + xray) x compute_rate_per_second; reviewer_session_tokens (Claude) not measured. USD is left null: no price list was checked, so the file reports tokens and seconds only.",
+ "rates": {
+  "gemini_usd_per_1M_input_tokens": null,
+  "gemini_usd_per_1M_output_tokens": null,
+  "compute_usd_per_cpu_second": null
+ },
+ "scope_note": "Gemini calls for claims and prosecutor per change (one each, cached). Canary Drill Gemini calls and the Claude sessions that wrote claims/refusals are listed separately and not attributed to a change.",
+ "changes": {
+  "2283": {
+   "gemini": {
+    "claims_gemini": {
+     "prompt_tokens": 5393,
+     "output_tokens": 971,
+     "thinking_tokens": 4503,
+     "total_tokens": 10867
+    },
+    "prosecutor_gemini": {
+     "prompt_tokens": 7385,
+     "output_tokens": 1589,
+     "thinking_tokens": 9149,
+     "total_tokens": 18123
+    },
+    "total": {
+     "prompt_tokens": 12778,
+     "output_tokens": 2560,
+     "thinking_tokens": 13652,
+     "total_tokens": 28990
+    }
+   },
+   "executed": {
+    "time_machine_timings_in_file": {
+     "base_build_seconds": 171,
+     "base_test_run": "exit=1 secs=80",
+     "head_test_run": "exit=0 secs=85"
+    },
+    "xray_group_seconds": {
+     "g1": 74.4,
+     "g2": 39.4,
+     "g3": 144.9,
+     "g4": 9.9,
+     "g5": 27.0
+    },
+    "xray_total_seconds": 295.6
+   },
+   "summary": {
+    "gemini_total_tokens": 28990,
+    "xray_seconds": 295.6
+   }
+  },
+  "2234": {
+   "gemini": {
+    "claims_gemini": {
+     "prompt_tokens": 4961,
+     "output_tokens": 933,
+     "thinking_tokens": 2046,
+     "total_tokens": 7940
+    },
+    "prosecutor_gemini": {
+     "prompt_tokens": 6808,
+     "output_tokens": 982,
+     "thinking_tokens": 10227,
+     "total_tokens": 18017
+    },
+    "total": {
+     "prompt_tokens": 11769,
+     "output_tokens": 1915,
+     "thinking_tokens": 12273,
+     "total_tokens": 25957
+    }
+   },
+   "executed": {
+    "time_machine_timings_in_file": {
+     "base_build_seconds": 123.3,
+     "base_test_run_seconds": 19.2,
+     "head_test_run_seconds": 18.7,
+     "source": "Time Elapsed lines in runs/2234/base-build.log, timemachine-base.log, timemachine-head.log"
+    },
+    "xray_group_seconds": {
+     "h2": 55.4,
+     "h3": 19.3,
+     "h4": 12.1,
+     "h5": 11.5,
+     "h6": 13.3,
+     "h7": 13.8
+    },
+    "xray_total_seconds": 125.4,
+    "seconds_source": "dotnet \"Time Elapsed\" per X-Ray log (build + 8 tests)"
+   },
+   "summary": {
+    "gemini_total_tokens": 25957,
+    "xray_seconds": 125.4
+   }
+  },
+  "2297": {
+   "gemini": {
+    "claims_gemini": {
+     "prompt_tokens": 6360,
+     "output_tokens": 1265,
+     "thinking_tokens": 4330,
+     "total_tokens": 11955
+    },
+    "prosecutor_gemini": {
+     "prompt_tokens": 8217,
+     "output_tokens": 1413,
+     "thinking_tokens": 9701,
+     "total_tokens": 19331
+    },
+    "total": {
+     "prompt_tokens": 14577,
+     "output_tokens": 2678,
+     "thinking_tokens": 14031,
+     "total_tokens": 31286
+    }
+   },
+   "executed": {
+    "time_machine_timings_in_file": null,
+    "xray_total_seconds": null,
+    "regeneration_check": {
+     "tests": "46 tests (CodeCoverageExclusionTests, GenerationTests) on head",
+     "seconds": 7.8,
+     "source": "runs/2297/regen-tests.log Time Elapsed"
+    },
+    "xray_note": "not applicable: snapshots are verified by regeneration, templates by pair check"
+   },
+   "summary": {
+    "gemini_total_tokens": 31286,
+    "xray_seconds": 0
+   }
+  },
+  "2129": {
+   "gemini": {
+    "claims_gemini": {
+     "prompt_tokens": 18602,
+     "output_tokens": 1621,
+     "thinking_tokens": 3957,
+     "total_tokens": 24180
+    },
+    "prosecutor_gemini": {
+     "prompt_tokens": 20504,
+     "output_tokens": 2106,
+     "thinking_tokens": 6951,
+     "total_tokens": 29561
+    },
+    "total": {
+     "prompt_tokens": 39106,
+     "output_tokens": 3727,
+     "thinking_tokens": 10908,
+     "total_tokens": 53741
+    }
+   },
+   "executed": {
+    "time_machine_timings_in_file": {
+     "head_diag_seconds": 17,
+     "base_diag_seconds": 12,
+     "head_exec_sdk9_seconds": 37,
+     "base_exec_sdk9_seconds": 16
+    },
+    "xray_group_seconds": {
+     "g1": 24.0,
+     "g2": 20.0,
+     "g3": 19.6,
+     "g4": 11.7,
+     "g5": 22.9,
+     "g6": 21.4,
+     "g7": 17.0,
+     "g8": 8.3,
+     "g9": 23.3
+    },
+    "xray_total_seconds": 168.2
+   },
+   "summary": {
+    "gemini_total_tokens": 53741,
+    "xray_seconds": 168.2
+   }
+  }
+ },
+ "executed_seconds_note": "For 2283 the per-group seconds are the test-run wall-clock from xray.json; for 2234 and 2129 they include incremental build. Cold base build was 171 s (2283) and 123 s (2234). Execution tests for 2129 needed the .NET 9 SDK.",
+ "not_attributed": {
+  "canary_drill": "Gemini and fresh claude -p reviews of 11 canaries: see data/drill.json and runs/drill/*/gemini_review.json (not summed here)",
+  "claude_sessions": "claims, story, refusals and prosecutor JSON for each change were written by Claude sessions; their tokens were not measured"
+ }
+}

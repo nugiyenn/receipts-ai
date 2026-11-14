@@ -1,0 +1,117 @@
+{
+ "change": "2129",
+ "method": "head's two new test files copied onto the base worktree (32258fdb); the diagnostic tests also run on head (083afd99). Execution tests copy the ExternalTypes fixture project and the csproj reference as well.",
+ "command": "dotnet test tests/MessagePack.SourceGenerator.Tests -f net8.0 --filter GeneratedMessagePackFormatterTests ; dotnet test tests/MessagePack.SourceGenerator.ExecutionTests -f net8.0 --filter GeneratedFormatterForExternalTypesTests",
+ "tests": [
+  {
+   "name": "GeneratedMessagePackFormatterTests.SurrogateMemberMustMatchFormattedType",
+   "project": "MessagePack.SourceGenerator.Tests",
+   "base": "fail",
+   "head": "pass",
+   "base_exception_excerpt": "error CS0246: The type or namespace name 'GeneratedMessagePackFormatterAttribute' could not be found (the attribute does not exist on base)"
+  },
+  {
+   "name": "GeneratedMessagePackFormatterTests.FormatterMustBePartial",
+   "project": "MessagePack.SourceGenerator.Tests",
+   "base": "fail",
+   "head": "pass",
+   "base_exception_excerpt": "error CS0246: The type or namespace name 'GeneratedMessagePackFormatterAttribute' could not be found (the attribute does not exist on base)"
+  },
+  {
+   "name": "GeneratedMessagePackFormatterTests.FormatterMustImplementFormatterOfT",
+   "project": "MessagePack.SourceGenerator.Tests",
+   "base": "fail",
+   "head": "pass",
+   "base_exception_excerpt": "error CS0246: The type or namespace name 'GeneratedMessagePackFormatterAttribute' could not be found (the attribute does not exist on base)"
+  },
+  {
+   "name": "GeneratedMessagePackFormatterTests.SurrogateMemberMustHaveMatchingType",
+   "project": "MessagePack.SourceGenerator.Tests",
+   "base": "fail",
+   "head": "pass",
+   "base_exception_excerpt": "error CS0246: The type or namespace name 'GeneratedMessagePackFormatterAttribute' could not be found (the attribute does not exist on base)"
+  },
+  {
+   "name": "GeneratedMessagePackFormatterTests.SurrogateKeysMustNotMixStringAndInt",
+   "project": "MessagePack.SourceGenerator.Tests",
+   "base": "fail",
+   "head": "pass",
+   "base_exception_excerpt": "error CS0246: The type or namespace name 'GeneratedMessagePackFormatterAttribute' could not be found (the attribute does not exist on base)"
+  },
+  {
+   "name": "GeneratedMessagePackFormatterTests.FormattedTypeMustNotBeAbstract",
+   "project": "MessagePack.SourceGenerator.Tests",
+   "base": "fail",
+   "head": "pass",
+   "base_exception_excerpt": "error CS0246: The type or namespace name 'GeneratedMessagePackFormatterAttribute' could not be found (the attribute does not exist on base)"
+  },
+  {
+   "name": "GeneratedFormatterForExternalTypesTests.GeneratedFormattersAreRegisteredInGeneratedResolver",
+   "project": "MessagePack.SourceGenerator.ExecutionTests",
+   "base": "fail",
+   "head": "pass",
+   "base_exception_excerpt": "does not build on base: CS0246 GeneratedMessagePackFormatterAttribute not found; CS0535 formatter does not implement IMessagePackFormatter<T>"
+  },
+  {
+   "name": "GeneratedFormatterForExternalTypesTests.ContractlessClassNullRoundTrips",
+   "project": "MessagePack.SourceGenerator.ExecutionTests",
+   "base": "fail",
+   "head": "pass",
+   "base_exception_excerpt": "does not build on base: CS0246 GeneratedMessagePackFormatterAttribute not found; CS0535 formatter does not implement IMessagePackFormatter<T>"
+  },
+  {
+   "name": "GeneratedFormatterForExternalTypesTests.SurrogateControlsKeysAndMembership",
+   "project": "MessagePack.SourceGenerator.ExecutionTests",
+   "base": "fail",
+   "head": "pass",
+   "base_exception_excerpt": "does not build on base: CS0246 GeneratedMessagePackFormatterAttribute not found; CS0535 formatter does not implement IMessagePackFormatter<T>"
+  },
+  {
+   "name": "GeneratedFormatterForExternalTypesTests.ContractlessStructRoundTrips",
+   "project": "MessagePack.SourceGenerator.ExecutionTests",
+   "base": "fail",
+   "head": "pass",
+   "base_exception_excerpt": "does not build on base: CS0246 GeneratedMessagePackFormatterAttribute not found; CS0535 formatter does not implement IMessagePackFormatter<T>"
+  },
+  {
+   "name": "GeneratedFormatterForExternalTypesTests.MessagePackObjectCanContainExternalTypes",
+   "project": "MessagePack.SourceGenerator.ExecutionTests",
+   "base": "fail",
+   "head": "pass",
+   "base_exception_excerpt": "does not build on base: CS0246 GeneratedMessagePackFormatterAttribute not found; CS0535 formatter does not implement IMessagePackFormatter<T>"
+  },
+  {
+   "name": "GeneratedFormatterForExternalTypesTests.ContractlessClassRoundTrips",
+   "project": "MessagePack.SourceGenerator.ExecutionTests",
+   "base": "fail",
+   "head": "pass",
+   "base_exception_excerpt": "does not build on base: CS0246 GeneratedMessagePackFormatterAttribute not found; CS0535 formatter does not implement IMessagePackFormatter<T>"
+  },
+  {
+   "name": "GeneratedFormatterForExternalTypesTests.ContractlessClassUsesStringKeysForPublicReadWriteMembers",
+   "project": "MessagePack.SourceGenerator.ExecutionTests",
+   "base": "fail",
+   "head": "pass",
+   "base_exception_excerpt": "does not build on base: CS0246 GeneratedMessagePackFormatterAttribute not found; CS0535 formatter does not implement IMessagePackFormatter<T>"
+  }
+ ],
+ "environment": {
+  "diagnostic_tests": "SDK 8.0.402 (pinned in global.json): Roslyn tests use the library directly, so the generator runs.",
+  "execution_tests": "SDK 9.0.321. Under the pinned 8.0.402 the compiler is Roslyn 4.11 and does not load the generator (CS9057, on base and head), so head-exec.log fails to build for an environment reason. global.json was overridden inside the worktrees only.",
+  "logs": [
+   "timemachine/head-diag.log",
+   "timemachine/base-diag.log",
+   "timemachine/head-exec.log",
+   "timemachine/head-exec-sdk9.log",
+   "timemachine/base-exec-sdk9.log"
+  ]
+ },
+ "note": "On base every new test fails because the attribute and the feature do not exist, so the failure shows the feature is absent, not a regression that the fix repairs. That is a weaker E3 than the exception match in 2283.",
+ "timings": {
+  "head_diag_seconds": 17,
+  "base_diag_seconds": 12,
+  "head_exec_sdk9_seconds": 37,
+  "base_exec_sdk9_seconds": 16
+ },
+ "verdict": "13 of 13 new tests fail on base and pass on head"
+}

@@ -1,0 +1,19 @@
+{
+ "text": "{\n  \"ok\": true,\n  \"model\": \"Gemini\"\n}",
+ "model": "gemini-3.1-pro-preview",
+ "prompt_sha256": "a0295f1ac3c5b64eb8f3da7dfc9cb1cc05ffc0d918f27dfac8b4c996772e74c3",
+ "ts": "2026-11-14T23:15:41+0200",
+ "usage": {
+  "promptTokenCount": 17,
+  "candidatesTokenCount": 19,
+  "totalTokenCount": 233,
+  "promptTokensDetails": [
+   {
+    "modality": "TEXT",
+    "tokenCount": 17
+   }
+  ],
+  "thoughtsTokenCount": 197,
+  "serviceTier": "standard"
+ }
+}

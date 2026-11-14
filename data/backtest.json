@@ -1,0 +1,1537 @@
+{
+  "label": "REAL public OSS history (MessagePack-CSharp, first-parent of origin/master), HEURISTIC labels",
+  "generated_at": "2026-11-14T23:55:35+02:00",
+  "window": {
+    "since": "2024-10-24",
+    "until": "2026-10-24",
+    "escape_window_days": 90
+  },
+  "method": {
+    "router": "areas.yaml default/ceiling lanes; source hunks >= L2 (LR4: no X-Ray historically); generated-only -> L1 (no regeneration proof)",
+    "escape_label": "later commit within 90 days mentioning the change (#PR or title) AND (subject has 'Revert' OR message has regress/introduced in/broke/caused by)",
+    "not_modelled": [
+      "blast radius",
+      "X-Ray",
+      "claims/evidence",
+      "refusals"
+    ]
+  },
+  "summary": {
+    "changes": 84,
+    "escapes": 0,
+    "escape_rate": 0.0,
+    "escapes_in_light_lanes_L0_L1": 0,
+    "escapes_in_L2_L3": 0,
+    "share_in_light_lanes": 0.0833,
+    "share_routed_to_humans_L2_L3": 0.9167,
+    "escape_rate_light_lanes": 0.0
+  },
+  "interpretation": "Too few labelled escapes (0) to say anything about router recall. Treat this as DESCRIPTIVE (how changes distribute over lanes), not as evidence that light lanes are safe.",
+  "confusion_by_lane": {
+    "L0": {
+      "changes": 0,
+      "escapes": 0
+    },
+    "L1": {
+      "changes": 7,
+      "escapes": 0
+    },
+    "L2": {
+      "changes": 49,
+      "escapes": 0
+    },
+    "L3": {
+      "changes": 28,
+      "escapes": 0
+    }
+  },
+  "hand_spot_check": {
+    "required": 10,
+    "checked": 10,
+    "sample": "10 of 84 changes, seeded random (seed 2026): 7 drawn from L2/L3 and 3 from L1. Labelled by one person reading git history (the commit, its first-parent diff, and later commits on the same files within 90 days). Not blind to the heuristic's output.",
+    "checked_rows": [
+      {
+        "sha": "781513b17",
+        "title": "perf: drop redundant char* fixed in MessagePackWriter.Write(string)",
+        "router_lane": "L3",
+        "heuristic_label": "no escape",
+        "my_label": "no escape",
+        "heuristic_matched": "yes",
+        "notes": "Only later commit on the file in 90 days is 21f6e635 (Fix OldSpec byte[] encoding, #2287), which changes doc comments and a different code path. No evidence the perf change caused it. Moderate confidence."
+      },
+      {
+        "sha": "6d58a2d92",
+        "title": "feat: Update package.json to 3.1.3 (bot)",
+        "router_lane": "L2",
+        "heuristic_label": "no escape",
+        "my_label": "no escape",
+        "heuristic_matched": "yes",
+        "notes": "Automated version bump. Lane L2 comes from the catch-all area, so the router over-flags it."
+      },
+      {
+        "sha": "ba54fab79",
+        "title": "feat: Update package.json to 3.0.300 (bot)",
+        "router_lane": "L2",
+        "heuristic_label": "no escape",
+        "my_label": "no escape",
+        "heuristic_matched": "yes",
+        "notes": "Automated version bump, later bumps are new releases, not fixes. Router over-flags it."
+      },
+      {
+        "sha": "d8b00a18c",
+        "title": "Update version.json",
+        "router_lane": "L2",
+        "heuristic_label": "no escape",
+        "my_label": "escape (minor)",
+        "heuristic_matched": "NO",
+        "notes": "a27fa8a8 'Fix version.json' landed three minutes later and corrects the version value this commit set. The label rule needs 'Revert' or regress/introduced in/broke/caused by, so a plain 'Fix ...' follow-up is invisible to it."
+      },
+      {
+        "sha": "9f80a327a",
+        "title": "feat: Update package.json to 3.1.8 (bot)",
+        "router_lane": "L2",
+        "heuristic_label": "no escape",
+        "my_label": "no escape",
+        "heuristic_matched": "yes",
+        "notes": "Automated version bump. Router over-flags it."
+      },
+      {
+        "sha": "b69ed9d1f",
+        "title": "Fix typo and ignore .lscache files (#2260)",
+        "router_lane": "L3",
+        "heuristic_label": "no escape",
+        "my_label": "no escape",
+        "heuristic_matched": "yes",
+        "notes": "Touches .gitignore and one line in src/MessagePack/Formatters/UnsafeBinaryFormatters.cs. L3 is the ceiling area rule working as designed, even though the change is tiny."
+      },
+      {
+        "sha": "bc83eb1ac",
+        "title": "Remove PublicApiAnalyzers (#2104)",
+        "router_lane": "L3",
+        "heuristic_label": "no escape",
+        "my_label": "no escape",
+        "heuristic_matched": "yes",
+        "notes": "Deletes PublicAPI.*.txt files. The later AnalyzerReleases change (#2169) is about the source generator's analyzer release tracking, not caused by this removal."
+      },
+      {
+        "sha": "3ff2dd9a4",
+        "title": "about v3 Analyzer (README)",
+        "router_lane": "L1",
+        "heuristic_label": "no escape",
+        "my_label": "no escape",
+        "heuristic_matched": "yes",
+        "notes": "Docs only. The 'ÌntKey' typo that #2098 later fixed already existed in earlier README versions, so this commit did not introduce it."
+      },
+      {
+        "sha": "50a247312",
+        "title": "Document strong-name key intent for CWE-798 (SECURITY.md)",
+        "router_lane": "L1",
+        "heuristic_label": "no escape",
+        "my_label": "no escape",
+        "heuristic_matched": "yes",
+        "notes": "Docs only. The later commit on that file is an unrelated end-of-life date edit."
+      },
+      {
+        "sha": "c6d298015",
+        "title": "README.md: ÌntKey -> IntKey (#2098)",
+        "router_lane": "L1",
+        "heuristic_label": "no escape",
+        "my_label": "no escape",
+        "heuristic_matched": "yes",
+        "notes": "This is the typo fix itself."
+      }
+    ],
+    "heuristic_agreed": 9,
+    "heuristic_false_negatives": 1,
+    "heuristic_false_positives": 0,
+    "label_precision": null,
+    "label_precision_note": "The heuristic labelled no change in the window as an escape, so there is nothing to compute precision on (0 of 0). What the check does show: it agreed with me on 9 of 10, and it missed 1 minor escape (d8b00a18c, fixed three minutes later by a plain 'Fix version.json' commit). Its recall of escapes in this sample is 0 of 1.",
+    "router_observations": [
+      "4 of the 7 sampled L2/L3 changes are one-line version bumps (package.json, version.json) routed to L2 by the catch-all area. That is noise a human would not want.",
+      "2 of the 7 are L3 because they touch the ceiling area src/MessagePack, including a typo fix. That is the rule working as intended, at the price of a full read for a one-line change."
+    ],
+    "conclusion": "The 0 escapes in 84 changes should not be read as 'no escapes happened'. The label rule is too narrow to see small follow-up fixes. Treat the backtest as a description of how the router sorts real changes, not as evidence that review time can fall safely.",
+    "checked_at": "2026-11-14T23:54:31+0200",
+    "status": "DONE (10 of 84 labels checked by hand)"
+  },
+  "changes": [
+    {
+      "sha": "9bc353141",
+      "date": "2026-10-24",
+      "pr": "2313",
+      "title": "Update README.md",
+      "files": 1,
+      "areas": [
+        "docs"
+      ],
+      "lane": "L1",
+      "escape": null
+    },
+    {
+      "sha": "b10aaf74b",
+      "date": "2026-10-21",
+      "pr": "2310",
+      "title": "Keep assembly versions stable across v3 servicing releases",
+      "files": 2,
+      "areas": [
+        "other",
+        "tests"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "eb108f897",
+      "date": "2026-10-12",
+      "pr": null,
+      "title": "feat: Update package.json to 3.1.12",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "552b62600",
+      "date": "2026-10-12",
+      "pr": "2308",
+      "title": "Add opt-in non-reflective object comparer for NativeAOT",
+      "files": 5,
+      "areas": [
+        "other",
+        "runtime-serializer",
+        "tests"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "242bdad51",
+      "date": "2026-10-03",
+      "pr": null,
+      "title": "feat: Update package.json to 3.1.11",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "cea32c434",
+      "date": "2026-10-03",
+      "pr": null,
+      "title": "Merge commit from fork",
+      "files": 4,
+      "areas": [
+        "docs",
+        "runtime-serializer",
+        "tests"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "f2bfa97ef",
+      "date": "2026-09-23",
+      "pr": null,
+      "title": "feat: Update package.json to 3.1.10",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "5ab8cab45",
+      "date": "2026-09-23",
+      "pr": null,
+      "title": "Merge commit from fork",
+      "files": 1,
+      "areas": [
+        "runtime-serializer"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "451d72907",
+      "date": "2026-09-18",
+      "pr": "2302",
+      "title": "Merge develop back into master",
+      "files": 2,
+      "areas": [
+        "other",
+        "runtime-serializer"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "aa16e71ae",
+      "date": "2026-09-17",
+      "pr": "2304",
+      "title": "Test before versioned release build",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "0e0bdff85",
+      "date": "2026-09-17",
+      "pr": "2303",
+      "title": "Fix source generator snapshot ordering",
+      "files": 1,
+      "areas": [
+        "tests"
+      ],
+      "lane": "L1",
+      "escape": null
+    },
+    {
+      "sha": "4fcae98bc",
+      "date": "2026-09-17",
+      "pr": null,
+      "title": "feat: Update package.json to 3.1.9",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "4fc3a2004",
+      "date": "2026-09-17",
+      "pr": null,
+      "title": "Merge fix from v2.x",
+      "files": 3,
+      "areas": [
+        "runtime-serializer",
+        "tests"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "ab3119e22",
+      "date": "2026-09-17",
+      "pr": "2300",
+      "title": "Fix build warning and Windows build break",
+      "files": 3,
+      "areas": [
+        "other",
+        "tests"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "21f6e635d",
+      "date": "2026-08-04",
+      "pr": "2287",
+      "title": "Fix OldSpec byte[] encoding emitting unsupported str8 headers",
+      "files": 3,
+      "areas": [
+        "runtime-serializer",
+        "tests"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "135abbc98",
+      "date": "2026-07-21",
+      "pr": "2282",
+      "title": "Revise end-of-life date for version 2.x",
+      "files": 1,
+      "areas": [
+        "docs"
+      ],
+      "lane": "L1",
+      "escape": null
+    },
+    {
+      "sha": "9f80a327a",
+      "date": "2026-07-08",
+      "pr": null,
+      "title": "feat: Update package.json to 3.1.8",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "3df413b30",
+      "date": "2026-07-08",
+      "pr": "2279",
+      "title": "Fix CS8669 warning in generated MessagePack.GeneratedMessagePackResolver.g.cs",
+      "files": 231,
+      "areas": [
+        "generated-snapshots",
+        "generator-other",
+        "generator-templates",
+        "tests"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "781513b17",
+      "date": "2026-07-08",
+      "pr": "2258",
+      "title": "perf: drop redundant char* fixed in MessagePackWriter.Write(string)",
+      "files": 1,
+      "areas": [
+        "runtime-serializer"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "2fb31064f",
+      "date": "2026-07-08",
+      "pr": "2278",
+      "title": "Update README built-in supported types list with missing types",
+      "files": 1,
+      "areas": [
+        "docs"
+      ],
+      "lane": "L1",
+      "escape": null
+    },
+    {
+      "sha": "1b53ae8b7",
+      "date": "2026-06-09",
+      "pr": null,
+      "title": "feat: Update package.json to 3.1.7",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "5e72f06a5",
+      "date": "2026-06-09",
+      "pr": "2274",
+      "title": "Fix security issues in master",
+      "files": 33,
+      "areas": [
+        "other",
+        "runtime-serializer",
+        "tests"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "7a306bd7a",
+      "date": "2026-06-01",
+      "pr": "2271",
+      "title": "Add `scoped` to `MessagePackWriter.Write(ReadOnlySpan<T>)` methods",
+      "files": 1,
+      "areas": [
+        "runtime-serializer"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "3a020c238",
+      "date": "2026-05-21",
+      "pr": null,
+      "title": "feat: Update package.json to 3.1.6",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "f13cb4781",
+      "date": "2026-05-21",
+      "pr": "2270",
+      "title": "Add several known unsafe 'gadgets' to the disallow list",
+      "files": 1,
+      "areas": [
+        "runtime-serializer"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "5b415b116",
+      "date": "2026-05-20",
+      "pr": "2268",
+      "title": "Fix release workflow",
+      "files": 4,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "9ee41c497",
+      "date": "2026-05-20",
+      "pr": null,
+      "title": "feat: Update package.json to 3.1.5",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "49db75fef",
+      "date": "2026-05-16",
+      "pr": null,
+      "title": "Harden release dry-run logging for CWE-532",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "50a247312",
+      "date": "2026-05-16",
+      "pr": null,
+      "title": "Document strong-name key intent for CWE-798",
+      "files": 1,
+      "areas": [
+        "docs"
+      ],
+      "lane": "L1",
+      "escape": null
+    },
+    {
+      "sha": "06ea24954",
+      "date": "2026-05-15",
+      "pr": null,
+      "title": "Fix build warnings",
+      "files": 2,
+      "areas": [
+        "generator-other",
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "3d259a958",
+      "date": "2026-05-14",
+      "pr": "2262",
+      "title": "Revert DateTimeOffset encoding change",
+      "files": 2,
+      "areas": [
+        "runtime-serializer",
+        "tests"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "2a7bc7e8e",
+      "date": "2026-05-14",
+      "pr": "2256",
+      "title": "Add more types to the default disallow list of named types to be deserialized",
+      "files": 1,
+      "areas": [
+        "runtime-serializer"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "ce868a057",
+      "date": "2026-05-13",
+      "pr": "2261",
+      "title": "Build with .NET SDK 10.0.300",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "b69ed9d1f",
+      "date": "2026-05-13",
+      "pr": "2260",
+      "title": "Fix typo and ignore .lscache files",
+      "files": 2,
+      "areas": [
+        "other",
+        "runtime-serializer"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "84db9f79e",
+      "date": "2026-02-27",
+      "pr": "2235",
+      "title": "Fix LICENSE notices for BufferWriter.cs",
+      "files": 2,
+      "areas": [
+        "other",
+        "runtime-serializer"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "39e4a7921",
+      "date": "2025-08-31",
+      "pr": "2226",
+      "title": "fix: prevent StackOverflow in Equals with recursive generic constraints",
+      "files": 1,
+      "areas": [
+        "analyzer-core"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "aa4debf6a",
+      "date": "2025-08-22",
+      "pr": "2224",
+      "title": "Fix various disposable issues",
+      "files": 4,
+      "areas": [
+        "runtime-serializer"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "327711df7",
+      "date": "2025-08-22",
+      "pr": "2225",
+      "title": "Fix Incorrect DateTimeOffset Serializer",
+      "files": 1,
+      "areas": [
+        "runtime-serializer"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "65e5b0fc9",
+      "date": "2025-08-17",
+      "pr": "2212",
+      "title": "Use 'Write' instead of 'WriteInt32' for union type keys",
+      "files": 5,
+      "areas": [
+        "generated-snapshots",
+        "generator-templates"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "55b4d1a12",
+      "date": "2025-08-17",
+      "pr": "2206",
+      "title": "Remove unneeded GetTypeInfo calls",
+      "files": 19,
+      "areas": [
+        "runtime-serializer"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "44aa149ac",
+      "date": "2025-06-12",
+      "pr": null,
+      "title": "feat: Update package.json to 3.1.4",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "1bf454c6b",
+      "date": "2025-06-06",
+      "pr": "2185",
+      "title": "AccessModifier was added to generated code.",
+      "files": 126,
+      "areas": [
+        "analyzer-core",
+        "generated-snapshots"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "e9ba7483f",
+      "date": "2025-03-04",
+      "pr": "2172",
+      "title": "Add memory size check to `GetMemoryCheckResult`",
+      "files": 1,
+      "areas": [
+        "runtime-serializer"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "49c422a36",
+      "date": "2025-03-01",
+      "pr": "2169",
+      "title": "Promote analyzers to AnalyzerReleases.Shipped.md",
+      "files": 2,
+      "areas": [
+        "generator-other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "a21c20157",
+      "date": "2025-02-09",
+      "pr": "2153",
+      "title": "Fix SkipClrVisibilityChecks to notice private fields in base classes",
+      "files": 2,
+      "areas": [
+        "runtime-serializer",
+        "tests"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "6d58a2d92",
+      "date": "2025-02-04",
+      "pr": null,
+      "title": "feat: Update package.json to 3.1.3",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "892b897e0",
+      "date": "2025-02-04",
+      "pr": "2150",
+      "title": "Fix stackoverflow on analyzer",
+      "files": 4,
+      "areas": [
+        "analyzer-core",
+        "generator-other",
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "9206d3539",
+      "date": "2025-01-27",
+      "pr": null,
+      "title": "feat: Update package.json to 3.1.2",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "e823ea1f9",
+      "date": "2025-01-27",
+      "pr": "2139",
+      "title": "Change ByteListFormatter behaviour to keep binary compatibility for List<byte>",
+      "files": 5,
+      "areas": [
+        "runtime-serializer",
+        "tests"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "c52c51d73",
+      "date": "2025-01-27",
+      "pr": "2136",
+      "title": "Add PreserveAttribute to generic formatters for Unity IL2CPP",
+      "files": 15,
+      "areas": [
+        "other",
+        "runtime-serializer"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "5063b72dc",
+      "date": "2025-01-27",
+      "pr": "2134",
+      "title": "Protects the generated resolver type metadata from trimmer",
+      "files": 2,
+      "areas": [
+        "runtime-serializer"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "c759cbf2f",
+      "date": "2025-01-24",
+      "pr": "2138",
+      "title": "GitHubActions, prevent run build-unity on external contributor",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "70214f0e7",
+      "date": "2025-01-23",
+      "pr": "2135",
+      "title": "Fix issues about Double.MaxValue",
+      "files": 1,
+      "areas": [
+        "runtime-serializer"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "528e6a774",
+      "date": "2025-01-16",
+      "pr": "2124",
+      "title": "Remove FluentAssertions, Use Shouldly",
+      "files": 5,
+      "areas": [
+        "other",
+        "tests"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "eec61d68f",
+      "date": "2025-01-09",
+      "pr": "2123",
+      "title": "Add missing recursion guard to `CodeAnalysisUtilities.GetTypeParameters`",
+      "files": 1,
+      "areas": [
+        "analyzer-core"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "8373710fb",
+      "date": "2024-12-26",
+      "pr": null,
+      "title": "feat: Update package.json to 3.1.1",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "fb8fac0d4",
+      "date": "2024-12-26",
+      "pr": "2106",
+      "title": "enable analyze union / stop collect field when object marked SuppressSourceGeneration",
+      "files": 9,
+      "areas": [
+        "analyzer-core",
+        "generated-snapshots",
+        "other",
+        "tests"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "5222bc2c3",
+      "date": "2024-12-25",
+      "pr": "2103",
+      "title": "Fix source generator, don't generate when abstract/interface is not union",
+      "files": 5,
+      "areas": [
+        "analyzer-core",
+        "other",
+        "tests"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "bc83eb1ac",
+      "date": "2024-12-25",
+      "pr": "2104",
+      "title": "Remove PublicApiAnalyzers",
+      "files": 12,
+      "areas": [
+        "other",
+        "runtime-serializer"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "bfce469a5",
+      "date": "2024-12-25",
+      "pr": "2105",
+      "title": "allow DynamicGenericResolver to StandardResolver in DynamicAssembly.AvoidDynamicCode",
+      "files": 1,
+      "areas": [
+        "runtime-serializer"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "c6d298015",
+      "date": "2024-12-18",
+      "pr": "2098",
+      "title": "README.md: ÌntKey -> IntKey",
+      "files": 1,
+      "areas": [
+        "docs"
+      ],
+      "lane": "L1",
+      "escape": null
+    },
+    {
+      "sha": "ff62247dd",
+      "date": "2024-12-12",
+      "pr": null,
+      "title": "feat: Update package.json to 3.1.0",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "829af01b2",
+      "date": "2024-12-12",
+      "pr": "2095",
+      "title": "Current all apis to shipped.txt",
+      "files": 12,
+      "areas": [
+        "runtime-serializer"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "cb0137149",
+      "date": "2024-12-12",
+      "pr": "2094",
+      "title": "Remove NerdBank.GitVersioning",
+      "files": 10,
+      "areas": [
+        "generator-other",
+        "other",
+        "tests"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "7639d75a0",
+      "date": "2024-12-12",
+      "pr": "2093",
+      "title": "Check IsGenericType before call ConstructUnboundGenericType()",
+      "files": 3,
+      "areas": [
+        "analyzer-core",
+        "generator-other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "b1df22f16",
+      "date": "2024-12-11",
+      "pr": "2090",
+      "title": "Add .NET 9",
+      "files": 47,
+      "areas": [
+        "generator-other",
+        "other",
+        "runtime-serializer",
+        "tests"
+      ],
+      "lane": "L3",
+      "escape": null
+    },
+    {
+      "sha": "3049deab8",
+      "date": "2024-12-10",
+      "pr": "2088",
+      "title": "Relaxed the conditions in editor.config",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "9bb199934",
+      "date": "2024-12-09",
+      "pr": null,
+      "title": "feat: Update package.json to 3.0.301",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "b4822a8bc",
+      "date": "2024-12-09",
+      "pr": "2087",
+      "title": "Fix Source Generator doesnt work in Unity",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "10d9d9bde",
+      "date": "2024-12-09",
+      "pr": "2084",
+      "title": "Touch-ups to master",
+      "files": 46,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "ba54fab79",
+      "date": "2024-12-06",
+      "pr": null,
+      "title": "feat: Update package.json to 3.0.300",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "d8b00a18c",
+      "date": "2024-12-06",
+      "pr": null,
+      "title": "Update version.json",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "ff3af77f5",
+      "date": "2024-12-06",
+      "pr": null,
+      "title": "Merge remote-tracking branch 'origin/master'",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "19da689e9",
+      "date": "2024-12-06",
+      "pr": null,
+      "title": "disable upload MessagePack.Experimental temporary",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "dec9d6ca1",
+      "date": "2024-12-06",
+      "pr": null,
+      "title": "fix path",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "0aa812eff",
+      "date": "2024-12-06",
+      "pr": null,
+      "title": "CI: do build for pack",
+      "files": 2,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "332b2b6e4",
+      "date": "2024-12-06",
+      "pr": null,
+      "title": "CI: disable package validation on Analyzer build",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "d38086045",
+      "date": "2024-12-06",
+      "pr": null,
+      "title": "CI, fetch-depth:0",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "b46745407",
+      "date": "2024-12-06",
+      "pr": null,
+      "title": "version.json",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "321c070cb",
+      "date": "2024-12-06",
+      "pr": null,
+      "title": "CI",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "69c4830e8",
+      "date": "2024-12-06",
+      "pr": null,
+      "title": "with write",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "3ff2dd9a4",
+      "date": "2024-12-06",
+      "pr": null,
+      "title": "about v3 Analyzer",
+      "files": 1,
+      "areas": [
+        "docs"
+      ],
+      "lane": "L1",
+      "escape": null
+    },
+    {
+      "sha": "4bab7b146",
+      "date": "2024-12-06",
+      "pr": null,
+      "title": "Merge remote-tracking branch 'origin/master'",
+      "files": 1,
+      "areas": [
+        "other"
+      ],
+      "lane": "L2",
+      "escape": null
+    },
+    {
+      "sha": "751eecce5",
+      "date": "2024-12-06",
+      "pr": null,
+      "title": "Merge branch 'develop'",
+      "files": 1120,
+      "areas": [
+        "analyzer-core",
+        "docs",
+        "generated-snapshots",
+        "generator-other",
+        "generator-templates",
+        "other",
+        "runtime-serializer",
+        "tests"
+      ],
+      "lane": "L3",
+      "escape": null
+    }
+  ],
+  "escape_cases": {
+    "label": "REAL escapes from MessagePack-CSharp history, hand-picked sample (n=4). Not a statistic.",
+    "pointed_at_defect_by_evidence": {
+      "yes": 2,
+      "no": 1,
+      "no_machine_evidence": 1
+    },
+    "generated_at": "2026-11-15T00:09:14+02:00",
+    "cases": [
+      {
+        "id": "esc-2234",
+        "title": "Analyzer silent for SuppressSourceGeneration types (issue #2234)",
+        "introducing_commit": "1a74a620",
+        "introduced_on": "2024-12-25",
+        "introducing_note": "inside PR #2106, shipped in v3.1.1",
+        "fix_commit": null,
+        "fixed_on": null,
+        "fix_note": "no upstream fix in this clone; the early return is still on origin/master",
+        "found_by": "issue #2234 ('worked in 3.1.0')",
+        "detected_on": "2025-10-17",
+        "days_to_detection": 296,
+        "files": 2,
+        "changed_lines": 185,
+        "areas": [
+          "analyzer-core",
+          "other"
+        ],
+        "lane": "L2",
+        "lane_reasons": [
+          "highest default lane of the touched areas",
+          "3 source hunk(s) not yet proven protected (xray pending)"
+        ],
+        "blast_radius": {
+          "symbol": "SetValue",
+          "references": 1
+        },
+        "light_lane": false,
+        "static_rules": [
+          {
+            "rule": "R2-early-return",
+            "hunk": "h2",
+            "why": "added an early 'return null;' that skips the rest of the method"
+          }
+        ],
+        "reading_budget_router": {
+          "lines": 185,
+          "of": 185,
+          "note": "no X-Ray folded in: the router sees only the baseline files in runs/escapes/<id>/"
+        },
+        "verdict": {
+          "defect": "TypeCollector.cs: the new early 'return null' (hunk 2 of the commit) skips the collection the analyzer relies on for SuppressSourceGeneration types.",
+          "pointed_at_defect": "yes",
+          "why": "X-Ray at the commit: both source hunks are unprotected, no passing test fails when either is reverted. The R2-early-return pattern also fires on the moved 'return null'. That pattern was written after reading this commit, so it is hindsight, not recall.",
+          "human_asked": "Nothing tests this early return. Every check after it is skipped for suppressed types. Is that intended?",
+          "limits": "9 of 103 tests in the selected set fail on this machine at the parent commit too (same 9), so they gave no signal. Router budget of 185 lines includes 170 lines of sandbox/Program.cs that our area map counts as source; the real source change is 15 lines."
+        },
+        "xray": {
+          "scope": "Only the tests selected by the filter were run.",
+          "baseline": {
+            "exit": 1,
+            "total": "103",
+            "passed": "94",
+            "failed_count": "9",
+            "failed": [
+              "GenerationTests.InterfaceUnionUsedWithNullableRefAnnotation",
+              "MsgPack00xAnalyzerTests.AddAttributeToGenericType",
+              "MsgPack00xAnalyzerTests.AddAttributeToTypeForRecord1",
+              "MsgPack00xAnalyzerTests.AddAttributeToTypeForRecord2",
+              "MsgPack00xAnalyzerTests.AddAttributeToTypeForRecordPrimaryConstructor",
+              "MsgPack00xAnalyzerTests.AddAttributeToType_Fields",
+              "MsgPack00xAnalyzerTests.AddAttributeToType_Generic",
+              "MsgPack00xAnalyzerTests.AddAttributeToType_Nullable",
+              "MsgPack00xAnalyzerTests.AddAttributeToType_Properties"
+            ],
+            "seconds": 52
+          },
+          "groups": [
+            {
+              "id": "g1",
+              "file": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+              "result": "unprotected",
+              "failing_tests": [],
+              "lines": 15
+            },
+            {
+              "id": "g2",
+              "file": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+              "result": "unprotected",
+              "failing_tests": [],
+              "lines": 14
+            }
+          ]
+        }
+      },
+      {
+        "id": "esc-2149",
+        "title": "Analyzer stack overflow from a dropped recursion guard (issue #2149)",
+        "introducing_commit": "c012263f",
+        "introduced_on": "2024-10-23",
+        "introducing_note": "added an optional recursionGuard parameter; one call site never passed it",
+        "fix_commit": "4d5ff777",
+        "fixed_on": "2025-02-03",
+        "fix_note": "PR #2150 'Fix stackoverflow on analyzer'",
+        "found_by": "issue #2149",
+        "detected_on": "2025-02-03",
+        "days_to_detection": 103,
+        "files": 8,
+        "changed_lines": 172,
+        "areas": [
+          "analyzer-core",
+          "generated-snapshots",
+          "tests"
+        ],
+        "lane": "L2",
+        "lane_reasons": [
+          "highest default lane of the touched areas",
+          "blast radius: QualifiedNamedTypeName has 48 references (threshold 10)",
+          "10 source hunk(s) not yet proven protected (xray pending)"
+        ],
+        "blast_radius": {
+          "symbol": "QualifiedNamedTypeName",
+          "references": 48
+        },
+        "light_lane": false,
+        "static_rules": [],
+        "reading_budget_router": {
+          "lines": 152,
+          "of": 172,
+          "note": "no X-Ray folded in: the router sees only the baseline files in runs/escapes/<id>/"
+        },
+        "verdict": {
+          "defect": "A call site that was never touched by the commit (target-typed 'new(nesting)' in QualifiedNamedTypeName.cs) kept using the default recursionGuard = null.",
+          "pointed_at_defect": "no",
+          "why": "Every logic hunk in the commit is protected (reverting the guard pass-through crashes the test host with a stack overflow) or structural. The three unprotected hunks only remove 'using' lines. The defect is in code the diff does not contain, which X-Ray cannot see. Blast radius (QualifiedNamedTypeName has 48 references) keeps the lane at L2, but that comes from reference counts, not from the defect.",
+          "human_asked": "A reviewer is asked to read 10 flagged hunks. Nothing points at the untouched call site.",
+          "limits": "A grep for call sites cannot find target-typed 'new(...)' expressions. Finding the missed call site needs a semantic tool such as Roslyn or an IDE find-usages."
+        },
+        "xray": {
+          "scope": "Only the tests selected by the filter were run.",
+          "baseline": {
+            "exit": 0,
+            "total": "86",
+            "passed": "86",
+            "failed_count": "0",
+            "failed": [],
+            "seconds": 50
+          },
+          "groups": [
+            {
+              "id": "g1",
+              "file": "src/MessagePack.SourceGenerator/CodeAnalysis/GenericTypeParameterInfo.cs",
+              "result": "structural",
+              "failing_tests": [],
+              "lines": 33
+            },
+            {
+              "id": "g2",
+              "file": "src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedNamedTypeName.cs",
+              "result": "unprotected",
+              "failing_tests": [],
+              "lines": 9
+            },
+            {
+              "id": "g3",
+              "file": "src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedNamedTypeName.cs",
+              "result": "structural",
+              "failing_tests": [],
+              "lines": 9
+            },
+            {
+              "id": "g4",
+              "file": "src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedNamedTypeName.cs",
+              "result": "load-bearing",
+              "failing_tests": [
+                "(test host aborted: stack overflow)"
+              ],
+              "lines": 11
+            },
+            {
+              "id": "g5",
+              "file": "src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedTypeName.cs",
+              "result": "unprotected",
+              "failing_tests": [],
+              "lines": 11
+            },
+            {
+              "id": "g6",
+              "file": "src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedTypeName.cs",
+              "result": "structural",
+              "failing_tests": [],
+              "lines": 24
+            },
+            {
+              "id": "g7",
+              "file": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+              "result": "unprotected",
+              "failing_tests": [],
+              "lines": 14
+            },
+            {
+              "id": "g8",
+              "file": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+              "result": "structural",
+              "failing_tests": [],
+              "lines": 9
+            }
+          ]
+        }
+      },
+      {
+        "id": "esc-2225",
+        "title": "DateTimeOffset encoding change reverted because it broke tests (PR #2225, revert #2262)",
+        "introducing_commit": "50394986",
+        "introduced_on": "2025-08-21",
+        "introducing_note": "PR #2225 'Use UtcTicks instead of Ticks', one line, no test change",
+        "fix_commit": "ecba7969",
+        "fixed_on": "2026-05-14",
+        "fix_note": "PR #2262 'Revert DateTimeOffset encoding change'",
+        "found_by": "maintainer, 'broke our tests' (revert text)",
+        "detected_on": "2026-05-14",
+        "days_to_detection": 266,
+        "files": 1,
+        "changed_lines": 2,
+        "areas": [
+          "runtime-serializer"
+        ],
+        "lane": "L3",
+        "lane_reasons": [
+          "highest default lane of the touched areas",
+          "touches ceiling area(s): runtime-serializer",
+          "1 source hunk(s) not yet proven protected (xray pending)"
+        ],
+        "blast_radius": {
+          "symbol": null,
+          "references": 0
+        },
+        "light_lane": false,
+        "static_rules": [],
+        "reading_budget_router": {
+          "lines": 2,
+          "of": 2,
+          "note": "no X-Ray folded in: the router sees only the baseline files in runs/escapes/<id>/"
+        },
+        "verdict": {
+          "defect": "StandardClassLibraryFormatter.cs: Ticks became UtcTicks, which changes the bytes written for DateTimeOffset (wire format) and broke an existing test.",
+          "pointed_at_defect": "yes",
+          "why": "The commit touches the runtime-serializer ceiling area, so the lane is L3 and a human reads the whole 2-line change, which comes with no test change. On this machine (Europe/Helsinki) the existing DateTimeOffsetTest fails at the commit and passes at its parent. With TZ=UTC all 8 selected tests pass, so a UTC CI runner would have stayed green.",
+          "human_asked": "Full read of 2 lines in a serializer. Does a different tick value change the encoded bytes for existing data?",
+          "limits": "Router lane comes from the area ceiling, not from understanding wire formats. Whether a reviewer sees the compatibility problem is the reviewer's call; we only guarantee they are asked."
+        },
+        "xray": {
+          "scope": "Only the tests selected by the filter were run.",
+          "baseline": {
+            "exit": 1,
+            "total": "8",
+            "passed": "7",
+            "failed_count": "1",
+            "failed": [
+              "MessagePack.Tests.FormatterTest.DateTimeOffsetTest"
+            ],
+            "seconds": 49
+          },
+          "groups": [
+            {
+              "id": "g1",
+              "file": "src/MessagePack/Formatters/StandardClassLibraryFormatter.cs",
+              "result": "breaks-existing-test",
+              "failing_tests": [],
+              "lines": 9
+            }
+          ]
+        }
+      },
+      {
+        "id": "esc-2300",
+        "title": "Copilot PR's new test did not build on .NET Framework (fix PR #2300)",
+        "introducing_commit": "21f6e635",
+        "introduced_on": "2026-08-04",
+        "introducing_note": "PR #2287 'Fix OldSpec byte[] encoding', new test used Array.Fill",
+        "fix_commit": "ab3119e2",
+        "fixed_on": "2026-09-17",
+        "fix_note": "PR #2300 'Fix build warning and Windows build break'",
+        "found_by": "Windows build, found by the maintainer 44 days later",
+        "detected_on": "2026-09-17",
+        "days_to_detection": 44,
+        "files": 3,
+        "changed_lines": 97,
+        "areas": [
+          "runtime-serializer",
+          "tests"
+        ],
+        "lane": "L3",
+        "lane_reasons": [
+          "highest default lane of the touched areas",
+          "touches ceiling area(s): runtime-serializer",
+          "4 source hunk(s) not yet proven protected (xray pending)"
+        ],
+        "blast_radius": {
+          "symbol": null,
+          "references": 0
+        },
+        "light_lane": false,
+        "static_rules": [],
+        "reading_budget_router": {
+          "lines": 97,
+          "of": 97,
+          "note": "no X-Ray folded in: the router sees only the baseline files in runs/escapes/<id>/"
+        },
+        "verdict": {
+          "defect": "tests/MessagePack.Tests/MessagePackWriterTests.cs: new test calls Array.Fill, which does not exist on .NET Framework 4.7.2, so Windows builds broke.",
+          "pointed_at_defect": "no machine evidence",
+          "why": "Lane is L3 by the ceiling area, so a human reads all 97 changed lines including the Array.Fill line. Our execution evidence runs on net8/net9 on macOS, where the line compiles and passes, so nothing we run would have shown the break. It needs a Windows runner or a reviewer who knows the net472 target.",
+          "human_asked": "Full read of 97 lines. No specific question about target frameworks.",
+          "limits": "X-Ray was not run for this case: the defect is a compile break on a target we cannot build here."
+        },
+        "xray": null
+      }
+    ],
+    "confusion": {
+      "light_lanes_L0_L1": 0,
+      "heavy_lanes_L2_L3": 4,
+      "n": 4
+    },
+    "method": "Router run on the introducing commit as a single-commit change (parent..commit), same code as for the ju26 changes; no claims or refusals existed, so lane comes from areas, ceiling, blast radius and (where run) X-Ray."
+  }
+}

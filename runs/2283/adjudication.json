@@ -1,0 +1,343 @@
+{
+  "change": "2283",
+  "adjudicator": "adjudicator-1",
+  "adjudicated_at": "2026-11-15T00:19:36+02:00",
+  "levels": {
+    "E3": 2,
+    "E1": 7,
+    "E2": 1
+  },
+  "statuses": {
+    "proven": 2,
+    "refused": 6,
+    "unproven": 2
+  },
+  "timemachine": {
+    "tests": 3,
+    "pass_on_base": 0,
+    "genuine_fail_to_pass": 3,
+    "tests_that_prove_nothing": []
+  },
+  "requirement_coverage": [
+    {
+      "id": "REQ-2283-F1",
+      "section": "functional",
+      "text": "MsgPack00xMessagePackAnalyzer does not throw (no AD0001) for a closed generic value type from a referenced assembly.",
+      "claims": [
+        "C1",
+        "C9"
+      ],
+      "best_level": "E3",
+      "coverage": "evidenced"
+    },
+    {
+      "id": "REQ-2283-F2",
+      "section": "functional",
+      "text": "MessagePackGenerator does not throw (no CS8785) and emits a GeneratedMessagePackResolver for the consuming assembly.",
+      "claims": [
+        "C2"
+      ],
+      "best_level": "E3",
+      "coverage": "evidenced"
+    },
+    {
+      "id": "REQ-2283-F3",
+      "section": "functional",
+      "text": "Behaviour matrix from the issue holds. struct<T> and record struct<T> from metadata no longer crash; struct, record struct, class<T> and record class<T> keep working unchanged.\n",
+      "claims": [
+        "C3"
+      ],
+      "best_level": "E1",
+      "coverage": "weak"
+    },
+    {
+      "id": "REQ-2283-NF1",
+      "section": "non_functional",
+      "text": "No existing diagnostic for types declared in source is lost, moved or changed.",
+      "claims": [
+        "C4",
+        "C10"
+      ],
+      "best_level": "E2",
+      "coverage": "evidenced"
+    },
+    {
+      "id": "REQ-2283-NF2",
+      "section": "non_functional",
+      "text": "Documentation changes are accurate and do not over-claim behaviour.",
+      "claims": [
+        "C6",
+        "C7",
+        "C8"
+      ],
+      "best_level": "E1",
+      "coverage": "weak"
+    },
+    {
+      "id": "REQ-2283-S1",
+      "section": "security",
+      "text": "No safety-relevant diagnostic is silently suppressed for types the user controls.",
+      "claims": [
+        "C5"
+      ],
+      "best_level": "E1",
+      "coverage": "weak"
+    }
+  ],
+  "uncovered_requirements": [],
+  "claims": [
+    {
+      "claim": "C1",
+      "verifier": "timemachine",
+      "rules": [
+        "E3: 2 test(s) fail on base and pass on head: ClosedGenericStruct_FromMetadataReference, ClosedGenericRecordStruct_FromMetadataReference",
+        "proven, partially refused: refusal(s) R-2283-4 cover a different question the owner decides"
+      ],
+      "refs": [
+        "runs/2283/timemachine.json#ClosedGenericStruct_FromMetadataReference",
+        "runs/2283/timemachine.json#ClosedGenericRecordStruct_FromMetadataReference"
+      ],
+      "flags": [],
+      "timemachine": {
+        "matched": true,
+        "via": [
+          "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs:507 is inside test ClosedGenericStruct_FromMetadataReference",
+          "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs:551 is inside test ClosedGenericRecordStruct_FromMetadataReference"
+        ],
+        "genuine": [
+          "ClosedGenericStruct_FromMetadataReference",
+          "ClosedGenericRecordStruct_FromMetadataReference"
+        ],
+        "pass_on_base": [],
+        "tests": [
+          "ClosedGenericRecordStruct_FromMetadataReference",
+          "ClosedGenericStruct_FromMetadataReference"
+        ]
+      },
+      "partially_refused": [
+        "R-2283-4"
+      ],
+      "level": "E3",
+      "status": "proven"
+    },
+    {
+      "claim": "C2",
+      "verifier": "timemachine",
+      "rules": [
+        "E3: 2 test(s) fail on base and pass on head: ClosedGenericStruct_FromMetadataReference, ClosedGenericStruct_FromMetadataReference_UnkeyedMember"
+      ],
+      "refs": [
+        "runs/2283/timemachine.json#ClosedGenericStruct_FromMetadataReference",
+        "runs/2283/timemachine.json#ClosedGenericStruct_FromMetadataReference_UnkeyedMember"
+      ],
+      "flags": [],
+      "timemachine": {
+        "matched": true,
+        "via": [
+          "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs:658 is in helper RunWithMetadataReferenceAsync, called by test ClosedGenericStruct_FromMetadataReference",
+          "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs:658 is in helper RunWithMetadataReferenceAsync, called by test ClosedGenericStruct_FromMetadataReference_UnkeyedMember",
+          "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs:656 is in helper RunWithMetadataReferenceAsync, called by test ClosedGenericStruct_FromMetadataReference",
+          "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs:656 is in helper RunWithMetadataReferenceAsync, called by test ClosedGenericStruct_FromMetadataReference_UnkeyedMember"
+        ],
+        "genuine": [
+          "ClosedGenericStruct_FromMetadataReference",
+          "ClosedGenericStruct_FromMetadataReference_UnkeyedMember"
+        ],
+        "pass_on_base": [],
+        "tests": [
+          "ClosedGenericStruct_FromMetadataReference",
+          "ClosedGenericStruct_FromMetadataReference_UnkeyedMember"
+        ]
+      },
+      "level": "E3",
+      "status": "proven"
+    },
+    {
+      "claim": "C3",
+      "verifier": "matrix",
+      "rules": [
+        "E1: verifier 'matrix' has no executed evidence (argued; citations validate)",
+        "refused: referenced by refusal(s) R-2283-3"
+      ],
+      "refs": [],
+      "flags": [],
+      "level": "E1",
+      "status": "refused"
+    },
+    {
+      "claim": "C4",
+      "verifier": "xray",
+      "rules": [
+        "E2: all cited source hunks are load-bearing (h3, h6); protected by a test, not an executed demonstration of the claim",
+        "refused: referenced by refusal(s) R-2283-1"
+      ],
+      "refs": [
+        "runs/2283/xray.json#g1",
+        "runs/2283/xray.json#g5",
+        "runs/2283/hypotheses.json#H1"
+      ],
+      "flags": [],
+      "xray": {
+        "h3": {
+          "result": "load-bearing",
+          "group": "g1",
+          "how": "alone"
+        },
+        "h6": {
+          "result": "load-bearing",
+          "group": "g5",
+          "how": "jointly"
+        }
+      },
+      "level": "E2",
+      "status": "refused"
+    },
+    {
+      "claim": "C5",
+      "verifier": "argued",
+      "rules": [
+        "E1: verifier 'argued' has no executed evidence (argued; citations validate)",
+        "refused: referenced by refusal(s) R-2283-1"
+      ],
+      "refs": [],
+      "flags": [],
+      "level": "E1",
+      "status": "refused"
+    },
+    {
+      "claim": "C6",
+      "verifier": "argued",
+      "rules": [
+        "E1: verifier 'argued' has no executed evidence (argued; citations validate)",
+        "refused: referenced by refusal(s) R-2283-2"
+      ],
+      "refs": [],
+      "flags": [],
+      "level": "E1",
+      "status": "refused"
+    },
+    {
+      "claim": "C7",
+      "verifier": "argued",
+      "rules": [
+        "E1: verifier 'argued' has no executed evidence (argued; citations validate)",
+        "refused: referenced by refusal(s) R-2283-2, R-2283-3"
+      ],
+      "refs": [],
+      "flags": [],
+      "level": "E1",
+      "status": "refused"
+    },
+    {
+      "claim": "C8",
+      "verifier": "argued",
+      "rules": [
+        "E1: verifier 'argued' has no executed evidence (argued; citations validate)"
+      ],
+      "refs": [],
+      "flags": [],
+      "level": "E1",
+      "status": "unproven"
+    },
+    {
+      "claim": "C9",
+      "verifier": "static",
+      "rules": [
+        "E1: static claim, citations validate, no deterministic check implemented for it",
+        "refused: referenced by refusal(s) R-2283-4"
+      ],
+      "refs": [],
+      "flags": [],
+      "level": "E1",
+      "status": "refused"
+    },
+    {
+      "claim": "C10",
+      "verifier": "matrix",
+      "rules": [
+        "E1: verifier 'matrix' has no executed evidence (argued; citations validate)"
+      ],
+      "refs": [],
+      "flags": [],
+      "level": "E1",
+      "status": "unproven"
+    }
+  ],
+  "reading_budget_line_level": {
+    "lines": 90,
+    "total_changed_lines": 228,
+    "ratio": 0.3947,
+    "hunks": [
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6",
+      "h8"
+    ],
+    "per_hunk": [
+      {
+        "hunk": "h1",
+        "path": "README.md",
+        "kind": "doc",
+        "lines": 5,
+        "of": 5,
+        "how": "5 of 5 lines (+-4 around cited lines)"
+      },
+      {
+        "hunk": "h2",
+        "path": "doc/analyzers/MsgPack004.md",
+        "kind": "doc",
+        "lines": 5,
+        "of": 5,
+        "how": "5 of 5 lines (+-4 around cited lines)"
+      },
+      {
+        "hunk": "h3",
+        "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+        "kind": "src",
+        "lines": 2,
+        "of": 2,
+        "how": "whole hunk"
+      },
+      {
+        "hunk": "h4",
+        "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+        "kind": "src",
+        "lines": 2,
+        "of": 2,
+        "how": "whole hunk"
+      },
+      {
+        "hunk": "h5",
+        "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+        "kind": "src",
+        "lines": 2,
+        "of": 2,
+        "how": "whole hunk"
+      },
+      {
+        "hunk": "h6",
+        "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+        "kind": "src",
+        "lines": 23,
+        "of": 23,
+        "how": "whole hunk"
+      },
+      {
+        "hunk": "h8",
+        "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+        "kind": "test",
+        "lines": 51,
+        "of": 187,
+        "how": "51 of 187 lines (+-4 around cited lines)"
+      }
+    ],
+    "router_hunk_level": {
+      "lines": 226,
+      "provisional": false
+    },
+    "method": "Reading budget at line granularity, computed after `router.route` has written route.json."
+  }
+}

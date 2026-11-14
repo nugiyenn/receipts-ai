@@ -1,0 +1,12 @@
+version: areas-1
+# First matching rule wins (order matters). Lanes: L0 mechanical, L1 skim, L2 focused, L3 full read.
+areas:
+  - {name: runtime-serializer,  globs: ["src/MessagePack/**", "src/MessagePack.Annotations/**"], default_lane: L3, ceiling: L3, security_critical: true}
+  - {name: analyzer-core,       globs: ["src/MessagePack.SourceGenerator/CodeAnalysis/**", "src/MessagePack.SourceGenerator/Analyzers/**"], default_lane: L2, ceiling: null}
+  - {name: generator-templates, globs: ["src/MessagePack.SourceGenerator/Transforms/**"], default_lane: L2, ceiling: null}
+  - {name: generator-other,     globs: ["src/MessagePack.SourceGenerator/**"], default_lane: L2, ceiling: null}
+  - {name: generated-snapshots, globs: ["**/*.g.cs", "**/Resources/**"], default_lane: L0, ceiling: null}
+  - {name: test-fixtures,       globs: ["tests/MessagePack.SourceGenerator.ExternalTypes/**"], default_lane: L1, ceiling: null}   # added for change 2129: fixture library without MessagePack reference
+  - {name: tests,               globs: ["tests/**"], default_lane: L1, ceiling: null}
+  - {name: docs,                globs: ["**/*.md", "doc/**"], default_lane: L1, ceiling: null}
+  - {name: other,               globs: ["**"], default_lane: L2, ceiling: null}

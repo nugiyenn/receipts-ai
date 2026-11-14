@@ -1,0 +1,421 @@
+{
+ "limits": [
+  "One run per reviewer per change, temperature 0 for Gemini and the default for claude -p. A second run could differ.",
+  "The ground truth is our own work: executed probes, X-Ray, Time Machine and regeneration results from runs/. It is not an independent list of every defect.",
+  "Whether a naive review 'mentions' a finding was judged by us. We leaned toward the naive reviewers (specific statements count, vague ones do not), but it is still our judgment.",
+  "The naive prompt is one choice. A longer prompt, repository access or tools would likely find more. We gave no tools, and claude -p had an empty working directory.",
+  "Only four changes from one repository, and these reviews saw the diff and the issue text only.",
+  "False and unverified counts only include what we could check by reading code or our own runs. 'Unverified' means plausible but not checked."
+ ],
+ "what_naive_review_lacks": "Both naive reviews are prose with no executed check, no log and no file reference a person can open to confirm a statement, and both sound equally sure when they are right and when they are wrong. Receipts attaches a run, a log or a refusal to every statement, so the owner can check it.",
+ "changes": {
+  "2283": {
+   "has_confirmed_silent_failure": true,
+   "ground_truth": [
+    {
+     "id": "G1",
+     "text": "Hunk h4 (BothStringAndIntKeyAreNull location helper) is unprotected: all 59 targeted tests pass when it is reverted.",
+     "source": "runs/2283/xray.json g2"
+    },
+    {
+     "id": "G2",
+     "text": "The constructor filter drops a diagnostic that base reported: MsgPack004, twice with Location.None, for a closed generic class from a referenced assembly with an unkeyed member.",
+     "source": "runs/2283/hypotheses.json H1"
+    },
+    {
+     "id": "G3",
+     "text": "A positional record with a null key used to crash the analyzer and now silently loses MsgPack005 (source-declared type).",
+     "source": "runs/2283/gemini_tests/results.json C10"
+    },
+    {
+     "id": "G4",
+     "text": "The code comment saying analyzers are not permitted to report against a location that does not exist overstates: base reported Location.None diagnostics without error.",
+     "source": "runs/2283/gemini_tests/results.json C8"
+    },
+    {
+     "id": "G5",
+     "text": "The broad filter is not what fixes the crash (the FirstOrDefault change in h5 is); only the agent's UnkeyedMember test notices the filter, and it asserts the drop.",
+     "source": "runs/2283/xray.json g1, g3"
+    }
+   ],
+   "reviewers": {
+    "claude": {
+     "verdict": "request_changes",
+     "confidence_words": [
+      "I reviewed the diff only. I haven't built it or run the tests",
+      "may still be unfixed",
+      "Not yet"
+     ],
+     "matches": {
+      "G1": {
+       "match": "yes",
+       "quote": "There is no test for `BothStringAndIntKeyAreNull` on a metadata type."
+      },
+      "G2": {
+       "match": "partly",
+       "quote": "It changes behavior for any existing diagnostic that deliberately uses `Location.None`. (general mechanism, not the MsgPack004 case)"
+      },
+      "G3": {
+       "match": "yes",
+       "quote": "positional record properties declared in source ... Before the PR, that path threw `InvalidCastException`. Now the `BothStringAndIntKeyAreNull` diagnostic is silently lost"
+      },
+      "G4": {
+       "match": "no",
+       "quote": "not mentioned"
+      },
+      "G5": {
+       "match": "yes",
+       "quote": "The filter is global and hides future bugs ... A narrower guard at the call sites ... would be safer."
+      }
+     },
+     "naive_findings": 7,
+     "false_or_unverifiable": [
+      {
+       "text": "One of the three DeclaringSyntaxReferences[0] sites may still be unfixed (near line 735).",
+       "status": "false",
+       "check": "On this base the third site is commented out (TypeCollector.cs:715 starts with ////), so no live crash remains."
+      },
+      {
+       "text": "Closed generics are not registered as formatters on that branch, so the README line may promise more than is verified.",
+       "status": "unverified",
+       "check": "Not checked."
+      }
+     ],
+     "found_that_receipts_missed": []
+    },
+    "gemini": {
+     "verdict": "request_changes",
+     "confidence_words": [
+      "This is a great catch",
+      "excellent",
+      "critical issues"
+     ],
+     "matches": {
+      "G1": {
+       "match": "no",
+       "quote": "not mentioned"
+      },
+      "G2": {
+       "match": "no",
+       "quote": "not mentioned"
+      },
+      "G3": {
+       "match": "yes",
+       "quote": "if a user has a field or record parameter in their *current* project with an invalid key (e.g., `[Key(null)]`), they will no longer get a warning."
+      },
+      "G4": {
+       "match": "no",
+       "quote": "not mentioned"
+      },
+      "G5": {
+       "match": "no",
+       "quote": "It says the approach of dropping diagnostics for referenced-assembly types is correct; no scope concern."
+      }
+     },
+     "naive_findings": 3,
+     "false_or_unverifiable": [
+      {
+       "text": "Compilation error CS1503: item is ISymbol but GetPropertyIdentifierLocation takes IPropertySymbol.",
+       "status": "false",
+       "check": "The call is inside `foreach (IPropertySymbol item ...)` (TypeCollector.cs:886) and the head builds; 59 tests pass."
+      },
+      {
+       "text": "Incomplete replacement of DeclaringSyntaxReferences[0]; cites a PR description that was not provided.",
+       "status": "false",
+       "check": "The third site is commented out at TypeCollector.cs:715; no PR description was in the prompt."
+      },
+      {
+       "text": "Fields would also lose the diagnostic through the property helper.",
+       "status": "false",
+       "check": "Fields go through a separate loop (TypeCollector.cs:1048) that does not call GetPropertyIdentifierLocation."
+      }
+     ],
+     "found_that_receipts_missed": []
+    }
+   }
+  },
+  "2234": {
+   "has_confirmed_silent_failure": true,
+   "ground_truth": [
+    {
+     "id": "G1",
+     "text": "4 of the 8 new analyzer tests also pass on the old code, so they do not reproduce the bug.",
+     "source": "runs/2234/timemachine.json"
+    },
+    {
+     "id": "G2",
+     "text": "3 of 6 source hunks (the field loop, 11 changed lines) are noticed by none of the 8 new tests.",
+     "source": "runs/2234/xray.json"
+    },
+    {
+     "id": "G3",
+     "text": "The branch does not address the issue's cause: the 3.1.1 regression commit 1a74a620 is not in its history and the diff never moves the early return.",
+     "source": "runs/2234/hypotheses.json H4"
+    },
+    {
+     "id": "G4",
+     "text": "After the fix the generator emits a resolver and formatters for types with duplicate or mixed keys without reporting anything itself.",
+     "source": "runs/2234/hypotheses.json H5"
+    }
+   ],
+   "reviewers": {
+    "claude": {
+     "verdict": "request_changes",
+     "confidence_words": [
+      "I wouldn't approve it as shown",
+      "probably",
+      "I'd expect"
+     ],
+     "matches": {
+      "G1": {
+       "match": "no",
+       "quote": "(It predicted those tests would fail on this diff; they pass on base and head.)"
+      },
+      "G2": {
+       "match": "partly",
+       "quote": "`DuplicateKeysAreReportedWithoutAnalyzerFailureForGeneratedTypes` covers duplicates but not mixed keys. (no mention of the field loop)"
+      },
+      "G3": {
+       "match": "yes",
+       "quote": "The fix itself is missing from the diff ... The only production change ... is a defensive change"
+      },
+      "G4": {
+       "match": "yes",
+       "quote": "broken code could generate a formatter without any error ... they don't prove the generator itself stays correct."
+      }
+     },
+     "naive_findings": 6,
+     "false_or_unverifiable": [
+      {
+       "text": "Tests such as MemberWithoutKeyIsReported ... I'd expect them to fail on this diff; the diff may be truncated.",
+       "status": "false",
+       "check": "All 8 new tests pass on head (runs/2234/timemachine.json); 4 of them pass on base too."
+      }
+     ],
+     "found_that_receipts_missed": []
+    },
+    "gemini": {
+     "verdict": "approve",
+     "confidence_words": [
+      "solid pull request",
+      "The tests are excellent and comprehensive",
+      "No bugs, risks, or concerns found",
+      "I approve this PR"
+     ],
+     "matches": {
+      "G1": {
+       "match": "no",
+       "quote": "The tests are excellent and comprehensive."
+      },
+      "G2": {
+       "match": "no",
+       "quote": "not mentioned"
+      },
+      "G3": {
+       "match": "no",
+       "quote": "(It says the fix addresses the issue and the tests prove it works perfectly.)"
+      },
+      "G4": {
+       "match": "no",
+       "quote": "(It says the analyzer gracefully ignores the duplicate while MsgPack005 is still reported.)"
+      }
+     },
+     "naive_findings": 0,
+     "false_or_unverifiable": [],
+     "found_that_receipts_missed": []
+    }
+   }
+  },
+  "2297": {
+   "has_confirmed_silent_failure": false,
+   "ground_truth": [
+    {
+     "id": "G1",
+     "text": "2 of 222 snapshots change by more than the attribute: an unrelated brace/newline edit in TransformUtilities.cs rides along.",
+     "source": "runs/2297/regen.json"
+    },
+    {
+     "id": "G2",
+     "text": "The #if !NETSTANDARD2_0 && !NETFRAMEWORK guard leaves generated code uncovered on those targets although the attribute compiles there.",
+     "source": "runs/2297/gemini_tests/ns2probe.log"
+    }
+   ],
+   "reviewers": {
+    "claude": {
+     "verdict": "request_changes",
+     "confidence_words": [
+      "I reviewed the diff only and didn't build or run anything",
+      "As far as I know",
+      "looks wrong",
+      "probably"
+     ],
+     "matches": {
+      "G1": {
+       "match": "partly",
+       "quote": "It changes output for every nested generic type with constraints. The `GenericDataTypeWithPrivateMember` snapshot reflects it. (treats it as needed, not as an unrelated change)"
+      },
+      "G2": {
+       "match": "yes",
+       "quote": "The guard `#if !NETSTANDARD2_0 && !NETFRAMEWORK` looks wrong ... ExcludeFromCodeCoverageAttribute exists in .NET Framework 4.0+, .NET Standard 2.0+"
+      }
+     },
+     "naive_findings": 8,
+     "false_or_unverifiable": [
+      {
+       "text": "The legacy `mpc` generator (MessagePack.GeneratorCore templates) still emits undecorated code.",
+       "status": "false",
+       "check": "No GeneratorCore or mpc project exists in this repository tree (src/ listing)."
+      }
+     ],
+     "found_that_receipts_missed": []
+    },
+    "gemini": {
+     "verdict": "request_changes",
+     "confidence_words": [
+      "This is a great addition",
+      "actually available",
+      "I would approve this PR once"
+     ],
+     "matches": {
+      "G1": {
+       "match": "no",
+       "quote": "The small fix in `TransformUtilities.cs` ... is a nice catch (mentioned approvingly, no concern raised)."
+      },
+      "G2": {
+       "match": "yes",
+       "quote": "`ExcludeFromCodeCoverageAttribute` **is** actually available in both .NET Standard 2.0 and .NET Framework 4.0+ ... The `#if` guards should be removed entirely."
+      }
+     },
+     "naive_findings": 4,
+     "false_or_unverifiable": [],
+     "found_that_receipts_missed": []
+    }
+   }
+  },
+  "2129": {
+   "has_confirmed_silent_failure": true,
+   "ground_truth": [
+    {
+     "id": "G1",
+     "text": "Read-only and private-setter public members are dropped with no diagnostic.",
+     "source": "runs/2129/hypotheses.json H2"
+    },
+    {
+     "id": "G2",
+     "text": "A duplicate formatter for one type, or a formatter for a type that already has [MessagePackObject], leaves a formatter without a body (CS0535) and no MsgPack diagnostic explains it.",
+     "source": "runs/2129/hypotheses.json H3"
+    },
+    {
+     "id": "G3",
+     "text": "[IgnoreMember] on a member of the formatted type is ignored by the generated formatter.",
+     "source": "runs/2129/hypotheses.json H7"
+    },
+    {
+     "id": "G4",
+     "text": "A [MessagePackFormatter] custom formatter on a surrogate member is silently ignored (wire shows 21, not 42).",
+     "source": "runs/2129/hypotheses.json H8"
+    },
+    {
+     "id": "G5",
+     "text": "Two source groups are unprotected by the 13 new tests: the IsUserDeclaredFormatter equality line in ObjectSerializationInfo and the four new analyzer descriptors.",
+     "source": "runs/2129/xray.json g2, g6"
+    }
+   ],
+   "reviewers": {
+    "claude": {
+     "verdict": "request_changes",
+     "confidence_words": [
+      "I only had the diff, so I couldn't build or run anything",
+      "likely bugs",
+      "I would approve once items 1-4 are resolved"
+     ],
+     "matches": {
+      "G1": {
+       "match": "no",
+       "quote": "not mentioned"
+      },
+      "G2": {
+       "match": "no",
+       "quote": "(Its item 2 is about duplicate registration through the GeneratorUtilities exclusion, a different case.)"
+      },
+      "G3": {
+       "match": "no",
+       "quote": "not mentioned"
+      },
+      "G4": {
+       "match": "no",
+       "quote": "not mentioned"
+      },
+      "G5": {
+       "match": "no",
+       "quote": "(It says the Tests project covers the diagnostics paths.)"
+      }
+     },
+     "naive_findings": 11,
+     "false_or_unverifiable": [
+      {
+       "text": "Surrogate members without [Key] fail with MemberNeedsKey, contradicting the docs that say unkeyed members are skipped.",
+       "status": "unverified",
+       "check": "Not checked."
+      },
+      {
+       "text": "A user formatter with only a parameterized constructor or a private nested formatter produces generated code that does not compile.",
+       "status": "unverified",
+       "check": "Not checked."
+      }
+     ],
+     "found_that_receipts_missed": [
+      "The predicate matches ClassDeclarationSyntax only, so a `record class` formatter is silently skipped and the user gets plain compiler errors (our claims, prosecutor and Gemini outputs never mention records; plausible from the Roslyn syntax kinds, not run)."
+     ]
+    },
+    "gemini": {
+     "verdict": "approve",
+     "confidence_words": [
+      "excellent and well-thought-out",
+      "I have ... found no blocking issues",
+      "I am approving this PR",
+      "Approved!"
+     ],
+     "matches": {
+      "G1": {
+       "match": "no",
+       "quote": "not mentioned"
+      },
+      "G2": {
+       "match": "yes",
+       "quote": "If a user applies `[GeneratedMessagePackFormatter]` to a type that *already* has `[MessagePackObject]` ... a compiler error or runtime exception. (called an edge case, non-blocking)"
+      },
+      "G3": {
+       "match": "no",
+       "quote": "not mentioned"
+      },
+      "G4": {
+       "match": "yes",
+       "quote": "if a user wants to apply a `[MessagePackFormatter(typeof(CustomFormatter))]` to a specific member via the surrogate, it will be ignored. (called a future enhancement, non-blocking)"
+      },
+      "G5": {
+       "match": "no",
+       "quote": "(It says the tests are comprehensive.)"
+      }
+     },
+     "naive_findings": 5,
+     "false_or_unverifiable": [
+      {
+       "text": "init-only properties may produce compiler error CS0200 in the generated formatter.",
+       "status": "false",
+       "check": "runs/2129/probe/InitAndRequired.txt: InitAndRequiredRoundTrip passes and the output equals the built-in resolver."
+      },
+      {
+       "text": "A generic formatter class makes the generated resolver fail to compile.",
+       "status": "unverified",
+       "check": "Not checked."
+      }
+     ],
+     "found_that_receipts_missed": [
+      "Generic formatter classes (item 2) are not in our outputs; unverified."
+     ]
+    }
+   }
+  }
+ }
+}

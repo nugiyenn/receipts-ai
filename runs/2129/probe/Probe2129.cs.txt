@@ -1,0 +1,84 @@
+using System.Runtime.Serialization;
+using System.Text;
+using MessagePack.Formatters;
+
+// Probe types (not part of the agent's change): compare the generated contractless formatter with the built-in contractless resolver.
+public class ProbeDmType
+{
+    public int Id { get; set; }
+
+    [IgnoreDataMember]
+    public string Secret { get; set; } = "s3cret";
+
+    [DataMember(Name = "renamed")]
+    public int Other { get; set; }
+}
+
+[GeneratedMessagePackFormatter]
+public partial class ProbeDmTypeFormatter : IMessagePackFormatter<ProbeDmType>
+{
+}
+
+public class ProbeRoType
+{
+    public int Id { get; set; }
+
+    public string Name { get; } = "fixed";
+
+    public string PrivSet { get; private set; } = "p";
+
+    internal int Internal { get; set; } = 5;
+}
+
+[GeneratedMessagePackFormatter]
+public partial class ProbeRoTypeFormatter : IMessagePackFormatter<ProbeRoType>
+{
+}
+
+public class ProbeInitType
+{
+    public int Id { get; init; }
+
+    public required string Label { get; init; }
+}
+
+[GeneratedMessagePackFormatter]
+public partial class ProbeInitTypeFormatter : IMessagePackFormatter<ProbeInitType>
+{
+}
+
+public class Probe2129Tests
+{
+    private static readonly MessagePackSerializerOptions Gen = MessagePackSerializerOptions.Standard
+        .WithResolver(CompositeResolver.Create(GeneratedMessagePackResolver.Instance, StandardResolver.Instance));
+
+    private static readonly MessagePackSerializerOptions Contractless = MessagePackSerializerOptions.Standard
+        .WithResolver(ContractlessStandardResolver.Instance);
+
+    private static void Record(string name, object value)
+    {
+        string dir = Environment.GetEnvironmentVariable("PROBE_OUT") ?? Path.GetTempPath();
+        Directory.CreateDirectory(dir);
+        string genJson = MessagePackSerializer.ConvertToJson(MessagePackSerializer.Serialize(value.GetType(), value, Gen), Gen);
+        string clJson = MessagePackSerializer.ConvertToJson(MessagePackSerializer.Serialize(value.GetType(), value, Contractless), Contractless);
+        File.WriteAllText(Path.Combine(dir, name + ".txt"), $"generated:    {genJson}\ncontractless: {clJson}\nequal: {genJson == clJson}\n", Encoding.UTF8);
+    }
+
+    [Fact]
+    public void DataMemberAttributes() => Record("DataMemberAttributes", new ProbeDmType { Id = 1, Other = 2 });
+
+    [Fact]
+    public void ReadOnlyAndPrivateSetters() => Record("ReadOnlyAndPrivateSetters", new ProbeRoType { Id = 1 });
+
+    [Fact]
+    public void InitAndRequired() => Record("InitAndRequired", new ProbeInitType { Id = 3, Label = "x" });
+
+    [Fact]
+    public void InitAndRequiredRoundTrip()
+    {
+        byte[] b = MessagePackSerializer.Serialize(new ProbeInitType { Id = 3, Label = "x" }, Gen);
+        ProbeInitType r = MessagePackSerializer.Deserialize<ProbeInitType>(b, Gen);
+        Assert.Equal(3, r.Id);
+        Assert.Equal("x", r.Label);
+    }
+}

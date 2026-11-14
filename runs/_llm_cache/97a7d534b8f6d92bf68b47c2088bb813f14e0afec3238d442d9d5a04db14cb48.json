@@ -1,0 +1,19 @@
+{
+ "text": "{\n  \"findings\": [\n    {\n      \"path\": \"src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs\",\n      \"line\": 985,\n      \"severity\": \"high\",\n      \"issue\": \"The variable 'item' is an ISymbol (as it can be a field or a property), so passing it to 'GetPropertyIdentifierLocation(IPropertySymbol)' causes a CS1503 compile error.\"\n    },\n    {\n      \"path\": \"src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs\",\n      \"line\": 1434,\n      \"severity\": \"high\",\n      \"issue\": \"GetPropertyIdentifierLocation returns null for record properties (which use ParameterSyntax), indexers, and fields. This causes valid BothStringAndIntKeyAreNull diagnostics for source-declared members to be silently dropped, violating the requirement.\"\n    }\n  ]\n}",
+ "model": "gemini-3.1-pro-preview",
+ "prompt_sha256": "97a7d534b8f6d92bf68b47c2088bb813f14e0afec3238d442d9d5a04db14cb48",
+ "ts": "2026-11-14T23:29:32+0200",
+ "usage": {
+  "promptTokenCount": 5959,
+  "candidatesTokenCount": 207,
+  "totalTokenCount": 21773,
+  "promptTokensDetails": [
+   {
+    "modality": "TEXT",
+    "tokenCount": 5959
+   }
+  ],
+  "thoughtsTokenCount": 15607,
+  "serviceTier": "standard"
+ }
+}

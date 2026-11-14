@@ -1,0 +1,21 @@
+{
+ "reviewer": "gemini",
+ "model": "gemini-3.1-pro-preview",
+ "prompt_sha256": "5cb0d610c6272e30430587ab631e6c5b522794b6e995d910c9dd5feb9a338998",
+ "ts": "2026-11-15T00:13:21+0200",
+ "seconds": 139.0,
+ "text": "This is an excellent and well-thought-out pull request. It elegantly solves the problem of generating formatters for external types (especially those in dependency-free libraries) without relying on reflection or modifying the external assembly. The use of a surrogate type for metadata is a very clean design choice.\n\nThe code quality is high, the documentation is thorough, and the tests cover the necessary scenarios. \n\nI have reviewed the implementation and found no blocking issues. I am approving this PR. Below are a few minor observations and edge cases to keep in mind (none of these require immediate changes, but they are worth noting for future iterations):\n\n### Minor Observations & Edge Cases (Non-blocking)\n\n1. **`init`-only properties**: \n   Because constructor parameters are not yet supported for these generated formatters, if the external type contains `init`-only properties, the generated formatter might produce a compiler error (CS0200) when it attempts to assign them after instantiation. This is an acceptable limitation for a first version, but it might be worth documenting.\n\n2. **Generic Formatter Classes**: \n   If a user mistakenly declares their formatter as a generic class (e.g., `public partial class MyFormatter<T> : IMessagePackFormatter<MyType>`), the source generator will generate the partial class correctly, but the generated `Resolver` will produce a compiler error because it won't know what type arguments to supply when instantiating `new MyFormatter<T>()`. This is a user error and the resulting compiler error is clear enough, but an analyzer could potentially catch this in the future.\n\n3. **Conflicts with `[MessagePackObject]`**: \n   If a user applies `[GeneratedMessagePackFormatter]` to a type that *already* has `[MessagePackObject]` (e.g., from an external assembly that *does* reference MessagePack), both the standard generator and this new generator will emit an `ObjectSerializationInfo` for the same type. This could lead to duplicate entries in the generated resolver, resulting in a compiler error or runtime exception. Given the primary use case is for dependency-free libraries, this is an edge case.\n\n4. **Custom Formatters on Surrogate Members**: \n   Currently, the surrogate member inspection only looks for `[Key]` and `[IgnoreMember]`. If a user wants to apply a `[MessagePackFormatter(typeof(CustomFormatter))]` to a specific member via the surrogate, it will be ignored. This could be a great enhancement for a future PR.\n\n5. **Double Evaluation in Generator**: \n   In `MessagePackGenerator.cs`, `GeneratedFormatterCollector.Collect` is called once in the main pipeline and once in the diagnostics pipeline. Given the expected low volume of `[GeneratedMessagePackFormatter]` declarations per project, the performance impact is negligible, but it could theoretically be optimized into a single pass that returns `(Model, Diagnostics)`.\n\n### Conclusion\nEverything looks solid. The analyzers are helpful, the tests are comprehensive, and the integration with the existing generator pipeline is seamless. \n\n**Approved!** Great work.",
+ "usage": {
+  "promptTokenCount": 16897,
+  "candidatesTokenCount": 649,
+  "totalTokenCount": 37072,
+  "promptTokensDetails": [
+   {
+    "modality": "TEXT",
+    "tokenCount": 16897
+   }
+  ],
+  "thoughtsTokenCount": 19526,
+  "serviceTier": "standard"
+ }
+}

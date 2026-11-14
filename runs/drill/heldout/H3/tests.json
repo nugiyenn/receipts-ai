@@ -1,0 +1,13 @@
+{
+  "ran": true,
+  "compiled": true,
+  "failing_tests": [
+    "GenericsFormatterTests.ClosedGenericRecordStruct_FromMetadataReference",
+    "GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference",
+    "GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference_UnkeyedMember"
+  ],
+  "summary_line": "",
+  "outcome": "red",
+  "seconds": 75.3,
+  "log": "runs/drill/heldout/H3/tests.log"
+}

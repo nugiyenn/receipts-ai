@@ -1,0 +1,6 @@
+Rehearsal: true (practice run, not a real sign-off)
+Requirement: REQ-2283
+Receipt: sha256:2697663dd4e1c01249847cf57a47ab9efff9160b980e4541a71318b53f0e8e6d
+Owner-Accepted-Risk: I read the diagnostic filter and the helper by hand. Three tests fail on the old code, so the crash 
+Reviewed-by-AI: receipts/areas-1+routing-1 (advisory)
+Signed-off-by: Rehearsal Owner

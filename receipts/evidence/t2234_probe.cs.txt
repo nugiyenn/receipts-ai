@@ -1,0 +1,27 @@
+// Probe for H5 (#2234): generator-only run on invalid keys. Copied into wt/*/tests/.../T2234Probe.cs (worktree only).
+using Microsoft.CodeAnalysis.Testing;
+using VerifyCS = CSharpSourceGeneratorVerifier<MessagePack.SourceGenerator.MessagePackGenerator>;
+
+public class T2234Probe
+{
+    private const string Dup = @"
+using MessagePack;
+[MessagePackObject]
+public class Dup { [Key(0)] public int A { get; set; } [Key(0)] public int B { get; set; } }
+";
+    private const string Mixed = @"
+using MessagePack;
+[MessagePackObject]
+public class Mixed { [Key(0)] public int A { get; set; } [Key(""b"")] public int B { get; set; } }
+";
+
+    [Fact] public Task DupKeys() => Run(Dup);
+    [Fact] public Task MixedKeys() => Run(Mixed);
+
+    private static async Task Run(string code)
+    {
+        var t = new VerifyCS.Test { TestCode = code };
+        try { await t.RunAsync(); System.Console.WriteLine("PROBE-RESULT: generator ran with no unexpected output"); }
+        catch (System.Exception ex) { System.Console.WriteLine("PROBE-RESULT: " + ex.Message.Replace("\r"," ").Replace("\n"," | ").Substring(0, System.Math.Min(900, ex.Message.Length))); throw; }
+    }
+}

@@ -1,0 +1,31 @@
+{
+ "hypotheses": [
+  {
+   "id": "H1",
+   "outcome": "confirmed",
+   "evidence_refs": [
+    "runs/2283/h1/base.tsv",
+    "runs/2283/h1/head.tsv",
+    "runs/2283/xray.json#g1",
+    "receipts/evidence/DiffProbeTests.cs"
+   ],
+   "notes": "Differential probe of 8 scenarios (analyzer run on base vs head). One previously-reported diagnostic is now dropped: S4, a closed generic CLASS from a referenced assembly with an unkeyed member. Base reported MsgPack004 twice with Location.None; head reports nothing. All other 7 scenarios identical (no diagnostics on both). Source-declared types: no diagnostic lost in the probe (S1 etc. had none on either side, so this is absence of evidence, not proof). The agent's own UnkeyedMember test (and X-Ray group g1) encode this drop as intended. So: behaviour change confirmed, consistent with the README's stated intent, but broader than the crash fix needed (crash fix is hunk h5; reverting the filter h3 leaves both crash tests green)."
+  },
+  {
+   "id": "H2",
+   "outcome": "inconclusive",
+   "evidence_refs": [
+    "runs/2283/h1/base.tsv"
+   ],
+   "notes": "Not executable as a test here: whether the defining assembly reports the dropped diagnostics depends on that assembly having been built with the analyzer. Probe S4 shows the consumer-side MsgPack004 existed before and is now gone, so for a library built without the analyzer nobody reports it. Left as a refusal for the owner (R2/R6)."
+  },
+  {
+   "id": "H3",
+   "outcome": "rejected",
+   "evidence_refs": [
+    "wt/2283-head GenericsFormatterTests.cs RunWithMetadataReferenceAsync"
+   ],
+   "notes": "Rejected by reading + running: the shared helper runs the generator on the usage compilation, asserts no Warning-or-higher diagnostics, and Assert.Contains(expectedResolverHintName, hintNames) (e.g. 'App.AppResolver.g.cs'). So the tests do assert a resolver is emitted; REQ-2283-F2 is covered. (All 3 pass on head: runs/2283/timemachine/head.log.)"
+  }
+ ]
+}

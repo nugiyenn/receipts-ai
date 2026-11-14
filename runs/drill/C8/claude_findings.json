@@ -1,0 +1,49 @@
+{
+  "produced_by": "fresh `claude -p` session, model claude-sonnet-5-5, no tools, empty working dir, no conversation context; never told a canary exists",
+  "prompt_sha256": "fa4d905fadfbf0579dfde6ce248df375f4e7b9782e6e09401ebd936a3a6bbd09",
+  "findings": [
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1453,
+      "severity": "high",
+      "issue": "The empty `catch (Exception)` swallows every exception raised while filtering or reporting a diagnostic. This includes exceptions thrown by the `report` callback, which hides real analyzer failures and can silently drop diagnostics. The filter needs no try/catch."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 239,
+      "severity": "high",
+      "issue": "The filter wraps every diagnostic from the TypeCollector, not only member diagnostics for metadata types. Any diagnostic whose location is not in a syntax tree of this compilation is now dropped. That includes `Location.None` diagnostics for source types and locations in other trees, such as those from partial or generated declarations. This contradicts claims C4, C5 and C8, and can lose safety-relevant diagnostics for user-controlled types."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1077,
+      "severity": "medium",
+      "issue": "`FirstOrDefault()?.GetSyntax().GetLocation()` yields a null location for metadata members. `Diagnostic.Create` then gets a null location, and the new filter drops the diagnostic. The same applies to line 985. Only the crash was fixed, and the diagnostics are now suppressed silently. For members of closed generic types from metadata, the root cause (the type is analyzed at all) is not addressed."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1434,
+      "severity": "medium",
+      "issue": "`GetPropertyIdentifierLocation` returns null whenever the first syntax node is not a `PropertyDeclarationSyntax`, not only for metadata properties. Examples are record primary-constructor parameters and other synthesized properties that have source declarations. This contradicts claim C10, and the BothStringAndIntKeyAreNull diagnostic for such source-declared properties is silently lost. The original code would have thrown InvalidCastException for them."
+    },
+    {
+      "path": "README.md",
+      "line": 1642,
+      "severity": "medium",
+      "issue": "The documentation says diagnostics for members of a referenced type are reported by the defining assembly. That is not guaranteed: the defining project may not use the analyzer, or may be a third-party NuGet package. It also over-claims by saying any problem must be fixed there, when the consumer's diagnostics are simply dropped. This breaches NF2."
+    },
+    {
+      "path": "doc/analyzers/MsgPack004.md",
+      "line": 52,
+      "severity": "medium",
+      "issue": "The doc states that members of a referenced type are reported by the defining project. This over-claims, because nothing ensures the defining project runs the analyzer. A consumer who has non-public or unattributed members gets no warning."
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+      "line": 590,
+      "severity": "low",
+      "issue": "The UnkeyedMember test only asserts that no diagnostics appear. It cannot show that a diagnostic for a source-declared type is still reported, so the new filter has no regression test for NF1 and S1. Nothing checks the record-struct primary-constructor case either."
+    }
+  ],
+  "raw": null
+}

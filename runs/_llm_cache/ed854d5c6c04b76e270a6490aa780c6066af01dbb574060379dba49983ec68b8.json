@@ -1,0 +1,19 @@
+{
+ "text": "{\n  \"findings\": [\n    {\n      \"path\": \"src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs\",\n      \"line\": 985,\n      \"severity\": \"high\",\n      \"issue\": \"The variable 'item' is of type 'ISymbol' (as it can be a property or a field), but 'GetPropertyIdentifierLocation' expects an 'IPropertySymbol', resulting in a CS1503 compiler error.\"\n    },\n    {\n      \"path\": \"src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs\",\n      \"line\": 1434,\n      \"severity\": \"high\",\n      \"issue\": \"If the parameter type is fixed to 'ISymbol', this method will still return null for fields because they are not 'PropertyDeclarationSyntax'. This causes their diagnostics to be created with Location.None and silently dropped by 'ReportIfLocatedInCompilation', violating the requirement that no existing diagnostic is lost.\"\n    },\n    {\n      \"path\": \"src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs\",\n      \"line\": 1453,\n      \"severity\": \"medium\",\n      \"issue\": \"The empty catch block silently swallows all exceptions from the diagnostic reporter or compilation checks, which can hide underlying bugs and violates the requirement against swallowed errors.\"\n    }\n  ]\n}",
+ "model": "gemini-3.1-pro-preview",
+ "prompt_sha256": "ed854d5c6c04b76e270a6490aa780c6066af01dbb574060379dba49983ec68b8",
+ "ts": "2026-11-14T23:29:02+0200",
+ "usage": {
+  "promptTokenCount": 6018,
+  "candidatesTokenCount": 308,
+  "totalTokenCount": 17294,
+  "promptTokensDetails": [
+   {
+    "modality": "TEXT",
+    "tokenCount": 6018
+   }
+  ],
+  "thoughtsTokenCount": 10968,
+  "serviceTier": "standard"
+ }
+}

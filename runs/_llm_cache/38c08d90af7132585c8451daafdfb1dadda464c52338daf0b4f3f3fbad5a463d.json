@@ -1,0 +1,19 @@
+{
+ "text": "{\n  \"findings\": [\n    {\n      \"path\": \"src/MessagePack/ExtensionHeader.cs\",\n      \"line\": 31,\n      \"severity\": \"high\",\n      \"issue\": \"The Equals method was modified to ignore the Length property, which is a correctness bug and scope creep that breaks equality comparisons for ExtensionHeader.\"\n    },\n    {\n      \"path\": \"src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs\",\n      \"line\": 1434,\n      \"severity\": \"medium\",\n      \"issue\": \"GetPropertyIdentifierLocation uses 'as PropertyDeclarationSyntax', which evaluates to null for record properties and indexers. This causes their diagnostics to be created with Location.None and silently swallowed by ReportIfLocatedInCompilation.\"\n    }\n  ]\n}",
+ "model": "gemini-3.1-pro-preview",
+ "prompt_sha256": "38c08d90af7132585c8451daafdfb1dadda464c52338daf0b4f3f3fbad5a463d",
+ "ts": "2026-11-14T23:28:52+0200",
+ "usage": {
+  "promptTokenCount": 6141,
+  "candidatesTokenCount": 180,
+  "totalTokenCount": 16034,
+  "promptTokensDetails": [
+   {
+    "modality": "TEXT",
+    "tokenCount": 6141
+   }
+  ],
+  "thoughtsTokenCount": 9713,
+  "serviceTier": "standard"
+ }
+}

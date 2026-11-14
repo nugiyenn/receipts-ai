@@ -1,0 +1,541 @@
+{
+  "change": "2129",
+  "adjudicator": "adjudicator-1",
+  "adjudicated_at": "2026-11-14T23:55:26+02:00",
+  "levels": {
+    "E3": 5,
+    "E1": 5,
+    "E2": 1
+  },
+  "statuses": {
+    "proven": 5,
+    "refused": 3,
+    "unproven": 2,
+    "supported": 1
+  },
+  "timemachine": {
+    "tests": 13,
+    "pass_on_base": 0,
+    "genuine_fail_to_pass": 13,
+    "tests_that_prove_nothing": []
+  },
+  "requirement_coverage": [
+    {
+      "id": "REQ-2129-F1",
+      "section": "functional",
+      "text": "A partial class marked [GeneratedMessagePackFormatter] that implements IMessagePackFormatter<T> gets its body generated for a T from a referenced assembly, with the formatter declared in the consuming project.",
+      "claims": [
+        "C1",
+        "C9"
+      ],
+      "best_level": "E3",
+      "coverage": "evidenced"
+    },
+    {
+      "id": "REQ-2129-F2",
+      "section": "functional",
+      "text": "With no MessagePack attributes on T, serialization defaults to contractless behaviour over public members.",
+      "claims": [
+        "C2"
+      ],
+      "best_level": "E3",
+      "coverage": "evidenced"
+    },
+    {
+      "id": "REQ-2129-F3",
+      "section": "functional",
+      "text": "Attributes on T are honoured when present (maintainer: 'If there are attributes on it, fine, we''ll use them').",
+      "claims": [
+        "C3",
+        "C10"
+      ],
+      "best_level": "E3",
+      "coverage": "evidenced"
+    },
+    {
+      "id": "REQ-2129-F4",
+      "section": "functional",
+      "text": "The generated resolver registers the generated formatter so MessagePackSerializer finds it.",
+      "claims": [
+        "C4"
+      ],
+      "best_level": "E3",
+      "coverage": "evidenced"
+    },
+    {
+      "id": "REQ-2129-NF1",
+      "section": "non_functional",
+      "text": "Nothing needs to be added to the assembly that declares T, and no new runtime dependency or runtime reflection over user-defined attribute copies is introduced.",
+      "claims": [
+        "C5"
+      ],
+      "best_level": "E1",
+      "coverage": "weak"
+    },
+    {
+      "id": "REQ-2129-NF2",
+      "section": "non_functional",
+      "text": "Behaviour of existing [MessagePackObject] types and existing formatters is unchanged.",
+      "claims": [
+        "C6"
+      ],
+      "best_level": "E2",
+      "coverage": "evidenced"
+    },
+    {
+      "id": "REQ-2129-NF3",
+      "section": "non_functional",
+      "text": "New public API and diagnostics are documented and listed in the analyzer release notes.",
+      "claims": [
+        "C7",
+        "C11"
+      ],
+      "best_level": "E1",
+      "coverage": "weak"
+    },
+    {
+      "id": "REQ-2129-S1",
+      "section": "security",
+      "text": "Only public members of T are serialized, and nothing silently changes what is written to the wire for members the owner did not intend to expose.",
+      "claims": [
+        "C8"
+      ],
+      "best_level": "E1",
+      "coverage": "weak"
+    }
+  ],
+  "uncovered_requirements": [],
+  "claims": [
+    {
+      "claim": "C1",
+      "verifier": "timemachine",
+      "rules": [
+        "E3: 1 test(s) fail on base and pass on head: ContractlessClassRoundTrips",
+        "proven, partially refused: refusal(s) R-2129-5 cover a different question the owner decides"
+      ],
+      "refs": [
+        "runs/2129/timemachine.json#ContractlessClassRoundTrips"
+      ],
+      "flags": [],
+      "timemachine": {
+        "matched": true,
+        "via": [
+          "tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypesTests.cs:12 is inside test ContractlessClassRoundTrips"
+        ],
+        "genuine": [
+          "ContractlessClassRoundTrips"
+        ],
+        "pass_on_base": [],
+        "tests": [
+          "ContractlessClassRoundTrips"
+        ]
+      },
+      "partially_refused": [
+        "R-2129-5"
+      ],
+      "level": "E3",
+      "status": "proven"
+    },
+    {
+      "claim": "C2",
+      "verifier": "timemachine",
+      "rules": [
+        "E3: 1 test(s) fail on base and pass on head: ContractlessClassUsesStringKeysForPublicReadWriteMembers",
+        "proven, partially refused: refusal(s) R-2129-2 cover a different question the owner decides"
+      ],
+      "refs": [
+        "runs/2129/timemachine.json#ContractlessClassUsesStringKeysForPublicReadWriteMembers"
+      ],
+      "flags": [],
+      "timemachine": {
+        "matched": true,
+        "via": [
+          "tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypesTests.cs:24 is inside test ContractlessClassUsesStringKeysForPublicReadWriteMembers"
+        ],
+        "genuine": [
+          "ContractlessClassUsesStringKeysForPublicReadWriteMembers"
+        ],
+        "pass_on_base": [],
+        "tests": [
+          "ContractlessClassUsesStringKeysForPublicReadWriteMembers"
+        ]
+      },
+      "partially_refused": [
+        "R-2129-2"
+      ],
+      "level": "E3",
+      "status": "proven"
+    },
+    {
+      "claim": "C3",
+      "verifier": "argued",
+      "rules": [
+        "E1: verifier 'argued' has no executed evidence (argued; citations validate)",
+        "refused: referenced by refusal(s) R-2129-4"
+      ],
+      "refs": [],
+      "flags": [],
+      "level": "E1",
+      "status": "refused"
+    },
+    {
+      "claim": "C4",
+      "verifier": "timemachine",
+      "rules": [
+        "E3: 1 test(s) fail on base and pass on head: GeneratedFormattersAreRegisteredInGeneratedResolver",
+        "proven, partially refused: refusal(s) R-2129-5 cover a different question the owner decides"
+      ],
+      "refs": [
+        "runs/2129/timemachine.json#GeneratedFormattersAreRegisteredInGeneratedResolver"
+      ],
+      "flags": [],
+      "timemachine": {
+        "matched": true,
+        "via": [
+          "tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypesTests.cs:89 is inside test GeneratedFormattersAreRegisteredInGeneratedResolver"
+        ],
+        "genuine": [
+          "GeneratedFormattersAreRegisteredInGeneratedResolver"
+        ],
+        "pass_on_base": [],
+        "tests": [
+          "GeneratedFormattersAreRegisteredInGeneratedResolver"
+        ]
+      },
+      "partially_refused": [
+        "R-2129-5"
+      ],
+      "level": "E3",
+      "status": "proven"
+    },
+    {
+      "claim": "C5",
+      "verifier": "static",
+      "rules": [
+        "E1: static claim, citations validate, no deterministic check implemented for it"
+      ],
+      "refs": [],
+      "flags": [],
+      "level": "E1",
+      "status": "unproven"
+    },
+    {
+      "claim": "C6",
+      "verifier": "xray",
+      "rules": [
+        "E2: all cited source hunks are load-bearing (h16); protected by a test, not an executed demonstration of the claim"
+      ],
+      "refs": [
+        "runs/2129/xray.json#g1"
+      ],
+      "flags": [],
+      "xray": {
+        "h16": {
+          "result": "load-bearing",
+          "group": "g1",
+          "how": "alone"
+        }
+      },
+      "level": "E2",
+      "status": "supported"
+    },
+    {
+      "claim": "C7",
+      "verifier": "argued",
+      "rules": [
+        "E1: verifier 'argued' has no executed evidence (argued; citations validate)"
+      ],
+      "refs": [],
+      "flags": [],
+      "level": "E1",
+      "status": "unproven"
+    },
+    {
+      "claim": "C8",
+      "verifier": "argued",
+      "rules": [
+        "E1: verifier 'argued' has no executed evidence (argued; citations validate)",
+        "refused: referenced by refusal(s) R-2129-2, R-2129-3"
+      ],
+      "refs": [],
+      "flags": [],
+      "level": "E1",
+      "status": "refused"
+    },
+    {
+      "claim": "C9",
+      "verifier": "timemachine",
+      "rules": [
+        "E3: 2 test(s) fail on base and pass on head: FormatterMustBePartial, SurrogateKeysMustNotMixStringAndInt"
+      ],
+      "refs": [
+        "runs/2129/timemachine.json#FormatterMustBePartial",
+        "runs/2129/timemachine.json#SurrogateKeysMustNotMixStringAndInt"
+      ],
+      "flags": [],
+      "timemachine": {
+        "matched": true,
+        "via": [
+          "tests/MessagePack.SourceGenerator.Tests/GeneratedMessagePackFormatterTests.cs:29 is inside test FormatterMustBePartial",
+          "tests/MessagePack.SourceGenerator.Tests/GeneratedMessagePackFormatterTests.cs:173 is inside test SurrogateKeysMustNotMixStringAndInt"
+        ],
+        "genuine": [
+          "FormatterMustBePartial",
+          "SurrogateKeysMustNotMixStringAndInt"
+        ],
+        "pass_on_base": [],
+        "tests": [
+          "FormatterMustBePartial",
+          "SurrogateKeysMustNotMixStringAndInt"
+        ]
+      },
+      "level": "E3",
+      "status": "proven"
+    },
+    {
+      "claim": "C10",
+      "verifier": "timemachine",
+      "rules": [
+        "E3: 1 test(s) fail on base and pass on head: SurrogateControlsKeysAndMembership",
+        "proven, partially refused: refusal(s) R-2129-6 cover a different question the owner decides"
+      ],
+      "refs": [
+        "runs/2129/timemachine.json#SurrogateControlsKeysAndMembership"
+      ],
+      "flags": [],
+      "timemachine": {
+        "matched": true,
+        "via": [
+          "tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypesTests.cs:55 is inside test SurrogateControlsKeysAndMembership"
+        ],
+        "genuine": [
+          "SurrogateControlsKeysAndMembership"
+        ],
+        "pass_on_base": [],
+        "tests": [
+          "SurrogateControlsKeysAndMembership"
+        ]
+      },
+      "partially_refused": [
+        "R-2129-6"
+      ],
+      "level": "E3",
+      "status": "proven"
+    },
+    {
+      "claim": "C11",
+      "verifier": "argued",
+      "rules": [
+        "E1: verifier 'argued' has no executed evidence (argued; citations validate)",
+        "refused: referenced by refusal(s) R-2129-1"
+      ],
+      "refs": [],
+      "flags": [],
+      "level": "E1",
+      "status": "refused"
+    }
+  ],
+  "reading_budget_line_level": {
+    "lines": 486,
+    "total_changed_lines": 1043,
+    "ratio": 0.466,
+    "hunks": [
+      "h1",
+      "h6",
+      "h7",
+      "h8",
+      "h9",
+      "h10",
+      "h11",
+      "h12",
+      "h13",
+      "h14",
+      "h15",
+      "h17",
+      "h18",
+      "h20",
+      "h21",
+      "h22",
+      "h23",
+      "h24",
+      "h26",
+      "h28",
+      "h31"
+    ],
+    "per_hunk": [
+      {
+        "hunk": "h1",
+        "path": "README.md",
+        "kind": "doc",
+        "lines": 18,
+        "of": 52,
+        "how": "18 of 52 lines (+-4 around cited lines)"
+      },
+      {
+        "hunk": "h6",
+        "path": "doc/analyzers/index.md",
+        "kind": "doc",
+        "lines": 4,
+        "of": 4,
+        "how": "4 of 4 lines (+-4 around cited lines)"
+      },
+      {
+        "hunk": "h7",
+        "path": "src/MessagePack.Annotations/Attributes.cs",
+        "kind": "src",
+        "lines": 36,
+        "of": 36,
+        "how": "whole hunk"
+      },
+      {
+        "hunk": "h8",
+        "path": "src/MessagePack.SourceGenerator/AnalyzerReleases.Unshipped.md",
+        "kind": "doc",
+        "lines": 4,
+        "of": 4,
+        "how": "4 of 4 lines (+-4 around cited lines)"
+      },
+      {
+        "hunk": "h9",
+        "path": "src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs",
+        "kind": "src",
+        "lines": 4,
+        "of": 4,
+        "how": "whole hunk"
+      },
+      {
+        "hunk": "h10",
+        "path": "src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs",
+        "kind": "src",
+        "lines": 36,
+        "of": 36,
+        "how": "whole hunk"
+      },
+      {
+        "hunk": "h11",
+        "path": "src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs",
+        "kind": "src",
+        "lines": 6,
+        "of": 6,
+        "how": "whole hunk"
+      },
+      {
+        "hunk": "h12",
+        "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+        "kind": "src",
+        "lines": 300,
+        "of": 300,
+        "how": "whole hunk"
+      },
+      {
+        "hunk": "h13",
+        "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterRequest.cs",
+        "kind": "src",
+        "lines": 13,
+        "of": 13,
+        "how": "whole hunk"
+      },
+      {
+        "hunk": "h14",
+        "path": "src/MessagePack.SourceGenerator/CodeAnalysis/ObjectSerializationInfo.cs",
+        "kind": "src",
+        "lines": 6,
+        "of": 6,
+        "how": "whole hunk"
+      },
+      {
+        "hunk": "h15",
+        "path": "src/MessagePack.SourceGenerator/CodeAnalysis/ObjectSerializationInfo.cs",
+        "kind": "src",
+        "lines": 1,
+        "of": 1,
+        "how": "whole hunk"
+      },
+      {
+        "hunk": "h17",
+        "path": "src/MessagePack.SourceGenerator/MessagePackGenerator.cs",
+        "kind": "src",
+        "lines": 9,
+        "of": 9,
+        "how": "whole hunk"
+      },
+      {
+        "hunk": "h18",
+        "path": "src/MessagePack.SourceGenerator/MessagePackGenerator.cs",
+        "kind": "src",
+        "lines": 12,
+        "of": 12,
+        "how": "whole hunk"
+      },
+      {
+        "hunk": "h20",
+        "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.cs",
+        "kind": "template-output",
+        "lines": 4,
+        "of": 4,
+        "how": "whole hunk"
+      },
+      {
+        "hunk": "h21",
+        "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.tt",
+        "kind": "template",
+        "lines": 2,
+        "of": 2,
+        "how": "whole hunk"
+      },
+      {
+        "hunk": "h22",
+        "path": "src/MessagePack.SourceGenerator/Transforms/StringKey/StringKeyFormatterTemplate.cs",
+        "kind": "template-output",
+        "lines": 4,
+        "of": 4,
+        "how": "whole hunk"
+      },
+      {
+        "hunk": "h23",
+        "path": "src/MessagePack.SourceGenerator/Transforms/StringKey/StringKeyFormatterTemplate.tt",
+        "kind": "template",
+        "lines": 2,
+        "of": 2,
+        "how": "whole hunk"
+      },
+      {
+        "hunk": "h24",
+        "path": "src/MessagePack.SourceGenerator/Utils/Constants.cs",
+        "kind": "src",
+        "lines": 2,
+        "of": 2,
+        "how": "whole hunk"
+      },
+      {
+        "hunk": "h26",
+        "path": "tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypesTests.cs",
+        "kind": "test",
+        "lines": 9,
+        "of": 95,
+        "how": "9 of 95 lines (+-4 around cited lines)"
+      },
+      {
+        "hunk": "h28",
+        "path": "tests/MessagePack.SourceGenerator.ExternalTypes/ExternalPerson.cs",
+        "kind": "test",
+        "lines": 6,
+        "of": 15,
+        "how": "6 of 15 lines (+-4 around cited lines)"
+      },
+      {
+        "hunk": "h31",
+        "path": "tests/MessagePack.SourceGenerator.ExternalTypes/MessagePack.SourceGenerator.ExternalTypes.csproj",
+        "kind": "test",
+        "lines": 8,
+        "of": 17,
+        "how": "8 of 17 lines (+-4 around cited lines)"
+      }
+    ],
+    "router_hunk_level": {
+      "lines": 1043,
+      "provisional": false
+    },
+    "method": "Reading budget at line granularity, computed after `router.route` has written route.json."
+  }
+}

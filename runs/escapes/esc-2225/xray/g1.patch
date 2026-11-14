@@ -1,0 +1,13 @@
+diff --git a/src/MessagePack/Formatters/StandardClassLibraryFormatter.cs b/src/MessagePack/Formatters/StandardClassLibraryFormatter.cs
+index 51ce1f8c..ef1479e5 100644
+--- a/src/MessagePack/Formatters/StandardClassLibraryFormatter.cs
++++ b/src/MessagePack/Formatters/StandardClassLibraryFormatter.cs
+@@ -257,7 +257,7 @@ namespace MessagePack.Formatters
+         public void Serialize(ref MessagePackWriter writer, DateTimeOffset value, MessagePackSerializerOptions options)
+         {
+             writer.WriteArrayHeader(2);
+-            writer.Write(new DateTime(value.Ticks, DateTimeKind.Utc)); // current ticks as is
++            writer.Write(new DateTime(value.UtcTicks, DateTimeKind.Utc)); // current ticks as is
+             writer.Write((short)value.Offset.TotalMinutes); // offset is normalized in minutes
+             return;
+         }

@@ -1,0 +1,12 @@
+diff --git a/src/MessagePack/ExtensionHeader.cs b/src/MessagePack/ExtensionHeader.cs
+index 833e7299..d19beb04 100644
+--- a/src/MessagePack/ExtensionHeader.cs
++++ b/src/MessagePack/ExtensionHeader.cs
+@@ -28,6 +28,6 @@ namespace MessagePack
+             this.Length = (uint)length;
+         }
+ 
+-        public bool Equals(ExtensionHeader other) => this.TypeCode == other.TypeCode && this.Length == other.Length;
++        public bool Equals(ExtensionHeader other) => this.TypeCode == other.TypeCode;
+     }
+ }

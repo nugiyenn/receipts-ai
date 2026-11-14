@@ -1,0 +1,5 @@
+G3_positional_record_valid_key_control	(no diagnostics)
+G2_positional_record_null_key	MsgPack007@src
+G1_class_property_null_key	MsgPack005@src
+G4_positional_record_unkeyed_member	MsgPack004@src;MsgPack007@src
+G5_record_body_property_null_key	MsgPack005@src

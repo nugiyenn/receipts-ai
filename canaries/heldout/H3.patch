@@ -1,0 +1,13 @@
+diff --git a/tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs b/tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs
+index 92cb3ac3..9ee3da06 100644
+--- a/tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs
++++ b/tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs
+@@ -649,7 +649,7 @@ namespace TempProject
+ 
+         // Verify that the resolver was actually generated for the usage assembly, since the defect caused it to be silently omitted.
+         ImmutableArray<MetadataReference> frameworkReferences = await ReferenceAssemblies.Net.Net80.ResolveAsync(LanguageNames.CSharp, CancellationToken.None);
+-        Compilation usageCompilation = CreateCompilation("App", usageSource, languageVersion, frameworkReferences.Concat(ReferencesHelper.GetReferences(ReferencesSet.MessagePack)).Append(definingAssembly));
++        Compilation usageCompilation = CreateCompilation("App", defineSource, languageVersion, frameworkReferences.Concat(ReferencesHelper.GetReferences(ReferencesSet.MessagePack)).Append(definingAssembly));
+         GeneratorDriverRunResult runResult = CSharpGeneratorDriver.Create(new MessagePack.SourceGenerator.MessagePackGenerator().AsSourceGenerator())
+             .RunGenerators(usageCompilation)
+             .GetRunResult();

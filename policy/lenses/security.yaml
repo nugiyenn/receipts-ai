@@ -1,0 +1,32 @@
+# Security lens (spec section 7). Areas listed as ceilings force lane L3 regardless of evidence.
+lens: security
+version: lens-1
+applies_to_areas: [runtime-serializer, analyzer-core]
+ceiling_areas: [runtime-serializer]   # deserialisation of untrusted input is always read by a human
+claim_templates:
+  - id: S-C1
+    text: "No input that was rejected before the change is accepted after it (deserialisation, validation, depth and size limits)."
+    verifier: matrix
+  - id: S-C2
+    text: "No diagnostic, warning or error that protects users is removed, downgraded or filtered for code the user controls."
+    verifier: xray
+    ask: "List every diagnostic whose reporting path the diff touches; run a base-vs-head differential."
+  - id: S-C3
+    text: "No secret, token, path or personal data is added to code, logs, tests or snapshots."
+    verifier: static
+    ask: "Pattern scan of added lines; list matches."
+  - id: S-C4
+    text: "No new dependency, build step or generated-code behaviour executes untrusted input."
+    verifier: static
+  - id: S-C5
+    text: "Injection: generated code never interpolates unescaped user-controlled text into emitted source."
+    verifier: argued
+refusal_triggers:
+  - {rule: R4-security-ceiling, when: "any file in a ceiling area is touched"}
+  - {rule: R2-silent-suppression, when: "the diff reduces the set of reported security-relevant diagnostics"}
+  - {rule: R5-evidence-gap, when: "a security claim has only argued evidence"}
+  - {rule: R7-public-api, when: "an attribute or option that changes serialisation limits or allowed types changes"}
+evidence_preferences: [matrix, xray, static]
+owner_questions:
+  - "Is the set of inputs accepted after this change a subset of what was accepted before?"
+  - "Who owns the residual risk of the silenced or removed diagnostic?"

@@ -1,0 +1,67 @@
+{
+  "canary": "C10",
+  "type": "swapped-condition-rare-branch",
+  "caught": true,
+  "by": [
+    "test-fail",
+    "llm:gemini",
+    "llm:claude"
+  ],
+  "by_family": {
+    "tests": true,
+    "deterministic-rules": false,
+    "gemini": true,
+    "claude": true
+  },
+  "note": "In the second member loop the mixed-key check compares stringKey instead of intKey in the int-key branch (rarely exercised: only mixed [Key] kinds in that loop).",
+  "tests": {
+    "ran": true,
+    "compiled": true,
+    "failing_tests": [
+      "MsgPack00xAnalyzerTests.AddAttributesToMembers_MixedVisibility"
+    ],
+    "summary_line": "",
+    "outcome": "red",
+    "seconds": 64.5,
+    "log": "runs/drill/C10/tests.log"
+  },
+  "detectors": [],
+  "gemini": {
+    "caught": true,
+    "hits": [
+      {
+        "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+        "line": 1138,
+        "severity": "high",
+        "issue": "The condition `(isIntKey && stringKey == null)` incorrectly checks `stringKey` instead of `intKey`. This breaks the logic for reporting `DoNotMixStringAndIntKeys` and violates the requirement that no existing diagnostic is changed."
+      }
+    ],
+    "near_but_off_target": [],
+    "n_findings": 2
+  },
+  "claude": {
+    "caught": true,
+    "hits": [
+      {
+        "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+        "line": 1138,
+        "severity": "high",
+        "issue": "The condition was changed from `isIntKey && intKey == null` to `isIntKey && stringKey == null`. This is an unrelated edit and a regression. For int-key types the DoNotMixStringAndIntKeys diagnostic now fires based on stringKey, so it is reported wrongly for valid int-key members and missed for int-key members that have no key. It violates NF1 and C4."
+      }
+    ],
+    "near_but_off_target": [],
+    "n_findings": 7
+  },
+  "xray_routed_to_human_NOT_counted": {
+    "routed": false,
+    "why": "planted lines form a new hunk; reverting it leaves tests red"
+  },
+  "evidence_refs": [
+    "runs/drill/C10/tests.json",
+    "runs/drill/C10/tests.log",
+    "runs/drill/C10/detectors.json",
+    "runs/drill/C10/gemini_review.json",
+    "runs/drill/C10/claude_findings.json",
+    "runs/drill/C10/review_input.diff"
+  ]
+}

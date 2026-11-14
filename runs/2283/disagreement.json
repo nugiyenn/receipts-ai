@@ -1,0 +1,63 @@
+{
+  "change": "2283",
+  "method": "match if (cited lines in same file within 8 lines AND token jaccard>=0.12) OR jaccard>=0.35; greedy per Claude claim. Heuristic, not semantic; unmatched claims need human read.",
+  "overlap": [
+    {
+      "claude": "C1",
+      "gemini": "c1",
+      "cited_lines_near": true,
+      "text_jaccard": 0.25
+    },
+    {
+      "claude": "C3",
+      "gemini": "c1",
+      "cited_lines_near": true,
+      "text_jaccard": 0.13
+    },
+    {
+      "claude": "C6",
+      "gemini": "c4",
+      "cited_lines_near": true,
+      "text_jaccard": 0.21
+    },
+    {
+      "claude": "C7",
+      "gemini": "c4",
+      "cited_lines_near": true,
+      "text_jaccard": 0.2
+    }
+  ],
+  "only_claude": [
+    "C2",
+    "C4",
+    "C5",
+    "C8",
+    "C9",
+    "C10"
+  ],
+  "only_gemini": [
+    {
+      "id": "c2",
+      "requirement": "REQ-2283-F1, REQ-2283-F3",
+      "text": "The analyzer avoids IndexOutOfRangeException by using FirstOrDefault() on DeclaringSyntaxReferences and safely handling properties without source declarations."
+    },
+    {
+      "id": "c3",
+      "requirement": "REQ-2283-NF1, REQ-2283-S1",
+      "text": "Diagnostics are only reported if their location is in source and belongs to the current compilation, ensuring no existing diagnostics for user-controlled types are lost or suppressed."
+    }
+  ],
+  "counts": {
+    "claude": 10,
+    "gemini": 4,
+    "overlap": 4
+  },
+  "only_claude_texts": {
+    "C2": "For the same input the generator no longer throws (no CS8785) and a GeneratedMessagePackResolver is emitted.",
+    "C4": "No diagnostic that was reported before the change for a type declared in source is lost, moved or changed by the new constructor-level filter.",
+    "C5": "No safety-relevant diagnostic is silently dropped for types the user controls.",
+    "C8": "Dropping a diagnostic that has no location in the compilation is required because analyzers are not permitted to report against a location that does not exist.",
+    "C9": "No live DeclaringSyntaxReferences[0] indexing remains in TypeCollector.cs; the only remaining occurrence is commented out.",
+    "C10": "GetPropertyIdentifierLocation returns null only for properties that have no source declaration (metadata), so no source-declared property loses its diagnostic."
+  }
+}

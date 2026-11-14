@@ -1,0 +1,58 @@
+{
+  "change": "2129",
+  "kind": "story",
+  "produced_by": "claude-code session, cached",
+  "model": "claude-sonnet-5-5",
+  "produced_at": "2026-11-14T23:50",
+  "static_analysis_only": false,
+  "inputs": [
+    "git show origin/ju26-issue-2129",
+    "issue #2129 body and maintainer reply (github.com page, fetched 2026-11-14)",
+    "receipts/requirements/REQ-2129.yaml",
+    "runs/2129/timemachine.json",
+    "runs/2129/probe/ (executed probes)"
+  ],
+  "prompt": "You write the story panel. Write 4-6 plain-language sentences describing what the change does and what is and is not proven.\nEvery sentence must end with one or more claim references like [C1]. A sentence with no claim reference is invalid.\nState facts, not opinions of quality. No confidence numbers.",
+  "prompt_sha256": "bb1f6929722c00e9545c08ad9decf403843c7bb52073f8be9f44d375195e82df",
+  "sentences": [
+    {
+      "text": "The change answers issue #2129: a project that references MessagePack can declare a partial formatter class marked [GeneratedMessagePackFormatter], and the source generator writes the body for a type from another assembly.",
+      "claims": [
+        "C1"
+      ],
+      "text_with_refs": "The change answers issue #2129: a project that references MessagePack can declare a partial formatter class marked [GeneratedMessagePackFormatter], and the source generator writes the body for a type from another assembly. [C1]"
+    },
+    {
+      "text": "By default every public read-write member of the external type is written as a string key, and the seven execution tests pass on head and do not build on base.",
+      "claims": [
+        "C1",
+        "C2",
+        "C4"
+      ],
+      "text_with_refs": "By default every public read-write member of the external type is written as a string key, and the seven execution tests pass on head and do not build on base. [C1][C2][C4]"
+    },
+    {
+      "text": "An optional surrogate type with [Key] and [IgnoreMember] attributes sets the keys, and misuse is reported as MsgPack019 to MsgPack022 by six analyzer tests that fail on base and pass on head.",
+      "claims": [
+        "C9",
+        "C10"
+      ],
+      "text_with_refs": "An optional surrogate type with [Key] and [IgnoreMember] attributes sets the keys, and misuse is reported as MsgPack019 to MsgPack022 by six analyzer tests that fail on base and pass on head. [C9][C10]"
+    },
+    {
+      "text": "The change ignores attributes that sit on the external type itself, although the maintainer's reply asked for attributes to win when present.",
+      "claims": [
+        "C3"
+      ],
+      "text_with_refs": "The change ignores attributes that sit on the external type itself, although the maintainer's reply asked for attributes to win when present. [C3]"
+    },
+    {
+      "text": "Read-only and private-setter members are dropped without a diagnostic, a second formatter for the same type is silently not generated, and the new public attribute lands in the MessagePack.Annotations runtime assembly, so the router reads the whole diff.",
+      "claims": [
+        "C8",
+        "C11"
+      ],
+      "text_with_refs": "Read-only and private-setter members are dropped without a diagnostic, a second formatter for the same type is silently not generated, and the new public attribute lands in the MessagePack.Annotations runtime assembly, so the router reads the whole diff. [C8][C11]"
+    }
+  ]
+}

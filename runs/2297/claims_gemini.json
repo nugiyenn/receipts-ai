@@ -1,0 +1,268 @@
+{
+  "claims": [
+    {
+      "id": "c1",
+      "requirement": "REQ-2297-F1",
+      "text": "Every generated formatter, resolver, enum and union type is decorated with [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage].",
+      "source": "requirement",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/CompositeResolverTemplate.tt",
+          "line": 8,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/EnumTemplate.tt",
+          "line": 9,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.tt",
+          "line": 15,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/ResolverTemplate.tt",
+          "line": 15,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/StringKey/StringKeyFormatterTemplate.tt",
+          "line": 19,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/UnionTemplate.tt",
+          "line": 11,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]"
+        }
+      ],
+      "verifier": "static",
+      "citations_checked": [
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/CompositeResolverTemplate.tt",
+          "line": 8,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h4"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/EnumTemplate.tt",
+          "line": 9,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h7"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.tt",
+          "line": 15,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h9"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/ResolverTemplate.tt",
+          "line": 15,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h13"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/StringKey/StringKeyFormatterTemplate.tt",
+          "line": 19,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h17"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/UnionTemplate.tt",
+          "line": 11,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h20"
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "requirement": "REQ-2297-NF1",
+      "text": "The only change to generated output is the added attribute (no behavioural change).",
+      "source": "requirement",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.tt",
+          "line": 14,
+          "quote": "#if !NETSTANDARD2_0 && !NETFRAMEWORK"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/TransformUtilities.cs",
+          "line": 58,
+          "quote": "writer(anyConstraints ? \"{\\r\\n\" : \" {\\r\\n\");"
+        }
+      ],
+      "verifier": "argued",
+      "citations_checked": [
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.tt",
+          "line": 14,
+          "quote": "#if !NETSTANDARD2_0 && !NETFRAMEWORK",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h9"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/TransformUtilities.cs",
+          "line": 58,
+          "quote": "writer(anyConstraints ? \"{\\r\\n\" : \" {\\r\\n\");",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h18"
+        }
+      ]
+    },
+    {
+      "id": "c3",
+      "requirement": "REQ-2297-NF2",
+      "text": "Template sources (.tt) and their generated .cs outputs stay consistent.",
+      "source": "requirement",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/EnumTemplate.tt",
+          "line": 9,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/EnumTemplate.cs",
+          "line": 27,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]"
+        }
+      ],
+      "verifier": "regen",
+      "citations_checked": [
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/EnumTemplate.tt",
+          "line": 9,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h7"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/EnumTemplate.cs",
+          "line": 27,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h6"
+        }
+      ]
+    },
+    {
+      "id": "c4",
+      "requirement": "REQ-2297-S1",
+      "text": "Generated code semantics for (de)serialisation are unchanged.",
+      "source": "requirement",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.tt",
+          "line": 15,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]"
+        }
+      ],
+      "verifier": "argued",
+      "citations_checked": [
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.tt",
+          "line": 15,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h9"
+        }
+      ]
+    },
+    {
+      "id": "c5",
+      "requirement": null,
+      "text": "All generated formatters and resolvers are decorated with `[ExcludeFromCodeCoverage]`, so generated code does not skew code coverage reports.",
+      "source": "author-narrative",
+      "citations": [
+        {
+          "path": "README.md",
+          "line": 1639,
+          "quote": "All generated formatters and resolvers are decorated with `[ExcludeFromCodeCoverage]`, so generated code does not skew code coverage reports."
+        }
+      ],
+      "verifier": "static",
+      "citations_checked": [
+        {
+          "path": "README.md",
+          "line": 1639,
+          "quote": "All generated formatters and resolvers are decorated with `[ExcludeFromCodeCoverage]`, so generated code does not skew code coverage reports.",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h1"
+        }
+      ]
+    },
+    {
+      "id": "c6",
+      "requirement": null,
+      "text": "The attribute is only emitted for targets where it is available (not `netstandard2.0` or .NET Framework).",
+      "source": "author-narrative",
+      "citations": [
+        {
+          "path": "README.md",
+          "line": 1640,
+          "quote": "The attribute is only emitted for targets where it is available (not `netstandard2.0` or .NET Framework)."
+        }
+      ],
+      "verifier": "static",
+      "citations_checked": [
+        {
+          "path": "README.md",
+          "line": 1640,
+          "quote": "The attribute is only emitted for targets where it is available (not `netstandard2.0` or .NET Framework).",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h1"
+        }
+      ]
+    }
+  ],
+  "uncovered_requirements": [
+    "REQ-2297-F2"
+  ],
+  "change": "2297",
+  "kind": "claims_gemini",
+  "model": "gemini-3.1-pro-preview",
+  "produced_by": "gemini api, cached",
+  "produced_at": "2026-11-14T23:24:35+02:00",
+  "prompt_sha256": "b4e03cf839d715662df39a147d696483ab976ab6608fdf4d2708a56c7bf7583b",
+  "prompt": "You are a code-review claim extractor. You do NOT judge whether the change is good.\nProduce the minimal set of falsifiable claims this change makes or must satisfy.\nRules:\n1. Every requirement item (F*, NF*, S*) must be covered by >=1 claim, or listed in uncovered_requirements.\n2. Statements from the commit message, README or docs written by the author agent are\n   CLAIMS TO TEST (source=\"author-narrative\"), never evidence.\n3. Every claim must cite >=1 exact diff line: {path, line, quote}. 'line' is the NEW-file line number shown\n   in the numbered diff; 'quote' must be a verbatim substring of that line.\n4. For each claim propose a verifier: timemachine | xray | regen | matrix | static | argued.\n5. Never output confidence numbers or words like \"likely correct\".\nOutput JSON: {\"claims\":[{\"id\",\"requirement\",\"text\",\"source\",\"citations\":[{\"path\",\"line\",\"quote\"}],\"verifier\"}],\"uncovered_requirements\":[...]}. No prose.",
+  "citation_summary": {
+    "citations": 13,
+    "invalid": 0,
+    "hallucinated": 0,
+    "wrong_line_only": 0
+  }
+}

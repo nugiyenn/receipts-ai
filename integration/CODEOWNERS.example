@@ -1,0 +1,23 @@
+# Example only. Replace the example-org teams with real owners before use.
+# The last matching pattern wins, as on GitHub. Receipts asks the CODEOWNER of the
+# highest-lane file in a change to sign (python -m receipts required-owner).
+#
+# Areas come from policy/areas.yaml.
+
+*                                                    @example-org/maintainers
+
+# generator-templates, generator-other
+/src/MessagePack.SourceGenerator/                    @example-org/generator-owners
+/src/MessagePack.SourceGenerator/Transforms/         @example-org/generator-owners
+
+# analyzer-core
+/src/MessagePack.SourceGenerator/CodeAnalysis/       @example-org/analyzer-owners
+/src/MessagePack.SourceGenerator/Analyzers/          @example-org/analyzer-owners
+
+# runtime-serializer: ceiling area, always a full read (lane L3)
+/src/MessagePack/                                    @example-org/runtime-owners @example-org/security
+/src/MessagePack.Annotations/                        @example-org/runtime-owners @example-org/security
+
+# tests and docs
+/tests/                                              @example-org/maintainers
+/doc/                                                @example-org/maintainers

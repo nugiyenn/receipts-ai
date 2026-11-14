@@ -1,0 +1,99 @@
+{
+  "commit": "c012263fe5ad699537a64823405ff6914ce0a7a7",
+  "test_project": "tests/MessagePack.SourceGenerator.Tests",
+  "filter": "FullyQualifiedName~MsgPack00x|FullyQualifiedName~Generics|FullyQualifiedName~GenerationTests",
+  "baseline": {
+    "exit": 0,
+    "total": "86",
+    "passed": "86",
+    "failed_count": "0",
+    "failed": [],
+    "seconds": 50
+  },
+  "groups": [
+    {
+      "id": "g1",
+      "file": "src/MessagePack.SourceGenerator/CodeAnalysis/GenericTypeParameterInfo.cs",
+      "header": "@@ -11,18 +11,30 @@ public record GenericTypeParameterInfo(string Name) : ICompa",
+      "result": "structural",
+      "compiled": false,
+      "failing_tests": [],
+      "seconds": 9,
+      "lines": 33
+    },
+    {
+      "id": "g2",
+      "file": "src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedNamedTypeName.cs",
+      "header": "@@ -3,8 +3,6 @@",
+      "result": "unprotected",
+      "compiled": true,
+      "failing_tests": [],
+      "seconds": 41,
+      "lines": 9
+    },
+    {
+      "id": "g3",
+      "file": "src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedNamedTypeName.cs",
+      "header": "@@ -39,7 +37,7 @@ public record QualifiedNamedTypeName : QualifiedTypeName, ICom",
+      "result": "structural",
+      "compiled": false,
+      "failing_tests": [],
+      "seconds": 19,
+      "lines": 9
+    },
+    {
+      "id": "g4",
+      "file": "src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedNamedTypeName.cs",
+      "header": "@@ -47,8 +45,8 @@ public record QualifiedNamedTypeName : QualifiedTypeName, ICom",
+      "result": "load-bearing",
+      "compiled": true,
+      "failing_tests": [
+        "(test host aborted: stack overflow)"
+      ],
+      "seconds": 30,
+      "lines": 11
+    },
+    {
+      "id": "g5",
+      "file": "src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedTypeName.cs",
+      "header": "@@ -2,10 +2,7 @@",
+      "result": "unprotected",
+      "compiled": true,
+      "failing_tests": [],
+      "seconds": 27,
+      "lines": 11
+    },
+    {
+      "id": "g6",
+      "file": "src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedTypeName.cs",
+      "header": "@@ -18,17 +15,21 @@ public abstract record QualifiedTypeName : IComparable<Quali",
+      "result": "structural",
+      "compiled": false,
+      "failing_tests": [],
+      "seconds": 3,
+      "lines": 24
+    },
+    {
+      "id": "g7",
+      "file": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "header": "@@ -5,13 +5,11 @@",
+      "result": "unprotected",
+      "compiled": true,
+      "failing_tests": [],
+      "seconds": 10,
+      "lines": 14
+    },
+    {
+      "id": "g8",
+      "file": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "header": "@@ -1407,7 +1405,7 @@ public class TypeCollector",
+      "result": "structural",
+      "compiled": false,
+      "failing_tests": [],
+      "seconds": 3,
+      "lines": 9
+    }
+  ],
+  "scope_note": "Only the tests selected by the filter were run.",
+  "total_seconds": 192
+}

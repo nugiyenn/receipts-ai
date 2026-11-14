@@ -1,0 +1,98 @@
+{
+  "change": "2129",
+  "generated_at": "2026-11-14T23:50",
+  "hypotheses": [
+    {
+      "id": "H1",
+      "change": "2129",
+      "rule": "R1-product-decision",
+      "outcome": "REJECTED",
+      "what": "The generated contractless formatter writes different bytes than ContractlessStandardResolver for attribute-bearing members.",
+      "evidence": [
+        "runs/2129/probe/DataMemberAttributes.txt"
+      ],
+      "finding": "Output is equal. Both write a member marked [IgnoreDataMember]; this is shared exposure behaviour, not a divergence. It still goes to the owner as R-2129-2."
+    },
+    {
+      "id": "H2",
+      "change": "2129",
+      "rule": "R2-silent-suppression",
+      "outcome": "CONFIRMED",
+      "what": "Read-only and private-setter public members are dropped with no diagnostic.",
+      "evidence": [
+        "runs/2129/probe/ReadOnlyAndPrivateSetters.txt",
+        "runs/2129/probe/probe-exec.log"
+      ],
+      "finding": "Wire output is {\"Id\":1} for ProbeRoType; the built-in contractless output is identical, so this matches existing behaviour but is silent."
+    },
+    {
+      "id": "H3",
+      "change": "2129",
+      "rule": "R5-evidence-gap",
+      "outcome": "CONFIRMED",
+      "what": "Duplicate formatter requests for one type, or a formatter for a type that already has [MessagePackObject], leave a formatter without a body.",
+      "evidence": [
+        "runs/2129/probe/probe-dup.log"
+      ],
+      "finding": "CS0535 on ProbeDupFormatterB and ProbeAttrTypeFormatter. No MsgPack diagnostic explains the conflict."
+    },
+    {
+      "id": "H4",
+      "change": "2129",
+      "rule": "R1-product-decision",
+      "outcome": "REJECTED",
+      "what": "init-only and required members fail to round trip.",
+      "evidence": [
+        "runs/2129/probe/InitAndRequired.txt",
+        "runs/2129/probe/probe-exec.log"
+      ],
+      "finding": "InitAndRequiredRoundTrip passes; output equals the built-in resolver."
+    },
+    {
+      "id": "H5",
+      "change": "2129",
+      "rule": "R4-security-ceiling",
+      "outcome": "CONFIRMED",
+      "what": "The router reads the whole 1043-line change because Attributes.cs is in the MessagePack.Annotations runtime area, which has an L3 ceiling.",
+      "evidence": [
+        "runs/2129/route.json"
+      ],
+      "finding": "The ceiling rule is path-based. The Annotations hunk is a 36-line additive attribute class, while the other 1007 lines sit in the generator, tests and docs. See LESSONS."
+    },
+    {
+      "id": "H6",
+      "change": "2129",
+      "rule": "environment",
+      "outcome": "CONFIRMED",
+      "what": "The execution tests cannot run under the SDK pinned in global.json.",
+      "evidence": [
+        "runs/2129/timemachine/head-exec.log",
+        "runs/2129/timemachine/base-exec.log"
+      ],
+      "finding": "SDK 8.0.402 ships Roslyn 4.11 and the generator needs 4.12 (CS9057), on base and head. Under SDK 9.0.321 the same tests run. The pin predates the change."
+    },
+    {
+      "id": "H7",
+      "change": "2129",
+      "rule": "R8-requirement-ambiguity",
+      "outcome": "CONFIRMED",
+      "what": "An [IgnoreMember] attribute on a member of the formatted type is ignored by the generated formatter (raised by Gemini, C3).",
+      "evidence": [
+        "runs/2129/probe/G1_IgnoreMemberOnFormattedType.txt",
+        "runs/2129/probe/probe-gemini.log"
+      ],
+      "finding": "Output is {\"X\":1,\"Y\":2}: the ignored member is written. Supports refusal R-2129-4."
+    },
+    {
+      "id": "H8",
+      "change": "2129",
+      "rule": "R2-silent-suppression",
+      "outcome": "CONFIRMED",
+      "what": "A [MessagePackFormatter] custom formatter on a surrogate member is silently ignored (raised by Gemini, NEW1; Claude's claims and prosecutor missed it).",
+      "evidence": [
+        "runs/2129/probe/G3_CustomFormatterOnSurrogateMember.txt"
+      ],
+      "finding": "Wire output is [21]; the custom doubling formatter would give [42]. CreateMember passes CustomFormatter: null. Goes to the owner as R-2129-6."
+    }
+  ]
+}

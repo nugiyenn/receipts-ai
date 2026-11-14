@@ -1,0 +1,77 @@
+# HELD-OUT canaries for #2283, authored by Gemini (not by us). detect_keywords were written by the author before any result.
+canaries:
+- id: H1
+  type: missed null case
+  area: analyzer-core
+  change: '2283'
+  patch: H1.patch
+  description: Removes the null-conditional operator when accessing the Identifier
+    property, causing a NullReferenceException if the syntax is not a PropertyDeclarationSyntax.
+  authored_by: gemini-3.1-pro-preview
+  detect_keywords:
+  - null reference
+  - null-conditional
+  - missing question mark
+- id: H2
+  type: logic inversion
+  area: analyzer-core
+  change: '2283'
+  patch: H2.patch
+  description: Inverts the condition that checks if the diagnostic is located in the
+    current compilation, causing valid diagnostics to be dropped and invalid ones
+    to be reported.
+  authored_by: gemini-3.1-pro-preview
+  detect_keywords:
+  - logic inversion
+  - negation
+  - contains syntax tree
+- id: H3
+  type: wrong variable
+  area: tests
+  change: '2283'
+  patch: H3.patch
+  description: Uses defineSource instead of usageSource when creating the usage compilation,
+    which will cause the test to compile the wrong code.
+  authored_by: gemini-3.1-pro-preview
+  detect_keywords:
+  - wrong variable
+  - definesource
+  - usagesource
+- id: H4
+  type: weakened test assertion
+  area: tests
+  change: '2283'
+  patch: H4.patch
+  description: Changes the diagnostic severity check from >= Warning to > Warning,
+    which would allow warnings to pass the test silently.
+  authored_by: gemini-3.1-pro-preview
+  detect_keywords:
+  - weakened assertion
+  - severity
+  - greater than
+- id: H5
+  type: false documentation claim
+  area: docs
+  change: '2283'
+  patch: H5.patch
+  description: Falsely claims that members of a type defined in a referenced assembly
+    are reported by the consuming project, contradicting the actual behavior implemented
+    in the PR.
+  authored_by: gemini-3.1-pro-preview
+  detect_keywords:
+  - documentation
+  - consumes
+  - consuming project
+- id: H6
+  type: silent exception swallow
+  area: tests
+  change: '2283'
+  patch: H6.patch
+  description: Swallows the compilation failure by removing the exception throw and
+    instead just logging to the console, which will cause downstream failures when
+    trying to use the invalid image.
+  authored_by: gemini-3.1-pro-preview
+  detect_keywords:
+  - swallow
+  - exception
+  - console.writeline

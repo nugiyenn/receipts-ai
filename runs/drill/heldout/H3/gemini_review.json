@@ -1,0 +1,14 @@
+{
+  "model": "gemini-3.1-pro-preview",
+  "prompt_sha256": "f292abf808608fd15e90fdd7d5d7be057dfde96f1d9696e7780eb7a66ebc6f92",
+  "cached": false,
+  "findings": [
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1434,
+      "severity": "high",
+      "issue": "`GetPropertyIdentifierLocation` uses `as PropertyDeclarationSyntax`, which evaluates to null for source-declared record properties (whose syntax is `ParameterSyntax`). This causes valid diagnostics like `BothStringAndIntKeyAreNull` to be assigned `Location.None` and silently dropped by `ReportIfLocatedInCompilation`, violating the requirement not to drop safety-relevant diagnostics for user-controlled types and contradicting claim C10."
+    }
+  ],
+  "raw": null
+}

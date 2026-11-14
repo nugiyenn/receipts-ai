@@ -1,0 +1,20 @@
+id: REQ-2297
+source: https://github.com/MessagePack-CSharp/MessagePack-CSharp/issues/2297
+title: Add ExcludeFromCodeCoverage attribute to generated code
+intent: >
+  All types emitted by the MessagePack source generator should carry
+  [ExcludeFromCodeCoverage] so that generated code does not skew coverage numbers.
+  The issue says no setting is needed.
+functional:
+  - id: REQ-2297-F1
+    text: Every generated formatter, resolver, enum and union type is decorated with [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage].
+  - id: REQ-2297-F2
+    text: Verified snapshot files are updated to match the new generator output.
+non_functional:
+  - id: REQ-2297-NF1
+    text: The only change to generated output is the added attribute (no behavioural change).
+  - id: REQ-2297-NF2
+    text: Template sources (.tt) and their generated .cs outputs stay consistent.
+security:
+  - id: REQ-2297-S1
+    text: Generated code semantics for (de)serialisation are unchanged.

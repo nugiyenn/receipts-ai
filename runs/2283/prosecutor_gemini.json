@@ -1,0 +1,198 @@
+{
+ "attacks": [
+  {
+   "id": "C1",
+   "claim": "For a [MessagePackObject] type whose member is a closed generic value type from a referenced assembly, the analyzer no longer throws IndexOutOfRangeException (AD0001).",
+   "outcome": "could_not_falsify",
+   "citations_checked": []
+  },
+  {
+   "id": "C2",
+   "claim": "For the same input the generator no longer throws (no CS8785) and a GeneratedMessagePackResolver is emitted.",
+   "outcome": "could_not_falsify",
+   "citations_checked": []
+  },
+  {
+   "id": "C3",
+   "claim": "Only struct<T> and record struct<T> from metadata change behaviour; struct, record struct, class<T> and record class<T> from metadata behave exactly as before.",
+   "outcome": "scenario_proposed",
+   "scenario": "A closed generic class (`class<T>`) from metadata with an unkeyed member also changes behavior, as it previously threw IndexOutOfRangeException (due to empty DeclaringSyntaxReferences) and now does not.",
+   "test_sketch": "Create a `class MyGenericClass<T> { public int Unkeyed { get; set; } }` in a referenced assembly. Use `MyGenericClass<int>` in the main project and observe it no longer throws AD0001.",
+   "citations": [
+    {
+     "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+     "line": 507,
+     "quote": "public async Task ClosedGenericStruct_FromMetadataReference()"
+    }
+   ],
+   "citations_checked": [
+    {
+     "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+     "line": 507,
+     "quote": "public async Task ClosedGenericStruct_FromMetadataReference()",
+     "valid": true,
+     "reason": "exact quote at cited line",
+     "in_diff": true,
+     "hunk": "h8"
+    }
+   ]
+  },
+  {
+   "id": "C4",
+   "claim": "No diagnostic that was reported before the change for a type declared in source is lost, moved or changed by the new constructor-level filter.",
+   "outcome": "could_not_falsify",
+   "citations_checked": []
+  },
+  {
+   "id": "C5",
+   "claim": "No safety-relevant diagnostic is silently dropped for types the user controls.",
+   "outcome": "scenario_proposed",
+   "scenario": "The user controls a referenced project, but that project does not have the MessagePack analyzer installed. Diagnostics for its types are silently dropped by the consuming project.",
+   "test_sketch": "Create Project B with a generic type without keys, but do not install MessagePack.Analyzers in Project B. Create Project A referencing Project B and MessagePack.SourceGenerator. Build Project A. No diagnostics are reported, but the type is invalid.",
+   "citations": [
+    {
+     "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+     "line": 1446,
+     "quote": "if (diagnostic.Location.IsInSource && this.compilation.ContainsSyntaxTree(diagnostic.Location.SourceTree))"
+    }
+   ],
+   "citations_checked": [
+    {
+     "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+     "line": 1446,
+     "quote": "if (diagnostic.Location.IsInSource && this.compilation.ContainsSyntaxTree(diagnostic.Location.SourceTree))",
+     "valid": true,
+     "reason": "exact quote at cited line",
+     "in_diff": true,
+     "hunk": "h6"
+    }
+   ]
+  },
+  {
+   "id": "C6",
+   "claim": "Diagnostics about the members of a closed generic type from a referenced assembly are reported by the assembly that defines it, so any problem must be fixed there.",
+   "outcome": "scenario_proposed",
+   "scenario": "The referenced assembly is a third-party library or a project without the MessagePack analyzer installed, meaning no diagnostics are reported anywhere.",
+   "test_sketch": "Use a type from a third-party library (e.g., a generic struct from a NuGet package without MessagePack analyzers) that lacks `[Key]` attributes. Observe that no diagnostics are reported by either assembly.",
+   "citations": [
+    {
+     "path": "README.md",
+     "line": 1642,
+     "quote": "Diagnostics about the members of such a type are reported by the assembly that defines it rather than by the consuming project"
+    }
+   ],
+   "citations_checked": [
+    {
+     "path": "README.md",
+     "line": 1642,
+     "quote": "Diagnostics about the members of such a type are reported by the assembly that defines it rather than by the consuming project",
+     "valid": true,
+     "reason": "exact quote at cited line",
+     "in_diff": true,
+     "hunk": "h1"
+    }
+   ]
+  },
+  {
+   "id": "C7",
+   "claim": "An unattributed public member of a type defined in a referenced assembly is reported by the project that defines that type.",
+   "outcome": "scenario_proposed",
+   "scenario": "The defining project does not have the MessagePack analyzer installed, so the unattributed member is never reported.",
+   "test_sketch": "Create a class library without MessagePack analyzers, define a type with an unattributed public member, reference it in an app with MessagePack analyzers, and observe no diagnostic is reported.",
+   "citations": [
+    {
+     "path": "doc/analyzers/MsgPack004.md",
+     "line": 52,
+     "quote": "Members of a type defined in a referenced assembly are reported by the project that defines that type"
+    }
+   ],
+   "citations_checked": [
+    {
+     "path": "doc/analyzers/MsgPack004.md",
+     "line": 52,
+     "quote": "Members of a type defined in a referenced assembly are reported by the project that defines that type",
+     "valid": true,
+     "reason": "exact quote at cited line",
+     "in_diff": true,
+     "hunk": "h2"
+    }
+   ]
+  },
+  {
+   "id": "C8",
+   "claim": "Dropping a diagnostic that has no location in the compilation is required because analyzers are not permitted to report against a location that does not exist.",
+   "outcome": "scenario_proposed",
+   "scenario": "Analyzers and source generators are permitted to report diagnostics that are not tied to a specific source location by using `Location.None`.",
+   "test_sketch": "Call `context.ReportDiagnostic(Diagnostic.Create(Rule, Location.None))` in an analyzer or generator. It works perfectly fine and is a standard way to report compilation-wide issues.",
+   "citations": [
+    {
+     "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+     "line": 1442,
+     "quote": "against a location that does not exist, which analyzers are not permitted to do."
+    }
+   ],
+   "citations_checked": [
+    {
+     "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+     "line": 1442,
+     "quote": "against a location that does not exist, which analyzers are not permitted to do.",
+     "valid": true,
+     "reason": "exact quote at cited line",
+     "in_diff": true,
+     "hunk": "h6"
+    }
+   ]
+  },
+  {
+   "id": "C9",
+   "claim": "No live DeclaringSyntaxReferences[0] indexing remains in TypeCollector.cs; the only remaining occurrence is commented out.",
+   "outcome": "could_not_falsify",
+   "citations_checked": []
+  },
+  {
+   "id": "C10",
+   "claim": "GetPropertyIdentifierLocation returns null only for properties that have no source declaration (metadata), so no source-declared property loses its diagnostic.",
+   "outcome": "scenario_proposed",
+   "scenario": "A property declared via a record primary constructor parameter has a source declaration but returns null because its syntax is `ParameterSyntax`, not `PropertyDeclarationSyntax`.",
+   "test_sketch": "Define `public record MyRecord([Key(null)] string Prop);`. `GetPropertyIdentifierLocation` will return `null` for `Prop` because the `as PropertyDeclarationSyntax` cast fails, causing the diagnostic to be dropped.",
+   "citations": [
+    {
+     "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+     "line": 1434,
+     "quote": "private static Location? GetPropertyIdentifierLocation(IPropertySymbol property) => (property.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as PropertyDeclarationSyntax)?.Identifier.GetLocation();"
+    }
+   ],
+   "citations_checked": [
+    {
+     "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+     "line": 1434,
+     "quote": "private static Location? GetPropertyIdentifierLocation(IPropertySymbol property) => (property.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as PropertyDeclarationSyntax)?.Identifier.GetLocation();",
+     "valid": true,
+     "reason": "exact quote at cited line",
+     "in_diff": true,
+     "hunk": "h6"
+    }
+   ]
+  }
+ ],
+ "change": "2283",
+ "kind": "prosecutor_gemini",
+ "model": "gemini-3.1-pro-preview",
+ "produced_by": "gemini api, cached",
+ "produced_at": "2026-11-14T23:22:34+02:00",
+ "prompt_sha256": "c616b1b19061c194baa5b30deeb451d82e998323016af1a09720b7467cd592dc",
+ "prompt": "You are the prosecutor. Your job is to FALSIFY the claims below. For each claim, either:\n(a) state a concrete scenario in which it is false, AND propose a minimal test or command\n    that would demonstrate it; or (b) state you could not falsify it.\nYou may also raise NEW hypotheses about behaviour the change silently alters.\nEvery hypothesis must cite exact diff lines (NEW-file line numbers from the numbered diff, verbatim quote). No confidence numbers.\nOutput JSON: {\"attacks\":[{\"id\",\"claim\",\"outcome\":\"scenario_proposed|could_not_falsify|new_hypothesis\",\"scenario\",\"test_sketch\",\"citations\":[{\"path\",\"line\",\"quote\"}]}]}. No prose.",
+ "citation_summary": {
+  "citations": 6,
+  "invalid": 0,
+  "hallucinated": 0,
+  "wrong_line_only": 0
+ },
+ "execution": {
+  "summary": "see runs/2283/gemini_tests/results.json",
+  "raised": 6,
+  "confirmed": 3,
+  "inconclusive": 3,
+  "precision": 0.5
+ }
+}

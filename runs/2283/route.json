@@ -1,0 +1,179 @@
+{
+  "change": "2283",
+  "lane": "L2",
+  "reasons": [
+    {
+      "rule": "areas",
+      "lane": "L2",
+      "why": "highest default lane of the touched areas"
+    },
+    {
+      "rule": "LR3",
+      "lane": "L2",
+      "why": "blast radius: reportDiagnostic has 34 references (threshold 10)"
+    },
+    {
+      "rule": "LR4",
+      "lane": "L2",
+      "why": "2 source hunk(s) unprotected by tests"
+    }
+  ],
+  "areas": [
+    "analyzer-core",
+    "docs",
+    "tests"
+  ],
+  "ceiling_areas": [],
+  "blast_radius": {
+    "threshold": 10,
+    "max_references": 34,
+    "top_symbol": "reportDiagnostic",
+    "per_hunk": {
+      "h3": [
+        {
+          "symbol": "reportDiagnostic",
+          "why": "member-access",
+          "references": 34
+        }
+      ],
+      "h4": [
+        {
+          "symbol": "reportDiagnostic",
+          "why": "member-access",
+          "references": 34
+        }
+      ],
+      "h5": [],
+      "h6": [
+        {
+          "symbol": "GetPropertyIdentifierLocation",
+          "why": "declared",
+          "references": 2
+        },
+        {
+          "symbol": "ReportIfLocatedInCompilation",
+          "why": "declared",
+          "references": 2
+        }
+      ]
+    }
+  },
+  "flagged_hunks": {
+    "h1": [
+      "refusal R-2283-2 (R6-doc-overclaim)",
+      "claim C6 has only E1 evidence"
+    ],
+    "h2": [
+      "refusal R-2283-2 (R6-doc-overclaim)",
+      "claim C7 has only E1 evidence"
+    ],
+    "h3": [
+      "blast-radius: touches a symbol with 34 references (threshold 10)",
+      "refusal R-2283-1 (R2-silent-suppression)",
+      "claim C4 has only E2 evidence",
+      "claim C5 has only E1 evidence"
+    ],
+    "h4": [
+      "unprotected: reverting this hunk breaks no test",
+      "blast-radius: touches a symbol with 34 references (threshold 10)",
+      "refusal R-2283-4 (R3-unverified-root-cause)",
+      "claim C10 has only E1 evidence"
+    ],
+    "h5": [
+      "refusal R-2283-4 (R3-unverified-root-cause)",
+      "claim C9 has only E1 evidence"
+    ],
+    "h6": [
+      "not-covered-by-xray: hunk could not be reverted in isolation (structural), not shown to be protected",
+      "refusal R-2283-1 (R2-silent-suppression)",
+      "claim C4 has only E2 evidence",
+      "claim C5 has only E1 evidence",
+      "claim C8 has only E1 evidence",
+      "claim C8 has only E1 evidence",
+      "claim C10 has only E1 evidence",
+      "claim C10 has only E1 evidence"
+    ],
+    "h8": [
+      "refusal R-2283-3 (R1-product-decision)",
+      "refusal R-2283-3 (R1-product-decision)",
+      "refusal R-2283-3 (R1-product-decision)",
+      "claim C3 has only E1 evidence",
+      "claim C3 has only E1 evidence",
+      "claim C3 has only E1 evidence",
+      "claim C6 has only E1 evidence",
+      "claim C7 has only E1 evidence",
+      "claim C7 has only E1 evidence"
+    ]
+  },
+  "reading_budget": {
+    "lines": 90,
+    "hunks": 7,
+    "total_changed_lines": 228,
+    "ratio": 0.3947,
+    "basis": "line-level: flagged src/template hunks whole; doc/test hunks only lines near cited evidence gaps",
+    "inputs": {
+      "xray": true,
+      "regen": false,
+      "refusals": true,
+      "claims": true
+    },
+    "provisional": false,
+    "hunk_level_lines": 226
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "area": "docs",
+      "kind": "doc",
+      "lane": "L2",
+      "changed_lines": 5,
+      "flagged_hunks": [
+        "h1"
+      ]
+    },
+    {
+      "path": "doc/analyzers/MsgPack004.md",
+      "area": "docs",
+      "kind": "doc",
+      "lane": "L2",
+      "changed_lines": 5,
+      "flagged_hunks": [
+        "h2"
+      ]
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "area": "analyzer-core",
+      "kind": "src",
+      "lane": "L2",
+      "changed_lines": 29,
+      "flagged_hunks": [
+        "h3",
+        "h4",
+        "h6",
+        "h5"
+      ]
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+      "area": "tests",
+      "kind": "test",
+      "lane": "L2",
+      "changed_lines": 189,
+      "flagged_hunks": [
+        "h8"
+      ]
+    }
+  ],
+  "policy": {
+    "areas": "areas-1",
+    "routing": "routing-1"
+  },
+  "budget_note": {
+    "headline_line_level": 90,
+    "hunk_level": 226,
+    "regen_ceiling": null,
+    "explanation": "Headline 90 of 228 changed lines is the line-level budget (route.json). 226 is the same flags counted as whole hunks.",
+    "derived_by": "receipts/budget.py"
+  }
+}

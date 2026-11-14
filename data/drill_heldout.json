@@ -1,0 +1,190 @@
+{
+  "generated_at": "2026-11-15T00:49:17+02:00",
+  "label": "HELD-OUT round: 6 bugs authored by Gemini, not by us. Detectors, prompts, filter and matching rule frozen before authoring (runs/drill/heldout/PREREGISTRATION.json).",
+  "planted": 6,
+  "caught_by_union": 5,
+  "recall_union": 0.833,
+  "recall_best_single": {
+    "reviewer": "claude",
+    "caught": 4,
+    "planted": 6,
+    "recall": 0.667
+  },
+  "recall_no_llm": {
+    "caught": 2,
+    "planted": 6,
+    "recall": 0.333,
+    "missed": [
+      "H1",
+      "H4",
+      "H5",
+      "H6"
+    ]
+  },
+  "per_family": {
+    "tests": {
+      "caught": [
+        "H2",
+        "H3"
+      ],
+      "planted": 6,
+      "recall": 0.333,
+      "missed": [
+        "H1",
+        "H4",
+        "H5",
+        "H6"
+      ]
+    },
+    "deterministic-rules": {
+      "caught": [],
+      "planted": 6,
+      "recall": 0.0,
+      "missed": [
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6"
+      ]
+    },
+    "gemini": {
+      "caught": [
+        "H1"
+      ],
+      "planted": 6,
+      "recall": 0.167,
+      "missed": [
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6"
+      ]
+    },
+    "claude": {
+      "caught": [
+        "H1",
+        "H3",
+        "H5",
+        "H6"
+      ],
+      "planted": 6,
+      "recall": 0.667,
+      "missed": [
+        "H2",
+        "H4"
+      ]
+    }
+  },
+  "caught_by_exactly_one_family": {
+    "H2": "tests",
+    "H5": "claude",
+    "H6": "claude"
+  },
+  "missed": [
+    "H4"
+  ],
+  "location_only_secondary": {
+    "any_signal_near_planted_hunk": 5,
+    "planted": 6,
+    "gemini": 2,
+    "claude": 5,
+    "note": "Finding within +-2 lines of the planted hunk, keywords ignored. Secondary metric, fixed before results."
+  },
+  "per_canary": {
+    "H1": {
+      "type": "missed null case",
+      "description": "Removes the null-conditional operator when accessing the Identifier property, causing a NullReferenceException if the syntax is not a PropertyDeclarationSyntax.",
+      "by": [
+        "llm:gemini",
+        "llm:claude"
+      ],
+      "caught": true,
+      "fired_families": [
+        "gemini",
+        "claude"
+      ],
+      "tests_outcome": "green"
+    },
+    "H2": {
+      "type": "logic inversion",
+      "description": "Inverts the condition that checks if the diagnostic is located in the current compilation, causing valid diagnostics to be dropped and invalid ones to be reported.",
+      "by": [
+        "test-fail"
+      ],
+      "caught": true,
+      "fired_families": [
+        "tests"
+      ],
+      "tests_outcome": "red"
+    },
+    "H3": {
+      "type": "wrong variable",
+      "description": "Uses defineSource instead of usageSource when creating the usage compilation, which will cause the test to compile the wrong code.",
+      "by": [
+        "test-fail",
+        "llm:claude"
+      ],
+      "caught": true,
+      "fired_families": [
+        "tests",
+        "claude"
+      ],
+      "tests_outcome": "red"
+    },
+    "H4": {
+      "type": "weakened test assertion",
+      "description": "Changes the diagnostic severity check from >= Warning to > Warning, which would allow warnings to pass the test silently.",
+      "by": [],
+      "caught": false,
+      "fired_families": [],
+      "tests_outcome": "green"
+    },
+    "H5": {
+      "type": "false documentation claim",
+      "description": "Falsely claims that members of a type defined in a referenced assembly are reported by the consuming project, contradicting the actual behavior implemented in the PR.",
+      "by": [
+        "llm:claude"
+      ],
+      "caught": true,
+      "fired_families": [
+        "claude"
+      ],
+      "tests_outcome": "green"
+    },
+    "H6": {
+      "type": "silent exception swallow",
+      "description": "Swallows the compilation failure by removing the exception throw and instead just logging to the console, which will cause downstream failures when trying to use the invalid image.",
+      "by": [
+        "llm:claude"
+      ],
+      "caught": true,
+      "fired_families": [
+        "claude"
+      ],
+      "tests_outcome": "green"
+    }
+  },
+  "caveats": [
+    "All 6 bugs were authored by one model (Gemini 3.1 Pro), one authoring call, n=6. Small sample, no confidence interval worth quoting.",
+    "Gemini is both the author and one of the four reviewers (separate fresh call, no authoring context), so its result is correlated with the authoring.",
+    "The fresh Claude reviewer is the same model family that wrote claims.json.",
+    "detect_keywords were written by the author. A finding must be near the planted hunk AND contain a keyword; the location-only metric is reported next to it.",
+    "The deterministic rules (R2, R4, R6, assertion drop) were written by us earlier and were not changed in this round.",
+    "Three of the six bugs sit in test files, which says something about what the author model thinks an agent breaks. Reviewer noise on the unplanted head is in runs/drill/BASELINE.",
+    "One run per reviewer; LLM output varies between runs."
+  ],
+  "post_hoc_reading": {
+    "status": "POST-HOC, human reading, NOT scored",
+    "text": "Read after the results. H2: by their text both Gemini and Claude described the inverted ContainsSyntaxTree condition (Gemini 'is inverted', Claude 'The condition is inverted'), but neither finding contained the author's keywords, so the strict metric did not count them; the canary is in the union anyway through the red tests. H4: no reviewer finding mentions test severity at all; Gemini's two findings and Claude's seven concern TypeCollector.cs and the docs. H3 and H6, which sit in test files, were found by Claude only."
+  },
+  "process": {
+    "authoring": "one Gemini call (gemini-3.1-pro-preview, temperature 0.4) given the PR diff plus head source of TypeCollector.cs, MsgPack004.md and GenericsFormatterTests.cs; not shown detectors, canaries, claims or results",
+    "patches": "generated mechanically with git diff from Gemini's exact old/new edits (not hand-written diffs)",
+    "replacements_requested": 0,
+    "compile": "6 of 6 compiled",
+    "freeze": "runs/drill/heldout/PREREGISTRATION.json (hashes recorded before authoring and again before the first signal ran; verified unchanged after)"
+  }
+}

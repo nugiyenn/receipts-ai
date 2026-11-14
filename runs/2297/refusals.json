@@ -1,0 +1,150 @@
+{
+  "change": "2297",
+  "kind": "refusals",
+  "produced_by": "claude-code session, cached",
+  "model": "claude-sonnet-5-5",
+  "produced_at": "2026-11-14T23:19",
+  "static_analysis_only": true,
+  "prompt": "You are the refusal writer. A deterministic policy (policy/refusal.yaml, rules R1-R8) decides WHEN the reviewer must refuse; you only word the refusal.\nFor each triggered rule write: what (the decision the AI will not make), why_ai_cannot_decide (the specific reason evidence cannot settle it),\nquestion_for_owner (one question answerable in under a minute), options (2-4 short strings), and resolvable_by (the evidence that would settle it, or \"human only\").\nCite exact diff lines. No confidence numbers. Do not recommend approving or rejecting the change.",
+  "prompt_sha256": "463eb717dbebf461ac3f21d903c076b5bc3d683aff49287e4efbdedaea6e398d",
+  "inputs": [
+    "git show origin/ju26-issue-2297",
+    "issue #2297 body (github.com page, fetched 2026-11-14)",
+    "receipts/requirements/REQ-2297.yaml"
+  ],
+  "refusals": [
+    {
+      "id": "R-2297-1",
+      "rule": "R1-product-decision",
+      "claims": [
+        "C3",
+        "C6"
+      ],
+      "what": "Whether code generated for netstandard2.0 and .NET Framework consumers may go undecorated.",
+      "why_ai_cannot_decide": "The requirement says all generated code. The change excludes two target families behind a preprocessor guard, justified by a comment and a README line that assert the attribute is unavailable there. Which targets the project supports and whether a partial answer meets the request is a maintainer decision, and the assertion itself is untested.",
+      "question_for_owner": "Is decoration on only some targets acceptable, and is the guard really required for those targets?",
+      "options": [
+        "Accept the guard",
+        "Require proof the attribute is unavailable there",
+        "Require decoration on all targets",
+        "Reject"
+      ],
+      "resolvable_by": "Partly by evidence: compile generated output for each target with and without the guard (hypothesis H9). Acceptable scope stays human.",
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 19,
+          "quote": "private const string Guard = \"#if !NETSTANDARD2_0 && !NETFRAMEWORK\";"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 18,
+          "quote": "The attribute is not available on netstandard2.0 or .NET Framework, so it is only emitted where it exists."
+        },
+        {
+          "path": "README.md",
+          "line": 1640,
+          "quote": "The attribute is only emitted for targets where it is available (not `netstandard2.0` or .NET Framework)."
+        }
+      ],
+      "evidence_refs": [],
+      "owner_decision": null,
+      "owner_note": null
+    },
+    {
+      "id": "R-2297-2",
+      "rule": "R1-product-decision",
+      "claims": [
+        "C8"
+      ],
+      "what": "Whether it is acceptable that the attribute placed on the generated part of the resolver also excludes the user's own members of that partial class from coverage.",
+      "why_ai_cannot_decide": "Attributes on one part of a partial type apply to the whole type. The resolver class is declared by the user and extended by the generator, so decorating the generated part changes coverage reporting for user code. The requirement asks only for generated code; whether the side effect is intended or tolerable is a decision for the owner.",
+      "question_for_owner": "Is excluding the whole user-declared resolver class from coverage acceptable?",
+      "options": [
+        "Accept",
+        "Document the side effect in the README",
+        "Restructure so only generated types are decorated",
+        "Reject"
+      ],
+      "resolvable_by": "Partly: a coverage-instrumented build of a resolver class with a hand-written member shows the member excluded (hypothesis H8). The decision stays human.",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/ResolverTemplate.tt",
+          "line": 17,
+          "quote": "partial class <#= ResolverName.Name #> : MsgPack::IFormatterResolver"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 58,
+          "quote": "partial class GeneratedMessagePackResolver"
+        }
+      ],
+      "evidence_refs": [],
+      "owner_decision": null,
+      "owner_note": null
+    },
+    {
+      "id": "R-2297-3",
+      "rule": "R5-evidence-gap",
+      "claims": [
+        "C2",
+        "C3"
+      ],
+      "what": "Whether the claim 'netstandard2.0 consumers still compile' and 'every type is decorated' are established.",
+      "why_ai_cannot_decide": "The only test matches strings. It never compiles generated output for a legacy target, and its per-file check passes even if two of the three attributes in the resolver file are removed. Nothing the reviewer can execute within the test suite settles either claim, so only an added test or a human read can.",
+      "question_for_owner": "Do you require a compile-per-target test and a per-type test before merge?",
+      "options": [
+        "Require both tests",
+        "Require the compile test only",
+        "Accept the string test"
+      ],
+      "resolvable_by": "Mechanical: the evidence engine's mutation and compile checks (claims C2, C3).",
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 76,
+          "quote": "text.Contains(ExcludeAttribute),"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 95,
+          "quote": "Assert.Equal(attributeCount, guardedCount);"
+        }
+      ],
+      "evidence_refs": [],
+      "owner_decision": null,
+      "owner_note": null
+    },
+    {
+      "id": "R-2297-4",
+      "rule": "R1-product-decision",
+      "claims": [
+        "C4"
+      ],
+      "what": "Whether the brace-layout change in TransformUtilities belongs in this change.",
+      "why_ai_cannot_decide": "The hunk changes generated code for nested generic types with constraints, is not mentioned in the README or the requirement, and is covered only by one snapshot whose line changes. Whether it is a needed side fix for the attribute or an unrelated edit is intent the reviewer cannot read from the diff.",
+      "question_for_owner": "Is the brace change part of this request, or should it be a separate change?",
+      "options": [
+        "Needed, keep",
+        "Split into its own change",
+        "Reject"
+      ],
+      "resolvable_by": "human only",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/TransformUtilities.cs",
+          "line": 58,
+          "quote": "writer(anyConstraints ? \"{\\r\\n\" : \" {\\r\\n\");"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericDataTypeWithPrivateMember/Formatters.HasPrivateSerializedMemberAndIsGenericNamed`1.HasPrivateSerializedMemberAndIsGenericNamedFormatter.g.cs",
+          "line": 13,
+          "quote": "internal sealed class HasPrivateSerializedMemberAndIsGenericNamedFormatter"
+        }
+      ],
+      "evidence_refs": [],
+      "owner_decision": null,
+      "owner_note": null
+    }
+  ]
+}

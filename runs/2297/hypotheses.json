@@ -1,0 +1,18 @@
+{
+ "change": "2297",
+ "hypotheses": [
+  {
+   "id": "H6",
+   "change": "2297",
+   "rule": "R5-evidence-gap",
+   "outcome": "REJECTED for attribute pattern; one scope finding",
+   "what": "Every .g.cs hunk is a pure attribute addition and .tt/.cs templates are consistent.",
+   "evidence": [
+    "runs/2297/regen.json",
+    "runs/2297/regen-tests.log (46 snapshot/generation tests pass on head)"
+   ],
+   "finding": "220/222 snapshots match the strict attribute-only pattern. 2 do not: HasPrivateSerializedMemberAndIsGenericNamed/Ordinal formatters, because TransformUtilities.cs (not part of \"add attribute\") changes anyConstraints ? \"{\" : ... to emit \"{\\r\\n\" -> unrelated whitespace/behaviour fix riding along. All 6 changed .tt files have their .cs counterpart changed (no orphaned template output). No claim in the commit mentions the TransformUtilities change.",
+   "refusal_question": "Accept the unrelated brace/newline output change in TransformUtilities.cs as part of this PR, or split it out?"
+  }
+ ]
+}

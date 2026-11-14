@@ -1,0 +1,345 @@
+You are reviewing a pull request. Requirement: The analyzer does not work if SuppressSourceGeneration = true
+
+#### Bug description
+
+The analyzer does not work if SuppressSourceGeneration = true. This has happened since version 3.1.1. It still worked in 3.1.0.
+
+Diff:
+diff --git a/README.md b/README.md
+index c52f1088..3d37b675 100644
+--- a/README.md
++++ b/README.md
+@@ -1617,6 +1617,20 @@ This code generation has a minor upfront performance cost.
+ > Note: When using Unity, dynamic code generation only works when targeting .NET Framework 4.x + mono runtime.
+ For all other Unity targets, AOT is required.
+ 
++### Opting out of source generation
++
++A `[MessagePackObject]` type can opt out of source generation with `[MessagePackObject(SuppressSourceGeneration = true)]`.
++No formatter is generated for that type. It is serialized at run time by the dynamic resolvers, which use reflection, so such a type is not AOT-safe.
++
++The analyzer still validates these types, because they are serialized at run time and must still have a valid contract:
++- Members have a `[Key]` or `[IgnoreMember]` attribute ([MsgPack004](doc/analyzers/MsgPack004.md)).
++- Keys are unique and all of the same kind ([MsgPack005](doc/analyzers/MsgPack005.md)).
++- Non-public members require `AllowPrivate` ([MsgPack015](doc/analyzers/MsgPack015.md)).
++- Members have types that are themselves serializable ([MsgPack003](doc/analyzers/MsgPack003.md)).
++- Types are accessible to the resolver ([MsgPack012](doc/analyzers/MsgPack012.md)).
++
++The analyzer does not report the partial-class requirement ([MsgPack011](doc/analyzers/MsgPack011.md)) or the AOT-only checks ([MsgPack016](doc/analyzers/MsgPack016.md) and [MsgPack017](doc/analyzers/MsgPack017.md)) for these types, because they only apply when a formatter is generated.
++
+ ### Customizations
+ 
+ You can customize the generated source through properties on the `GeneratedMessagePackResolverAttribute`.
+diff --git a/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs b/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs
+index e121773d..470c93fc 100644
+--- a/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs
++++ b/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs
+@@ -1005,6 +1005,7 @@ public class TypeCollector
+                         if ((isIntKey && intKey == null) || (!isIntKey && stringKey == null))
+                         {
+                             this.reportDiagnostic?.Invoke(Diagnostic.Create(MsgPack00xMessagePackAnalyzer.DoNotMixStringAndIntKeys, item.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation()));
++                            continue; // The key kind does not match the other members; the diagnostic is reported, so skip this member.
+                         }
+                     }
+ 
+@@ -1019,7 +1020,10 @@ public class TypeCollector
+                         {
+                             DeclaringType = GetDeclaringTypeIfColliding(item),
+                         };
+-                        intMembers.Add(member.IntKey, (member, item.Type));
++                        if (!intMembers.ContainsKey(member.IntKey))
++                        {
++                            intMembers.Add(member.IntKey, (member, item.Type));
++                        }
+                     }
+                     else if (stringKey is not null)
+                     {
+@@ -1032,7 +1036,10 @@ public class TypeCollector
+                         {
+                             DeclaringType = GetDeclaringTypeIfColliding(item),
+                         };
+-                        stringMembers.Add(member.StringKey, (member, item.Type));
++                        if (!stringMembers.ContainsKey(member.StringKey))
++                        {
++                            stringMembers.Add(member.StringKey, (member, item.Type));
++                        }
+                     }
+ 
+                     var messagePackFormatter = item.GetAttributes().FirstOrDefault(x => x.AttributeClass.ApproximatelyEqual(this.typeReferences.FormatterAttribute))?.ConstructorArguments[0];
+@@ -1138,6 +1145,7 @@ public class TypeCollector
+                         if ((isIntKey && intKey == null) || (!isIntKey && stringKey == null))
+                         {
+                             this.reportDiagnostic?.Invoke(Diagnostic.Create(MsgPack00xMessagePackAnalyzer.DoNotMixStringAndIntKeys, item.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation()));
++                            continue; // The key kind does not match the other members; the diagnostic is reported, so skip this member.
+                         }
+                     }
+ 
+@@ -1152,7 +1160,10 @@ public class TypeCollector
+                         {
+                             DeclaringType = GetDeclaringTypeIfColliding(item),
+                         };
+-                        intMembers.Add(member.IntKey, (member, item.Type));
++                        if (!intMembers.ContainsKey(member.IntKey))
++                        {
++                            intMembers.Add(member.IntKey, (member, item.Type));
++                        }
+                     }
+                     else
+                     {
+@@ -1165,7 +1176,10 @@ public class TypeCollector
+                         {
+                             DeclaringType = GetDeclaringTypeIfColliding(item),
+                         };
+-                        stringMembers.Add(member.StringKey, (member, item.Type));
++                        if (!stringMembers.ContainsKey(member.StringKey))
++                        {
++                            stringMembers.Add(member.StringKey, (member, item.Type));
++                        }
+                     }
+ 
+                     var messagePackFormatter = item.GetAttributes().FirstOrDefault(x => x.AttributeClass.ApproximatelyEqual(this.typeReferences.FormatterAttribute))?.ConstructorArguments[0];
+diff --git a/tests/MessagePack.SourceGenerator.ExecutionTests/SuppressedSourceGenerationTests.cs b/tests/MessagePack.SourceGenerator.ExecutionTests/SuppressedSourceGenerationTests.cs
+new file mode 100644
+index 00000000..9ba87c4e
+--- /dev/null
++++ b/tests/MessagePack.SourceGenerator.ExecutionTests/SuppressedSourceGenerationTests.cs
+@@ -0,0 +1,37 @@
++// Copyright (c) All contributors. All rights reserved.
++// Licensed under the MIT license. See LICENSE file in the project root for full license information.
++
++/// <summary>
++/// A type that opts out of source generation (https://github.com/MessagePack-CSharp/MessagePack-CSharp/issues/2234).
++/// It must still serialize correctly through the run-time (dynamic) resolver.
++/// </summary>
++[MessagePackObject(SuppressSourceGeneration = true)]
++public class SuppressedSourceGenerationType
++{
++    [Key(0)]
++    public int Id { get; set; }
++
++    [Key(1)]
++    public string Name { get; set; } = string.Empty;
++}
++
++public class SuppressedSourceGenerationTests
++{
++    [Fact]
++    public void NoFormatterIsGeneratedForSuppressedType()
++    {
++        Assert.Null(GeneratedMessagePackResolver.Instance.GetFormatter<SuppressedSourceGenerationType>());
++    }
++
++    [Fact]
++    public void SuppressedTypeRoundTripsThroughDynamicResolver()
++    {
++        var value = new SuppressedSourceGenerationType { Id = 7, Name = "seven" };
++
++        byte[] bytes = MessagePackSerializer.Serialize(value, MessagePackSerializerOptions.Standard);
++        SuppressedSourceGenerationType result = MessagePackSerializer.Deserialize<SuppressedSourceGenerationType>(bytes, MessagePackSerializerOptions.Standard);
++
++        Assert.Equal(7, result.Id);
++        Assert.Equal("seven", result.Name);
++    }
++}
+diff --git a/tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs b/tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs
+new file mode 100644
+index 00000000..3aa556f9
+--- /dev/null
++++ b/tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs
+@@ -0,0 +1,193 @@
++// Copyright (c) All contributors. All rights reserved.
++// Licensed under the MIT license. See LICENSE file in the project root for full license information.
++
++using MessagePack.Analyzers.CodeFixes;
++using Microsoft.CodeAnalysis.CSharp;
++using Microsoft.CodeAnalysis.Testing;
++using VerifyCS = CSharpCodeFixVerifier<MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer, MessagePack.Analyzers.CodeFixes.MessagePackCodeFixProvider>;
++
++/// <summary>
++/// Verifies that the analyzer keeps validating <c>[MessagePackObject(SuppressSourceGeneration = true)]</c> types
++/// (https://github.com/MessagePack-CSharp/MessagePack-CSharp/issues/2234).
++/// Opting out of source generation only skips generation; the type is still serialized at run time, so its contract must still be checked.
++/// </summary>
++public class SuppressSourceGenerationAnalyzerTests
++{
++    private const string Preamble = @"
++using MessagePack;
++";
++
++    [Fact]
++    public async Task MemberWithoutKeyIsReported()
++    {
++        string input = Preamble + @"
++[MessagePackObject(SuppressSourceGeneration = true)]
++public class Foo
++{
++    public string {|MsgPack004:Member|} { get; set; }
++}
++";
++
++        await new VerifyCS.Test
++        {
++            TestCode = input,
++            MarkupOptions = MarkupOptions.UseFirstDescriptor,
++        }.RunAsync();
++    }
++
++    [Fact]
++    public async Task AllowPrivateRequiredIsReported()
++    {
++        string input = Preamble + @"
++[{|MsgPack015:MessagePackObject(SuppressSourceGeneration = true)|}]
++public class Foo
++{
++    [Key(0)]
++    private string member;
++}
++";
++
++        await new VerifyCS.Test
++        {
++            TestCode = input,
++            MarkupOptions = MarkupOptions.UseFirstDescriptor,
++        }.RunAsync();
++    }
++
++    [Fact]
++    public async Task MemberTypeMustBeMessagePackObjectIsReported()
++    {
++        string input = Preamble + @"
++public class Other
++{
++}
++
++[MessagePackObject(SuppressSourceGeneration = true)]
++public class Foo
++{
++    [Key(0)]
++    public Other {|MsgPack003:Member|} { get; set; }
++}
++";
++
++        await new VerifyCS.Test
++        {
++            TestCode = input,
++            MarkupOptions = MarkupOptions.UseFirstDescriptor,
++        }.RunAsync();
++    }
++
++    [Fact]
++    public async Task DuplicateIntKeysAreReportedWithoutAnalyzerFailure()
++    {
++        string input = Preamble + @"
++[MessagePackObject(SuppressSourceGeneration = true)]
++public class Foo
++{
++    [Key(0)]
++    public string Member1 { get; set; }
++
++    {|MsgPack005:[Key(0)]
++    public string Member2 { get; set; }|}
++}
++";
++
++        await new VerifyCS.Test
++        {
++            TestCode = input,
++            MarkupOptions = MarkupOptions.UseFirstDescriptor,
++        }.RunAsync();
++    }
++
++    [Fact]
++    public async Task DuplicateStringKeysAreReportedWithoutAnalyzerFailure()
++    {
++        string input = Preamble + @"
++[MessagePackObject(SuppressSourceGeneration = true)]
++public class Foo
++{
++    [Key(""a"")]
++    public string Member1 { get; set; }
++
++    {|MsgPack005:[Key(""a"")]
++    public string Member2 { get; set; }|}
++}
++";
++
++        await new VerifyCS.Test
++        {
++            TestCode = input,
++            MarkupOptions = MarkupOptions.UseFirstDescriptor,
++        }.RunAsync();
++    }
++
++    [Fact]
++    public async Task MixedKeyKindsAreReportedWithoutAnalyzerFailure()
++    {
++        string input = Preamble + @"
++[MessagePackObject(SuppressSourceGeneration = true)]
++public class Foo
++{
++    [Key(0)]
++    public string Member1 { get; set; }
++
++    {|MsgPack005:[Key(""Member2"")]
++    public string Member2 { get; set; }|}
++}
++";
++
++        await new VerifyCS.Test
++        {
++            TestCode = input,
++            MarkupOptions = MarkupOptions.UseFirstDescriptor,
++        }.RunAsync();
++    }
++
++    [Fact]
++    public async Task DuplicateKeysAreReportedWithoutAnalyzerFailureForGeneratedTypes()
++    {
++        string input = Preamble + @"
++[MessagePackObject]
++public class Foo
++{
++    [Key(0)]
++    public string Member1 { get; set; }
++
++    {|MsgPack005:[Key(0)]
++    public string Member2 { get; set; }|}
++}
++";
++
++        await new VerifyCS.Test
++        {
++            TestCode = input,
++            MarkupOptions = MarkupOptions.UseFirstDescriptor,
++        }.RunAsync();
++    }
++
++    [Fact]
++    public async Task SourceGenerationOnlyDiagnosticsAreNotReportedWhenSuppressed()
++    {
++        // The partial-class requirement (MsgPack011) and the AOT-only checks (MsgPack016, MsgPack017)
++        // only matter when a formatter is generated, so they are not reported for a suppressed type.
++        string input = Preamble + @"
++[MessagePackObject(AllowPrivate = true, SuppressSourceGeneration = true)]
++public class Foo
++{
++    [Key(0)]
++    private string member;
++
++    [Key(1)]
++    public string Prop1 { get; init; } = ""some default"";
++
++    [Key(2)]
++    public string Prop2 { get; set; }
++}
++";
++
++        await new VerifyCS.Test
++        {
++            TestCode = input,
++        }.RunAsync();
++    }
++}
+
+
+List any bugs, risks or concerns, and say whether you would approve it.

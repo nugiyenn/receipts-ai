@@ -1,0 +1,19 @@
+{
+ "text": "{\n  \"findings\": [\n    {\n      \"path\": \"src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs\",\n      \"line\": 1434,\n      \"severity\": \"high\",\n      \"issue\": \"GetPropertyIdentifierLocation uses 'as PropertyDeclarationSyntax', which evaluates to null for record properties (whose syntax is ParameterSyntax). This causes valid diagnostics for source-declared record properties to be silently dropped by ReportIfLocatedInCompilation, violating the requirement that no existing diagnostic for types declared in source is lost.\"\n    }\n  ]\n}",
+ "model": "gemini-3.1-pro-preview",
+ "prompt_sha256": "4dd106ffecf230388e82589e9e3d64eb671f0f3d8f9b76a3d3e38d1251ac8fe0",
+ "ts": "2026-11-14T23:26:30+0200",
+ "usage": {
+  "promptTokenCount": 5930,
+  "candidatesTokenCount": 126,
+  "totalTokenCount": 16372,
+  "promptTokensDetails": [
+   {
+    "modality": "TEXT",
+    "tokenCount": 5930
+   }
+  ],
+  "thoughtsTokenCount": 10316,
+  "serviceTier": "standard"
+ }
+}

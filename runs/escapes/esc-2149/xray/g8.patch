@@ -1,0 +1,13 @@
+diff --git a/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs b/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs
+index 2d7da5a6..50565ad9 100644
+--- a/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs
++++ b/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs
+@@ -1407,7 +1405,7 @@ public class TypeCollector
+             formattedType,
+             isClass: isClass,
+             nestedFormatterRequired: nestedFormatterRequired,
+-            genericTypeParameters: formattedType.IsGenericType ? formattedType.TypeParameters.Select(t => new GenericTypeParameterInfo(t)).ToArray() : Array.Empty<GenericTypeParameterInfo>(),
++            genericTypeParameters: formattedType.IsGenericType ? formattedType.TypeParameters.Select(t => GenericTypeParameterInfo.Create(t)).ToArray() : Array.Empty<GenericTypeParameterInfo>(),
+             constructorParameters: constructorParameters.ToArray(),
+             isIntKey: isIntKey,
+             members: isIntKey ? intMembers.Values.Select(v => v.Info).ToArray() : stringMembers.Values.Select(v => v.Info).ToArray(),

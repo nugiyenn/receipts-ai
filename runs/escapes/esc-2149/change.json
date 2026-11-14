@@ -1,0 +1,325 @@
+{
+  "id": "esc-2149",
+  "requirement_ids": [
+    "REQ-esc-2149"
+  ],
+  "repo": "../repo",
+  "branch": "c012263fe5ad699537a64823405ff6914ce0a7a7",
+  "base": "168179ef9aba18a16a12df932a9cb818cc545377",
+  "head": "c012263fe5ad699537a64823405ff6914ce0a7a7",
+  "subject": "Avoid crashing with stack overflow on recursive generic type parameter constraints",
+  "message": "Avoid crashing with stack overflow on recursive generic type parameter constraints\n\nFixes #2034",
+  "areas_version": "areas-1",
+  "totals": {
+    "files": 8,
+    "hunks": 13,
+    "added": 151,
+    "removed": 21,
+    "changed_lines": 172,
+    "by_kind": {
+      "generated": 2,
+      "src": 5,
+      "test": 1
+    }
+  },
+  "files": [
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/CodeAnalysisUtilities.cs",
+      "area": "analyzer-core",
+      "kind": "src",
+      "status": "modified",
+      "added": 5,
+      "removed": 6,
+      "hunks": [
+        "h1",
+        "h2"
+      ],
+      "binary": false
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GenericTypeParameterInfo.cs",
+      "area": "analyzer-core",
+      "kind": "src",
+      "status": "modified",
+      "added": 14,
+      "removed": 2,
+      "hunks": [
+        "h3"
+      ],
+      "binary": false
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedNamedTypeName.cs",
+      "area": "analyzer-core",
+      "kind": "src",
+      "status": "modified",
+      "added": 3,
+      "removed": 5,
+      "hunks": [
+        "h4",
+        "h5",
+        "h6"
+      ],
+      "binary": false
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedTypeName.cs",
+      "area": "analyzer-core",
+      "kind": "src",
+      "status": "modified",
+      "added": 6,
+      "removed": 5,
+      "hunks": [
+        "h7",
+        "h8"
+      ],
+      "binary": false
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "area": "analyzer-core",
+      "kind": "src",
+      "status": "modified",
+      "added": 1,
+      "removed": 3,
+      "hunks": [
+        "h9",
+        "h10"
+      ],
+      "binary": false
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+      "area": "tests",
+      "kind": "test",
+      "status": "modified",
+      "added": 20,
+      "removed": 0,
+      "hunks": [
+        "h11"
+      ],
+      "binary": false
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/RecursiveGenerics_Direct/Formatters.MessagePack.GeneratedMessagePackResolver.AFormatter`1.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "status": "added",
+      "added": 39,
+      "removed": 0,
+      "hunks": [
+        "h12"
+      ],
+      "binary": false
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/RecursiveGenerics_Direct/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "status": "added",
+      "added": 63,
+      "removed": 0,
+      "hunks": [
+        "h13"
+      ],
+      "binary": false
+    }
+  ],
+  "hunks": [
+    {
+      "id": "h1",
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/CodeAnalysisUtilities.cs",
+      "kind": "src",
+      "area": "analyzer-core",
+      "old_start": 2,
+      "old_len": 7,
+      "new_start": 2,
+      "new_len": 6,
+      "ctx": "",
+      "added": 0,
+      "removed": 1,
+      "text": "@@ -2,7 +2,6 @@\n // Licensed under the MIT license. See LICENSE file in the project root for full license information.\n \n using System.Collections.Immutable;\n-using System.Text;\n using Microsoft.CodeAnalysis;\n using Microsoft.CodeAnalysis.CSharp.Syntax;\n ",
+      "group": null
+    },
+    {
+      "id": "h2",
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/CodeAnalysisUtilities.cs",
+      "kind": "src",
+      "area": "analyzer-core",
+      "old_start": 81,
+      "old_len": 20,
+      "new_start": 80,
+      "new_len": 20,
+      "ctx": "public static class CodeAnalysisUtilities",
+      "added": 5,
+      "removed": 5,
+      "text": "@@ -81,20 +80,20 @@ public static class CodeAnalysisUtilities\n             _ => throw new NotSupportedException(),\n         };\n \n-    internal static ImmutableArray<GenericTypeParameterInfo> GetTypeParameters(ITypeSymbol dataType)\n+    internal static ImmutableArray<GenericTypeParameterInfo> GetTypeParameters(ITypeSymbol dataType, ImmutableStack<GenericTypeParameterInfo>? recursionGuard = null)\n         => dataType switch\n         {\n-            INamedTypeSymbol namedType => namedType.TypeParameters.Select(t => new GenericTypeParameterInfo(t)).ToImmutableArray(),\n+            INamedTypeSymbol namedType => namedType.TypeParameters.Select(t => GenericTypeParameterInfo.Create(t, recursionGuard)).ToImmutableArray(),\n             IArrayTypeSymbol arrayType => GetTypeParameters(arrayType.ElementType),\n             ITypeParameterSymbol => ImmutableArray<GenericTypeParameterInfo>.Empty,\n             _ => throw new NotSupportedException(),\n         };\n \n-    internal static ImmutableArray<QualifiedTypeName> GetTypeArguments(ITypeSymbol dataType)\n+    internal static ImmutableArray<QualifiedTypeName> GetTypeArguments(ITypeSymbol dataType, ImmutableStack<GenericTypeParameterInfo>? recursionGuard = null)\n         => dataType switch\n         {\n-            INamedTypeSymbol namedType => namedType.TypeArguments.Select(QualifiedTypeName.Create).ToImmutableArray(),\n-            IArrayTypeSymbol arrayType => GetTypeArguments(arrayType.ElementType),\n+            INamedTypeSymbol namedType => namedType.TypeArguments.Select(t => QualifiedTypeName.Create(t, recursionGuard)).ToImmutableArray(),\n+            IArrayTypeSymbol arrayType => GetTypeArguments(arrayType.ElementType, recursionGuard),\n             ITypeParameterSymbol => ImmutableArray<QualifiedTypeName>.Empty,\n             _ => throw new NotSupportedException(),\n         };",
+      "group": null
+    },
+    {
+      "id": "h3",
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GenericTypeParameterInfo.cs",
+      "kind": "src",
+      "area": "analyzer-core",
+      "old_start": 11,
+      "old_len": 18,
+      "new_start": 11,
+      "new_len": 30,
+      "ctx": "public record GenericTypeParameterInfo(string Name) : IComparable<GenericTypePar",
+      "added": 14,
+      "removed": 2,
+      "text": "@@ -11,18 +11,30 @@ public record GenericTypeParameterInfo(string Name) : IComparable<GenericTypePar\n {\n     private string? constraints;\n \n-    public GenericTypeParameterInfo(ITypeParameterSymbol typeParameter)\n+    private GenericTypeParameterInfo(ITypeParameterSymbol typeParameter, ImmutableStack<GenericTypeParameterInfo> recursionGuard)\n         : this(typeParameter.Name)\n     {\n+        recursionGuard = recursionGuard.Push(this);\n+\n         this.HasUnmanagedTypeConstraint = typeParameter.HasUnmanagedTypeConstraint;\n         this.HasReferenceTypeConstraint = typeParameter.HasReferenceTypeConstraint;\n         this.HasValueTypeConstraint = typeParameter.HasValueTypeConstraint;\n         this.HasNotNullConstraint = typeParameter.HasNotNullConstraint;\n-        this.ConstraintTypes = typeParameter.ConstraintTypes.Select(t => QualifiedTypeName.Create(t)).ToImmutableArray();\n+        this.ConstraintTypes = typeParameter.ConstraintTypes.Select(t => QualifiedTypeName.Create(t, recursionGuard)).ToImmutableArray();\n         this.HasConstructorConstraint = typeParameter.HasConstructorConstraint;\n         this.ReferenceTypeConstraintNullableAnnotation = typeParameter.ReferenceTypeConstraintNullableAnnotation;\n     }\n \n+    public static GenericTypeParameterInfo Create(ITypeParameterSymbol typeParameter, ImmutableStack<GenericTypeParameterInfo>? recursionGuard = null)\n+    {\n+        if (recursionGuard?.FirstOrDefault(tpi => tpi.Name == typeParameter.Name) is { } existing)\n+        {\n+            return existing;\n+        }\n+\n+        return new(typeParameter, recursionGuard ?? ImmutableStack<GenericTypeParameterInfo>.Empty);\n+    }\n+\n     public string Constraints => this.constraints ??= this.ConstructConstraintString();\n \n     public bool HasConstraints => this.Constraints.Length > 0;",
+      "group": null
+    },
+    {
+      "id": "h4",
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedNamedTypeName.cs",
+      "kind": "src",
+      "area": "analyzer-core",
+      "old_start": 3,
+      "old_len": 8,
+      "new_start": 3,
+      "new_len": 6,
+      "ctx": "",
+      "added": 0,
+      "removed": 2,
+      "text": "@@ -3,8 +3,6 @@\n \n #pragma warning disable SA1402 // File may only contain a single type\n \n-using System;\n-using System.Collections.Generic;\n using System.Collections.Immutable;\n using System.Diagnostics;\n using System.Diagnostics.CodeAnalysis;",
+      "group": null
+    },
+    {
+      "id": "h5",
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedNamedTypeName.cs",
+      "kind": "src",
+      "area": "analyzer-core",
+      "old_start": 39,
+      "old_len": 7,
+      "new_start": 37,
+      "new_len": 7,
+      "ctx": "public record QualifiedNamedTypeName : QualifiedTypeName, IComparable<QualifiedN",
+      "added": 1,
+      "removed": 1,
+      "text": "@@ -39,7 +37,7 @@ public record QualifiedNamedTypeName : QualifiedTypeName, IComparable<QualifiedN\n     }\n \n     [SetsRequiredMembers]\n-    public QualifiedNamedTypeName(INamedTypeSymbol symbol)\n+    public QualifiedNamedTypeName(INamedTypeSymbol symbol, ImmutableStack<GenericTypeParameterInfo>? recursionGuard = null)\n     {\n         this.Name = symbol.Name;\n         this.Kind = symbol.TypeKind;",
+      "group": null
+    },
+    {
+      "id": "h6",
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedNamedTypeName.cs",
+      "kind": "src",
+      "area": "analyzer-core",
+      "old_start": 47,
+      "old_len": 8,
+      "new_start": 45,
+      "new_len": 8,
+      "ctx": "public record QualifiedNamedTypeName : QualifiedTypeName, IComparable<QualifiedN",
+      "added": 2,
+      "removed": 2,
+      "text": "@@ -47,8 +45,8 @@ public record QualifiedNamedTypeName : QualifiedTypeName, IComparable<QualifiedN\n         this.Container = symbol.ContainingType is { } nesting ? new NestingTypeContainer(new(nesting)) :\n             symbol.ContainingNamespace?.GetFullNamespaceName() is string ns ? new NamespaceTypeContainer(ns) :\n             null;\n-        this.TypeParameters = CodeAnalysisUtilities.GetTypeParameters(symbol);\n-        this.TypeArguments = CodeAnalysisUtilities.GetTypeArguments(symbol);\n+        this.TypeParameters = CodeAnalysisUtilities.GetTypeParameters(symbol, recursionGuard);\n+        this.TypeArguments = CodeAnalysisUtilities.GetTypeArguments(symbol, recursionGuard);\n         this.ReferenceTypeNullableAnnotation = symbol.NullableAnnotation;\n     }\n ",
+      "group": null
+    },
+    {
+      "id": "h7",
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedTypeName.cs",
+      "kind": "src",
+      "area": "analyzer-core",
+      "old_start": 2,
+      "old_len": 10,
+      "new_start": 2,
+      "new_len": 7,
+      "ctx": "",
+      "added": 0,
+      "removed": 3,
+      "text": "@@ -2,10 +2,7 @@\n // Licensed under the MIT license. See LICENSE file in the project root for full license information.\n \n using System.Collections.Immutable;\n-using System.Diagnostics;\n-using System.Text;\n using Microsoft.CodeAnalysis;\n-using Microsoft.CodeAnalysis.CSharp.Syntax;\n \n namespace MessagePack.SourceGenerator.CodeAnalysis;\n ",
+      "group": null
+    },
+    {
+      "id": "h8",
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedTypeName.cs",
+      "kind": "src",
+      "area": "analyzer-core",
+      "old_start": 18,
+      "old_len": 17,
+      "new_start": 15,
+      "new_len": 21,
+      "ctx": "public abstract record QualifiedTypeName : IComparable<QualifiedTypeName>",
+      "added": 6,
+      "removed": 2,
+      "text": "@@ -18,17 +15,21 @@ public abstract record QualifiedTypeName : IComparable<QualifiedTypeName>\n     /// Initializes a new instance of the <see cref=\"QualifiedTypeName\"/> class.\n     /// </summary>\n     /// <param name=\"symbol\">The symbol this instance will identify.</param>\n-    public static QualifiedTypeName Create(ITypeSymbol symbol)\n+    /// <param name=\"recursionGuard\">A stack of objects that serves to avoid infinite recursion when generic constraints are written in terms of themselves.</param>\n+    public static QualifiedTypeName Create(ITypeSymbol symbol, ImmutableStack<GenericTypeParameterInfo>? recursionGuard = null)\n     {\n         return symbol switch\n         {\n             IArrayTypeSymbol arrayType => new QualifiedArrayTypeName(arrayType),\n-            INamedTypeSymbol namedType => new QualifiedNamedTypeName(namedType),\n+            INamedTypeSymbol namedType => new QualifiedNamedTypeName(namedType, recursionGuard),\n             ITypeParameterSymbol typeParam => new TypeParameter(typeParam),\n             _ => throw new NotSupportedException(),\n         };\n     }\n \n+    /// <inheritdoc cref=\"Create(ITypeSymbol, ImmutableStack{GenericTypeParameterInfo}?)\"/>\n+    public static QualifiedTypeName Create(ITypeSymbol symbol) => Create(symbol, null);\n+\n     /// <summary>\n     /// Gets the kind of type.\n     /// </summary>",
+      "group": null
+    },
+    {
+      "id": "h9",
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "kind": "src",
+      "area": "analyzer-core",
+      "old_start": 5,
+      "old_len": 13,
+      "new_start": 5,
+      "new_len": 11,
+      "ctx": "",
+      "added": 0,
+      "removed": 2,
+      "text": "@@ -5,13 +5,11 @@\n #pragma warning disable SA1649 // File name should match first type name\n \n using System.Collections.Immutable;\n-using System.ComponentModel;\n using System.Reflection;\n using System.Text.RegularExpressions;\n using Microsoft.CodeAnalysis;\n using Microsoft.CodeAnalysis.CSharp;\n using Microsoft.CodeAnalysis.CSharp.Syntax;\n-using Microsoft.CodeAnalysis.Operations;\n \n namespace MessagePack.SourceGenerator.CodeAnalysis;\n ",
+      "group": null
+    },
+    {
+      "id": "h10",
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "kind": "src",
+      "area": "analyzer-core",
+      "old_start": 1407,
+      "old_len": 7,
+      "new_start": 1405,
+      "new_len": 7,
+      "ctx": "public class TypeCollector",
+      "added": 1,
+      "removed": 1,
+      "text": "@@ -1407,7 +1405,7 @@ public class TypeCollector\n             formattedType,\n             isClass: isClass,\n             nestedFormatterRequired: nestedFormatterRequired,\n-            genericTypeParameters: formattedType.IsGenericType ? formattedType.TypeParameters.Select(t => new GenericTypeParameterInfo(t)).ToArray() : Array.Empty<GenericTypeParameterInfo>(),\n+            genericTypeParameters: formattedType.IsGenericType ? formattedType.TypeParameters.Select(t => GenericTypeParameterInfo.Create(t)).ToArray() : Array.Empty<GenericTypeParameterInfo>(),\n             constructorParameters: constructorParameters.ToArray(),\n             isIntKey: isIntKey,\n             members: isIntKey ? intMembers.Values.Select(v => v.Info).ToArray() : stringMembers.Values.Select(v => v.Info).ToArray(),",
+      "group": null
+    },
+    {
+      "id": "h11",
+      "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+      "kind": "test",
+      "area": "tests",
+      "old_start": 493,
+      "old_len": 4,
+      "new_start": 493,
+      "new_len": 24,
+      "ctx": "namespace TempProject",
+      "added": 20,
+      "removed": 0,
+      "text": "@@ -493,4 +493,24 @@ namespace TempProject\n             },\n         }.RunAsync();\n     }\n+\n+    /// <summary>\n+    /// Asserts that the generator can handle directly recursive generic constraints.\n+    /// </summary>\n+    [Fact]\n+    public async Task RecursiveGenerics_Direct()\n+    {\n+        string testSource = /* lang=c#-test */ \"\"\"\n+            using System;\n+            using MessagePack;\n+\n+            [MessagePackObject]\n+            public class A<T>\n+                where T : IEquatable<A<T>>\n+            {\n+            }\n+            \"\"\";\n+\n+        await VerifyCS.Test.RunDefaultAsync(this.testOutputHelper, testSource);\n+    }\n }",
+      "group": null
+    },
+    {
+      "id": "h12",
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/RecursiveGenerics_Direct/Formatters.MessagePack.GeneratedMessagePackResolver.AFormatter`1.g.cs",
+      "kind": "generated",
+      "area": "generated-snapshots",
+      "old_start": 0,
+      "old_len": 0,
+      "new_start": 1,
+      "new_len": 39,
+      "ctx": "",
+      "added": 39,
+      "removed": 0,
+      "text": "@@ -0,0 +1,39 @@\n+﻿// <auto-generated />\n+\n+#pragma warning disable 618, 612, 414, 168, CS1591, SA1129, SA1309, SA1312, SA1403, SA1649\n+\n+#pragma warning disable CS8669 // We may leak nullable annotations into generated code.\n+\n+using MsgPack = global::MessagePack;\n+\n+namespace MessagePack {\n+partial class GeneratedMessagePackResolver {\n+\n+\tinternal sealed class AFormatter<T> : MsgPack::Formatters.IMessagePackFormatter<global::A<T>>\n+\t\twhere T : global::System.IEquatable<global::A<T>>\n+\t{\n+\n+\t\tpublic void Serialize(ref MsgPack::MessagePackWriter writer, global::A<T> value, MsgPack::MessagePackSerializerOptions options)\n+\t\t{\n+\t\t\tif (value == null)\n+\t\t\t{\n+\t\t\t\twriter.WriteNil();\n+\t\t\t\treturn;\n+\t\t\t}\n+\n+\t\t\twriter.WriteArrayHeader(0);\n+\t\t}\n+\n+\t\tpublic global::A<T> Deserialize(ref MsgPack::MessagePackReader reader, MsgPack::MessagePackSerializerOptions options)\n+\t\t{\n+\t\t\tif (reader.TryReadNil())\n+\t\t\t{\n+\t\t\t\treturn null;\n+\t\t\t}\n+\n+\t\t\treader.Skip();\n+\t\t\treturn new global::A<T>();\n+\t\t}\n+\t}\n+}\n+}",
+      "group": null
+    },
+    {
+      "id": "h13",
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/RecursiveGenerics_Direct/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "kind": "generated",
+      "area": "generated-snapshots",
+      "old_start": 0,
+      "old_len": 0,
+      "new_start": 1,
+      "new_len": 63,
+      "ctx": "",
+      "added": 63,
+      "removed": 0,
+      "text": "@@ -0,0 +1,63 @@\n+﻿// <auto-generated />\n+\n+#pragma warning disable 618, 612, 414, 168, CS1591, SA1129, SA1309, SA1312, SA1403, SA1649\n+\n+using MsgPack = global::MessagePack;\n+\n+[assembly: MsgPack::Internal.GeneratedAssemblyMessagePackResolverAttribute(typeof(MessagePack.GeneratedMessagePackResolver), 3, 0)]\n+\n+namespace MessagePack {\n+\n+/// <summary>A MessagePack resolver that uses generated formatters for types in this assembly.</summary>\n+partial class GeneratedMessagePackResolver : MsgPack::IFormatterResolver\n+{\n+\t/// <summary>An instance of this resolver that only returns formatters specifically generated for types in this assembly.</summary>\n+\tpublic static readonly MsgPack::IFormatterResolver Instance = new GeneratedMessagePackResolver();\n+\n+\tprivate GeneratedMessagePackResolver()\n+\t{\n+\t}\n+\n+\tpublic MsgPack::Formatters.IMessagePackFormatter<T> GetFormatter<T>()\n+\t{\n+\t\treturn FormatterCache<T>.Formatter;\n+\t}\n+\n+\tprivate static class FormatterCache<T>\n+\t{\n+\t\tinternal static readonly MsgPack::Formatters.IMessagePackFormatter<T> Formatter;\n+\n+\t\tstatic FormatterCache()\n+\t\t{\n+\t\t\tvar f = GeneratedMessagePackResolverGetFormatterHelper.GetFormatter(typeof(T));\n+\t\t\tif (f != null)\n+\t\t\t{\n+\t\t\t\tFormatter = (MsgPack::Formatters.IMessagePackFormatter<T>)f;\n+\t\t\t}\n+\t\t}\n+\t}\n+\n+\tprivate static class GeneratedMessagePackResolverGetFormatterHelper\n+\t{\n+\t\tprivate static readonly global::System.Collections.Generic.Dictionary<global::System.Type, int> openTypeLookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(1)\n+\t\t{\n+\t\t\t{ typeof(global::A<>), 0 },\n+\t\t};\n+\n+\t\tinternal static object GetFormatter(global::System.Type t)\n+\t\t{\n+\t\t\tif (t.IsGenericType && openTypeLookup.TryGetValue(t.GetGenericTypeDefinition(), out int openKey))\n+\t\t\t{\n+\t\t\t\tswitch (openKey)\n+\t\t\t\t{\n+\t\t\t\t\tcase 0: return global::System.Activator.CreateInstance(typeof(global::MessagePack.GeneratedMessagePackResolver.AFormatter<>).MakeGenericType(t.GenericTypeArguments));\n+\t\t\t\t\tdefault: return null; // unreachable\n+\t\t\t\t};\n+\t\t\t}\n+\n+\t\t\treturn null;\n+\t\t}\n+\t}\n+}\n+\n+}",
+      "group": null
+    }
+  ]
+}

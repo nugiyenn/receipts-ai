@@ -1,0 +1,2058 @@
+{
+  "change": "2297",
+  "lane": "L2",
+  "reasons": [
+    {
+      "rule": "areas",
+      "lane": "L2",
+      "why": "highest default lane of the touched areas"
+    },
+    {
+      "rule": "LR4",
+      "lane": "L2",
+      "why": "10 source hunk(s) not yet proven protected (xray pending)"
+    }
+  ],
+  "areas": [
+    "docs",
+    "generated-snapshots",
+    "generator-templates",
+    "tests"
+  ],
+  "ceiling_areas": [],
+  "blast_radius": {
+    "threshold": 10,
+    "max_references": 0,
+    "top_symbol": null,
+    "per_hunk": {
+      "h4": [],
+      "h5": [],
+      "h7": [],
+      "h9": [],
+      "h13": [],
+      "h14": [],
+      "h15": [],
+      "h17": [],
+      "h18": [],
+      "h20": []
+    }
+  },
+  "flagged_hunks": {
+    "h1": [
+      "refusal R-2297-1 (R1-product-decision)",
+      "claim C3 has only E1 evidence",
+      "claim C6 has only E1 evidence",
+      "claim C6 has only E1 evidence"
+    ],
+    "h4": [
+      "xray-pending: not yet shown to be protected by a test"
+    ],
+    "h5": [
+      "xray-pending: not yet shown to be protected by a test"
+    ],
+    "h7": [
+      "xray-pending: not yet shown to be protected by a test"
+    ],
+    "h9": [
+      "xray-pending: not yet shown to be protected by a test"
+    ],
+    "h13": [
+      "xray-pending: not yet shown to be protected by a test",
+      "refusal R-2297-2 (R1-product-decision)",
+      "claim C8 has only E1 evidence"
+    ],
+    "h14": [
+      "xray-pending: not yet shown to be protected by a test"
+    ],
+    "h15": [
+      "xray-pending: not yet shown to be protected by a test"
+    ],
+    "h17": [
+      "xray-pending: not yet shown to be protected by a test"
+    ],
+    "h18": [
+      "xray-pending: not yet shown to be protected by a test",
+      "refusal R-2297-4 (R1-product-decision)",
+      "claim C4 has only E2 evidence"
+    ],
+    "h20": [
+      "xray-pending: not yet shown to be protected by a test"
+    ],
+    "h21": [
+      "refusal R-2297-1 (R1-product-decision)",
+      "refusal R-2297-1 (R1-product-decision)",
+      "refusal R-2297-2 (R1-product-decision)",
+      "refusal R-2297-3 (R5-evidence-gap)",
+      "refusal R-2297-3 (R5-evidence-gap)",
+      "claim C2 has only E1 evidence",
+      "claim C2 has only E1 evidence",
+      "claim C2 has only E1 evidence",
+      "claim C3 has only E1 evidence",
+      "claim C3 has only E1 evidence",
+      "claim C3 has only E1 evidence",
+      "claim C8 has only E1 evidence"
+    ],
+    "h153": [
+      "regen-unverified: snapshot not proven by regeneration/pattern check",
+      "refusal R-2297-4 (R1-product-decision)",
+      "claim C4 has only E2 evidence"
+    ],
+    "h154": [
+      "regen-unverified: snapshot not proven by regeneration/pattern check"
+    ],
+    "h266": [
+      "claim C7 has only E1 evidence"
+    ]
+  },
+  "reading_budget": {
+    "lines": 89,
+    "hunks": 15,
+    "total_changed_lines": 1392,
+    "ratio": 0.0639,
+    "basis": "line-level: flagged src/template hunks whole; doc/test hunks only lines near cited evidence gaps",
+    "inputs": {
+      "xray": false,
+      "regen": true,
+      "refusals": true,
+      "claims": true
+    },
+    "provisional": true,
+    "hunk_level_lines": 175
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "area": "docs",
+      "kind": "doc",
+      "lane": "L2",
+      "changed_lines": 3,
+      "flagged_hunks": [
+        "h1"
+      ]
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/Transforms/CompositeResolverTemplate.cs",
+      "area": "generator-templates",
+      "kind": "template-output",
+      "lane": "L0",
+      "changed_lines": 5,
+      "flagged_hunks": []
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/Transforms/CompositeResolverTemplate.tt",
+      "area": "generator-templates",
+      "kind": "template",
+      "lane": "L2",
+      "changed_lines": 6,
+      "flagged_hunks": [
+        "h4",
+        "h5"
+      ]
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/Transforms/EnumTemplate.cs",
+      "area": "generator-templates",
+      "kind": "template-output",
+      "lane": "L0",
+      "changed_lines": 2,
+      "flagged_hunks": []
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/Transforms/EnumTemplate.tt",
+      "area": "generator-templates",
+      "kind": "template",
+      "lane": "L2",
+      "changed_lines": 3,
+      "flagged_hunks": [
+        "h7"
+      ]
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.cs",
+      "area": "generator-templates",
+      "kind": "template-output",
+      "lane": "L0",
+      "changed_lines": 2,
+      "flagged_hunks": []
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.tt",
+      "area": "generator-templates",
+      "kind": "template",
+      "lane": "L2",
+      "changed_lines": 3,
+      "flagged_hunks": [
+        "h9"
+      ]
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/Transforms/ResolverTemplate.cs",
+      "area": "generator-templates",
+      "kind": "template-output",
+      "lane": "L0",
+      "changed_lines": 7,
+      "flagged_hunks": []
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/Transforms/ResolverTemplate.tt",
+      "area": "generator-templates",
+      "kind": "template",
+      "lane": "L2",
+      "changed_lines": 9,
+      "flagged_hunks": [
+        "h13",
+        "h14",
+        "h15"
+      ]
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/Transforms/StringKey/StringKeyFormatterTemplate.cs",
+      "area": "generator-templates",
+      "kind": "template-output",
+      "lane": "L0",
+      "changed_lines": 2,
+      "flagged_hunks": []
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/Transforms/StringKey/StringKeyFormatterTemplate.tt",
+      "area": "generator-templates",
+      "kind": "template",
+      "lane": "L2",
+      "changed_lines": 3,
+      "flagged_hunks": [
+        "h17"
+      ]
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/Transforms/TransformUtilities.cs",
+      "area": "generator-templates",
+      "kind": "src",
+      "lane": "L2",
+      "changed_lines": 2,
+      "flagged_hunks": [
+        "h18"
+      ]
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/Transforms/UnionTemplate.cs",
+      "area": "generator-templates",
+      "kind": "template-output",
+      "lane": "L0",
+      "changed_lines": 2,
+      "flagged_hunks": []
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/Transforms/UnionTemplate.tt",
+      "area": "generator-templates",
+      "kind": "template",
+      "lane": "L2",
+      "changed_lines": 3,
+      "flagged_hunks": [
+        "h20"
+      ]
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+      "area": "tests",
+      "kind": "test",
+      "lane": "L2",
+      "changed_lines": 130,
+      "flagged_hunks": [
+        "h21"
+      ]
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/AdditionalAllowTypes/Formatters.MessagePack.GeneratedMessagePackResolver.TypeWithAutoGeneratedFormatterFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/AdditionalAllowTypes/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/AdditionalFormatterTypes/DefiningProject.MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/AdditionalFormatterTypes/TestProject.Formatters.MessagePack.GeneratedMessagePackResolver.TypeWithAutoGeneratedFormatterFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/AdditionalFormatterTypes/TestProject.MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/AdditionalFormatterTypes_RedundantAttribute/Formatters.MessagePack.GeneratedMessagePackResolver.TypeWithAutoGeneratedFormatterFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/AdditionalFormatterTypes_RedundantAttribute/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/Array2DJaggedProperty/Formatters.MessagePack.GeneratedMessagePackResolver.ContainerObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/Array2DJaggedProperty/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/ArrayTypedProperty/Formatters.MessagePack.GeneratedMessagePackResolver.ContainerObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/ArrayTypedProperty/Formatters.MessagePack.GeneratedMessagePackResolver.SubObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/ArrayTypedProperty/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/CanGenerateMessagePackFormatterAttr/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.BarFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/CanGenerateMessagePackFormatterAttr/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/CompositeResolver_MixedResolverTypes/MyResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 6,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/CompositeResolver_Nested/MyResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 6,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/CustomFormatterForGenericWithConstraints/Formatters.MessagePack.GeneratedMessagePackResolver.SampleObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/CustomFormatterForGenericWithConstraints/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/CustomFormatterViaAttributeOnField(False)/Formatters.MessagePack.GeneratedMessagePackResolver.HasFieldWithCustomFormatterAttributeFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/CustomFormatterViaAttributeOnField(False)/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/CustomFormatterViaAttributeOnField(True)/Formatters.MessagePack.GeneratedMessagePackResolver.HasFieldWithCustomFormatterAttributeFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/CustomFormatterViaAttributeOnField(True)/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/CustomFormatterViaAttributeOnProperty(False)/Formatters.MessagePack.GeneratedMessagePackResolver.HasPropertyWithCustomFormatterAttributeFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/CustomFormatterViaAttributeOnProperty(False)/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/CustomFormatterViaAttributeOnProperty(True)/Formatters.MessagePack.GeneratedMessagePackResolver.HasPropertyWithCustomFormatterAttributeFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/CustomFormatterViaAttributeOnProperty(True)/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/CustomFormatterWithSingletonPattern/Formatters.MessagePack.GeneratedMessagePackResolver.GFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/CustomFormatterWithSingletonPattern/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/DeserializingConstructorParameterMemberTypeAssignability_Incompatible/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/DeserializingConstructorParameterMemberTypeAssignability_MemberAssignsToParamType/Formatters.MessagePack.GeneratedMessagePackResolver.AFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/DeserializingConstructorParameterMemberTypeAssignability_MemberAssignsToParamType/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/EmbeddedTypes/Formatters.MessagePack.GeneratedMessagePackResolver.AFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/EmbeddedTypes/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/EnumFormatter(Namespace, False)/Formatters.MessagePack.GeneratedMessagePackResolver.MyTestNamespace.MyEnumFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/EnumFormatter(Namespace, False)/Formatters.MessagePack.GeneratedMessagePackResolver.MyTestNamespace.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/EnumFormatter(Namespace, False)/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/EnumFormatter(Namespace, True)/Formatters.MessagePack.GeneratedMessagePackResolver.MyTestNamespace.MyEnumFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/EnumFormatter(Namespace, True)/Formatters.MessagePack.GeneratedMessagePackResolver.MyTestNamespace.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/EnumFormatter(Namespace, True)/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/EnumFormatter(NestingClass, False)/Formatters.MessagePack.GeneratedMessagePackResolver.ContainingClass.MyEnumFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/EnumFormatter(NestingClass, False)/Formatters.MessagePack.GeneratedMessagePackResolver.ContainingClass.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/EnumFormatter(NestingClass, False)/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/EnumFormatter(NestingClass, True)/Formatters.MessagePack.GeneratedMessagePackResolver.ContainingClass.MyEnumFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/EnumFormatter(NestingClass, True)/Formatters.MessagePack.GeneratedMessagePackResolver.ContainingClass.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/EnumFormatter(NestingClass, True)/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/EnumFormatter(None, False)/Formatters.MessagePack.GeneratedMessagePackResolver.MyEnumFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/EnumFormatter(None, False)/Formatters.MessagePack.GeneratedMessagePackResolver.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/EnumFormatter(None, False)/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/EnumFormatter(None, True)/Formatters.MessagePack.GeneratedMessagePackResolver.MyEnumFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/EnumFormatter(None, True)/Formatters.MessagePack.GeneratedMessagePackResolver.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/EnumFormatter(None, True)/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/EnumFormatter_CollidingTypeNames/Formatters.MessagePack.GeneratedMessagePackResolver.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/EnumFormatter_CollidingTypeNames/Formatters.MessagePack.GeneratedMessagePackResolver.NS1.MyEnumFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/EnumFormatter_CollidingTypeNames/Formatters.MessagePack.GeneratedMessagePackResolver.NS2.MyEnumFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/EnumFormatter_CollidingTypeNames/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/FormatterForClassWithPrivateMembers(class)/Formatters.MyObject.MyObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/FormatterForClassWithPrivateMembers(class)/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/FormatterForClassWithPrivateMembers(record struct)/Formatters.MyObject.MyObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/FormatterForClassWithPrivateMembers(record struct)/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/FormatterForClassWithPrivateMembers(record)/Formatters.MyObject.MyObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/FormatterForClassWithPrivateMembers(record)/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/FormatterForClassWithPrivateMembers(struct)/Formatters.MyObject.MyObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/FormatterForClassWithPrivateMembers(struct)/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/FormatterForClassWithPrivateMembers_MapMode/Formatters.MyObject.MyObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/FormatterForClassWithPrivateMembers_MapMode/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/FormatterForClassWithPrivateMembers_WithNamespace/Formatters.A.MyObject.MyObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/FormatterForClassWithPrivateMembers_WithNamespace/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericCustomFormatter/Formatters.SampleObject.SampleObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericCustomFormatter/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericDataTypeWithPrivateMember/Formatters.HasPrivateSerializedMemberAndIsGenericNamed`1.HasPrivateSerializedMemberAndIsGenericNamedFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L2",
+      "changed_lines": 6,
+      "flagged_hunks": [
+        "h153"
+      ]
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericDataTypeWithPrivateMember/Formatters.HasPrivateSerializedMemberAndIsGenericOrdinal`1.HasPrivateSerializedMemberAndIsGenericOrdinalFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L2",
+      "changed_lines": 4,
+      "flagged_hunks": [
+        "h154"
+      ]
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericDataTypeWithPrivateMember/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericType/Formatters.MessagePack.GeneratedMessagePackResolver.ContainerObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericType/Formatters.MessagePack.GeneratedMessagePackResolver.MyGenericTypeFormatter`1.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericType/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericTypeArg/Formatters.MessagePack.GeneratedMessagePackResolver.GenericClassFormatter`2.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericTypeArg/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericType_CollidingTypeNames/Formatters.MessagePack.GeneratedMessagePackResolver.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericType_CollidingTypeNames/Formatters.MessagePack.GeneratedMessagePackResolver.NS1.MyTypeFormatter`1.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericType_CollidingTypeNames/Formatters.MessagePack.GeneratedMessagePackResolver.NS2.MyTypeFormatter`1.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericType_CollidingTypeNames/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericWithConstraintsThatReferenceTypeParameter/Formatters.MessagePack.GeneratedMessagePackResolver.GenericConstrainedClassIntKeyFormatter`2.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericWithConstraintsThatReferenceTypeParameter/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericsOfT1T2Formatter/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyGenericObjectFormatter`2.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericsOfT1T2Formatter/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericsOfT1T2Formatter/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyObjectNestedFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericsOfT1T2Formatter/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericsOfTFormatter/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyGenericObjectFormatter`1.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericsOfTFormatter/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericsOfTFormatter/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyObjectNestedFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericsOfTFormatter/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericsOfTFormatter_FormatterOnly/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyGenericObjectFormatter`1.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericsOfTFormatter_FormatterOnly/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericsOfTFormatter_WithKnownTypes/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyGenericObjectFormatter`1.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericsOfTFormatter_WithKnownTypes/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyObject2Formatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericsOfTFormatter_WithKnownTypes/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericsOfTFormatter_WithKnownTypes/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericsUnionFormatter/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.WrapperFormatter`1.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericsUnionFormatter/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericsUnionFormatter_Nested/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyGenericObjectFormatter`1.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericsUnionFormatter_Nested/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyInnerGenericObjectFormatter`1.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericsUnionFormatter_Nested/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.WrapperFormatter`1.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericsUnionFormatter_Nested/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/Generics_Constraints_Multiple/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyGenericObjectFormatter`4.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/Generics_Constraints_Multiple/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/Generics_Constraints_NullableReferenceType/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyGenericObjectFormatter`4.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/Generics_Constraints_NullableReferenceType/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/Generics_Constraints_ReferenceType_Nullable/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyGenericObjectFormatter`2.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/Generics_Constraints_ReferenceType_Nullable/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/Generics_Constraints_Struct/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyGenericObjectFormatter`1.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/Generics_Constraints_Struct/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/Generics_Constraints_Type/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyGenericObjectFormatter`1.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/Generics_Constraints_Type/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/Generics_Defined_In_ReferencedProject/DefiningProject.Formatters.TempProject.MyResolver.TempProject.MyGenericObjectFormatter`1.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/Generics_Defined_In_ReferencedProject/DefiningProject.TempProject.MyResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/Generics_Defined_In_ReferencedProject/TestProject.Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyGenericObjectFormatter`1.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/Generics_Defined_In_ReferencedProject/TestProject.Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/Generics_Defined_In_ReferencedProject/TestProject.Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyObjectNestedFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/Generics_Defined_In_ReferencedProject/TestProject.MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/ImplicitFormatterTypes/Formatters.MessagePack.GeneratedMessagePackResolver.TypeWithAutoGeneratedFormatterFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/ImplicitFormatterTypes/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/InterfaceUnionUsedWithNullableRefAnnotation/Formatters.MessagePack.GeneratedMessagePackResolver.IMyTypeFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/InterfaceUnionUsedWithNullableRefAnnotation/Formatters.MessagePack.GeneratedMessagePackResolver.UnionContainerFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/InterfaceUnionUsedWithNullableRefAnnotation/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/MixType_CollidingTypeNames/Formatters.MessagePack.GeneratedMessagePackResolver.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/MixType_CollidingTypeNames/Formatters.MessagePack.GeneratedMessagePackResolver.NS1.MyTypeFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/MixType_CollidingTypeNames/Formatters.MessagePack.GeneratedMessagePackResolver.NS2.MyTypeFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/MixType_CollidingTypeNames/Formatters.MessagePack.GeneratedMessagePackResolver.NS3.MyTypeFormatter`1.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/MixType_CollidingTypeNames/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/MultipleFunctionalCustomFormattersForType_MultiFormatter/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/MultipleFunctionalCustomFormattersForType_OnlyOneNonExcluded/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NestedGenericTypes/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyGenericObjectFormatter`1.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NestedGenericTypes/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyInnerGenericObjectFormatter`1.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NestedGenericTypes/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyObject2Formatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NestedGenericTypes/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NestedGenericTypes/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.WrapperFormatter`1.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NestedGenericTypes/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L2",
+      "changed_lines": 9,
+      "flagged_hunks": [
+        "h266"
+      ]
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NestedMessagePackObjects/Formatters.MessagePack.GeneratedMessagePackResolver.A.B.CFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NestedMessagePackObjects/Formatters.MessagePack.GeneratedMessagePackResolver.A.BFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NestedMessagePackObjects/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NestedMessagePackObjects_Array/Formatters.MessagePack.GeneratedMessagePackResolver.A.B.CFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NestedMessagePackObjects_Array/Formatters.MessagePack.GeneratedMessagePackResolver.A.BFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NestedMessagePackObjects_Array/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NoFieldWithCustomFormatterCollected/Formatters.MessagePack.GeneratedMessagePackResolver.TestFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NoFieldWithCustomFormatterCollected/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NoPrivateAccessNeeded/Formatters.MessagePack.GeneratedMessagePackResolver.Test3Formatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NoPrivateAccessNeeded/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NoPrivateMemberCollected/Formatters.MessagePack.GeneratedMessagePackResolver.TestFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NoPrivateMemberCollected/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NonDefaultDeserializingConstructor_Private/Formatters.A.AFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NonDefaultDeserializingConstructor_Private/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NonGenericType_CollidingTypeNames/Formatters.MessagePack.GeneratedMessagePackResolver.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NonGenericType_CollidingTypeNames/Formatters.MessagePack.GeneratedMessagePackResolver.NS1.MyTypeFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NonGenericType_CollidingTypeNames/Formatters.MessagePack.GeneratedMessagePackResolver.NS2.MyTypeFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NonGenericType_CollidingTypeNames/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NullableFormatter/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyEnumFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NullableFormatter/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NullableFormatter/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/OpenGenericFormatter/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterOnlyDefaultValue/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterOnlyDefaultValue/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterOnlyIgnore/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterOnlyIgnore/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterOnlyMixed/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterOnlyMixed/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterOnlyWithParameterizedConstructor/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterOnlyWithParameterizedConstructor/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterOnlyWithParameterizedConstructorDefaultValue/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterOnlyWithParameterizedConstructorDefaultValue/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterOnlyWithParameterizedConstructorPartially/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterOnlyWithParameterizedConstructorPartially/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterSetter/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterSetter/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterSetterWithDefaultValue/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterSetterWithDefaultValue/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterSetterWithDefaultValueInputPartially/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterSetterWithDefaultValueInputPartially/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterSetterWithParameterizedConstructor/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterSetterWithParameterizedConstructor/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterSetterWithParameterizedConstructorAndDefaultValue/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterSetterWithParameterizedConstructorAndDefaultValue/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterSetterWithParameterizedConstructorDoNotUseSetter/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterSetterWithParameterizedConstructorDoNotUseSetter/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterSetterWithParameterizedConstructorPartially/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/PropertiesGetterSetterWithParameterizedConstructorPartially/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/RecordWithPrimaryConstructor/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/RecordWithPrimaryConstructor/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/RecordWithWithInitOnlyProps/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/RecordWithWithInitOnlyProps/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/RecursiveGenerics_Direct/Formatters.MessagePack.GeneratedMessagePackResolver.AFormatter`1.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/RecursiveGenerics_Direct/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/SimplifiedNameForKeywordsAndSyntaxSugar/Formatters.MessagePack.GeneratedMessagePackResolver.SampleObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/SimplifiedNameForKeywordsAndSyntaxSugar/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/SpecifyFormatterFromStockSet/Formatters.MessagePack.GeneratedMessagePackResolver.GFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/SpecifyFormatterFromStockSet/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/SystemCollectionsObjectModelCollection/Formatters.MessagePack.GeneratedMessagePackResolver.AFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/SystemCollectionsObjectModelCollection/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/SystemMemoryTypes/Formatters.MessagePack.GeneratedMessagePackResolver.AFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/SystemMemoryTypes/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/TwoTypes(False)/Formatters.MessagePack.GeneratedMessagePackResolver.Object1Formatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/TwoTypes(False)/Formatters.MessagePack.GeneratedMessagePackResolver.Object2Formatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/TwoTypes(False)/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/TwoTypes(True)/Formatters.MessagePack.GeneratedMessagePackResolver.Object1Formatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/TwoTypes(True)/Formatters.MessagePack.GeneratedMessagePackResolver.Object2Formatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/TwoTypes(True)/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/UnionFormatter(Namespace)/Formatters.MessagePack.GeneratedMessagePackResolver.MyTestNamespace.Derived1Formatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/UnionFormatter(Namespace)/Formatters.MessagePack.GeneratedMessagePackResolver.MyTestNamespace.Derived2Formatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/UnionFormatter(Namespace)/Formatters.MessagePack.GeneratedMessagePackResolver.MyTestNamespace.IMyTypeFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/UnionFormatter(Namespace)/Formatters.MessagePack.GeneratedMessagePackResolver.MyTestNamespace.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/UnionFormatter(Namespace)/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/UnionFormatter(NestingClass)/Formatters.MessagePack.GeneratedMessagePackResolver.ContainingClass.Derived1Formatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/UnionFormatter(NestingClass)/Formatters.MessagePack.GeneratedMessagePackResolver.ContainingClass.Derived2Formatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/UnionFormatter(NestingClass)/Formatters.MessagePack.GeneratedMessagePackResolver.ContainingClass.IMyTypeFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/UnionFormatter(NestingClass)/Formatters.MessagePack.GeneratedMessagePackResolver.ContainingClass.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/UnionFormatter(NestingClass)/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/UnionFormatter(None)/Formatters.MessagePack.GeneratedMessagePackResolver.Derived1Formatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/UnionFormatter(None)/Formatters.MessagePack.GeneratedMessagePackResolver.Derived2Formatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/UnionFormatter(None)/Formatters.MessagePack.GeneratedMessagePackResolver.IMyTypeFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/UnionFormatter(None)/Formatters.MessagePack.GeneratedMessagePackResolver.MyMessagePackObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/UnionFormatter(None)/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/WellKnownGenericsFormatter/Formatters.MessagePack.GeneratedMessagePackResolver.TempProject.MyObjectFormatter.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 3,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/WellKnownGenericsFormatter/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L0",
+      "changed_lines": 9,
+      "flagged_hunks": []
+    }
+  ],
+  "policy": {
+    "areas": "areas-1",
+    "routing": "routing-1"
+  },
+  "budget_note": {
+    "headline_line_level": 89,
+    "hunk_level": 175,
+    "regen_ceiling": 192,
+    "explanation": "Headline 89 of 1392 changed lines is the line-level budget (route.json). 175 is the same flags counted as whole hunks. 192 (regen.json) counts every non-snapshot changed line plus the snapshots that do not match, so it is a looser ceiling made before claims and refusals existed.",
+    "derived_by": "receipts/budget.py"
+  }
+}

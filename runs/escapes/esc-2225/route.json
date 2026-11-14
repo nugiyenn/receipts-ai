@@ -1,0 +1,70 @@
+{
+  "change": "esc-2225",
+  "lane": "L3",
+  "reasons": [
+    {
+      "rule": "areas",
+      "lane": "L3",
+      "why": "highest default lane of the touched areas"
+    },
+    {
+      "rule": "LR1",
+      "lane": "L3",
+      "why": "touches ceiling area(s): runtime-serializer"
+    },
+    {
+      "rule": "LR4",
+      "lane": "L2",
+      "why": "1 source hunk(s) not yet proven protected (xray pending)"
+    }
+  ],
+  "areas": [
+    "runtime-serializer"
+  ],
+  "ceiling_areas": [
+    "runtime-serializer"
+  ],
+  "blast_radius": {
+    "threshold": 10,
+    "max_references": 0,
+    "top_symbol": null,
+    "per_hunk": {
+      "h1": []
+    }
+  },
+  "flagged_hunks": {
+    "h1": [
+      "xray-pending: not yet shown to be protected by a test"
+    ]
+  },
+  "reading_budget": {
+    "lines": 2,
+    "hunks": 1,
+    "total_changed_lines": 2,
+    "ratio": 1.0,
+    "basis": "L3: full read",
+    "inputs": {
+      "xray": false,
+      "regen": false,
+      "refusals": false,
+      "claims": false
+    },
+    "provisional": true
+  },
+  "files": [
+    {
+      "path": "src/MessagePack/Formatters/StandardClassLibraryFormatter.cs",
+      "area": "runtime-serializer",
+      "kind": "src",
+      "lane": "L3",
+      "changed_lines": 2,
+      "flagged_hunks": [
+        "h1"
+      ]
+    }
+  ],
+  "policy": {
+    "areas": "areas-1",
+    "routing": "routing-1"
+  }
+}

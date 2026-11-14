@@ -1,0 +1,343 @@
+{
+  "change": "2234",
+  "adjudicator": "adjudicator-1",
+  "adjudicated_at": "2026-11-14T23:55:23+02:00",
+  "levels": {
+    "E1": 6,
+    "E3": 1,
+    "E2": 1
+  },
+  "statuses": {
+    "refused": 4,
+    "proven": 1,
+    "unproven": 2,
+    "refuted": 1
+  },
+  "timemachine": {
+    "tests": 8,
+    "pass_on_base": 4,
+    "genuine_fail_to_pass": 4,
+    "tests_that_prove_nothing": [
+      "MemberWithoutKeyIsReported",
+      "AllowPrivateRequiredIsReported",
+      "MemberTypeMustBeMessagePackObjectIsReported",
+      "SourceGenerationOnlyDiagnosticsAreNotReportedWhenSuppressed"
+    ]
+  },
+  "requirement_coverage": [
+    {
+      "id": "REQ-2234-F1",
+      "section": "functional",
+      "text": "The analyzer reports its contract diagnostics (e.g. MsgPack004, MsgPack005) for types with SuppressSourceGeneration = true.",
+      "claims": [
+        "C1",
+        "C2",
+        "C7",
+        "C8"
+      ],
+      "best_level": "E3",
+      "coverage": "evidenced"
+    },
+    {
+      "id": "REQ-2234-F2",
+      "section": "functional",
+      "text": "No source is generated for such types (SuppressSourceGeneration behaviour is preserved).",
+      "claims": [
+        "C5"
+      ],
+      "best_level": "E1",
+      "coverage": "weak"
+    },
+    {
+      "id": "REQ-2234-NF1",
+      "section": "non_functional",
+      "text": "The fix targets the cause of the 3.1.1 regression, not only its symptom.",
+      "claims": [
+        "C4"
+      ],
+      "best_level": "E1",
+      "coverage": "weak"
+    },
+    {
+      "id": "REQ-2234-NF2",
+      "section": "non_functional",
+      "text": "Behaviour for types without SuppressSourceGeneration is unchanged.",
+      "claims": [
+        "C3"
+      ],
+      "best_level": "E1",
+      "coverage": "weak"
+    },
+    {
+      "id": "REQ-2234-S1",
+      "section": "security",
+      "text": "Invalid key contracts are not silently dropped when no diagnostic is reported.",
+      "claims": [
+        "C6"
+      ],
+      "best_level": "E2",
+      "coverage": "evidenced"
+    }
+  ],
+  "uncovered_requirements": [],
+  "claims": [
+    {
+      "claim": "C1",
+      "verifier": "timemachine",
+      "rules": [
+        "E1: every cited test already passes on base, so the tests do not reproduce the bug (tests-prove-nothing)",
+        "refused: referenced by refusal(s) R-2234-1"
+      ],
+      "refs": [
+        "runs/2234/timemachine.json#MemberWithoutKeyIsReported",
+        "runs/2234/timemachine.json#AllowPrivateRequiredIsReported",
+        "runs/2234/timemachine.json#MemberTypeMustBeMessagePackObjectIsReported"
+      ],
+      "flags": [
+        "tests-prove-nothing: MemberWithoutKeyIsReported, AllowPrivateRequiredIsReported, MemberTypeMustBeMessagePackObjectIsReported"
+      ],
+      "timemachine": {
+        "matched": true,
+        "via": [
+          "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs:21 is inside test MemberWithoutKeyIsReported",
+          "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs:39 is inside test AllowPrivateRequiredIsReported",
+          "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs:58 is inside test MemberTypeMustBeMessagePackObjectIsReported"
+        ],
+        "genuine": [],
+        "pass_on_base": [
+          "MemberWithoutKeyIsReported",
+          "AllowPrivateRequiredIsReported",
+          "MemberTypeMustBeMessagePackObjectIsReported"
+        ],
+        "tests": [
+          "AllowPrivateRequiredIsReported",
+          "MemberTypeMustBeMessagePackObjectIsReported",
+          "MemberWithoutKeyIsReported"
+        ]
+      },
+      "level": "E1",
+      "status": "refused"
+    },
+    {
+      "claim": "C2",
+      "verifier": "timemachine",
+      "rules": [
+        "E3: 2 test(s) fail on base and pass on head: DuplicateIntKeysAreReportedWithoutAnalyzerFailure, MixedKeyKindsAreReportedWithoutAnalyzerFailure"
+      ],
+      "refs": [
+        "runs/2234/timemachine.json#DuplicateIntKeysAreReportedWithoutAnalyzerFailure",
+        "runs/2234/timemachine.json#MixedKeyKindsAreReportedWithoutAnalyzerFailure"
+      ],
+      "flags": [],
+      "timemachine": {
+        "matched": true,
+        "via": [
+          "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs:81 is inside test DuplicateIntKeysAreReportedWithoutAnalyzerFailure",
+          "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs:125 is inside test MixedKeyKindsAreReportedWithoutAnalyzerFailure"
+        ],
+        "genuine": [
+          "DuplicateIntKeysAreReportedWithoutAnalyzerFailure",
+          "MixedKeyKindsAreReportedWithoutAnalyzerFailure"
+        ],
+        "pass_on_base": [],
+        "tests": [
+          "DuplicateIntKeysAreReportedWithoutAnalyzerFailure",
+          "MixedKeyKindsAreReportedWithoutAnalyzerFailure"
+        ]
+      },
+      "level": "E3",
+      "status": "proven"
+    },
+    {
+      "claim": "C3",
+      "verifier": "xray",
+      "rules": [
+        "E1: cited hunk(s) h5 unprotected, so the claim cannot be fully backed (load-bearing: h3)"
+      ],
+      "refs": [
+        "runs/2234/xray.json#g3",
+        "runs/2234/xray.json#g5"
+      ],
+      "flags": [
+        "unprotected hunk(s): h5"
+      ],
+      "xray": {
+        "h3": {
+          "result": "load-bearing",
+          "group": "g3",
+          "how": "alone"
+        },
+        "h5": {
+          "result": "unprotected",
+          "group": "g5",
+          "how": "alone"
+        }
+      },
+      "level": "E1",
+      "status": "unproven"
+    },
+    {
+      "claim": "C4",
+      "verifier": "static",
+      "rules": [
+        "E1: static claim, citations validate, no deterministic check implemented for it",
+        "refuted: H4 confirmed: Root-cause commit 1a74a620 is not in this branch; the diff patches a different crash."
+      ],
+      "refs": [
+        "runs/2234/hypotheses.json#H4"
+      ],
+      "flags": [],
+      "level": "E1",
+      "status": "refuted"
+    },
+    {
+      "claim": "C5",
+      "verifier": "timemachine",
+      "rules": [
+        "E1: no test cited by this claim appears in timemachine.json, so nothing was executed for it"
+      ],
+      "refs": [],
+      "flags": [],
+      "level": "E1",
+      "status": "unproven"
+    },
+    {
+      "claim": "C6",
+      "verifier": "xray",
+      "rules": [
+        "E2: all cited source hunks are load-bearing (h2, h3); protected by a test, not an executed demonstration of the claim",
+        "refused: referenced by refusal(s) R-2234-2"
+      ],
+      "refs": [
+        "runs/2234/xray.json#g2",
+        "runs/2234/xray.json#g3",
+        "runs/2234/hypotheses.json#H5"
+      ],
+      "flags": [],
+      "xray": {
+        "h2": {
+          "result": "load-bearing",
+          "group": "g2",
+          "how": "alone"
+        },
+        "h3": {
+          "result": "load-bearing",
+          "group": "g3",
+          "how": "alone"
+        }
+      },
+      "level": "E2",
+      "status": "refused"
+    },
+    {
+      "claim": "C7",
+      "verifier": "xray",
+      "rules": [
+        "E1: claim cites no source hunk (docs/tests only), so X-Ray has nothing to say",
+        "refused: referenced by refusal(s) R-2234-3, R-2234-4"
+      ],
+      "refs": [],
+      "flags": [],
+      "level": "E1",
+      "status": "refused"
+    },
+    {
+      "claim": "C8",
+      "verifier": "matrix",
+      "rules": [
+        "E1: verifier 'matrix' has no executed evidence (argued; citations validate)",
+        "refused: referenced by refusal(s) R-2234-3, R-2234-4"
+      ],
+      "refs": [],
+      "flags": [],
+      "level": "E1",
+      "status": "refused"
+    }
+  ],
+  "reading_budget_line_level": {
+    "lines": 97,
+    "total_changed_lines": 266,
+    "ratio": 0.3647,
+    "hunks": [
+      "h1",
+      "h2",
+      "h3",
+      "h5",
+      "h6",
+      "h7",
+      "h8",
+      "h9"
+    ],
+    "per_hunk": [
+      {
+        "hunk": "h1",
+        "path": "README.md",
+        "kind": "doc",
+        "lines": 14,
+        "of": 14,
+        "how": "14 of 14 lines (+-4 around cited lines)"
+      },
+      {
+        "hunk": "h2",
+        "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+        "kind": "src",
+        "lines": 1,
+        "of": 1,
+        "how": "whole hunk"
+      },
+      {
+        "hunk": "h3",
+        "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+        "kind": "src",
+        "lines": 5,
+        "of": 5,
+        "how": "whole hunk"
+      },
+      {
+        "hunk": "h5",
+        "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+        "kind": "src",
+        "lines": 1,
+        "of": 1,
+        "how": "whole hunk"
+      },
+      {
+        "hunk": "h6",
+        "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+        "kind": "src",
+        "lines": 5,
+        "of": 5,
+        "how": "whole hunk"
+      },
+      {
+        "hunk": "h7",
+        "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+        "kind": "src",
+        "lines": 5,
+        "of": 5,
+        "how": "whole hunk"
+      },
+      {
+        "hunk": "h8",
+        "path": "tests/MessagePack.SourceGenerator.ExecutionTests/SuppressedSourceGenerationTests.cs",
+        "kind": "test",
+        "lines": 9,
+        "of": 37,
+        "how": "9 of 37 lines (+-4 around cited lines)"
+      },
+      {
+        "hunk": "h9",
+        "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+        "kind": "test",
+        "lines": 57,
+        "of": 193,
+        "how": "57 of 193 lines (+-4 around cited lines)"
+      }
+    ],
+    "router_hunk_level": {
+      "lines": 261,
+      "provisional": false
+    },
+    "method": "Reading budget at line granularity, computed after `router.route` has written route.json."
+  }
+}

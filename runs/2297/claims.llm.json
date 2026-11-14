@@ -1,0 +1,261 @@
+{
+  "change": "2297",
+  "kind": "claims",
+  "produced_by": "claude-code session, cached",
+  "model": "claude-sonnet-5-5",
+  "produced_at": "2026-11-14T23:19",
+  "static_analysis_only": true,
+  "prompt": "You are a code-review claim extractor. You do NOT judge whether the change is good.\nProduce the minimal set of falsifiable claims this change makes or must satisfy.\nRules:\n1. Every requirement item (F*, NF*, S*) must be covered by >=1 claim, or listed in uncovered_requirements.\n2. Statements from the commit message, README or docs written by the author agent are\n   CLAIMS TO TEST (source=\"author-narrative\"), never evidence.\n3. Every claim must cite >=1 exact diff line: {path, new_line, quote}. Quote must be verbatim.\n4. For each claim propose a verifier: timemachine | xray | regen | matrix | static | argued.\n5. Never output confidence numbers or words like \"likely correct\".\nOutput JSON matching the schema. No prose.",
+  "prompt_sha256": "6fa10c1d36a7f9dbe83081c922aac0dae15dbd4a6a35c6a5db18767b372c1144",
+  "inputs": [
+    "git show origin/ju26-issue-2297",
+    "issue #2297 body (github.com page, fetched 2026-11-14)",
+    "receipts/requirements/REQ-2297.yaml"
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "requirement": "REQ-2297-F1",
+      "text": "Every generated formatter (integer-key and string-key), enum formatter, union formatter, resolver (with its two nested helper classes) and composite resolver is decorated with ExcludeFromCodeCoverage.",
+      "source": "requirement",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.tt",
+          "line": 15,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/StringKey/StringKeyFormatterTemplate.tt",
+          "line": 19,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/EnumTemplate.tt",
+          "line": 9,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/UnionTemplate.tt",
+          "line": 11,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/ResolverTemplate.tt",
+          "line": 15,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/ResolverTemplate.tt",
+          "line": 32,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/ResolverTemplate.tt",
+          "line": 49,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/CompositeResolverTemplate.tt",
+          "line": 8,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/CompositeResolverTemplate.tt",
+          "line": 36,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]"
+        }
+      ],
+      "verifier": "regen",
+      "evidence_level": null,
+      "evidence_refs": [],
+      "status": "pending",
+      "verifier_notes": "Regenerate and check every emitted type declaration in every snapshot is preceded by the guarded attribute; list types without it."
+    },
+    {
+      "id": "C2",
+      "requirement": "REQ-2297-F1",
+      "text": "The new test verifies that every type the generator emits is decorated.",
+      "source": "author-narrative",
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 11,
+          "quote": "/// Verifies that every type emitted by the source generator is decorated with <c>ExcludeFromCodeCoverage</c>"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 76,
+          "quote": "text.Contains(ExcludeAttribute),"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 95,
+          "quote": "Assert.Equal(attributeCount, guardedCount);"
+        }
+      ],
+      "verifier": "xray",
+      "evidence_level": null,
+      "evidence_refs": [],
+      "status": "pending",
+      "verifier_notes": "The test checks that each generated file contains the attribute at least once and that every occurrence is guarded. The resolver file has three attributed types; deleting two of the three attributes still satisfies the per-file check. Mutation: delete one attribute in ResolverTemplate.cs and see whether this test or a snapshot test fails."
+    },
+    {
+      "id": "C3",
+      "requirement": "REQ-2297-NF1",
+      "text": "Wrapping the attribute in '#if !NETSTANDARD2_0 && !NETFRAMEWORK' is needed and sufficient so that consumers targeting netstandard2.0 or .NET Framework still compile.",
+      "source": "author-narrative",
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 19,
+          "quote": "private const string Guard = \"#if !NETSTANDARD2_0 && !NETFRAMEWORK\";"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 18,
+          "quote": "The attribute is not available on netstandard2.0 or .NET Framework, so it is only emitted where it exists."
+        },
+        {
+          "path": "README.md",
+          "line": 1640,
+          "quote": "The attribute is only emitted for targets where it is available (not `netstandard2.0` or .NET Framework)."
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 95,
+          "quote": "Assert.Equal(attributeCount, guardedCount);"
+        }
+      ],
+      "verifier": "matrix",
+      "evidence_level": null,
+      "evidence_refs": [],
+      "status": "pending",
+      "verifier_notes": "The test only matches strings; nothing compiles generated output for a legacy target. Compile the generated files against netstandard2.0, net472 and net8 reference sets, with and without the guard, and check whether the attribute exists on those targets."
+    },
+    {
+      "id": "C4",
+      "requirement": "REQ-2297-NF1",
+      "text": "The only change to generated output is the added guarded attribute.",
+      "source": "diff",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/TransformUtilities.cs",
+          "line": 58,
+          "quote": "writer(anyConstraints ? \"{\\r\\n\" : \" {\\r\\n\");"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericDataTypeWithPrivateMember/Formatters.HasPrivateSerializedMemberAndIsGenericNamed`1.HasPrivateSerializedMemberAndIsGenericNamedFormatter.g.cs",
+          "line": 13,
+          "quote": "internal sealed class HasPrivateSerializedMemberAndIsGenericNamedFormatter"
+        }
+      ],
+      "verifier": "regen",
+      "evidence_level": null,
+      "evidence_refs": [],
+      "status": "pending",
+      "verifier_notes": "TransformUtilities changes the opening brace emission for nested generic types with constraints (a newline after the brace). At least one snapshot differs by a deleted line, not only an added attribute (9 deleted lines in the whole commit, 1 of them in a snapshot)."
+    },
+    {
+      "id": "C5",
+      "requirement": "REQ-2297-NF2",
+      "text": "Each .tt template and its preprocessed .cs output carry the same attribute text.",
+      "source": "diff",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.tt",
+          "line": 15,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.cs",
+          "line": 33,
+          "quote": "ExcludeFromCodeCoverage"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/ResolverTemplate.cs",
+          "line": 38,
+          "quote": "ExcludeFromCodeCoverage"
+        }
+      ],
+      "verifier": "static",
+      "evidence_level": null,
+      "evidence_refs": [],
+      "status": "pending",
+      "verifier_notes": "The generator compiles the .cs files, not the .tt files, so reverting a .tt hunk changes no test. Compare the literal text of each .tt insertion with the matching Write(...) string in the .cs."
+    },
+    {
+      "id": "C6",
+      "requirement": "REQ-2297-F1",
+      "text": "All generated formatters and resolvers are decorated with ExcludeFromCodeCoverage.",
+      "source": "author-narrative",
+      "citations": [
+        {
+          "path": "README.md",
+          "line": 1639,
+          "quote": "All generated formatters and resolvers are decorated with `[ExcludeFromCodeCoverage]`, so generated code does not skew code coverage reports."
+        },
+        {
+          "path": "README.md",
+          "line": 1640,
+          "quote": "The attribute is only emitted for targets where it is available (not `netstandard2.0` or .NET Framework)."
+        }
+      ],
+      "verifier": "argued",
+      "evidence_level": null,
+      "evidence_refs": [],
+      "status": "pending",
+      "verifier_notes": "The README states the claim without condition in one line and with a target exclusion in the next; on netstandard2.0 and .NET Framework nothing is decorated. See refusal R-2297-1."
+    },
+    {
+      "id": "C7",
+      "requirement": "REQ-2297-F2",
+      "text": "All snapshot files affected by the change were regenerated: 222 of the 225 .g.cs snapshots were updated and the 3 left untouched are not consumed by any test.",
+      "source": "diff",
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/Resources/InterfaceUnion/MessagePack.GeneratedMessagePackResolver.g.cs",
+          "line": 12,
+          "quote": "partial class GeneratedMessagePackResolver : MsgPack::IFormatterResolver"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/Resources/NestedGenericTypes/MessagePack.GeneratedMessagePackResolver.g.cs",
+          "line": 15,
+          "quote": "partial class GeneratedMessagePackResolver : MsgPack::IFormatterResolver"
+        }
+      ],
+      "verifier": "regen",
+      "evidence_level": null,
+      "evidence_refs": [],
+      "status": "pending",
+      "verifier_notes": "The 3 untouched files are under Resources/InterfaceUnion/, while a sibling directory InterfaceUnionUsedWithNullableRefAnnotation was updated. Check no test resolves the InterfaceUnion directory."
+    },
+    {
+      "id": "C8",
+      "requirement": "REQ-2297-S1",
+      "text": "The change affects only generated code: coverage exclusion is limited to code the generator emits.",
+      "source": "diff",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/ResolverTemplate.tt",
+          "line": 17,
+          "quote": "partial class <#= ResolverName.Name #> : MsgPack::IFormatterResolver"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 58,
+          "quote": "partial class GeneratedMessagePackResolver"
+        }
+      ],
+      "verifier": "argued",
+      "evidence_level": null,
+      "evidence_refs": [],
+      "status": "pending",
+      "verifier_notes": "The resolver is a partial class the user declares ([GeneratedMessagePackResolver] partial class ...). C# merges attributes across partial declarations, so the attribute on the generated part also excludes the user's own members of that class. See refusal R-2297-2."
+    }
+  ],
+  "uncovered_requirements": [],
+  "coverage_gaps": [
+    "The requirement set has no item for 'generated code still compiles for netstandard2.0 / .NET Framework consumers', although the change adds a guard for exactly that (claim C3).",
+    "No requirement item covers side effects on user-declared partial classes (claim C8)."
+  ]
+}

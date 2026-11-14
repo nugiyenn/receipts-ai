@@ -1,0 +1,53 @@
+{
+  "canary": "H4",
+  "type": "weakened test assertion",
+  "authored_by": "gemini-3.1-pro-preview",
+  "caught": false,
+  "by": [],
+  "by_family": {
+    "tests": false,
+    "deterministic-rules": false,
+    "gemini": false,
+    "claude": false
+  },
+  "location_only_secondary": {
+    "gemini": false,
+    "claude": false,
+    "any": false
+  },
+  "note": "Changes the diagnostic severity check from >= Warning to > Warning, which would allow warnings to pass the test silently.",
+  "tests": {
+    "ran": true,
+    "compiled": true,
+    "failing_tests": [],
+    "summary_line": "",
+    "outcome": "green",
+    "seconds": 98.0,
+    "log": "runs/drill/heldout/H4/tests.log"
+  },
+  "detectors": [],
+  "gemini": {
+    "caught": false,
+    "hits": [],
+    "near_but_off_target": [],
+    "n_findings": 2
+  },
+  "claude": {
+    "caught": false,
+    "hits": [],
+    "near_but_off_target": [],
+    "n_findings": 7
+  },
+  "xray_routed_to_human_NOT_counted": {
+    "routed": false,
+    "why": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs is not a src hunk; X-Ray only covers src hunks"
+  },
+  "evidence_refs": [
+    "runs/drill/heldout/H4/tests.json",
+    "runs/drill/heldout/H4/tests.log",
+    "runs/drill/heldout/H4/detectors.json",
+    "runs/drill/heldout/H4/gemini_review.json",
+    "runs/drill/heldout/H4/claude_findings.json",
+    "runs/drill/heldout/H4/review_input.diff"
+  ]
+}

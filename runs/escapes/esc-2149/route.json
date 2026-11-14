@@ -1,0 +1,227 @@
+{
+  "change": "esc-2149",
+  "lane": "L2",
+  "reasons": [
+    {
+      "rule": "areas",
+      "lane": "L2",
+      "why": "highest default lane of the touched areas"
+    },
+    {
+      "rule": "LR3",
+      "lane": "L2",
+      "why": "blast radius: QualifiedNamedTypeName has 48 references (threshold 10)"
+    },
+    {
+      "rule": "LR4",
+      "lane": "L2",
+      "why": "10 source hunk(s) not yet proven protected (xray pending)"
+    }
+  ],
+  "areas": [
+    "analyzer-core",
+    "generated-snapshots",
+    "tests"
+  ],
+  "ceiling_areas": [],
+  "blast_radius": {
+    "threshold": 10,
+    "max_references": 48,
+    "top_symbol": "QualifiedNamedTypeName",
+    "per_hunk": {
+      "h1": [],
+      "h2": [
+        {
+          "symbol": "GetTypeParameters",
+          "why": "declared",
+          "references": 7
+        },
+        {
+          "symbol": "GetTypeArguments",
+          "why": "declared",
+          "references": 5
+        }
+      ],
+      "h3": [
+        {
+          "symbol": "GenericTypeParameterInfo",
+          "why": "declared",
+          "references": 21
+        },
+        {
+          "symbol": "ConstraintTypes",
+          "why": "member-access",
+          "references": 3
+        }
+      ],
+      "h4": [],
+      "h5": [
+        {
+          "symbol": "QualifiedNamedTypeName",
+          "why": "declared",
+          "references": 48
+        }
+      ],
+      "h6": [
+        {
+          "symbol": "TypeArguments",
+          "why": "member-access",
+          "references": 22
+        },
+        {
+          "symbol": "TypeParameters",
+          "why": "member-access",
+          "references": 17
+        }
+      ],
+      "h7": [],
+      "h8": [],
+      "h9": [],
+      "h10": []
+    }
+  },
+  "flagged_hunks": {
+    "h1": [
+      "xray-pending: not yet shown to be protected by a test"
+    ],
+    "h2": [
+      "xray-pending: not yet shown to be protected by a test"
+    ],
+    "h3": [
+      "xray-pending: not yet shown to be protected by a test",
+      "blast-radius: touches a symbol with 21 references (threshold 10)"
+    ],
+    "h4": [
+      "xray-pending: not yet shown to be protected by a test"
+    ],
+    "h5": [
+      "xray-pending: not yet shown to be protected by a test",
+      "blast-radius: touches a symbol with 48 references (threshold 10)"
+    ],
+    "h6": [
+      "xray-pending: not yet shown to be protected by a test",
+      "blast-radius: touches a symbol with 22 references (threshold 10)"
+    ],
+    "h7": [
+      "xray-pending: not yet shown to be protected by a test"
+    ],
+    "h8": [
+      "xray-pending: not yet shown to be protected by a test"
+    ],
+    "h9": [
+      "xray-pending: not yet shown to be protected by a test"
+    ],
+    "h10": [
+      "xray-pending: not yet shown to be protected by a test"
+    ],
+    "h12": [
+      "regen-unverified: snapshot not proven by regeneration/pattern check"
+    ],
+    "h13": [
+      "regen-unverified: snapshot not proven by regeneration/pattern check"
+    ]
+  },
+  "reading_budget": {
+    "lines": 152,
+    "hunks": 12,
+    "total_changed_lines": 172,
+    "ratio": 0.8837,
+    "basis": "lines in flagged hunks",
+    "inputs": {
+      "xray": false,
+      "regen": false,
+      "refusals": false,
+      "claims": false
+    },
+    "provisional": true
+  },
+  "files": [
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/CodeAnalysisUtilities.cs",
+      "area": "analyzer-core",
+      "kind": "src",
+      "lane": "L2",
+      "changed_lines": 11,
+      "flagged_hunks": [
+        "h1",
+        "h2"
+      ]
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GenericTypeParameterInfo.cs",
+      "area": "analyzer-core",
+      "kind": "src",
+      "lane": "L2",
+      "changed_lines": 16,
+      "flagged_hunks": [
+        "h3"
+      ]
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedNamedTypeName.cs",
+      "area": "analyzer-core",
+      "kind": "src",
+      "lane": "L2",
+      "changed_lines": 8,
+      "flagged_hunks": [
+        "h4",
+        "h5",
+        "h6"
+      ]
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedTypeName.cs",
+      "area": "analyzer-core",
+      "kind": "src",
+      "lane": "L2",
+      "changed_lines": 11,
+      "flagged_hunks": [
+        "h7",
+        "h8"
+      ]
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "area": "analyzer-core",
+      "kind": "src",
+      "lane": "L2",
+      "changed_lines": 4,
+      "flagged_hunks": [
+        "h9",
+        "h10"
+      ]
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+      "area": "tests",
+      "kind": "test",
+      "lane": "L1",
+      "changed_lines": 20,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/RecursiveGenerics_Direct/Formatters.MessagePack.GeneratedMessagePackResolver.AFormatter`1.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L2",
+      "changed_lines": 39,
+      "flagged_hunks": [
+        "h12"
+      ]
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/Resources/RecursiveGenerics_Direct/MessagePack.GeneratedMessagePackResolver.g.cs",
+      "area": "generated-snapshots",
+      "kind": "generated",
+      "lane": "L2",
+      "changed_lines": 63,
+      "flagged_hunks": [
+        "h13"
+      ]
+    }
+  ],
+  "policy": {
+    "areas": "areas-1",
+    "routing": "routing-1"
+  }
+}

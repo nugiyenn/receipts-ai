@@ -1,0 +1,49 @@
+{
+  "produced_by": "fresh `claude -p` session, model claude-sonnet-5-5, no tools, empty working dir, no conversation context; never told a canary exists",
+  "prompt_sha256": "5618b472b69183cf107c165ba5ec41760c5aceaf7c44502d43a7aa59de94f7de",
+  "findings": [
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1446,
+      "severity": "high",
+      "issue": "The constructor-level filter drops every diagnostic whose location is not in the compilation. That includes diagnostics on source-declared types that were created with a null location, which become Location.None. Examples are those using GetParameterListLocation or GetLocation(parameter) when there is no syntax. These were reported before and are now silently lost, which contradicts C4, C5, NF1 and S1. The fix is too broad. It should be scoped to the metadata-symbol case."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 239,
+      "severity": "medium",
+      "issue": "Wrapping reportDiagnostic once in the constructor changes the behaviour of every report site, not only the two that crashed. Nothing records which diagnostics are now dropped, and no test shows that diagnostics on source types still get through."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1434,
+      "severity": "medium",
+      "issue": "GetPropertyIdentifierLocation returns null whenever the syntax is not a PropertyDeclarationSyntax, not only for metadata. A source-declared property whose declaration is a record positional ParameterSyntax now gets Location.None. The new filter then drops its BothStringAndIntKeyAreNull diagnostic. Before the change this case threw an InvalidCastException. C10's claim that only metadata properties lose the diagnostic is false."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1077,
+      "severity": "low",
+      "issue": "FirstOrDefault()?.GetSyntax().GetLocation() yields a null location when there is no source. The MemberNeedsKey diagnostic is then dropped silently by the filter. This relies on an implicit coupling between the null location and the filter, and nothing at this site says so."
+    },
+    {
+      "path": "README.md",
+      "line": 1642,
+      "severity": "low",
+      "issue": "The sentence says diagnostics about members of such a type are reported by the defining assembly. That only holds if the defining project runs the analyzer, so a NuGet package built without it reports nothing. The change over-claims behaviour (NF2, C6). The statement that a problem must be fixed there is also unqualified."
+    },
+    {
+      "path": "doc/analyzers/MsgPack004.md",
+      "line": 52,
+      "severity": "low",
+      "issue": "The doc states that the defining project reports an unattributed public member. That is not guaranteed, because the defining project may not use the analyzer or may have it suppressed. The claim reads as a behaviour guarantee (C7) and over-claims (NF2)."
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+      "line": 641,
+      "severity": "low",
+      "issue": "The test sets SkipGeneratedSourcesCheck, so it only checks that the resolver exists, not its content. No regression test checks that diagnostics for source-declared types, such as MemberNeedsKey or a null-key positional record property, are still reported after the new filter. The unkeyed-member test only shows that nothing is reported."
+    }
+  ],
+  "raw": null
+}

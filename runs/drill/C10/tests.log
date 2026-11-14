@@ -1,0 +1,150 @@
+
+  Determining projects to restore...
+/Users/andy/Downloads/Junction2/wt/canary-2283-C10/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+  Restored /Users/andy/Downloads/Junction2/wt/canary-2283-C10/src/MessagePack.Annotations/MessagePack.Annotations.csproj (in 1.93 sec).
+  Restored /Users/andy/Downloads/Junction2/wt/canary-2283-C10/src/MessagePack.SourceGenerator/MessagePack.SourceGenerator.csproj (in 1.99 sec).
+  Restored /Users/andy/Downloads/Junction2/wt/canary-2283-C10/src/MessagePack.Analyzers.CodeFixes/MessagePack.Analyzers.CodeFixes.csproj (in 1.92 sec).
+  Restored /Users/andy/Downloads/Junction2/wt/canary-2283-C10/src/MessagePack.Analyzers/MessagePack.Analyzers.csproj (in 1.94 sec).
+  Restored /Users/andy/Downloads/Junction2/wt/canary-2283-C10/src/MessagePack/MessagePack.csproj (in 2.05 sec).
+  Restored /Users/andy/Downloads/Junction2/wt/canary-2283-C10/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj (in 2.47 sec).
+
+Build succeeded.
+
+/Users/andy/Downloads/Junction2/wt/canary-2283-C10/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:05.17
+
+/Users/andy/Downloads/Junction2/wt/canary-2283-C10/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+  MessagePack.SourceGenerator -> /Users/andy/Downloads/Junction2/wt/canary-2283-C10/bin/MessagePack.SourceGenerator/Debug/netstandard2.0/MessagePack.SourceGenerator.dll
+  MessagePack.Analyzers.CodeFixes -> /Users/andy/Downloads/Junction2/wt/canary-2283-C10/bin/MessagePack.Analyzers.CodeFixes/Debug/netstandard2.0/MessagePack.Analyzers.CodeFixes.dll
+  MessagePack.Analyzers -> /Users/andy/Downloads/Junction2/wt/canary-2283-C10/bin/MessagePack.Analyzers/Debug/netstandard2.0/MessagePack.Analyzers.dll
+  MessagePack.Annotations -> /Users/andy/Downloads/Junction2/wt/canary-2283-C10/bin/MessagePack.Annotations/Debug/netstandard2.0/MessagePack.Annotations.dll
+  MessagePack -> /Users/andy/Downloads/Junction2/wt/canary-2283-C10/bin/MessagePack/Debug/net8.0/MessagePack.dll
+  MessagePack.SourceGenerator.Tests -> /Users/andy/Downloads/Junction2/wt/canary-2283-C10/bin/MessagePack.SourceGenerator.Tests/Debug/net8.0/MessagePack.SourceGenerator.Tests.dll
+Test run for /Users/andy/Downloads/Junction2/wt/canary-2283-C10/bin/MessagePack.SourceGenerator.Tests/Debug/net8.0/MessagePack.SourceGenerator.Tests.dll (.NETCoreApp,Version=v8.0)
+VSTest version 17.11.0 (arm64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.8)
+[xUnit.net 00:00:00.19]   Discovering: MessagePack.SourceGenerator.Tests
+[xUnit.net 00:00:00.33]   Discovered:  MessagePack.SourceGenerator.Tests
+[xUnit.net 00:00:00.35]   Starting:    MessagePack.SourceGenerator.Tests
+  Passed MsgPack012InaccessibleDataTypeTests.InaccessibleNestedDataType_OuterNesting [8 s]
+  Passed MsgPack012InaccessibleDataTypeTests.InaccessibleNestedDataType [311 ms]
+  Passed GenericsFormatterTests.RecursiveGenerics_Direct [9 s]
+  Passed MsgPack011PartialTypeRequiredTests.NestedPartialTypeRequiresPartialSelfAndDeclaringType [10 s]
+  Passed MsgPack015AllowPrivateRequiredTests.SetWhenNonPublicPropertyIsAnnotated [11 s]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToTypeForRecord1 [11 s]
+  Passed MsgPack015AllowPrivateRequiredTests.AddForPublicTypeNestedUnderNonPublicType [427 ms]
+  Passed MsgPack011PartialTypeRequiredTests.NestedPartialTypeRequiresPartialDeclaringType [727 ms]
+  Passed GenericsFormatterTests.ClosedGenericRecordStruct_FromMetadataReference [2 s]
+  Passed MsgPack015AllowPrivateRequiredTests.AddWhenNonPublicPropertyIsAnnotated [542 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributesToMembersOfRecordStruct [897 ms]
+  Passed MsgPack011PartialTypeRequiredTests.CodeFixOffered [468 ms]
+  Passed GenericsFormatterTests.Generics_Constraints_Struct [222 ms]
+  Passed MsgPack015AllowPrivateRequiredTests.AddForNonPublicDeserializingConstructor [267 ms]
+  Passed MsgPack015AllowPrivateRequiredTests.AddForNonPublicType [418 ms]
+  Passed MsgPack00xAnalyzerTests.CodeFixAppliesAcrossFiles [671 ms]
+  Passed GenericsFormatterTests.GenericsUnionFormatter_Nested [695 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributesToMembersOfRecordWithPrimaryCtor [366 ms]
+  Passed GenericsFormatterTests.Generics_Constraints_NullableReferenceType [344 ms]
+  Passed MsgPack00xAnalyzerTests.DerivedAttributes [186 ms]
+  Passed GenericsFormatterTests.GenericsOfTFormatter [262 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToType_Properties [321 ms]
+  Passed MsgPack00xAnalyzerTests.MessageFormatterAttribute [249 ms]
+  Passed GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference_UnkeyedMember [460 ms]
+  Passed MsgPack00xAnalyzerTests.InitPropertyInitializer [138 ms]
+  Passed GenericsFormatterTests.GenericsUnionFormatter [175 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributesToMembers [402 ms]
+  Passed GenericsFormatterTests.GenericsOfTFormatter_WithKnownTypes [287 ms]
+  Passed MsgPack00xAnalyzerTests.NoMessagePackReference [52 ms]
+  Passed GenericsFormatterTests.Generics_Constraints_ReferenceType_Nullable [226 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToField_WithComment [522 ms]
+  Passed GenericsFormatterTests.NullableFormatter [471 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToTypeForRecord2 [191 ms]
+  Passed GenericsFormatterTests.Generics_Constraints_Type [119 ms]
+  Passed GenericsFormatterTests.Generics_Defined_In_ReferencedProject [344 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributesToMembersOfRecordStructWithPrimaryCtor [395 ms]
+  Passed GenericsFormatterTests.WellKnownGenericsFormatter [239 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToGenericType [257 ms]
+  Passed GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference [392 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToType_Generic [540 ms]
+  Passed GenericsFormatterTests.Generics_Constraints_Multiple [232 ms]
+  Passed MsgPack00xAnalyzerTests.NameCollisionsInForceMapMode [146 ms]
+  Passed GenericsFormatterTests.GenericsOfTFormatter_FormatterOnly [194 ms]
+  Passed MsgPack00xAnalyzerTests.NullStringKey [123 ms]
+  Passed GenericsFormatterTests.GenericsOfT1T2Formatter [288 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributesToMembersOfRecord [403 ms]
+  Passed MsgPack00xAnalyzerTests.DerivedAttributes_SourceGenerationDisabled [56 ms]
+  Passed GenericsFormatterTests.NestedGenericTypes [246 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToType_Nullable [206 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToTypeForRecordPrimaryConstructor [450 ms]
+  Passed MsgPack00xAnalyzerTests.PrivateMembersInBaseClassNeedNoAttribution [48 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToType_Fields [129 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributesToMembers_AllowPrivateAttribute [157 ms]
+  Passed MsgPack00xAnalyzerTests.DoNotAddAttributesToClassWithPrimaryCtor [114 ms]
+  Passed MsgPack00xAnalyzerTests.AbstractFormatterDoesNotAttractAttention [15 ms]
+[xUnit.net 00:00:18.96]       System.InvalidOperationException : Context: Diagnostics of fixed state
+[xUnit.net 00:00:18.96]       Mismatch between number of diagnostics returned, expected "2" actual "3"
+[xUnit.net 00:00:18.96]       
+[xUnit.net 00:00:18.96]       Diagnostics:
+[xUnit.net 00:00:18.96]       // /0/Test0.cs(5,14): error MsgPack011: Types with private, serializable members must be declared as partial, including nesting types
+[xUnit.net 00:00:18.96]       VerifyCS.Diagnostic(MsgPack00xMessagePackAnalyzer.MsgPack011).WithSpan(5, 14, 5, 17),
+[xUnit.net 00:00:18.96]       // /0/Test0.cs(4,2): warning MsgPack015: MessagePackObjectAttribute.AllowPrivate should be set to true because the type is not public and/or at least one of its non-public members are attributed for serialization
+[xUnit.net 00:00:18.96]       VerifyCS.Diagnostic(MsgPack00xMessagePackAnalyzer.MsgPack015).WithSpan(4, 2, 4, 19),
+[xUnit.net 00:00:18.96]       // /0/Test0.cs(8,20): error MsgPack005: All KeyAttribute arguments must be of the same type (either string or int)
+[xUnit.net 00:00:18.96]       VerifyCS.Diagnostic(MsgPack00xMessagePackAnalyzer.MsgPack005).WithSpan(8, 20, 8, 27),
+[xUnit.net 00:00:18.96]       
+[xUnit.net 00:00:18.96]       
+[xUnit.net 00:00:18.96]       Stack Trace:
+[xUnit.net 00:00:18.96]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/DefaultVerifier.cs(79,0): at Microsoft.CodeAnalysis.Testing.DefaultVerifier.Equal[T](T expected, T actual, String message)
+[xUnit.net 00:00:18.96]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(546,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticResults(IEnumerable`1 actualResults, ImmutableArray`1 analyzers, DiagnosticResult[] expectedResults, IVerifier verifier)
+[xUnit.net 00:00:18.96]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(449,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticsAsync(EvaluatedProjectState primaryProject, ImmutableArray`1 additionalProjects, DiagnosticResult[] expected, IVerifier verifier, CancellationToken cancellationToken)
+[xUnit.net 00:00:18.96]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.CodeFix.Testing/CodeFixTest`1.cs(318,0): at Microsoft.CodeAnalysis.Testing.CodeFixTest`1.RunImplAsync(CancellationToken cancellationToken)
+[xUnit.net 00:00:18.96]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(172,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunAsync(CancellationToken cancellationToken)
+[xUnit.net 00:00:18.96]         /Users/andy/Downloads/Junction2/wt/canary-2283-C10/tests/MessagePack.SourceGenerator.Tests/MsgPack00xAnalyzerTests.cs(231,0): at MsgPack00xAnalyzerTests.AddAttributesToMembers_MixedVisibility()
+[xUnit.net 00:00:18.96]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:19.14]   Finished:    MessagePack.SourceGenerator.Tests
+  Passed MsgPack00xAnalyzerTests.InvalidMessageFormatterType [46 ms]
+  Failed MsgPack00xAnalyzerTests.AddAttributesToMembers_MixedVisibility [211 ms]
+  Error Message:
+   System.InvalidOperationException : Context: Diagnostics of fixed state
+Mismatch between number of diagnostics returned, expected "2" actual "3"
+
+Diagnostics:
+// /0/Test0.cs(5,14): error MsgPack011: Types with private, serializable members must be declared as partial, including nesting types
+VerifyCS.Diagnostic(MsgPack00xMessagePackAnalyzer.MsgPack011).WithSpan(5, 14, 5, 17),
+// /0/Test0.cs(4,2): warning MsgPack015: MessagePackObjectAttribute.AllowPrivate should be set to true because the type is not public and/or at least one of its non-public members are attributed for serialization
+VerifyCS.Diagnostic(MsgPack00xMessagePackAnalyzer.MsgPack015).WithSpan(4, 2, 4, 19),
+// /0/Test0.cs(8,20): error MsgPack005: All KeyAttribute arguments must be of the same type (either string or int)
+VerifyCS.Diagnostic(MsgPack00xMessagePackAnalyzer.MsgPack005).WithSpan(8, 20, 8, 27),
+
+
+  Stack Trace:
+     at Microsoft.CodeAnalysis.Testing.DefaultVerifier.Equal[T](T expected, T actual, String message) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/DefaultVerifier.cs:line 79
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticResults(IEnumerable`1 actualResults, ImmutableArray`1 analyzers, DiagnosticResult[] expectedResults, IVerifier verifier) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 546
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticsAsync(EvaluatedProjectState primaryProject, ImmutableArray`1 additionalProjects, DiagnosticResult[] expected, IVerifier verifier, CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 449
+   at Microsoft.CodeAnalysis.Testing.CodeFixTest`1.RunImplAsync(CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.CodeFix.Testing/CodeFixTest`1.cs:line 318
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunAsync(CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 172
+   at MsgPack00xAnalyzerTests.AddAttributesToMembers_MixedVisibility() in /Users/andy/Downloads/Junction2/wt/canary-2283-C10/tests/MessagePack.SourceGenerator.Tests/MsgPack00xAnalyzerTests.cs:line 231
+--- End of stack trace from previous location ---
+  Passed MsgPack00xAnalyzerTests.AddAttributesToMembers_PublicOnly [91 ms]
+  Passed MsgPack00xAnalyzerTests.AddIgnoreAttributesToMembers [89 ms]
+
+Total tests: 59
+     Passed: 58
+     Failed: 1
+ Total time: 20.1902 Seconds
+
+Build FAILED.
+
+/Users/andy/Downloads/Junction2/wt/canary-2283-C10/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:58.68
+[xUnit.net 00:00:18.96]     MsgPack00xAnalyzerTests.AddAttributesToMembers_MixedVisibility [FAIL]
+Test Run Failed.

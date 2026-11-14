@@ -1,0 +1,140 @@
+# Reference workflow. Not run against GitHub. See integration/README.md for what is and is not implemented.
+name: receipts
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: read
+  pull-requests: write
+  statuses: write
+
+concurrency:
+  group: receipts-${{ github.event.pull_request.number || github.event.issue.number }}
+  cancel-in-progress: false
+
+env:
+  STATUS_CONTEXT: receipts/owner-signed
+
+jobs:
+  review:
+    name: review agent-authored PR
+    if: >-
+      github.event_name == 'pull_request' &&
+      contains(github.event.pull_request.labels.*.name, 'agent-authored')
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: receipts/requirements.txt
+
+      - name: Install the reviewer
+        run: python -m pip install -r receipts/requirements.txt
+
+      - name: Review the change
+        working-directory: receipts
+        env:
+          CHANGE_ID: ${{ github.event.pull_request.number }}
+        run: |
+          python -m receipts review --change "$CHANGE_ID"
+          python -m receipts pr-comment --change "$CHANGE_ID" > "$RUNNER_TEMP/comment.md"
+          python -m receipts required-owner --change "$CHANGE_ID" \
+            --codeowners ../.github/CODEOWNERS > "$RUNNER_TEMP/owners.json"
+
+      - name: Post or update the summary comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const owners = JSON.parse(fs.readFileSync(`${process.env.RUNNER_TEMP}/owners.json`, 'utf8')).owners;
+            const marker = '<!-- receipts:pr-comment';
+            const body = fs.readFileSync(`${process.env.RUNNER_TEMP}/comment.md`, 'utf8')
+              + `\nRequired signer: ${owners.join(', ') || 'none found'}\n<!-- receipts:owners=${owners.join(',')} -->\n`;
+            const { owner, repo } = context.repo;
+            const issue_number = context.payload.pull_request.number;
+            const comments = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number });
+            const mine = comments.find(c => c.body && c.body.startsWith(marker));
+            if (mine) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: mine.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number, body });
+            }
+
+      - name: Hold the required check as pending
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              ...context.repo,
+              sha: context.payload.pull_request.head.sha,
+              state: 'pending',
+              context: process.env.STATUS_CONTEXT,
+              description: 'Waiting for the CODEOWNER to comment /receipts sign',
+            });
+
+  sign:
+    name: owner signs
+    if: >-
+      github.event_name == 'issue_comment' &&
+      github.event.issue.pull_request &&
+      startsWith(github.event.comment.body, '/receipts sign')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check the commenter against the required signer
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const issue_number = context.payload.issue.number;
+            const who = context.payload.comment.user.login.toLowerCase();
+            const comments = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number });
+            const mine = comments.find(c => c.body && c.body.includes('<!-- receipts:owners='));
+            if (!mine) {
+              core.setFailed('No Receipts summary comment found on this PR.');
+              return;
+            }
+            const owners = mine.body.match(/<!-- receipts:owners=([^>]*?) -->/)[1].split(',').filter(Boolean);
+            let allowed = false;
+            for (const o of owners) {
+              const name = o.replace(/^@/, '');
+              if (!name.includes('/')) {
+                allowed = allowed || name.toLowerCase() === who;
+                continue;
+              }
+              const [org, team] = name.split('/');
+              try {
+                const m = await github.rest.teams.getMembershipForUserInOrg({ org, team_slug: team, username: who });
+                allowed = allowed || m.data.state === 'active';
+              } catch (e) {
+                core.warning(`Could not read team ${name}: ${e.status}`);
+              }
+            }
+            if (!allowed) {
+              core.setFailed(`${who} is not a required signer (${owners.join(', ')}).`);
+              return;
+            }
+            const pr = await github.rest.pulls.get({ owner, repo, pull_number: issue_number });
+            const reviews = await github.paginate(github.rest.pulls.listReviews, { owner, repo, pull_number: issue_number });
+            const approved = reviews.some(r => r.user.login.toLowerCase() === who && r.state === 'APPROVED' && r.commit_id === pr.data.head.sha);
+            if (!approved) {
+              core.setFailed('Approve the PR at its current head commit first, then comment /receipts sign.');
+              return;
+            }
+            await github.rest.repos.createCommitStatus({
+              owner, repo,
+              sha: pr.data.head.sha,
+              state: 'success',
+              context: process.env.STATUS_CONTEXT,
+              description: `Signed by ${who}`,
+            });

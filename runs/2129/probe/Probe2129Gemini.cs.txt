@@ -1,0 +1,114 @@
+using System.Text;
+using MessagePack.Formatters;
+
+// Probes for hypotheses raised by the Gemini prosecutor (runs/2129/prosecutor_gemini.json): C3, C10, NEW1, C2.
+public class GemAttrType
+{
+    [IgnoreMember]
+    public int X { get; set; }
+
+    public int Y { get; set; }
+}
+
+[GeneratedMessagePackFormatter]
+public partial class GemAttrTypeFormatter : IMessagePackFormatter<GemAttrType>
+{
+}
+
+public class GemTarget
+{
+    public int Id { get; set; }
+
+    public string Name { get; set; } = "n";
+}
+
+public class GemSurrogateField
+{
+    [Key(0)]
+    public int Id;
+
+    [Key(1)]
+    public string Name = "n";
+}
+
+[GeneratedMessagePackFormatter(SurrogateType = typeof(GemSurrogateField))]
+public partial class GemTargetFormatter : IMessagePackFormatter<GemTarget>
+{
+}
+
+public sealed class GemDoubleIntFormatter : IMessagePackFormatter<int>
+{
+    public int Deserialize(ref MessagePackReader reader, MessagePackSerializerOptions options) => reader.ReadInt32() / 2;
+
+    public void Serialize(ref MessagePackWriter writer, int value, MessagePackSerializerOptions options) => writer.Write(value * 2);
+}
+
+public class GemTarget2
+{
+    public int Id { get; set; }
+}
+
+public class GemSurrogateCustom
+{
+    [Key(0)]
+    [MessagePackFormatter(typeof(GemDoubleIntFormatter))]
+    public int Id { get; set; }
+}
+
+[GeneratedMessagePackFormatter(SurrogateType = typeof(GemSurrogateCustom))]
+public partial class GemTarget2Formatter : IMessagePackFormatter<GemTarget2>
+{
+}
+
+public class GemIndexerType
+{
+    public int Id { get; set; }
+
+    public int this[int key]
+    {
+        get => 0;
+        set { }
+    }
+}
+
+[GeneratedMessagePackFormatter]
+public partial class GemIndexerTypeFormatter : IMessagePackFormatter<GemIndexerType>
+{
+}
+
+public class Probe2129GeminiTests
+{
+    private static readonly MessagePackSerializerOptions Gen = MessagePackSerializerOptions.Standard
+        .WithResolver(CompositeResolver.Create(GeneratedMessagePackResolver.Instance, StandardResolver.Instance));
+
+    private static void Write(string name, string text)
+    {
+        string dir = Environment.GetEnvironmentVariable("PROBE_OUT") ?? Path.GetTempPath();
+        Directory.CreateDirectory(dir);
+        File.WriteAllText(Path.Combine(dir, name + ".txt"), text, Encoding.UTF8);
+    }
+
+    private static string Json<T>(T v) => MessagePackSerializer.ConvertToJson(MessagePackSerializer.Serialize(v, Gen), Gen);
+
+    [Fact]
+    public void IgnoreMemberOnFormattedType() => Write("G1_IgnoreMemberOnFormattedType", Json(new GemAttrType { X = 1, Y = 2 }));
+
+    [Fact]
+    public void SurrogateFieldMatchesProperty()
+    {
+        var v = new GemTarget { Id = 5, Name = "x" };
+        string json = Json(v);
+        GemTarget r = MessagePackSerializer.Deserialize<GemTarget>(MessagePackSerializer.Serialize(v, Gen), Gen);
+        Write("G2_SurrogateFieldMatchesProperty", $"{json}; roundtrip Id={r.Id} Name={r.Name}");
+    }
+
+    [Fact]
+    public void CustomFormatterOnSurrogateMember()
+    {
+        string json = Json(new GemTarget2 { Id = 21 });
+        Write("G3_CustomFormatterOnSurrogateMember", $"{json}  (21 means the custom doubling formatter was ignored; 42 means it was applied)");
+    }
+
+    [Fact]
+    public void IndexerIsSkipped() => Write("G4_IndexerIsSkipped", Json(new GemIndexerType { Id = 9 }));
+}

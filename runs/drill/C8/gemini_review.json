@@ -1,0 +1,26 @@
+{
+  "model": "gemini-3.1-pro-preview",
+  "prompt_sha256": "ed854d5c6c04b76e270a6490aa780c6066af01dbb574060379dba49983ec68b8",
+  "cached": false,
+  "findings": [
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 985,
+      "severity": "high",
+      "issue": "The variable 'item' is of type 'ISymbol' (as it can be a property or a field), but 'GetPropertyIdentifierLocation' expects an 'IPropertySymbol', resulting in a CS1503 compiler error."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1434,
+      "severity": "high",
+      "issue": "If the parameter type is fixed to 'ISymbol', this method will still return null for fields because they are not 'PropertyDeclarationSyntax'. This causes their diagnostics to be created with Location.None and silently dropped by 'ReportIfLocatedInCompilation', violating the requirement that no existing diagnostic is lost."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1453,
+      "severity": "medium",
+      "issue": "The empty catch block silently swallows all exceptions from the diagnostic reporter or compilation checks, which can hide underlying bugs and violates the requirement against swallowed errors."
+    }
+  ],
+  "raw": null
+}

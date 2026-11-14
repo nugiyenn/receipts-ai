@@ -1,0 +1,6 @@
+H1 green []
+H2 red ['MsgPack00xAnalyzerTests.AddAttributeToField_WithComment', 'MsgPack00xAnalyzerTests.AddAttributeToGenericType', 'MsgPack00xAnalyzerTests.AddAttributeToTypeForRecord1', 'MsgPack00xAnalyzerTests.AddAttributeToTypeForRecord2']
+H3 red ['GenericsFormatterTests.ClosedGenericRecordStruct_FromMetadataReference', 'GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference', 'GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference_UnkeyedMember']
+H4 green []
+H5 green []
+H6 green []

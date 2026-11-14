@@ -1,0 +1,22 @@
+{
+  "signals": {
+    "R4": null,
+    "R2": null,
+    "R6": {
+      "fired": true,
+      "path": "README.md",
+      "why": "added documentation uses universal-claim words ['ever', 'full', 'no diagnostic is']; no claim in claims.json proves them"
+    },
+    "assertion_drop": null
+  },
+  "fired": [
+    "R6"
+  ],
+  "planted_ranges": [
+    {
+      "path": "README.md",
+      "start": 1640,
+      "end": 1646
+    }
+  ]
+}

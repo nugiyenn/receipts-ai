@@ -1,0 +1,198 @@
+{
+ "change": "2129",
+ "scope": "revert one hunk group at a time on head; run FullyQualifiedName~GeneratedMessagePackFormatterTests (6 tests) and FullyQualifiedName~GeneratedFormatterForExternalTypesTests (7 tests); other suites not run",
+ "sdk": "9.0.321 (global.json overridden inside the worktree only)",
+ "groups": [
+  {
+   "id": "g1",
+   "hunks": [
+    "h16"
+   ],
+   "desc": "GeneratorUtilities: hand-written formatter search skips classes marked [GeneratedMessagePackFormatter]",
+   "result": "load-bearing",
+   "compiled": true,
+   "failing_tests": [
+    "diag:GeneratedMessagePackFormatterTests.FormattedTypeMustNotBeAbstract",
+    "diag:GeneratedMessagePackFormatterTests.FormatterMustBePartial",
+    "diag:GeneratedMessagePackFormatterTests.SurrogateKeysMustNotMixStringAndInt",
+    "diag:GeneratedMessagePackFormatterTests.SurrogateMemberMustHaveMatchingType",
+    "diag:GeneratedMessagePackFormatterTests.SurrogateMemberMustMatchFormattedType"
+   ],
+   "seconds": 24.0,
+   "log": "runs/2129/xray/g1-*.log"
+  },
+  {
+   "id": "g2",
+   "hunks": [
+    "h15"
+   ],
+   "desc": "ObjectSerializationInfo.Equals compares IsUserDeclaredFormatter",
+   "result": "unprotected",
+   "compiled": true,
+   "failing_tests": [],
+   "seconds": 20.0,
+   "log": "runs/2129/xray/g2-*.log"
+  },
+  {
+   "id": "g3",
+   "hunks": [
+    "h20",
+    "h22"
+   ],
+   "desc": "FormatterTemplate.cs and StringKeyFormatterTemplate.cs emit 'partial class' for user-declared formatters (T4 output)",
+   "result": "load-bearing",
+   "compiled": true,
+   "failing_tests": [
+    "exec:build-broken"
+   ],
+   "seconds": 19.6,
+   "log": "runs/2129/xray/g3-*.log"
+  },
+  {
+   "id": "g4",
+   "hunks": [
+    "h17",
+    "h18"
+   ],
+   "desc": "MessagePackGenerator: collect [GeneratedMessagePackFormatter] classes and add their models",
+   "result": "structural",
+   "compiled": false,
+   "failing_tests": [],
+   "seconds": 11.7,
+   "log": "runs/2129/xray/g4-*.log"
+  },
+  {
+   "id": "g5",
+   "hunks": [
+    "h19"
+   ],
+   "desc": "MessagePackGenerator: report diagnostics for [GeneratedMessagePackFormatter] classes",
+   "result": "load-bearing",
+   "compiled": true,
+   "failing_tests": [
+    "diag:GeneratedMessagePackFormatterTests.FormattedTypeMustNotBeAbstract",
+    "diag:GeneratedMessagePackFormatterTests.FormatterMustBePartial",
+    "diag:GeneratedMessagePackFormatterTests.FormatterMustImplementFormatterOfT",
+    "diag:GeneratedMessagePackFormatterTests.SurrogateKeysMustNotMixStringAndInt",
+    "diag:GeneratedMessagePackFormatterTests.SurrogateMemberMustHaveMatchingType",
+    "diag:GeneratedMessagePackFormatterTests.SurrogateMemberMustMatchFormattedType"
+   ],
+   "seconds": 22.9,
+   "log": "runs/2129/xray/g5-*.log"
+  },
+  {
+   "id": "g6",
+   "hunks": [
+    "h11"
+   ],
+   "desc": "Analyzer SupportedDiagnostics lists the four new descriptors",
+   "result": "unprotected",
+   "compiled": true,
+   "failing_tests": [],
+   "seconds": 21.4,
+   "log": "runs/2129/xray/g6-*.log"
+  },
+  {
+   "id": "g7",
+   "hunks": [
+    "h24"
+   ],
+   "desc": "Constants for the attribute name and SurrogateType (used by h17, h16, h12: structural when alone)",
+   "result": "structural",
+   "compiled": false,
+   "failing_tests": [],
+   "seconds": 17.0,
+   "log": "runs/2129/xray/g7-*.log"
+  },
+  {
+   "id": "g8",
+   "hunks": [
+    "h14"
+   ],
+   "desc": "ObjectSerializationInfo.IsUserDeclaredFormatter property (used by templates and collector: structural when alone)",
+   "result": "structural",
+   "compiled": false,
+   "failing_tests": [],
+   "seconds": 8.3,
+   "log": "runs/2129/xray/g8-*.log"
+  },
+  {
+   "id": "g9",
+   "hunks": [
+    "h17",
+    "h18",
+    "h19"
+   ],
+   "desc": "MessagePackGenerator: all three hunks together (collection, model loop, diagnostics)",
+   "result": "load-bearing",
+   "compiled": true,
+   "failing_tests": [
+    "diag:GeneratedMessagePackFormatterTests.FormattedTypeMustNotBeAbstract",
+    "diag:GeneratedMessagePackFormatterTests.FormatterMustBePartial",
+    "diag:GeneratedMessagePackFormatterTests.FormatterMustImplementFormatterOfT",
+    "diag:GeneratedMessagePackFormatterTests.SurrogateKeysMustNotMixStringAndInt",
+    "diag:GeneratedMessagePackFormatterTests.SurrogateMemberMustHaveMatchingType",
+    "diag:GeneratedMessagePackFormatterTests.SurrogateMemberMustMatchFormattedType",
+    "exec:build-broken"
+   ],
+   "seconds": 23.3,
+   "log": "runs/2129/xray/g9-*.log"
+  }
+ ],
+ "not_xrayed": [
+  {
+   "hunks": [
+    "h7"
+   ],
+   "why": "Attributes.cs: the new attribute class. Reverting it breaks every project that uses it, so it is structural by construction."
+  },
+  {
+   "hunks": [
+    "h9",
+    "h10"
+   ],
+   "why": "Diagnostic ids and descriptors, used by the collector (h12). Structural when reverted alone."
+  },
+  {
+   "hunks": [
+    "h12",
+    "h13"
+   ],
+   "why": "New files GeneratedFormatterCollector.cs and GeneratedFormatterRequest.cs: removing them removes the feature, and the generator no longer builds."
+  },
+  {
+   "hunks": [
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "h8"
+   ],
+   "why": "README, analyzer docs and release notes: no test can fail when documentation is reverted."
+  },
+  {
+   "hunks": [
+    "h21",
+    "h23"
+   ],
+   "why": ".tt template sources are only compiled by T4 outside this build; their .cs outputs (h20, h22) were X-Rayed as g3."
+  },
+  {
+   "hunks": [
+    "h25",
+    "h26",
+    "h27",
+    "h28",
+    "h29",
+    "h30",
+    "h31",
+    "h32",
+    "h33"
+   ],
+   "why": "Tests and fixtures: the evidence, not the subject. Time Machine covers them."
+  }
+ ],
+ "order_note": "g1 to g8 first run, g3 and g4 reclassified from saved logs after the classifier fix (a compile error only in the test project means the tests notice the revert); g9 run afterwards."
+}

@@ -1,0 +1,112 @@
+{
+ "change": "2234",
+ "generated_at": "2026-11-14T23:16:31+02:00",
+ "method": "reverse-apply each src hunk on head worktree wt/2234-xray, run the 8 new analyzer tests",
+ "hunk_index": {
+  "h1": "README.md (doc)",
+  "h2-h7": "TypeCollector.cs",
+  "h8": "ExecutionTests/SuppressedSourceGenerationTests.cs (test)",
+  "h9": "Tests/SuppressSourceGenerationAnalyzerTests.cs (test)"
+ },
+ "groups": [
+  {
+   "id": "g2",
+   "hunks": [
+    "h2"
+   ],
+   "description": "TypeCollector.cs (property loop): continue after DoNotMixStringAndIntKeys",
+   "old_line": 1005,
+   "result": "load-bearing",
+   "failing_tests": [
+    "MixedKeyKindsAreReportedWithoutAnalyzerFailure"
+   ],
+   "log": "runs/2234/xray/h2.log",
+   "scope": "SuppressSourceGenerationAnalyzerTests (8 tests) only",
+   "patch": "runs/2234/xray/h2.patch",
+   "lines_changed": 1
+  },
+  {
+   "id": "g3",
+   "hunks": [
+    "h3"
+   ],
+   "description": "TypeCollector.cs (property loop): ContainsKey guard before intMembers.Add",
+   "old_line": 1019,
+   "result": "load-bearing",
+   "failing_tests": [
+    "DuplicateIntKeysAreReportedWithoutAnalyzerFailure",
+    "DuplicateKeysAreReportedWithoutAnalyzerFailureForGeneratedTypes"
+   ],
+   "log": "runs/2234/xray/h3.log",
+   "scope": "SuppressSourceGenerationAnalyzerTests (8 tests) only",
+   "patch": "runs/2234/xray/h3.patch",
+   "lines_changed": 5
+  },
+  {
+   "id": "g4",
+   "hunks": [
+    "h4"
+   ],
+   "description": "TypeCollector.cs (property loop): ContainsKey guard before stringMembers.Add",
+   "old_line": 1032,
+   "result": "load-bearing",
+   "failing_tests": [
+    "DuplicateStringKeysAreReportedWithoutAnalyzerFailure"
+   ],
+   "log": "runs/2234/xray/h4.log",
+   "scope": "SuppressSourceGenerationAnalyzerTests (8 tests) only",
+   "patch": "runs/2234/xray/h4.patch",
+   "lines_changed": 5
+  },
+  {
+   "id": "g5",
+   "hunks": [
+    "h5"
+   ],
+   "description": "TypeCollector.cs (FIELD loop): continue after DoNotMixStringAndIntKeys",
+   "old_line": 1138,
+   "result": "unprotected",
+   "failing_tests": [],
+   "log": "runs/2234/xray/h5.log",
+   "scope": "SuppressSourceGenerationAnalyzerTests (8 tests) only",
+   "patch": "runs/2234/xray/h5.patch",
+   "lines_changed": 1
+  },
+  {
+   "id": "g6",
+   "hunks": [
+    "h6"
+   ],
+   "description": "TypeCollector.cs (FIELD loop): ContainsKey guard before intMembers.Add",
+   "old_line": 1152,
+   "result": "unprotected",
+   "failing_tests": [],
+   "log": "runs/2234/xray/h6.log",
+   "scope": "SuppressSourceGenerationAnalyzerTests (8 tests) only",
+   "patch": "runs/2234/xray/h6.patch",
+   "lines_changed": 5
+  },
+  {
+   "id": "g7",
+   "hunks": [
+    "h7"
+   ],
+   "description": "TypeCollector.cs (FIELD loop): ContainsKey guard before stringMembers.Add",
+   "old_line": 1165,
+   "result": "unprotected",
+   "failing_tests": [],
+   "log": "runs/2234/xray/h7.log",
+   "scope": "SuppressSourceGenerationAnalyzerTests (8 tests) only",
+   "patch": "runs/2234/xray/h7.patch",
+   "lines_changed": 5
+  }
+ ],
+ "summary": {
+  "src_hunks": 6,
+  "load_bearing": 3,
+  "unprotected": 3,
+  "unprotected_lines_changed": 11,
+  "src_lines_changed_total": 22
+ },
+ "not_checked": "existing analyzer test classes and ExecutionTests were not run against the reverted variants (scope = new tests only). An \"unprotected\" verdict means no test in THAT scope notices the hunk."
+}

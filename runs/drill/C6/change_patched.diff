@@ -1,0 +1,13 @@
+diff --git a/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs b/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs
+index c4ebe3e1..5c228935 100644
+--- a/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs
++++ b/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs
+@@ -1431,7 +1431,7 @@ public class TypeCollector
+     /// </summary>
+     /// <param name="property">The property symbol. It may be declared in metadata, in which case <see langword="null" /> is returned.</param>
+     /// <returns>The location of the identifier, or <see langword="null" /> if the property has no declaration in source.</returns>
+-    private static Location? GetPropertyIdentifierLocation(IPropertySymbol property) => (property.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as PropertyDeclarationSyntax)?.Identifier.GetLocation();
++    private static Location? GetPropertyIdentifierLocation(IPropertySymbol property) => (property.ContainingType.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as PropertyDeclarationSyntax)?.Identifier.GetLocation();
+ 
+     /// <summary>
+     /// Reports a diagnostic only when its location belongs to the compilation being analyzed.

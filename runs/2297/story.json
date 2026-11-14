@@ -1,0 +1,62 @@
+{
+  "change": "2297",
+  "kind": "story",
+  "produced_by": "claude-code session, cached",
+  "model": "claude-sonnet-5-5",
+  "produced_at": "2026-11-14T23:19",
+  "static_analysis_only": true,
+  "prompt": "You write the story panel. Write 4-6 plain-language sentences describing what the change does and what is and is not proven.\nEvery sentence must end with one or more claim references like [C1]. A sentence with no claim reference is invalid.\nState facts, not opinions of quality. No confidence numbers.",
+  "prompt_sha256": "bb1f6929722c00e9545c08ad9decf403843c7bb52073f8be9f44d375195e82df",
+  "inputs": [
+    "git show origin/ju26-issue-2297",
+    "issue #2297 body (github.com page, fetched 2026-11-14)",
+    "receipts/requirements/REQ-2297.yaml"
+  ],
+  "sentences": [
+    {
+      "text": "Issue #2297 asks that all code the MessagePack generator emits carry ExcludeFromCodeCoverage so generated code stops skewing coverage numbers.",
+      "claims": [
+        "C1"
+      ],
+      "text_with_refs": "Issue #2297 asks that all code the MessagePack generator emits carry ExcludeFromCodeCoverage so generated code stops skewing coverage numbers. [C1]"
+    },
+    {
+      "text": "The change edits six T4 templates and their preprocessed outputs, regenerates 222 of 225 snapshot files, and leaves three under InterfaceUnion/ untouched.",
+      "claims": [
+        "C1",
+        "C5",
+        "C7"
+      ],
+      "text_with_refs": "The change edits six T4 templates and their preprocessed outputs, regenerates 222 of 225 snapshot files, and leaves three under InterfaceUnion/ untouched. [C1][C5][C7]"
+    },
+    {
+      "text": "The attribute is wrapped in a guard that excludes netstandard2.0 and .NET Framework, so the README's 'all generated formatters and resolvers' does not hold on those targets, and nothing compiles the output for them.",
+      "claims": [
+        "C3",
+        "C6"
+      ],
+      "text_with_refs": "The attribute is wrapped in a guard that excludes netstandard2.0 and .NET Framework, so the README's 'all generated formatters and resolvers' does not hold on those targets, and nothing compiles the output for them. [C3][C6]"
+    },
+    {
+      "text": "The new test checks each generated file for the attribute and for the guard, which is weaker than checking every generated type.",
+      "claims": [
+        "C2"
+      ],
+      "text_with_refs": "The new test checks each generated file for the attribute and for the guard, which is weaker than checking every generated type. [C2]"
+    },
+    {
+      "text": "One hunk outside the requirement changes how braces are emitted for nested generic types with constraints, and at least one snapshot differs by more than an added attribute.",
+      "claims": [
+        "C4"
+      ],
+      "text_with_refs": "One hunk outside the requirement changes how braces are emitted for nested generic types with constraints, and at least one snapshot differs by more than an added attribute. [C4]"
+    },
+    {
+      "text": "On the resolver the attribute lands on the generated part of a class the user declares, which excludes the user's own members of that class from coverage too.",
+      "claims": [
+        "C8"
+      ],
+      "text_with_refs": "On the resolver the attribute lands on the generated part of a class the user declares, which excludes the user's own members of that class from coverage too. [C8]"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "esc-2225",
+  "requirement_ids": [
+    "REQ-esc-2225"
+  ],
+  "repo": "../repo",
+  "branch": "503949862b5c237ddd3413e0f4877c71505656a4",
+  "base": "65e5b0fc96ec2742c055191ae09d068428608b44",
+  "head": "503949862b5c237ddd3413e0f4877c71505656a4",
+  "subject": "Use UtcTicks instead of Ticks",
+  "message": "Use UtcTicks instead of Ticks",
+  "areas_version": "areas-1",
+  "totals": {
+    "files": 1,
+    "hunks": 1,
+    "added": 1,
+    "removed": 1,
+    "changed_lines": 2,
+    "by_kind": {
+      "src": 1
+    }
+  },
+  "files": [
+    {
+      "path": "src/MessagePack/Formatters/StandardClassLibraryFormatter.cs",
+      "area": "runtime-serializer",
+      "kind": "src",
+      "status": "modified",
+      "added": 1,
+      "removed": 1,
+      "hunks": [
+        "h1"
+      ],
+      "binary": false
+    }
+  ],
+  "hunks": [
+    {
+      "id": "h1",
+      "path": "src/MessagePack/Formatters/StandardClassLibraryFormatter.cs",
+      "kind": "src",
+      "area": "runtime-serializer",
+      "old_start": 257,
+      "old_len": 7,
+      "new_start": 257,
+      "new_len": 7,
+      "ctx": "namespace MessagePack.Formatters",
+      "added": 1,
+      "removed": 1,
+      "text": "@@ -257,7 +257,7 @@ namespace MessagePack.Formatters\n         public void Serialize(ref MessagePackWriter writer, DateTimeOffset value, MessagePackSerializerOptions options)\n         {\n             writer.WriteArrayHeader(2);\n-            writer.Write(new DateTime(value.Ticks, DateTimeKind.Utc)); // current ticks as is\n+            writer.Write(new DateTime(value.UtcTicks, DateTimeKind.Utc)); // current ticks as is\n             writer.Write((short)value.Offset.TotalMinutes); // offset is normalized in minutes\n             return;\n         }",
+      "group": null
+    }
+  ]
+}

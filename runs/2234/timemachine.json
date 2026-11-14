@@ -1,0 +1,77 @@
+{
+ "change": "2234",
+ "generated_at": "2026-11-14T23:16:31+02:00",
+ "base": "origin/ju26-issue-2234~1 (32258fdb)",
+ "head": "origin/ju26-issue-2234 (9007cee1)",
+ "command": "dotnet test tests/MessagePack.SourceGenerator.Tests -f net8.0 --filter FullyQualifiedName~SuppressSourceGenerationAnalyzerTests (test file copied into base worktree wt/2234-base)",
+ "base_result": "Failed: 4, Passed: 4, Total: 8",
+ "head_result": "Failed: 0, Passed: 8, Total: 8",
+ "logs": [
+  "runs/2234/timemachine-base.log",
+  "runs/2234/timemachine-head.log"
+ ],
+ "tests": [
+  {
+   "name": "MemberWithoutKeyIsReported",
+   "base": "pass",
+   "head": "pass",
+   "reproduces_bug": false,
+   "base_error": null
+  },
+  {
+   "name": "AllowPrivateRequiredIsReported",
+   "base": "pass",
+   "head": "pass",
+   "reproduces_bug": false,
+   "base_error": null
+  },
+  {
+   "name": "MemberTypeMustBeMessagePackObjectIsReported",
+   "base": "pass",
+   "head": "pass",
+   "reproduces_bug": false,
+   "base_error": null
+  },
+  {
+   "name": "DuplicateIntKeysAreReportedWithoutAnalyzerFailure",
+   "base": "fail",
+   "head": "pass",
+   "reproduces_bug": true,
+   "base_error": "AD0001: ArgumentException 'An item with the same key has already been added' / InvalidOperationException 'Nullable object must have a value'"
+  },
+  {
+   "name": "DuplicateStringKeysAreReportedWithoutAnalyzerFailure",
+   "base": "fail",
+   "head": "pass",
+   "reproduces_bug": true,
+   "base_error": "AD0001: ArgumentException 'An item with the same key has already been added' / InvalidOperationException 'Nullable object must have a value'"
+  },
+  {
+   "name": "MixedKeyKindsAreReportedWithoutAnalyzerFailure",
+   "base": "fail",
+   "head": "pass",
+   "reproduces_bug": true,
+   "base_error": "AD0001: ArgumentException 'An item with the same key has already been added' / InvalidOperationException 'Nullable object must have a value'"
+  },
+  {
+   "name": "DuplicateKeysAreReportedWithoutAnalyzerFailureForGeneratedTypes",
+   "base": "fail",
+   "head": "pass",
+   "reproduces_bug": true,
+   "base_error": "AD0001: ArgumentException 'An item with the same key has already been added' / InvalidOperationException 'Nullable object must have a value'"
+  },
+  {
+   "name": "SourceGenerationOnlyDiagnosticsAreNotReportedWhenSuppressed",
+   "base": "pass",
+   "head": "pass",
+   "reproduces_bug": false,
+   "base_error": null
+  }
+ ],
+ "not_run": [
+  "SuppressedSourceGenerationTests.cs (2 tests, ExecutionTests project) - not executed"
+ ],
+ "verdict": "4 of 8 new analyzer tests are fail->pass (real evidence; they hit an analyzer crash on duplicate/mixed keys). 4 of 8 pass on the OLD code too: they do not reproduce the issue headline (\"analyzer does not work with SuppressSourceGeneration=true\") on this base.",
+ "level_for_headline_claim": "E1",
+ "level_for_duplicate_key_crash_claim": "E3"
+}

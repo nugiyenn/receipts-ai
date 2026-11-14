@@ -1,0 +1,17 @@
+diff --git a/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs b/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs
+index 7ab75357..dab046e6 100644
+--- a/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs
++++ b/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs
+@@ -338,7 +378,11 @@ public class MsgPack00xMessagePackAnalyzer : DiagnosticAnalyzer
+         InaccessibleDataType,
+         NullableReferenceTypeFormatter,
+         MessagePackObjectAllowPrivateRequired,
+-        CollidingMemberNamesInForceMapMode);
++        CollidingMemberNamesInForceMapMode,
++        GeneratedFormatterMustBePartial,
++        GeneratedFormatterMustImplementFormatter,
++        GeneratedFormatterDataTypeNotSupported,
++        SurrogateMemberNotFound);
+ 
+     public override void Initialize(AnalysisContext context)
+     {

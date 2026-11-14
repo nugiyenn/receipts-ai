@@ -1,0 +1,62 @@
+{
+  "canary": "C4",
+  "type": "doc-overclaim",
+  "caught": true,
+  "by": [
+    "refusal:R6",
+    "llm:claude"
+  ],
+  "by_family": {
+    "tests": false,
+    "deterministic-rules": true,
+    "gemini": false,
+    "claude": true
+  },
+  "note": "README claims generic classes also get full cross-assembly diagnostics and that no diagnostic is ever lost.",
+  "tests": {
+    "ran": false,
+    "outcome": "not-applicable",
+    "note": "docs-only patch cannot change a test outcome; not run"
+  },
+  "detectors": [
+    "R6"
+  ],
+  "gemini": {
+    "caught": false,
+    "hits": [],
+    "near_but_off_target": [],
+    "n_findings": 2
+  },
+  "claude": {
+    "caught": true,
+    "hits": [
+      {
+        "path": "README.md",
+        "line": 1643,
+        "severity": "medium",
+        "issue": "The text says generic classes from referenced assemblies get full cross-assembly diagnostics and that no diagnostic is ever lost. The code drops all diagnostics that have no location in the compilation, and it does so for class<T> too. The statement over-claims, which breaks NF2."
+      }
+    ],
+    "near_but_off_target": [
+      {
+        "path": "README.md",
+        "line": 1642,
+        "severity": "medium",
+        "issue": "The text says diagnostics about members of such types are reported by the defining assembly. The defining assembly only reports them if it has the analyzer enabled, so this is not guaranteed. It is also inaccurate for diagnostics that concern the use site, such as a member type that is unserializable."
+      }
+    ],
+    "n_findings": 7
+  },
+  "xray_routed_to_human_NOT_counted": {
+    "routed": false,
+    "why": "README.md is not a src hunk; X-Ray only covers src hunks"
+  },
+  "evidence_refs": [
+    "runs/drill/C4/tests.json",
+    "runs/drill/C4/tests.log",
+    "runs/drill/C4/detectors.json",
+    "runs/drill/C4/gemini_review.json",
+    "runs/drill/C4/claude_findings.json",
+    "runs/drill/C4/review_input.diff"
+  ]
+}

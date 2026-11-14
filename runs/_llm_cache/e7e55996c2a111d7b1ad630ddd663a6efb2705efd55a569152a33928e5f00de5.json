@@ -1,0 +1,19 @@
+{
+ "text": "{\n  \"findings\": [\n    {\n      \"path\": \"src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs\",\n      \"line\": 1434,\n      \"severity\": \"high\",\n      \"issue\": \"Using `property.ContainingType.DeclaringSyntaxReferences` retrieves the syntax of the containing type (e.g., class or struct) rather than the property itself. This will never cast to `PropertyDeclarationSyntax`, causing the method to always return null and silently swallow the diagnostic for all source-declared properties.\"\n    }\n  ]\n}",
+ "model": "gemini-3.1-pro-preview",
+ "prompt_sha256": "e7e55996c2a111d7b1ad630ddd663a6efb2705efd55a569152a33928e5f00de5",
+ "ts": "2026-11-14T23:26:26+0200",
+ "usage": {
+  "promptTokenCount": 5964,
+  "candidatesTokenCount": 128,
+  "totalTokenCount": 12105,
+  "promptTokensDetails": [
+   {
+    "modality": "TEXT",
+    "tokenCount": 5964
+   }
+  ],
+  "thoughtsTokenCount": 6013,
+  "serviceTier": "standard"
+ }
+}

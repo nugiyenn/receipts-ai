@@ -1,0 +1,53 @@
+{
+  "canary": "C3",
+  "type": "regression-reintroduced",
+  "caught": true,
+  "by": [
+    "test-fail"
+  ],
+  "by_family": {
+    "tests": true,
+    "deterministic-rules": false,
+    "gemini": false,
+    "claude": false
+  },
+  "note": "Reverts one null-safe FirstOrDefault() back to DeclaringSyntaxReferences[0], re-introducing the issue's crash path.",
+  "tests": {
+    "ran": true,
+    "compiled": true,
+    "failing_tests": [
+      "GenericsFormatterTests.ClosedGenericRecordStruct_FromMetadataReference",
+      "GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference",
+      "GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference_UnkeyedMember"
+    ],
+    "summary_line": "",
+    "outcome": "red",
+    "seconds": 84.1,
+    "log": "runs/drill/C3/tests.log"
+  },
+  "detectors": [],
+  "gemini": {
+    "caught": false,
+    "hits": [],
+    "near_but_off_target": [],
+    "n_findings": 2
+  },
+  "claude": {
+    "caught": false,
+    "hits": [],
+    "near_but_off_target": [],
+    "n_findings": 6
+  },
+  "xray_routed_to_human_NOT_counted": {
+    "routed": false,
+    "why": "planted lines fall inside agent hunk h5 whose X-Ray result is 'load-bearing' (hunk granularity cannot see a planted change inside it)"
+  },
+  "evidence_refs": [
+    "runs/drill/C3/tests.json",
+    "runs/drill/C3/tests.log",
+    "runs/drill/C3/detectors.json",
+    "runs/drill/C3/gemini_review.json",
+    "runs/drill/C3/claude_findings.json",
+    "runs/drill/C3/review_input.diff"
+  ]
+}

@@ -1,0 +1,226 @@
+
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.43
+
+  MessagePack.SourceGenerator -> /Users/andy/Downloads/Junction2/wt/2129-xray/bin/MessagePack.SourceGenerator/Debug/netstandard2.0/MessagePack.SourceGenerator.dll
+  MessagePack.Analyzers.CodeFixes -> /Users/andy/Downloads/Junction2/wt/2129-xray/bin/MessagePack.Analyzers.CodeFixes/Debug/netstandard2.0/MessagePack.Analyzers.CodeFixes.dll
+  MessagePack.Analyzers -> /Users/andy/Downloads/Junction2/wt/2129-xray/bin/MessagePack.Analyzers/Debug/netstandard2.0/MessagePack.Analyzers.dll
+  MessagePack.Annotations -> /Users/andy/Downloads/Junction2/wt/2129-xray/bin/MessagePack.Annotations/Debug/netstandard2.0/MessagePack.Annotations.dll
+  MessagePack -> /Users/andy/Downloads/Junction2/wt/2129-xray/bin/MessagePack/Debug/net8.0/MessagePack.dll
+/Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/GeneratedMessagePackFormatterTests.cs(22,26): warning SA1203: Constant fields should appear before non-constant fields (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1203.md) [/Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj]
+  MessagePack.SourceGenerator.Tests -> /Users/andy/Downloads/Junction2/wt/2129-xray/bin/MessagePack.SourceGenerator.Tests/Debug/net8.0/MessagePack.SourceGenerator.Tests.dll
+Test run for /Users/andy/Downloads/Junction2/wt/2129-xray/bin/MessagePack.SourceGenerator.Tests/Debug/net8.0/MessagePack.SourceGenerator.Tests.dll (.NETCoreApp,Version=v8.0)
+VSTest version 17.14.2 (arm64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.8)
+[xUnit.net 00:00:00.15]   Discovering: MessagePack.SourceGenerator.Tests
+[xUnit.net 00:00:00.23]   Discovered:  MessagePack.SourceGenerator.Tests
+[xUnit.net 00:00:00.23]   Starting:    MessagePack.SourceGenerator.Tests
+[xUnit.net 00:00:02.22]       System.InvalidOperationException : Mismatch between number of diagnostics returned, expected "1" actual "0"
+[xUnit.net 00:00:02.22]       
+[xUnit.net 00:00:02.22]       Diagnostics:
+[xUnit.net 00:00:02.22]           NONE.
+[xUnit.net 00:00:02.22]       
+[xUnit.net 00:00:02.22]       Stack Trace:
+[xUnit.net 00:00:02.22]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/DefaultVerifier.cs(79,0): at Microsoft.CodeAnalysis.Testing.DefaultVerifier.Equal[T](T expected, T actual, String message)
+[xUnit.net 00:00:02.22]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(546,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticResults(IEnumerable`1 actualResults, ImmutableArray`1 analyzers, DiagnosticResult[] expectedResults, IVerifier verifier)
+[xUnit.net 00:00:02.22]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(449,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticsAsync(EvaluatedProjectState primaryProject, ImmutableArray`1 additionalProjects, DiagnosticResult[] expected, IVerifier verifier, CancellationToken cancellationToken)
+[xUnit.net 00:00:02.22]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(203,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunImplAsync(CancellationToken cancellationToken)
+[xUnit.net 00:00:02.22]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(172,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunAsync(CancellationToken cancellationToken)
+[xUnit.net 00:00:02.22]         /Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/Verifiers/CSharpSourceGeneratorVerifier`1+Test.cs(75,0): at CSharpSourceGeneratorVerifier`1.Test.RunDefaultAsync(ITestOutputHelper logger)
+[xUnit.net 00:00:02.22]         /Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/GeneratedMessagePackFormatterTests.cs(129,0): at GeneratedMessagePackFormatterTests.SurrogateMemberMustMatchFormattedType()
+[xUnit.net 00:00:02.22]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:02.27]       System.InvalidOperationException : Mismatch between number of diagnostics returned, expected "1" actual "0"
+[xUnit.net 00:00:02.27]       
+[xUnit.net 00:00:02.27]       Diagnostics:
+[xUnit.net 00:00:02.27]           NONE.
+[xUnit.net 00:00:02.27]       
+[xUnit.net 00:00:02.27]       Stack Trace:
+[xUnit.net 00:00:02.27]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/DefaultVerifier.cs(79,0): at Microsoft.CodeAnalysis.Testing.DefaultVerifier.Equal[T](T expected, T actual, String message)
+[xUnit.net 00:00:02.27]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(546,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticResults(IEnumerable`1 actualResults, ImmutableArray`1 analyzers, DiagnosticResult[] expectedResults, IVerifier verifier)
+[xUnit.net 00:00:02.27]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(449,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticsAsync(EvaluatedProjectState primaryProject, ImmutableArray`1 additionalProjects, DiagnosticResult[] expected, IVerifier verifier, CancellationToken cancellationToken)
+[xUnit.net 00:00:02.27]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(203,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunImplAsync(CancellationToken cancellationToken)
+[xUnit.net 00:00:02.27]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(172,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunAsync(CancellationToken cancellationToken)
+[xUnit.net 00:00:02.27]         /Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/Verifiers/CSharpSourceGeneratorVerifier`1+Test.cs(75,0): at CSharpSourceGeneratorVerifier`1.Test.RunDefaultAsync(ITestOutputHelper logger)
+[xUnit.net 00:00:02.27]         /Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/GeneratedMessagePackFormatterTests.cs(47,0): at GeneratedMessagePackFormatterTests.FormatterMustBePartial()
+[xUnit.net 00:00:02.27]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:02.29]       System.InvalidOperationException : Mismatch between number of diagnostics returned, expected "1" actual "0"
+[xUnit.net 00:00:02.29]       
+[xUnit.net 00:00:02.29]       Diagnostics:
+[xUnit.net 00:00:02.29]           NONE.
+[xUnit.net 00:00:02.29]       
+[xUnit.net 00:00:02.29]       Stack Trace:
+[xUnit.net 00:00:02.29]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/DefaultVerifier.cs(79,0): at Microsoft.CodeAnalysis.Testing.DefaultVerifier.Equal[T](T expected, T actual, String message)
+[xUnit.net 00:00:02.29]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(546,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticResults(IEnumerable`1 actualResults, ImmutableArray`1 analyzers, DiagnosticResult[] expectedResults, IVerifier verifier)
+[xUnit.net 00:00:02.29]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(449,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticsAsync(EvaluatedProjectState primaryProject, ImmutableArray`1 additionalProjects, DiagnosticResult[] expected, IVerifier verifier, CancellationToken cancellationToken)
+[xUnit.net 00:00:02.29]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(203,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunImplAsync(CancellationToken cancellationToken)
+[xUnit.net 00:00:02.29]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(172,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunAsync(CancellationToken cancellationToken)
+[xUnit.net 00:00:02.29]         /Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/Verifiers/CSharpSourceGeneratorVerifier`1+Test.cs(75,0): at CSharpSourceGeneratorVerifier`1.Test.RunDefaultAsync(ITestOutputHelper logger)
+[xUnit.net 00:00:02.29]         /Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/GeneratedMessagePackFormatterTests.cs(68,0): at GeneratedMessagePackFormatterTests.FormatterMustImplementFormatterOfT()
+[xUnit.net 00:00:02.29]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:02.32]       System.InvalidOperationException : Mismatch between number of diagnostics returned, expected "1" actual "0"
+[xUnit.net 00:00:02.32]       
+[xUnit.net 00:00:02.32]       Diagnostics:
+[xUnit.net 00:00:02.32]           NONE.
+[xUnit.net 00:00:02.32]       
+[xUnit.net 00:00:02.32]       Stack Trace:
+[xUnit.net 00:00:02.32]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/DefaultVerifier.cs(79,0): at Microsoft.CodeAnalysis.Testing.DefaultVerifier.Equal[T](T expected, T actual, String message)
+[xUnit.net 00:00:02.32]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(546,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticResults(IEnumerable`1 actualResults, ImmutableArray`1 analyzers, DiagnosticResult[] expectedResults, IVerifier verifier)
+[xUnit.net 00:00:02.33]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(449,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticsAsync(EvaluatedProjectState primaryProject, ImmutableArray`1 additionalProjects, DiagnosticResult[] expected, IVerifier verifier, CancellationToken cancellationToken)
+[xUnit.net 00:00:02.33]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(203,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunImplAsync(CancellationToken cancellationToken)
+[xUnit.net 00:00:02.33]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(172,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunAsync(CancellationToken cancellationToken)
+[xUnit.net 00:00:02.33]         /Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/Verifiers/CSharpSourceGeneratorVerifier`1+Test.cs(75,0): at CSharpSourceGeneratorVerifier`1.Test.RunDefaultAsync(ITestOutputHelper logger)
+[xUnit.net 00:00:02.33]         /Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/GeneratedMessagePackFormatterTests.cs(163,0): at GeneratedMessagePackFormatterTests.SurrogateMemberMustHaveMatchingType()
+[xUnit.net 00:00:02.33]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:02.38]       System.InvalidOperationException : Mismatch between number of diagnostics returned, expected "1" actual "0"
+[xUnit.net 00:00:02.38]       
+[xUnit.net 00:00:02.38]       Diagnostics:
+[xUnit.net 00:00:02.38]           NONE.
+[xUnit.net 00:00:02.38]       
+[xUnit.net 00:00:02.38]       Stack Trace:
+[xUnit.net 00:00:02.38]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/DefaultVerifier.cs(79,0): at Microsoft.CodeAnalysis.Testing.DefaultVerifier.Equal[T](T expected, T actual, String message)
+[xUnit.net 00:00:02.38]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(546,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticResults(IEnumerable`1 actualResults, ImmutableArray`1 analyzers, DiagnosticResult[] expectedResults, IVerifier verifier)
+[xUnit.net 00:00:02.38]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(449,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticsAsync(EvaluatedProjectState primaryProject, ImmutableArray`1 additionalProjects, DiagnosticResult[] expected, IVerifier verifier, CancellationToken cancellationToken)
+[xUnit.net 00:00:02.38]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(203,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunImplAsync(CancellationToken cancellationToken)
+[xUnit.net 00:00:02.38]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(172,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunAsync(CancellationToken cancellationToken)
+[xUnit.net 00:00:02.38]         /Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/Verifiers/CSharpSourceGeneratorVerifier`1+Test.cs(75,0): at CSharpSourceGeneratorVerifier`1.Test.RunDefaultAsync(ITestOutputHelper logger)
+[xUnit.net 00:00:02.38]         /Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/GeneratedMessagePackFormatterTests.cs(201,0): at GeneratedMessagePackFormatterTests.SurrogateKeysMustNotMixStringAndInt()
+[xUnit.net 00:00:02.38]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:02.43]       System.InvalidOperationException : Mismatch between number of diagnostics returned, expected "1" actual "0"
+[xUnit.net 00:00:02.43]       
+[xUnit.net 00:00:02.43]       Diagnostics:
+[xUnit.net 00:00:02.43]           NONE.
+[xUnit.net 00:00:02.43]       
+[xUnit.net 00:00:02.43]       Stack Trace:
+[xUnit.net 00:00:02.43]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/DefaultVerifier.cs(79,0): at Microsoft.CodeAnalysis.Testing.DefaultVerifier.Equal[T](T expected, T actual, String message)
+[xUnit.net 00:00:02.43]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(546,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticResults(IEnumerable`1 actualResults, ImmutableArray`1 analyzers, DiagnosticResult[] expectedResults, IVerifier verifier)
+[xUnit.net 00:00:02.43]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(449,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticsAsync(EvaluatedProjectState primaryProject, ImmutableArray`1 additionalProjects, DiagnosticResult[] expected, IVerifier verifier, CancellationToken cancellationToken)
+[xUnit.net 00:00:02.43]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(203,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunImplAsync(CancellationToken cancellationToken)
+[xUnit.net 00:00:02.43]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(172,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunAsync(CancellationToken cancellationToken)
+[xUnit.net 00:00:02.43]         /Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/Verifiers/CSharpSourceGeneratorVerifier`1+Test.cs(75,0): at CSharpSourceGeneratorVerifier`1.Test.RunDefaultAsync(ITestOutputHelper logger)
+[xUnit.net 00:00:02.43]         /Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/GeneratedMessagePackFormatterTests.cs(95,0): at GeneratedMessagePackFormatterTests.FormattedTypeMustNotBeAbstract()
+[xUnit.net 00:00:02.43]         --- End of stack trace from previous location ---
+[xUnit.net 00:00:02.43]   Finished:    MessagePack.SourceGenerator.Tests
+  Failed GeneratedMessagePackFormatterTests.SurrogateMemberMustMatchFormattedType [1 s]
+  Error Message:
+   System.InvalidOperationException : Mismatch between number of diagnostics returned, expected "1" actual "0"
+
+Diagnostics:
+    NONE.
+
+  Stack Trace:
+     at Microsoft.CodeAnalysis.Testing.DefaultVerifier.Equal[T](T expected, T actual, String message) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/DefaultVerifier.cs:line 79
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticResults(IEnumerable`1 actualResults, ImmutableArray`1 analyzers, DiagnosticResult[] expectedResults, IVerifier verifier) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 546
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticsAsync(EvaluatedProjectState primaryProject, ImmutableArray`1 additionalProjects, DiagnosticResult[] expected, IVerifier verifier, CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 449
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunImplAsync(CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 203
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunAsync(CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 172
+   at CSharpSourceGeneratorVerifier`1.Test.RunDefaultAsync(ITestOutputHelper logger) in /Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/Verifiers/CSharpSourceGeneratorVerifier`1+Test.cs:line 75
+   at GeneratedMessagePackFormatterTests.SurrogateMemberMustMatchFormattedType() in /Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/GeneratedMessagePackFormatterTests.cs:line 129
+--- End of stack trace from previous location ---
+  Failed GeneratedMessagePackFormatterTests.FormatterMustBePartial [45 ms]
+  Error Message:
+   System.InvalidOperationException : Mismatch between number of diagnostics returned, expected "1" actual "0"
+
+Diagnostics:
+    NONE.
+
+  Stack Trace:
+     at Microsoft.CodeAnalysis.Testing.DefaultVerifier.Equal[T](T expected, T actual, String message) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/DefaultVerifier.cs:line 79
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticResults(IEnumerable`1 actualResults, ImmutableArray`1 analyzers, DiagnosticResult[] expectedResults, IVerifier verifier) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 546
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticsAsync(EvaluatedProjectState primaryProject, ImmutableArray`1 additionalProjects, DiagnosticResult[] expected, IVerifier verifier, CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 449
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunImplAsync(CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 203
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunAsync(CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 172
+   at CSharpSourceGeneratorVerifier`1.Test.RunDefaultAsync(ITestOutputHelper logger) in /Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/Verifiers/CSharpSourceGeneratorVerifier`1+Test.cs:line 75
+   at GeneratedMessagePackFormatterTests.FormatterMustBePartial() in /Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/GeneratedMessagePackFormatterTests.cs:line 47
+--- End of stack trace from previous location ---
+  Failed GeneratedMessagePackFormatterTests.FormatterMustImplementFormatterOfT [25 ms]
+  Error Message:
+   System.InvalidOperationException : Mismatch between number of diagnostics returned, expected "1" actual "0"
+
+Diagnostics:
+    NONE.
+
+  Stack Trace:
+     at Microsoft.CodeAnalysis.Testing.DefaultVerifier.Equal[T](T expected, T actual, String message) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/DefaultVerifier.cs:line 79
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticResults(IEnumerable`1 actualResults, ImmutableArray`1 analyzers, DiagnosticResult[] expectedResults, IVerifier verifier) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 546
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticsAsync(EvaluatedProjectState primaryProject, ImmutableArray`1 additionalProjects, DiagnosticResult[] expected, IVerifier verifier, CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 449
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunImplAsync(CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 203
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunAsync(CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 172
+   at CSharpSourceGeneratorVerifier`1.Test.RunDefaultAsync(ITestOutputHelper logger) in /Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/Verifiers/CSharpSourceGeneratorVerifier`1+Test.cs:line 75
+   at GeneratedMessagePackFormatterTests.FormatterMustImplementFormatterOfT() in /Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/GeneratedMessagePackFormatterTests.cs:line 68
+--- End of stack trace from previous location ---
+  Failed GeneratedMessagePackFormatterTests.SurrogateMemberMustHaveMatchingType [28 ms]
+  Error Message:
+   System.InvalidOperationException : Mismatch between number of diagnostics returned, expected "1" actual "0"
+
+Diagnostics:
+    NONE.
+
+  Stack Trace:
+     at Microsoft.CodeAnalysis.Testing.DefaultVerifier.Equal[T](T expected, T actual, String message) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/DefaultVerifier.cs:line 79
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticResults(IEnumerable`1 actualResults, ImmutableArray`1 analyzers, DiagnosticResult[] expectedResults, IVerifier verifier) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 546
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticsAsync(EvaluatedProjectState primaryProject, ImmutableArray`1 additionalProjects, DiagnosticResult[] expected, IVerifier verifier, CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 449
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunImplAsync(CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 203
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunAsync(CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 172
+   at CSharpSourceGeneratorVerifier`1.Test.RunDefaultAsync(ITestOutputHelper logger) in /Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/Verifiers/CSharpSourceGeneratorVerifier`1+Test.cs:line 75
+   at GeneratedMessagePackFormatterTests.SurrogateMemberMustHaveMatchingType() in /Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/GeneratedMessagePackFormatterTests.cs:line 163
+--- End of stack trace from previous location ---
+  Failed GeneratedMessagePackFormatterTests.SurrogateKeysMustNotMixStringAndInt [57 ms]
+  Error Message:
+   System.InvalidOperationException : Mismatch between number of diagnostics returned, expected "1" actual "0"
+
+Diagnostics:
+    NONE.
+
+  Stack Trace:
+     at Microsoft.CodeAnalysis.Testing.DefaultVerifier.Equal[T](T expected, T actual, String message) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/DefaultVerifier.cs:line 79
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticResults(IEnumerable`1 actualResults, ImmutableArray`1 analyzers, DiagnosticResult[] expectedResults, IVerifier verifier) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 546
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticsAsync(EvaluatedProjectState primaryProject, ImmutableArray`1 additionalProjects, DiagnosticResult[] expected, IVerifier verifier, CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 449
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunImplAsync(CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 203
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunAsync(CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 172
+   at CSharpSourceGeneratorVerifier`1.Test.RunDefaultAsync(ITestOutputHelper logger) in /Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/Verifiers/CSharpSourceGeneratorVerifier`1+Test.cs:line 75
+   at GeneratedMessagePackFormatterTests.SurrogateKeysMustNotMixStringAndInt() in /Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/GeneratedMessagePackFormatterTests.cs:line 201
+--- End of stack trace from previous location ---
+  Failed GeneratedMessagePackFormatterTests.FormattedTypeMustNotBeAbstract [42 ms]
+  Error Message:
+   System.InvalidOperationException : Mismatch between number of diagnostics returned, expected "1" actual "0"
+
+Diagnostics:
+    NONE.
+
+  Stack Trace:
+     at Microsoft.CodeAnalysis.Testing.DefaultVerifier.Equal[T](T expected, T actual, String message) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/DefaultVerifier.cs:line 79
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticResults(IEnumerable`1 actualResults, ImmutableArray`1 analyzers, DiagnosticResult[] expectedResults, IVerifier verifier) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 546
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticsAsync(EvaluatedProjectState primaryProject, ImmutableArray`1 additionalProjects, DiagnosticResult[] expected, IVerifier verifier, CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 449
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunImplAsync(CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 203
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunAsync(CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 172
+   at CSharpSourceGeneratorVerifier`1.Test.RunDefaultAsync(ITestOutputHelper logger) in /Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/Verifiers/CSharpSourceGeneratorVerifier`1+Test.cs:line 75
+   at GeneratedMessagePackFormatterTests.FormattedTypeMustNotBeAbstract() in /Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/GeneratedMessagePackFormatterTests.cs:line 95
+--- End of stack trace from previous location ---
+
+Total tests: 6
+     Failed: 6
+ Total time: 3,1040 Seconds
+
+Build FAILED.
+
+/Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/GeneratedMessagePackFormatterTests.cs(22,26): warning SA1203: Constant fields should appear before non-constant fields (https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1203.md) [/Users/andy/Downloads/Junction2/wt/2129-xray/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj]
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:11.38
+[xUnit.net 00:00:02.22]     GeneratedMessagePackFormatterTests.SurrogateMemberMustMatchFormattedType [FAIL]
+[xUnit.net 00:00:02.27]     GeneratedMessagePackFormatterTests.FormatterMustBePartial [FAIL]
+[xUnit.net 00:00:02.29]     GeneratedMessagePackFormatterTests.FormatterMustImplementFormatterOfT [FAIL]
+[xUnit.net 00:00:02.32]     GeneratedMessagePackFormatterTests.SurrogateMemberMustHaveMatchingType [FAIL]
+[xUnit.net 00:00:02.38]     GeneratedMessagePackFormatterTests.SurrogateKeysMustNotMixStringAndInt [FAIL]
+[xUnit.net 00:00:02.43]     GeneratedMessagePackFormatterTests.FormattedTypeMustNotBeAbstract [FAIL]
+Test Run Failed.

@@ -1,0 +1,66 @@
+{
+  "change": "2283",
+  "kind": "story",
+  "produced_by": "claude-code session, cached",
+  "model": "claude-sonnet-5-5",
+  "produced_at": "2026-11-14T23:19",
+  "static_analysis_only": true,
+  "prompt": "You write the story panel. Write 4-6 plain-language sentences describing what the change does and what is and is not proven.\nEvery sentence must end with one or more claim references like [C1]. A sentence with no claim reference is invalid.\nState facts, not opinions of quality. No confidence numbers.",
+  "prompt_sha256": "bb1f6929722c00e9545c08ad9decf403843c7bb52073f8be9f44d375195e82df",
+  "inputs": [
+    "git show origin/ju26-issue-2283",
+    "issue #2283 body (github.com page, fetched 2026-11-14)",
+    "receipts/requirements/REQ-2283.yaml",
+    "git history: v3.1.8 TypeCollector.cs"
+  ],
+  "sentences": [
+    {
+      "text": "The change targets issue #2283: the analyzer and the generator crash when a member's type is a closed generic struct defined in another assembly.",
+      "claims": [
+        "C1",
+        "C2"
+      ],
+      "text_with_refs": "The change targets issue #2283: the analyzer and the generator crash when a member's type is a closed generic struct defined in another assembly. [C1][C2]"
+    },
+    {
+      "text": "The crash fix itself is two null-safe location lookups, and no live indexed DeclaringSyntaxReferences[0] access is left in the file.",
+      "claims": [
+        "C1",
+        "C9"
+      ],
+      "text_with_refs": "The crash fix itself is two null-safe location lookups, and no live indexed DeclaringSyntaxReferences[0] access is left in the file. [C1][C9]"
+    },
+    {
+      "text": "The change also wraps every one of the 28 analyzer reporting call sites in a filter that silently drops any diagnostic whose location is not in the current compilation, which is far wider than the two patched sites.",
+      "claims": [
+        "C4",
+        "C5"
+      ],
+      "text_with_refs": "The change also wraps every one of the 28 analyzer reporting call sites in a filter that silently drops any diagnostic whose location is not in the current compilation, which is far wider than the two patched sites. [C4][C5]"
+    },
+    {
+      "text": "Three new tests cover the struct and record-struct cases and assert both a clean build and an emitted resolver, but only 2 of the 6 declaration forms in the issue's table have a test.",
+      "claims": [
+        "C2",
+        "C3"
+      ],
+      "text_with_refs": "Three new tests cover the struct and record-struct cases and assert both a clean build and an emitted resolver, but only 2 of the 6 declaration forms in the issue's table have a test. [C2][C3]"
+    },
+    {
+      "text": "README and the MsgPack004 page now say member problems in such types are reported by the defining assembly, and a code comment asserts what analyzers are not permitted to do; nothing in the change proves either statement.",
+      "claims": [
+        "C6",
+        "C7",
+        "C8"
+      ],
+      "text_with_refs": "README and the MsgPack004 page now say member problems in such types are reported by the defining assembly, and a code comment asserts what analyzers are not permitted to do; nothing in the change proves either statement. [C6][C7][C8]"
+    },
+    {
+      "text": "A helper documented as returning null only for metadata properties also returns null for source-declared record primary-constructor properties.",
+      "claims": [
+        "C10"
+      ],
+      "text_with_refs": "A helper documented as returning null only for metadata properties also returns null for source-declared record primary-constructor properties. [C10]"
+    }
+  ]
+}

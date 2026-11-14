@@ -1,0 +1,291 @@
+{
+  "attacks": [
+    {
+      "id": "C1",
+      "claim": "A partial class marked [GeneratedMessagePackFormatter] that implements IMessagePackFormatter<T> for a type T from another assembly gets its Serialize and Deserialize members generated in the consuming project.",
+      "outcome": "scenario_proposed",
+      "scenario": "If the type T is an inaccessible type (e.g., an `internal` type from another assembly), the generator will reject it and report MsgPack021 instead of generating the members.",
+      "test_sketch": "Declare an `internal class InternalType` in Project A. In Project B, declare `[GeneratedMessagePackFormatter] partial class Formatter : IMessagePackFormatter<InternalType>`. The generator will emit MsgPack021 and not generate the members.",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 66,
+          "quote": "|| !compilation.IsSymbolAccessibleWithin(type, formatter))"
+        }
+      ],
+      "citations_checked": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 66,
+          "quote": "|| !compilation.IsSymbolAccessibleWithin(type, formatter))",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h12"
+        }
+      ],
+      "executed": false,
+      "result": "not executed",
+      "result_detail": "describes documented or already tested behaviour (MsgPack021 / MsgPack022 paths); no probe written"
+    },
+    {
+      "id": "C2",
+      "claim": "Without a surrogate, the generated formatter writes every public read-write instance property and field of T as a string-keyed map entry named after the member.",
+      "outcome": "scenario_proposed",
+      "scenario": "If the type T has a public read-write indexer property, it is explicitly skipped and not written as a map entry.",
+      "test_sketch": "Define `class T { public int this[int key] { get => 0; set { } } }`. Generate a formatter without a surrogate. The indexer is not serialized.",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 262,
+          "quote": "if (member is IPropertySymbol { IsIndexer: true })"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 264,
+          "quote": "continue;"
+        }
+      ],
+      "citations_checked": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 262,
+          "quote": "if (member is IPropertySymbol { IsIndexer: true })",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h12"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 264,
+          "quote": "continue;",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h12"
+        }
+      ],
+      "executed": true,
+      "result": "confirmed, benign",
+      "result_detail": "G4: an indexer is skipped and the type serializes as {\"Id\":9}. Intended. runs/2129/probe/G4_IndexerIsSkipped.txt"
+    },
+    {
+      "id": "C3",
+      "claim": "Attributes that are present on T are used for the wire contract.",
+      "outcome": "scenario_proposed",
+      "scenario": "Attributes on T are completely ignored by the generator when using `[GeneratedMessagePackFormatter]`. For example, a property marked with `[IgnoreMember]` on T will still be serialized.",
+      "test_sketch": "Define `class T { [IgnoreMember] public int X { get; set; } }`. Generate a formatter for T without a surrogate. The property `X` is serialized, proving the attribute on T was ignored.",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 133,
+          "quote": "List<ISymbol> targets = GetInstanceMembers(type).Where(IsPublicReadWrite).OrderBy(m => m.Name, StringComparer.Ordinal).ToList();"
+        }
+      ],
+      "citations_checked": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 133,
+          "quote": "List<ISymbol> targets = GetInstanceMembers(type).Where(IsPublicReadWrite).OrderBy(m => m.Name, StringComparer.Ordinal).ToList();",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h12"
+        }
+      ],
+      "executed": true,
+      "result": "confirmed",
+      "result_detail": "G1: [IgnoreMember] on a member of the formatted type is ignored; the member X is written. runs/2129/probe/G1_IgnoreMemberOnFormattedType.txt"
+    },
+    {
+      "id": "C4",
+      "claim": "The generated resolver registers each generated formatter, so GeneratedMessagePackResolver.Instance returns it for the formatted type.",
+      "outcome": "could_not_falsify",
+      "scenario": "",
+      "test_sketch": "",
+      "citations": [],
+      "citations_checked": []
+    },
+    {
+      "id": "C5",
+      "claim": "The fixture assembly that declares the formatted types has no MessagePack reference, so the feature works without adding anything to the assembly that owns T.",
+      "outcome": "could_not_falsify",
+      "scenario": "",
+      "test_sketch": "",
+      "citations": [],
+      "citations_checked": []
+    },
+    {
+      "id": "C6",
+      "claim": "Hand-written formatters and existing generated formatters are unaffected: the exclusion in the formatter search only matches classes carrying the new attribute, and the template keeps 'internal sealed class' for every other formatter.",
+      "outcome": "could_not_falsify",
+      "scenario": "",
+      "test_sketch": "",
+      "citations": [],
+      "citations_checked": []
+    },
+    {
+      "id": "C7",
+      "claim": "The new attribute, the four analyzer diagnostics and the surrogate option are documented in the README, in per-diagnostic pages and in the analyzer release notes.",
+      "outcome": "could_not_falsify",
+      "scenario": "",
+      "test_sketch": "",
+      "citations": [],
+      "citations_checked": []
+    },
+    {
+      "id": "C8",
+      "claim": "Only public read-write members are written. Read-only members and members with a non-public setter are skipped, and no diagnostic says so.",
+      "outcome": "scenario_proposed",
+      "scenario": "If a surrogate type is used and it includes a member that matches a read-only member on the formatted type, the generator reports a diagnostic (MsgPack022).",
+      "test_sketch": "Define `class T { public int ReadOnlyProp { get; } }` and a surrogate `class Surrogate { [Key(0)] public int ReadOnlyProp { get; set; } }`. The generator will emit MsgPack022.",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 190,
+          "quote": "if (target is null || !IsPublicReadWrite(target) || !SymbolEqualityComparer.Default.Equals(GetMemberType(target), GetMemberType(surrogateMember)))"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 193,
+          "quote": "MsgPack00xMessagePackAnalyzer.SurrogateMemberNotFound,"
+        }
+      ],
+      "citations_checked": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 190,
+          "quote": "if (target is null || !IsPublicReadWrite(target) || !SymbolEqualityComparer.Default.Equals(GetMemberType(target), GetMemberType(surrogateMember)))",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h12"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 193,
+          "quote": "MsgPack00xMessagePackAnalyzer.SurrogateMemberNotFound,",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h12"
+        }
+      ],
+      "executed": false,
+      "result": "not executed",
+      "result_detail": "describes documented or already tested behaviour (MsgPack021 / MsgPack022 paths); no probe written"
+    },
+    {
+      "id": "C9",
+      "claim": "Misuse of the attribute is reported as a compile error: a non-partial formatter (MsgPack019), a class that does not implement IMessagePackFormatter<T> (MsgPack020), an abstract type (MsgPack021) and surrogate mismatches (MsgPack022, MsgPack005).",
+      "outcome": "could_not_falsify",
+      "scenario": "",
+      "test_sketch": "",
+      "citations": [],
+      "citations_checked": []
+    },
+    {
+      "id": "C10",
+      "claim": "A surrogate type's [Key] and [IgnoreMember] attributes decide which members are written and under which keys, with members matched by name and type.",
+      "outcome": "scenario_proposed",
+      "scenario": "The matching only checks name and type, not member kind. A field in the surrogate can successfully match a property in the formatted type.",
+      "test_sketch": "Define `class T { public int Id { get; set; } }` and a surrogate `class Surrogate { [Key(0)] public int Id; }`. The generator accepts this and serializes the property.",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 189,
+          "quote": "ISymbol? target = targetMembers.FirstOrDefault(m => m.Name == surrogateMember.Name);"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 190,
+          "quote": "if (target is null || !IsPublicReadWrite(target) || !SymbolEqualityComparer.Default.Equals(GetMemberType(target), GetMemberType(surrogateMember)))"
+        }
+      ],
+      "citations_checked": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 189,
+          "quote": "ISymbol? target = targetMembers.FirstOrDefault(m => m.Name == surrogateMember.Name);",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h12"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 190,
+          "quote": "if (target is null || !IsPublicReadWrite(target) || !SymbolEqualityComparer.Default.Equals(GetMemberType(target), GetMemberType(surrogateMember)))",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h12"
+        }
+      ],
+      "executed": true,
+      "result": "confirmed, benign",
+      "result_detail": "G2: a surrogate field matches a target property and the round trip works. Behaviour as described, not a defect. runs/2129/probe/G2_SurrogateFieldMatchesProperty.txt"
+    },
+    {
+      "id": "C11",
+      "claim": "Adding the public attribute class GeneratedMessagePackFormatterAttribute to the MessagePack.Annotations assembly is additive and does not change existing public API.",
+      "outcome": "could_not_falsify",
+      "scenario": "",
+      "test_sketch": "",
+      "citations": [],
+      "citations_checked": []
+    },
+    {
+      "id": "NEW1",
+      "claim": "Custom formatters specified on surrogate members are ignored.",
+      "outcome": "new_hypothesis",
+      "scenario": "If a surrogate member is annotated with `[MessagePackFormatter]`, the generator ignores it and does not apply the custom formatter to the serialized member.",
+      "test_sketch": "Define a surrogate with `[Key(0), MessagePackFormatter(typeof(CustomIntFormatter))] public int Id { get; set; }`. The generated formatter will use the default int formatter, not `CustomIntFormatter`.",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 238,
+          "quote": "CustomFormatter: null)"
+        }
+      ],
+      "citations_checked": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 238,
+          "quote": "CustomFormatter: null)",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h12"
+        }
+      ],
+      "executed": true,
+      "result": "confirmed",
+      "result_detail": "G3: [MessagePackFormatter(typeof(...))] on a surrogate member is ignored; wire shows [21], the doubling formatter would give [42]. runs/2129/probe/G3_CustomFormatterOnSurrogateMember.txt"
+    }
+  ],
+  "change": "2129",
+  "kind": "prosecutor_gemini",
+  "model": "gemini-3.1-pro-preview",
+  "produced_by": "gemini api, cached",
+  "produced_at": "2026-11-14T23:49:36+02:00",
+  "prompt_sha256": "3e3b5f214d9e5033ea5612147104f151b68cb07c7904842d5f57435a364c4264",
+  "prompt": "You are the prosecutor. Your job is to FALSIFY the claims below. For each claim, either:\n(a) state a concrete scenario in which it is false, AND propose a minimal test or command\n    that would demonstrate it; or (b) state you could not falsify it.\nYou may also raise NEW hypotheses about behaviour the change silently alters.\nEvery hypothesis must cite exact diff lines (NEW-file line numbers from the numbered diff, verbatim quote). No confidence numbers.\nOutput JSON: {\"attacks\":[{\"id\",\"claim\",\"outcome\":\"scenario_proposed|could_not_falsify|new_hypothesis\",\"scenario\",\"test_sketch\",\"citations\":[{\"path\",\"line\",\"quote\"}]}]}. No prose.",
+  "citation_summary": {
+    "citations": 9,
+    "invalid": 0,
+    "hallucinated": 0,
+    "wrong_line_only": 0
+  },
+  "execution": "pending (see runs/<id>/gemini_tests/ when present)",
+  "summary": {
+    "raised": 6,
+    "executed": 4,
+    "confirmed_defects": 2,
+    "confirmed_benign": 2,
+    "not_executed": 2,
+    "precision_executed_defects_over_raised": 0.33,
+    "could_not_falsify": 6
+  }
+}

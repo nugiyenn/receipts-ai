@@ -1,0 +1,16 @@
+{
+  "signals": {
+    "R4": null,
+    "R2": null,
+    "R6": null,
+    "assertion_drop": null
+  },
+  "fired": [],
+  "planted_ranges": [
+    {
+      "path": "doc/analyzers/MsgPack004.md",
+      "start": 50,
+      "end": 53
+    }
+  ]
+}

@@ -1,0 +1,212 @@
+{
+  "change": "2297",
+  "kind": "prosecutor",
+  "produced_by": "claude-code session, cached",
+  "model": "claude-sonnet-5-5",
+  "produced_at": "2026-11-14T23:19",
+  "static_analysis_only": true,
+  "prompt": "You are the prosecutor. Your job is to FALSIFY the claims below. For each claim, either:\n(a) state a concrete scenario in which it is false, AND propose a minimal test or command\n    that would demonstrate it; or (b) state you could not falsify it.\nYou may also raise NEW hypotheses about behaviour the change silently alters.\nEvery hypothesis must cite exact diff lines. No confidence numbers.",
+  "prompt_sha256": "13ea3c27169a798217bfe57294ac885b5e4965104ab863f5c4129f5abbe51f22",
+  "inputs": [
+    "git show origin/ju26-issue-2297",
+    "issue #2297 body (github.com page, fetched 2026-11-14)",
+    "receipts/requirements/REQ-2297.yaml"
+  ],
+  "note": "Hypotheses only. A hypothesis counts as a finding only after the evidence engine runs its test_sketch and it reproduces. Nothing here was executed.",
+  "attacks": [
+    {
+      "id": "P-2297-1",
+      "claim": "C1",
+      "outcome": "scenario_proposed",
+      "scenario": "A generated type kind is missing the attribute: the helper types nested in the composite resolver, or a type emitted from a template not edited here.",
+      "test_sketch": "Regenerate all snapshot inputs, parse every output file with Roslyn, and assert every ClassDeclaration/StructDeclaration/EnumDeclaration emitted by the generator has the attribute (or sits under an attributed parent), reporting the exceptions.",
+      "holds_if": "no undecorated type",
+      "falsified_if": "any undecorated generated type",
+      "cited_lines": [
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/ResolverTemplate.tt",
+          "line": 49,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/CompositeResolverTemplate.tt",
+          "line": 36,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]"
+        }
+      ]
+    },
+    {
+      "id": "P-2297-2",
+      "claim": "C2",
+      "outcome": "scenario_proposed",
+      "scenario": "The test passes with an attribute missing from a type, because it counts per file.",
+      "test_sketch": "Mutation: delete one of the three attributed declarations in ResolverTemplate.cs (and its .tt text); run CodeCoverageExclusionTests and the resolver snapshot tests; record which go red.",
+      "holds_if": "a test goes red",
+      "falsified_if": "everything stays green",
+      "cited_lines": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 76,
+          "quote": "text.Contains(ExcludeAttribute),"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 11,
+          "quote": "/// Verifies that every type emitted by the source generator is decorated with <c>ExcludeFromCodeCoverage</c>"
+        }
+      ]
+    },
+    {
+      "id": "P-2297-3",
+      "claim": "C3",
+      "outcome": "scenario_proposed",
+      "scenario": "The attribute exists on netstandard2.0 and .NET Framework, so the guard removes decoration that would have compiled fine; or, if it truly is missing there, nothing proves the guarded output compiles.",
+      "test_sketch": "Compile a generated formatter and resolver (from a snapshot) against netstandard2.0, net472 and net8.0 reference assemblies with and without the guard (#define NETSTANDARD2_0 for the first); inspect the compiler output for CS0246 on ExcludeFromCodeCoverage.",
+      "holds_if": "without the guard, netstandard2.0 and net472 compile errors appear",
+      "falsified_if": "they compile without the guard",
+      "cited_lines": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 18,
+          "quote": "The attribute is not available on netstandard2.0 or .NET Framework, so it is only emitted where it exists."
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 19,
+          "quote": "private const string Guard = \"#if !NETSTANDARD2_0 && !NETFRAMEWORK\";"
+        }
+      ]
+    },
+    {
+      "id": "P-2297-4",
+      "claim": "C4",
+      "outcome": "scenario_proposed",
+      "scenario": "The generated layout for nested generic types with constraints changed beyond the attribute, and exactly one snapshot encodes that.",
+      "test_sketch": "For every .g.cs diff hunk, test against the regex ^\\+(#if !NETSTANDARD2_0 && !NETFRAMEWORK|\\s*\\[global::System\\.Diagnostics\\.CodeAnalysis\\.ExcludeFromCodeCoverage\\]|#endif)$; list hunks that do not match and the files they are in.",
+      "holds_if": "no non-matching hunk",
+      "falsified_if": "at least one non-matching hunk",
+      "cited_lines": [
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/TransformUtilities.cs",
+          "line": 58,
+          "quote": "writer(anyConstraints ? \"{\\r\\n\" : \" {\\r\\n\");"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/Resources/GenericDataTypeWithPrivateMember/Formatters.HasPrivateSerializedMemberAndIsGenericNamed`1.HasPrivateSerializedMemberAndIsGenericNamedFormatter.g.cs",
+          "line": 13,
+          "quote": "internal sealed class HasPrivateSerializedMemberAndIsGenericNamedFormatter"
+        }
+      ]
+    },
+    {
+      "id": "P-2297-5",
+      "claim": "C5",
+      "outcome": "scenario_proposed",
+      "scenario": ".tt edited but .cs not regenerated, or the reverse, in one of the six pairs.",
+      "test_sketch": "For each pair extract the attribute and #if lines from the .tt and from the string literals in the .cs and compare after unescaping \\r\\n.",
+      "holds_if": "equal",
+      "falsified_if": "any pair differs",
+      "cited_lines": [
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.tt",
+          "line": 15,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.cs",
+          "line": 33,
+          "quote": "ExcludeFromCodeCoverage"
+        }
+      ]
+    },
+    {
+      "id": "P-2297-6",
+      "claim": "C6",
+      "outcome": "scenario_proposed",
+      "scenario": "The first README line is unconditional, the second narrows it: a reader of the first sentence alone is misled for the excluded targets.",
+      "test_sketch": "Documentation review; executable half is P-2297-3.",
+      "holds_if": "owner accepts the two-sentence form",
+      "falsified_if": "owner requires the first sentence to carry the condition",
+      "cited_lines": [
+        {
+          "path": "README.md",
+          "line": 1639,
+          "quote": "All generated formatters and resolvers are decorated with `[ExcludeFromCodeCoverage]`, so generated code does not skew code coverage reports."
+        },
+        {
+          "path": "README.md",
+          "line": 1640,
+          "quote": "The attribute is only emitted for targets where it is available (not `netstandard2.0` or .NET Framework)."
+        }
+      ]
+    },
+    {
+      "id": "P-2297-7",
+      "claim": "C7",
+      "outcome": "scenario_proposed",
+      "scenario": "A test resolves the InterfaceUnion directory, so its three untouched snapshots should have changed.",
+      "test_sketch": "git grep for the directory name in tests excluding Resources; run the generation tests and see whether the InterfaceUnion snapshots are read.",
+      "holds_if": "no reference",
+      "falsified_if": "a reference exists and the test passes anyway",
+      "cited_lines": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/Resources/InterfaceUnion/MessagePack.GeneratedMessagePackResolver.g.cs",
+          "line": 12,
+          "quote": "partial class GeneratedMessagePackResolver : MsgPack::IFormatterResolver"
+        }
+      ]
+    },
+    {
+      "id": "P-2297-8",
+      "claim": "C8",
+      "outcome": "scenario_proposed",
+      "scenario": "A hand-written member in the user's partial resolver class disappears from the coverage report after the change.",
+      "test_sketch": "Build a tiny project with [GeneratedMessagePackResolver] partial class R { public int Hand() => 1; }, run coverlet with a test that calls Hand(), and compare covered lines of R before and after the change.",
+      "holds_if": "Hand() is excluded after the change",
+      "falsified_if": "Hand() stays in the report",
+      "cited_lines": [
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/ResolverTemplate.tt",
+          "line": 17,
+          "quote": "partial class <#= ResolverName.Name #> : MsgPack::IFormatterResolver"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/CodeCoverageExclusionTests.cs",
+          "line": 58,
+          "quote": "partial class GeneratedMessagePackResolver"
+        }
+      ]
+    }
+  ],
+  "new_hypotheses": [
+    {
+      "id": "N-2297-1",
+      "text": "On the nested FormatterCache<T> and GetFormatterHelper types the attribute is redundant (excluded through the parent) and adds three lines to every resolver snapshot; harmless but part of the diff size.",
+      "cited_lines": [
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/ResolverTemplate.tt",
+          "line": 32,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/ResolverTemplate.tt",
+          "line": 49,
+          "quote": "[global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]"
+        }
+      ],
+      "test_sketch": "None needed; report in the scale view."
+    },
+    {
+      "id": "N-2297-2",
+      "text": "The README note sits in the section about mixing generated and custom formatters, not near the generator options, so a reader looking for coverage will not find it.",
+      "cited_lines": [
+        {
+          "path": "README.md",
+          "line": 1639,
+          "quote": "All generated formatters and resolvers are decorated with `[ExcludeFromCodeCoverage]`, so generated code does not skew code coverage reports."
+        }
+      ],
+      "test_sketch": "Documentation review."
+    }
+  ]
+}

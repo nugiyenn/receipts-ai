@@ -1,0 +1,67 @@
+{
+  "canary": "C8",
+  "type": "swallowed-exception",
+  "caught": true,
+  "by": [
+    "refusal:R2",
+    "llm:gemini",
+    "llm:claude"
+  ],
+  "by_family": {
+    "tests": false,
+    "deterministic-rules": true,
+    "gemini": true,
+    "claude": true
+  },
+  "note": "Wraps the filter in try { } catch (Exception) { } so any failure is silently swallowed.",
+  "tests": {
+    "ran": true,
+    "compiled": true,
+    "failing_tests": [],
+    "summary_line": "",
+    "outcome": "green",
+    "seconds": 25.1,
+    "log": "runs/drill/C8/tests.log"
+  },
+  "detectors": [
+    "R2"
+  ],
+  "gemini": {
+    "caught": true,
+    "hits": [
+      {
+        "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+        "line": 1453,
+        "severity": "medium",
+        "issue": "The empty catch block silently swallows all exceptions from the diagnostic reporter or compilation checks, which can hide underlying bugs and violates the requirement against swallowed errors."
+      }
+    ],
+    "near_but_off_target": [],
+    "n_findings": 3
+  },
+  "claude": {
+    "caught": true,
+    "hits": [
+      {
+        "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+        "line": 1453,
+        "severity": "high",
+        "issue": "The empty `catch (Exception)` swallows every exception raised while filtering or reporting a diagnostic. This includes exceptions thrown by the `report` callback, which hides real analyzer failures and can silently drop diagnostics. The filter needs no try/catch."
+      }
+    ],
+    "near_but_off_target": [],
+    "n_findings": 7
+  },
+  "xray_routed_to_human_NOT_counted": {
+    "routed": false,
+    "why": "planted lines fall inside agent hunk h6 whose X-Ray result is 'structural' (hunk granularity cannot see a planted change inside it)"
+  },
+  "evidence_refs": [
+    "runs/drill/C8/tests.json",
+    "runs/drill/C8/tests.log",
+    "runs/drill/C8/detectors.json",
+    "runs/drill/C8/gemini_review.json",
+    "runs/drill/C8/claude_findings.json",
+    "runs/drill/C8/review_input.diff"
+  ]
+}

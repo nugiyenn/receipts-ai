@@ -1,0 +1,11 @@
+{
+  "ran": true,
+  "compiled": true,
+  "failing_tests": [
+    "MsgPack00xAnalyzerTests.NullStringKey"
+  ],
+  "summary_line": "",
+  "outcome": "red",
+  "seconds": 127.1,
+  "log": "runs/drill/C6/tests.log"
+}

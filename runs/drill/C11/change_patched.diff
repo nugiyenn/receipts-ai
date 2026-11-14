@@ -1,0 +1,9 @@
+diff --git a/doc/analyzers/MsgPack004.md b/doc/analyzers/MsgPack004.md
+index a0fd5433..952e9387 100644
+--- a/doc/analyzers/MsgPack004.md
++++ b/doc/analyzers/MsgPack004.md
+@@ -50,3 +50,4 @@ public class C {
+ 
+ This analyzer only reports on members declared in the project being compiled.
+ Members of a type defined in a referenced assembly are reported by the project that defines that type, so an unattributed public member of such a type must be fixed in its defining project.
++When the referenced assembly was built without this analyzer, the consuming project's analyzer still reports the missing `[Key]` attributes for those members.

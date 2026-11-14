@@ -1,0 +1,22 @@
+{
+  "signals": {
+    "R4": {
+      "fired": true,
+      "path": "src/MessagePack/ExtensionHeader.cs",
+      "why": "change touches ceiling area 'runtime-serializer' (always L3)"
+    },
+    "R2": null,
+    "R6": null,
+    "assertion_drop": null
+  },
+  "fired": [
+    "R4"
+  ],
+  "planted_ranges": [
+    {
+      "path": "src/MessagePack/ExtensionHeader.cs",
+      "start": 28,
+      "end": 33
+    }
+  ]
+}

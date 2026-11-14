@@ -1,0 +1,337 @@
+{
+  "change": "2283",
+  "checked_at": "2026-11-15T00:19:36+02:00",
+  "head": "9df83c38409c8bfad0517aebffe48211eda4a5b4",
+  "summary": {
+    "citations": 28,
+    "valid": 28,
+    "invalid": 0,
+    "claims": 10,
+    "claims_invalid": 0,
+    "hallucination_rate": 0.0
+  },
+  "claims": [
+    {
+      "claim": "C1",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 985,
+          "quote": "GetPropertyIdentifierLocation(item), formattedType.ToDisplayString",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h4"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1077,
+          "quote": "Diagnostic.Create(MsgPack00xMessagePackAnalyzer.MemberNeedsKey, item.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h5"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 507,
+          "quote": "public async Task ClosedGenericStruct_FromMetadataReference()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h8"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 551,
+          "quote": "public async Task ClosedGenericRecordStruct_FromMetadataReference()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h8"
+        }
+      ]
+    },
+    {
+      "claim": "C2",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 658,
+          "quote": "Assert.Contains(expectedResolverHintName, hintNames);",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h8"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 656,
+          "quote": "Assert.Empty(runResult.Diagnostics.Where(d => d.Severity >= DiagnosticSeverity.Warning));",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h8"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1077,
+          "quote": "Diagnostic.Create(MsgPack00xMessagePackAnalyzer.MemberNeedsKey, item.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h5"
+        }
+      ]
+    },
+    {
+      "claim": "C3",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 507,
+          "quote": "public async Task ClosedGenericStruct_FromMetadataReference()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h8"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 551,
+          "quote": "public async Task ClosedGenericRecordStruct_FromMetadataReference()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h8"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 590,
+          "quote": "public async Task ClosedGenericStruct_FromMetadataReference_UnkeyedMember()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h8"
+        }
+      ]
+    },
+    {
+      "claim": "C4",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 239,
+          "quote": "this.reportDiagnostic = reportAnalyzerDiagnostic is null ? null : diagnostic => ReportIfLocatedInCompilation(reportAnalyzerDiagnostic, diagnostic);",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h3"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1446,
+          "quote": "if (diagnostic.Location.IsInSource && this.compilation.ContainsSyntaxTree(diagnostic.Location.SourceTree))",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h6"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1341,
+          "quote": "Location location = callerSymbol is not null ? callerSymbol.Locations[0] : formattedType.Locations[0];",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": false,
+          "hunk": null
+        }
+      ]
+    },
+    {
+      "claim": "C5",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 239,
+          "quote": "this.reportDiagnostic = reportAnalyzerDiagnostic is null ? null : diagnostic => ReportIfLocatedInCompilation(reportAnalyzerDiagnostic, diagnostic);",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h3"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1446,
+          "quote": "if (diagnostic.Location.IsInSource && this.compilation.ContainsSyntaxTree(diagnostic.Location.SourceTree))",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h6"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 248,
+          "quote": "reportAnalyzerDiagnostic?.Invoke(Diagnostic.Create(MsgPack00xMessagePackAnalyzer.InaccessibleDataType",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": false,
+          "hunk": null
+        }
+      ]
+    },
+    {
+      "claim": "C6",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "README.md",
+          "line": 1642,
+          "quote": "Diagnostics about the members of such a type are reported by the assembly that defines it rather than by the consuming project",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h1"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 584,
+          "quote": "since its member diagnostics belong to the defining assembly.",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h8"
+        }
+      ]
+    },
+    {
+      "claim": "C7",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "doc/analyzers/MsgPack004.md",
+          "line": 52,
+          "quote": "Members of a type defined in a referenced assembly are reported by the project that defines that type",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h2"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 603,
+          "quote": "public int Unkeyed { get; set; }",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h8"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 667,
+          "quote": "Microsoft.CodeAnalysis.Emit.EmitResult emitResult = compilation.Emit(stream);",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h8"
+        }
+      ]
+    },
+    {
+      "claim": "C8",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1442,
+          "quote": "against a location that does not exist, which analyzers are not permitted to do.",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h6"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1446,
+          "quote": "if (diagnostic.Location.IsInSource && this.compilation.ContainsSyntaxTree(diagnostic.Location.SourceTree))",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h6"
+        }
+      ]
+    },
+    {
+      "claim": "C9",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 715,
+          "quote": "////this.reportDiagnostic?.Invoke(Diagnostic.Create(MsgPack00xMessagePackAnalyzer.TypeMustBeMessagePackObject",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": false,
+          "hunk": null
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1077,
+          "quote": "Diagnostic.Create(MsgPack00xMessagePackAnalyzer.MemberNeedsKey, item.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h5"
+        }
+      ]
+    },
+    {
+      "claim": "C10",
+      "all_valid": true,
+      "note": null,
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1434,
+          "quote": "private static Location? GetPropertyIdentifierLocation(IPropertySymbol property)",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h6"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1432,
+          "quote": "It may be declared in metadata, in which case",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h6"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 985,
+          "quote": "GetPropertyIdentifierLocation(item), formattedType.ToDisplayString",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h4"
+        }
+      ]
+    }
+  ]
+}

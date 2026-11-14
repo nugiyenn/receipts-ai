@@ -1,0 +1,20 @@
+{
+  "model": "gemini-3.1-pro-preview",
+  "prompt_sha256": "301df94f4a499d2df5fa2010a03b5a9c171b975e29bb493bca5826243e4f3c7d",
+  "cached": true,
+  "findings": [
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1434,
+      "severity": "high",
+      "issue": "GetPropertyIdentifierLocation returns null for properties declared as primary constructor parameters in records (which use ParameterSyntax, not PropertyDeclarationSyntax), causing their diagnostics to be silently dropped."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1446,
+      "severity": "medium",
+      "issue": "ReportIfLocatedInCompilation silently drops diagnostics with Location.None (since IsInSource evaluates to false), which swallows valid compilation-wide errors or diagnostics for symbols lacking source locations."
+    }
+  ],
+  "raw": null
+}

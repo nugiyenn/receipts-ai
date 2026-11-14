@@ -1,0 +1,31 @@
+# Frontend lens (spec section 7). Defined and explained in the concept card; not exercised on a MessagePack change.
+# COULD item: demonstrate on a small synthetic frontend diff (label it SYNTHETIC).
+lens: frontend
+version: lens-1
+applies_to_areas: [ui, web]   # no such area exists in the MessagePack-CSharp sample; used for synthetic demos only
+claim_templates:
+  - id: F-C1
+    text: "Accessibility: every new interactive element has an accessible name, keyboard operability and sufficient contrast."
+    verifier: static
+    ask: "Run an automated accessibility check on the rendered change; list violations."
+  - id: F-C2
+    text: "Output encoding: user-controlled values are escaped before insertion into HTML, attributes, URLs or scripts."
+    verifier: xray
+    ask: "Find every new innerHTML, dangerouslySetInnerHTML, template interpolation or href built from input."
+  - id: F-C3
+    text: "State: no new state path leaves the UI inconsistent after an error or a cancelled request."
+    verifier: matrix
+  - id: F-C4
+    text: "Rendering at phone width has no horizontal scroll and no clipped controls."
+    verifier: static
+  - id: F-C5
+    text: "Client-side validation is not the only validation of a value the server relies on."
+    verifier: argued
+refusal_triggers:
+  - {rule: R1-product-decision, when: "visible copy, layout, or interaction flow changes beyond the requirement"}
+  - {rule: R2-silent-suppression, when: "an error state, toast or log is removed or swallowed"}
+  - {rule: R5-evidence-gap, when: "no rendered check (screenshot, accessibility run) exists for a visual change"}
+evidence_preferences: [static, matrix, xray]
+owner_questions:
+  - "Is the visible change what the requirement asked for?"
+  - "Which browsers and screen sizes do you promise?"

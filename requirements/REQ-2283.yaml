@@ -1,0 +1,32 @@
+id: REQ-2283
+source: https://github.com/MessagePack-CSharp/MessagePack-CSharp/issues/2283
+title: Generator and analyzer crash with IndexOutOfRangeException on a closed generic struct from a referenced assembly
+intent: >
+  A [MessagePackObject] type with a member whose type is a closed generic value type
+  (struct<T> or record struct<T>) defined in a referenced assembly must build cleanly
+  and get a generated resolver, instead of crashing the generator (CS8785) and the
+  analyzer (AD0001) with IndexOutOfRangeException.
+functional:
+  - id: REQ-2283-F1
+    text: MsgPack00xMessagePackAnalyzer does not throw (no AD0001) for a closed generic value type from a referenced assembly.
+  - id: REQ-2283-F2
+    text: MessagePackGenerator does not throw (no CS8785) and emits a GeneratedMessagePackResolver for the consuming assembly.
+  - id: REQ-2283-F3
+    text: >
+      Behaviour matrix from the issue holds. struct<T> and record struct<T> from metadata no longer crash;
+      struct, record struct, class<T> and record class<T> keep working unchanged.
+non_functional:
+  - id: REQ-2283-NF1
+    text: No existing diagnostic for types declared in source is lost, moved or changed.
+  - id: REQ-2283-NF2
+    text: Documentation changes are accurate and do not over-claim behaviour.
+security:
+  - id: REQ-2283-S1
+    text: No safety-relevant diagnostic is silently suppressed for types the user controls.
+issue_matrix:   # declaration of Item in the referenced assembly -> result reported in the issue (before the fix)
+  - {declaration: "record struct Item<T>", result: crash}
+  - {declaration: "struct Item<T>", result: crash}
+  - {declaration: "struct Item", result: ok}
+  - {declaration: "record struct Item", result: ok}
+  - {declaration: "class Item<T>", result: ok}
+  - {declaration: "record class Item<T>", result: ok}

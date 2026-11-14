@@ -1,0 +1,19 @@
+id: REQ-2234
+source: https://github.com/MessagePack-CSharp/MessagePack-CSharp/issues/2234
+title: The analyzer does not work if SuppressSourceGeneration = true
+intent: >
+  Types marked [MessagePackObject(SuppressSourceGeneration = true)] must still be validated by the analyzer.
+  The issue states this regressed in 3.1.1 and still worked in 3.1.0.
+functional:
+  - id: REQ-2234-F1
+    text: The analyzer reports its contract diagnostics (e.g. MsgPack004, MsgPack005) for types with SuppressSourceGeneration = true.
+  - id: REQ-2234-F2
+    text: No source is generated for such types (SuppressSourceGeneration behaviour is preserved).
+non_functional:
+  - id: REQ-2234-NF1
+    text: The fix targets the cause of the 3.1.1 regression, not only its symptom.
+  - id: REQ-2234-NF2
+    text: Behaviour for types without SuppressSourceGeneration is unchanged.
+security:
+  - id: REQ-2234-S1
+    text: Invalid key contracts are not silently dropped when no diagnostic is reported.

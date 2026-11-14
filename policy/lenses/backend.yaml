@@ -1,0 +1,32 @@
+# Backend lens (spec section 7). Adds claim templates and refusal triggers; it never sets an evidence level.
+lens: backend
+version: lens-1
+applies_to_areas: [analyzer-core, generator-templates, runtime-serializer]
+claim_templates:
+  - id: B-C1
+    text: "The change preserves behaviour for inputs that worked before (compatibility)."
+    verifier: matrix
+    ask: "List the input classes that worked before; require a base-vs-head differential run over them."
+  - id: B-C2
+    text: "Error paths still surface a failure: no exception is converted into silence."
+    verifier: xray
+    ask: "Find every catch, null-guard, filter or skip added by the diff and show what is reported when it triggers."
+  - id: B-C3
+    text: "Every new null-safe path has a test that reaches it."
+    verifier: xray
+  - id: B-C4
+    text: "Documentation and code comments assert only what a test or command shows."
+    verifier: argued
+  - id: B-C5
+    text: "Performance: no new work on a hot path proportional to input size without a bound."
+    verifier: argued
+refusal_triggers:
+  - {rule: R2-silent-suppression, when: "the diff adds a filter, skip, empty catch or null-conditional that can drop a diagnostic, error or data"}
+  - {rule: R3-unverified-root-cause, when: "the requirement names a version, regression or cause and no cited line connects the diff to it"}
+  - {rule: R6-doc-overclaim, when: "README, docs or comments written in the same change state behaviour no claim proves"}
+  - {rule: R7-public-api, when: "a public or protected member, attribute or generated public type changes"}
+  - {rule: R8-requirement-ambiguity, when: "the requirement text names no concrete observable behaviour"}
+evidence_preferences: [timemachine, xray, matrix, static]
+owner_questions:
+  - "Which build configurations do you promise this behaviour for?"
+  - "Which branch or release line does this target, and was the change verified on it?"

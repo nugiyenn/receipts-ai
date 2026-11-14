@@ -1,0 +1,272 @@
+{
+  "change": "2283",
+  "kind": "prosecutor",
+  "produced_by": "claude-code session, cached",
+  "model": "claude-sonnet-5-5",
+  "produced_at": "2026-11-14T23:19",
+  "static_analysis_only": true,
+  "prompt": "You are the prosecutor. Your job is to FALSIFY the claims below. For each claim, either:\n(a) state a concrete scenario in which it is false, AND propose a minimal test or command\n    that would demonstrate it; or (b) state you could not falsify it.\nYou may also raise NEW hypotheses about behaviour the change silently alters.\nEvery hypothesis must cite exact diff lines. No confidence numbers.",
+  "prompt_sha256": "13ea3c27169a798217bfe57294ac885b5e4965104ab863f5c4129f5abbe51f22",
+  "inputs": [
+    "git show origin/ju26-issue-2283",
+    "issue #2283 body (github.com page, fetched 2026-11-14)",
+    "receipts/requirements/REQ-2283.yaml",
+    "git history: v3.1.8 TypeCollector.cs"
+  ],
+  "note": "Hypotheses only. A hypothesis counts as a finding only after the evidence engine runs its test_sketch and it reproduces. Nothing here was executed.",
+  "attacks": [
+    {
+      "id": "P-2283-1",
+      "claim": "C1",
+      "outcome": "scenario_proposed",
+      "scenario": "Nested closed generics from metadata: Outer<T> (referenced assembly) has a keyed member of type Inner<T> (also referenced). GetObjectInfo recurses through CollectGeneric once per closed generic, so any third null-unsafe lookup on that path would still throw although the two patched sites are safe.",
+      "test_sketch": "In a scratch copy of GenericsFormatterTests.cs add: defineSource = 'using MessagePack; namespace Lib { [MessagePackObject] public struct Inner<T> { [Key(0)] public T V { get; set; } } [MessagePackObject] public struct Outer<T> { [Key(0)] public Inner<T> I { get; set; } } }'; usageSource = '[MessagePackObject] public class Use { [Key(0)] public Lib.Outer<int> O { get; set; } } [GeneratedMessagePackResolver] partial class R { }'; await RunWithMetadataReferenceAsync(defineSource, usageSource, 'TempProject.R.g.cs').",
+      "holds_if": "passes on head with no diagnostics",
+      "falsified_if": "AD0001 or CS8785 on head",
+      "cited_lines": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 985,
+          "quote": "GetPropertyIdentifierLocation(item), formattedType.ToDisplayString"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1077,
+          "quote": "Diagnostic.Create(MsgPack00xMessagePackAnalyzer.MemberNeedsKey, item.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation()"
+        }
+      ]
+    },
+    {
+      "id": "P-2283-2",
+      "claim": "C2",
+      "outcome": "scenario_proposed",
+      "scenario": "The resolver file is emitted but the formatter for the closed generic is missing or the generated code does not compile: the helper uses SkipGeneratedSourcesCheck and asserts only that a hint name exists.",
+      "test_sketch": "After RunGenerators in the helper, add generated trees to usageCompilation and assert compilation.GetDiagnostics() has no errors; then reflect over the emitted assembly and round-trip serialize Cmd with MessagePackSerializer using the generated resolver.",
+      "holds_if": "no compile errors and the round-trip equals the input",
+      "falsified_if": "compile error, or the resolver has no formatter for Item<int>",
+      "cited_lines": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 641,
+          "quote": "TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 658,
+          "quote": "Assert.Contains(expectedResolverHintName, hintNames);"
+        }
+      ]
+    },
+    {
+      "id": "P-2283-3",
+      "claim": "C3",
+      "outcome": "scenario_proposed",
+      "scenario": "The four rows the issue lists as already working (struct, record struct, class<T>, record class<T>) have no regression test, so a change in their behaviour would not be noticed.",
+      "test_sketch": "Parameterise RunWithMetadataReferenceAsync over the six declaration forms from the issue table, each declared in the referenced assembly, run on base and head, and compare crash/ok per row with the issue_matrix in REQ-2283.yaml.",
+      "holds_if": "head: all six ok; base: exactly the two struct<T> forms crash",
+      "falsified_if": "any other row differs between base and head",
+      "cited_lines": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 507,
+          "quote": "public async Task ClosedGenericStruct_FromMetadataReference()"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 551,
+          "quote": "public async Task ClosedGenericRecordStruct_FromMetadataReference()"
+        }
+      ]
+    },
+    {
+      "id": "P-2283-4",
+      "claim": "C4",
+      "outcome": "scenario_proposed",
+      "scenario": "The constructor-level filter changes the set of reported diagnostics for source types. Candidate inputs are call sites whose location expression can be null for a source declaration: the formatter-attribute argument location, the colliding-names location and the partial-type primary location.",
+      "test_sketch": "Create worktrees at base and head. Write a small harness that runs MsgPack00xMessagePackAnalyzer through CompilationWithAnalyzers over every input in tests/MessagePack.SourceGenerator.Tests (markup stripped) and prints (diagnostic id, span) sorted. Run in both worktrees and diff the outputs; expected: identical for every source-only input.",
+      "holds_if": "identical output",
+      "falsified_if": "any line differs",
+      "cited_lines": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 239,
+          "quote": "this.reportDiagnostic = reportAnalyzerDiagnostic is null ? null : diagnostic => ReportIfLocatedInCompilation(reportAnalyzerDiagnostic, diagnostic);"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1446,
+          "quote": "if (diagnostic.Location.IsInSource && this.compilation.ContainsSyntaxTree(diagnostic.Location.SourceTree))"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 693,
+          "quote": "Location? location = ((AttributeSyntax?)formatterAttribute.ApplicationSyntaxReference?.GetSyntax())?.ArgumentList?.Arguments[0].GetLocation();"
+        }
+      ]
+    },
+    {
+      "id": "P-2283-5",
+      "claim": "C5",
+      "outcome": "scenario_proposed",
+      "scenario": "Inconsistent application: the InaccessibleDataType report in the same constructor uses the unwrapped delegate, so it is not filtered, while the 28 later sites are. Two diagnostics with the same kind of location are treated differently.",
+      "test_sketch": "Static: list every call through reportAnalyzerDiagnostic versus this.reportDiagnostic in the head file (grep). Dynamic: an inaccessible [MessagePackObject] type declared in a referenced assembly and used as a member type: record whether InaccessibleDataType is reported on base and on head.",
+      "holds_if": "no difference",
+      "falsified_if": "reported on base, absent on head, or the reverse",
+      "cited_lines": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 239,
+          "quote": "this.reportDiagnostic = reportAnalyzerDiagnostic is null ? null : diagnostic => ReportIfLocatedInCompilation(reportAnalyzerDiagnostic, diagnostic);"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 248,
+          "quote": "reportAnalyzerDiagnostic?.Invoke(Diagnostic.Create(MsgPack00xMessagePackAnalyzer.InaccessibleDataType"
+        }
+      ]
+    },
+    {
+      "id": "P-2283-6",
+      "claim": "C6",
+      "outcome": "scenario_proposed",
+      "scenario": "The README sentence is false whenever the defining assembly was compiled without this analyzer, which is exactly how the new test builds it (Compilation.Emit with no analyzer run).",
+      "test_sketch": "Compile lib without analyzers (as the helper does) with [MessagePackObject] public struct MyGenericStruct<T> having an unattributed public int member; run the analyzer on the consumer; assert that no MsgPack004 is reported anywhere. Then compile lib with the analyzer and assert MsgPack004 is reported in lib.",
+      "holds_if": "MsgPack004 appears in the lib compilation",
+      "falsified_if": "no analyzer run on lib is part of the claimed flow, so the sentence has no support for builds without it",
+      "cited_lines": [
+        {
+          "path": "README.md",
+          "line": 1642,
+          "quote": "Diagnostics about the members of such a type are reported by the assembly that defines it rather than by the consuming project"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 667,
+          "quote": "Microsoft.CodeAnalysis.Emit.EmitResult emitResult = compilation.Emit(stream);"
+        }
+      ]
+    },
+    {
+      "id": "P-2283-7",
+      "claim": "C7",
+      "outcome": "scenario_proposed",
+      "scenario": "'Must be fixed in its defining project' cannot be followed by a consumer whose reference is a NuGet package it does not control, and the documentation gives no alternative.",
+      "test_sketch": "No code: documentation review. Executable half is P-2283-6.",
+      "holds_if": "owner accepts the documented limitation",
+      "falsified_if": "owner requires an alternative path",
+      "cited_lines": [
+        {
+          "path": "doc/analyzers/MsgPack004.md",
+          "line": 52,
+          "quote": "Members of a type defined in a referenced assembly are reported by the project that defines that type"
+        }
+      ]
+    },
+    {
+      "id": "P-2283-8",
+      "claim": "C8",
+      "outcome": "scenario_proposed",
+      "scenario": "Roslyn rejects diagnostics whose location is a source location in a tree outside the compilation, but a diagnostic with Location.None or a metadata location is reportable. If so the comment's premise is false and the filter is broader than needed.",
+      "test_sketch": "Write a minimal DiagnosticAnalyzer (inside the test project) that calls context.ReportDiagnostic(Diagnostic.Create(descriptor, Location.None)) and one with a metadata location taken from a referenced type's Locations[0]; run it via CSharpAnalyzerVerifier. Expected if the comment is true: AD0001 or an exception. Expected if false: the diagnostic is reported without error.",
+      "holds_if": "exception thrown for Location.None",
+      "falsified_if": "reported without error",
+      "cited_lines": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1442,
+          "quote": "against a location that does not exist, which analyzers are not permitted to do."
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1446,
+          "quote": "if (diagnostic.Location.IsInSource && this.compilation.ContainsSyntaxTree(diagnostic.Location.SourceTree))"
+        }
+      ]
+    },
+    {
+      "id": "P-2283-9",
+      "claim": "C9",
+      "outcome": "could_not_falsify_statically",
+      "scenario": "Mechanical check only; the claim limits itself to DeclaringSyntaxReferences[0]. Other index-based accessors exist at the cited sites and are not covered by the claim.",
+      "test_sketch": "git show origin/ju26-issue-2283:src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs | grep -n 'DeclaringSyntaxReferences\\[0\\]'  # expect one commented line",
+      "holds_if": "exactly one match and it starts with ////",
+      "falsified_if": "any uncommented match",
+      "cited_lines": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 715,
+          "quote": "////this.reportDiagnostic?.Invoke(Diagnostic.Create(MsgPack00xMessagePackAnalyzer.TypeMustBeMessagePackObject"
+        }
+      ]
+    },
+    {
+      "id": "P-2283-10",
+      "claim": "C10",
+      "outcome": "scenario_proposed",
+      "scenario": "A positional record whose primary-constructor property carries a key attribute with a null string value: the property syntax is a parameter, so 'as PropertyDeclarationSyntax' is null, the location is Location.None, and the new filter drops the BothStringAndIntKeyAreNull diagnostic. On base the cast to PropertyDeclarationSyntax throws instead, so a crash becomes silence.",
+      "test_sketch": "Analyzer test (VerifyCS): '[MessagePackObject] public record R([property: Key((string)null)] string X);' Record on base: AD0001 with InvalidCastException expected; on head: no diagnostic and no exception.",
+      "holds_if": "head reports a diagnostic at the parameter",
+      "falsified_if": "head reports nothing (confirms the claim is false)",
+      "cited_lines": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1434,
+          "quote": "private static Location? GetPropertyIdentifierLocation(IPropertySymbol property)"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 985,
+          "quote": "GetPropertyIdentifierLocation(item), formattedType.ToDisplayString"
+        }
+      ]
+    }
+  ],
+  "new_hypotheses": [
+    {
+      "id": "N-2283-1",
+      "text": "The fix is incomplete on the 3.1.x line: v3.1.8 has a third live DeclaringSyntaxReferences[0] site in the contractAttr-is-null branch (line 735 there), commented out in this base. A referenced generic struct without [MessagePackObject] used as a member could still crash the analyzer on master.",
+      "cited_lines": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 715,
+          "quote": "////this.reportDiagnostic?.Invoke(Diagnostic.Create(MsgPack00xMessagePackAnalyzer.TypeMustBeMessagePackObject"
+        }
+      ],
+      "test_sketch": "git worktree add a master checkout; git diff base..head | git apply (no commit); add a test with the defining type lacking [MessagePackObject]; run it. Expected if the hypothesis holds: AD0001 IndexOutOfRangeException."
+    },
+    {
+      "id": "N-2283-2",
+      "text": "Asymmetry of blast radius: the crash is cured at two call sites but the filter changes behaviour at all 28; the review budget should follow the 28, not the 2.",
+      "cited_lines": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 239,
+          "quote": "this.reportDiagnostic = reportAnalyzerDiagnostic is null ? null : diagnostic => ReportIfLocatedInCompilation(reportAnalyzerDiagnostic, diagnostic);"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1077,
+          "quote": "Diagnostic.Create(MsgPack00xMessagePackAnalyzer.MemberNeedsKey, item.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation()"
+        }
+      ],
+      "test_sketch": "Router blast-radius count for the constructor hunk (git grep references of reportDiagnostic in the file)."
+    },
+    {
+      "id": "N-2283-3",
+      "text": "Crash becomes silence: wherever a call site computed its location with a cast that throws for a metadata or non-property syntax, the new null-safe form plus the filter produces no output instead of an exception.",
+      "cited_lines": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 985,
+          "quote": "GetPropertyIdentifierLocation(item), formattedType.ToDisplayString"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1434,
+          "quote": "private static Location? GetPropertyIdentifierLocation(IPropertySymbol property)"
+        }
+      ],
+      "test_sketch": "See P-2283-10; add the same pattern for fields declared via record primary constructors."
+    }
+  ]
+}

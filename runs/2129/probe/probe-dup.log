@@ -1,0 +1,31 @@
+
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.36
+
+  MessagePack.SourceGenerator -> /Users/andy/Downloads/Junction2/wt/2129-probe/bin/MessagePack.SourceGenerator/Debug/netstandard2.0/MessagePack.SourceGenerator.dll
+  MessagePack.Analyzers.CodeFixes -> /Users/andy/Downloads/Junction2/wt/2129-probe/bin/MessagePack.Analyzers.CodeFixes/Debug/netstandard2.0/MessagePack.Analyzers.CodeFixes.dll
+  MessagePack.Analyzers -> /Users/andy/Downloads/Junction2/wt/2129-probe/bin/MessagePack.Analyzers/Debug/netstandard2.0/MessagePack.Analyzers.dll
+  MessagePack.SourceGenerator.ExternalTypes -> /Users/andy/Downloads/Junction2/wt/2129-probe/bin/MessagePack.SourceGenerator.ExternalTypes/Debug/net8.0/MessagePack.SourceGenerator.ExternalTypes.dll
+  MessagePack.Annotations -> /Users/andy/Downloads/Junction2/wt/2129-probe/bin/MessagePack.Annotations/Debug/netstandard2.0/MessagePack.Annotations.dll
+  MessagePack -> /Users/andy/Downloads/Junction2/wt/2129-probe/bin/MessagePack/Debug/net8.0/MessagePack.dll
+/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/Probe2129Dup.cs(30,47): error CS0535: 'ProbeAttrTypeFormatter' does not implement interface member 'IMessagePackFormatter<ProbeAttrType>.Serialize(ref MessagePackWriter, ProbeAttrType, MessagePackSerializerOptions)' [/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/MessagePack.SourceGenerator.ExecutionTests.csproj]
+/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/Probe2129Dup.cs(30,47): error CS0535: 'ProbeAttrTypeFormatter' does not implement interface member 'IMessagePackFormatter<ProbeAttrType>.Deserialize(ref MessagePackReader, MessagePackSerializerOptions)' [/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/MessagePack.SourceGenerator.ExecutionTests.csproj]
+/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/Probe2129Dup.cs(15,43): error CS0535: 'ProbeDupFormatterB' does not implement interface member 'IMessagePackFormatter<ProbeDupType>.Serialize(ref MessagePackWriter, ProbeDupType, MessagePackSerializerOptions)' [/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/MessagePack.SourceGenerator.ExecutionTests.csproj]
+/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/Probe2129Dup.cs(15,43): error CS0535: 'ProbeDupFormatterB' does not implement interface member 'IMessagePackFormatter<ProbeDupType>.Deserialize(ref MessagePackReader, MessagePackSerializerOptions)' [/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/MessagePack.SourceGenerator.ExecutionTests.csproj]
+
+Build FAILED.
+
+/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/Probe2129Dup.cs(30,47): error CS0535: 'ProbeAttrTypeFormatter' does not implement interface member 'IMessagePackFormatter<ProbeAttrType>.Serialize(ref MessagePackWriter, ProbeAttrType, MessagePackSerializerOptions)' [/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/MessagePack.SourceGenerator.ExecutionTests.csproj]
+/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/Probe2129Dup.cs(30,47): error CS0535: 'ProbeAttrTypeFormatter' does not implement interface member 'IMessagePackFormatter<ProbeAttrType>.Deserialize(ref MessagePackReader, MessagePackSerializerOptions)' [/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/MessagePack.SourceGenerator.ExecutionTests.csproj]
+/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/Probe2129Dup.cs(15,43): error CS0535: 'ProbeDupFormatterB' does not implement interface member 'IMessagePackFormatter<ProbeDupType>.Serialize(ref MessagePackWriter, ProbeDupType, MessagePackSerializerOptions)' [/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/MessagePack.SourceGenerator.ExecutionTests.csproj]
+/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/Probe2129Dup.cs(15,43): error CS0535: 'ProbeDupFormatterB' does not implement interface member 'IMessagePackFormatter<ProbeDupType>.Deserialize(ref MessagePackReader, MessagePackSerializerOptions)' [/Users/andy/Downloads/Junction2/wt/2129-probe/tests/MessagePack.SourceGenerator.ExecutionTests/MessagePack.SourceGenerator.ExecutionTests.csproj]
+    0 Warning(s)
+    4 Error(s)
+
+Time Elapsed 00:00:07.24

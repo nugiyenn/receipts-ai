@@ -1,0 +1,12 @@
+diff --git a/README.md b/README.md
+index 5ae00d37..5a2fdd99 100644
+--- a/README.md
++++ b/README.md
+@@ -1640,6 +1640,7 @@ Learn more about using a mix of your own custom formatters and automatically gen
+ 
+ Closed generic types defined in a referenced assembly (for example, `Item<int>` where `Item<T>` is defined in another project or NuGet package) can be used as members of your `[MessagePackObject]` types, including generic value types and record structs.
+ Diagnostics about the members of such a type are reported by the assembly that defines it rather than by the consuming project, so any problem must be fixed there.
++Generic classes from referenced assemblies likewise get full cross-assembly diagnostics in the consuming project, and no diagnostic is ever lost.
+ 
+ ### MagicOnion
+ 

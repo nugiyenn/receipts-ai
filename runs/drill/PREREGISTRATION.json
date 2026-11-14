@@ -1,0 +1,34 @@
+{
+ "at": "2026-11-14T23:23:20+02:00",
+ "note": "Hashes fixed before any drill result existed.",
+ "files": {
+  "canaries/canaries.yaml": "097dfb50d2d6a71c41cab91c280b0f83febf89b9fd14ca9dbd85429d62577475",
+  "receipts/evidence/canary_runner.py": "536bf87dc1ca3e462cf95b68bf5f44d7519234273de428168f0564aefff0f922",
+  "canaries/C1.patch": "c5577658506fc6373364ce897127090dbf127f72a19a251cfd04d60a5a9383ce",
+  "canaries/C2.patch": "05d5efcc5dedc52ff54bc507439e6bc7c34198ddb36dc65ce2b38f6da0959ec0",
+  "canaries/C3.patch": "0cb79bbcdedc8d0953cb5b7570e9eb9ae7c117330fdb89338f0c460071509740",
+  "canaries/C4.patch": "b228010041016cb8549377ac59839343d67d72754da4dd958a43a3bbfc2e6957",
+  "canaries/C5.patch": "0956e29fa1a5e23f06d72e22f352746ad52e55ed31450f3691ac5ddac6b3ef4a",
+  "canaries/C6.patch": "fe61f3c067f663a87b237da47eae9c0045693b9b5b4322385b931b41c4f01938",
+  "canaries/C7.patch": "321bb14d71f1ecac377c50743459e4d135a9702456c7f99955cdd1a10996925b",
+  "canaries/C8.patch": "53ea0fef9909f7377127a094711a2d1c530d50f50461cfbf948366a2939337d6"
+ },
+ "amendments": [
+  {
+   "at": "2026-11-14T23:23:31+02:00",
+   "what": "R2 empty-catch detector read only added lines; git showed the braces as context so C8 was missed by a detector bug. Fixed to inspect the hunk post-image. First result kept in runs/drill/C8/detectors_v1_before_fix.json. Fix was made after seeing the C8 detector result; no other detector or keyword was changed.",
+   "canary_runner_sha256": "95c295b38271d516438db3fc41efea5bd0a833dea3c6d8cc8ccf659017936077"
+  },
+  {
+   "at": "2026-11-14T23:33:29+02:00",
+   "what": "ROUND 2: canaries C9-C11 added after round-1 results. Hashes below were recorded before round-2 detectors/tests/reviews ran. canary_runner.py unchanged since the R2 fix.",
+   "files": {
+    "canaries/canaries.yaml": "8944ead1e8f3386e798fe97f2404bab9a9e2dd7b011a0e409c4fa418fdb6eccf",
+    "canaries/C9.patch": "33f3d73664e9ee645c9d79f14ee17ab9f3066c38994c19ad6eb372ede8912212",
+    "canaries/C10.patch": "6b8cc1de3d5686ac8d6b0ca582e5e121e659bcbc787294f168112912819b693b",
+    "canaries/C11.patch": "5809ad292a5add720a3749200007ecadec21797460286097a494b9cef69b08bf",
+    "receipts/evidence/canary_runner.py": "8135c11a0623770d6a2f675ac25d5be705a0133d6534a9f288cd03812558c060"
+   }
+  }
+ ]
+}

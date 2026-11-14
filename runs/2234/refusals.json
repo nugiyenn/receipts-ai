@@ -1,0 +1,150 @@
+{
+  "change": "2234",
+  "kind": "refusals",
+  "produced_by": "claude-code session, cached",
+  "model": "claude-sonnet-5-5",
+  "produced_at": "2026-11-14T23:19",
+  "static_analysis_only": true,
+  "prompt": "You are the refusal writer. A deterministic policy (policy/refusal.yaml, rules R1-R8) decides WHEN the reviewer must refuse; you only word the refusal.\nFor each triggered rule write: what (the decision the AI will not make), why_ai_cannot_decide (the specific reason evidence cannot settle it),\nquestion_for_owner (one question answerable in under a minute), options (2-4 short strings), and resolvable_by (the evidence that would settle it, or \"human only\").\nCite exact diff lines. No confidence numbers. Do not recommend approving or rejecting the change.",
+  "prompt_sha256": "463eb717dbebf461ac3f21d903c076b5bc3d683aff49287e4efbdedaea6e398d",
+  "inputs": [
+    "git show origin/ju26-issue-2234",
+    "issue #2234 body (github.com page, fetched 2026-11-14)",
+    "receipts/requirements/REQ-2234.yaml",
+    "git history: commit 1a74a620, v3.1.0..v3.1.1 TypeCollector.cs diff"
+  ],
+  "refusals": [
+    {
+      "id": "R-2234-1",
+      "rule": "R3-unverified-root-cause",
+      "claims": [
+        "C4",
+        "C1"
+      ],
+      "what": "Whether this change fixes the regression named in issue #2234, rather than a different defect (duplicate and mixed key handling) found nearby.",
+      "why_ai_cannot_decide": "The issue says the analyzer worked in 3.1.0 and broke in 3.1.1. The v3.1.0..v3.1.1 diff moves the suppression early return to the top of the member-collection method (commit 1a74a620). That commit is not an ancestor of the branch base (32258fdb, v3.0.238-rc.1-66), and the diff leaves the early return at the end of the method. So the cause the issue names is not in the code the change was written against, and no cited line connects the diff to it.",
+      "question_for_owner": "Do you accept this as hardening of duplicate and mixed key handling, and re-target the real regression fix to master with a test that fails there?",
+      "options": [
+        "Accept as hardening, relabel the change",
+        "Re-target to master and re-run the tests",
+        "Reject: it does not fix #2234"
+      ],
+      "resolvable_by": "Partly by evidence: Time Machine on base (if the eight tests already pass there, they cannot evidence a regression fix) and a master worktree run (hypothesis H4).",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1383,
+          "quote": "if (suppressSourceGeneration is true)"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 21,
+          "quote": "public async Task MemberWithoutKeyIsReported()"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1008,
+          "quote": "continue; // The key kind does not match the other members; the diagnostic is reported, so skip this member."
+        }
+      ],
+      "evidence_refs": [],
+      "owner_decision": null,
+      "owner_note": null
+    },
+    {
+      "id": "R-2234-2",
+      "rule": "R2-silent-suppression",
+      "claims": [
+        "C6"
+      ],
+      "what": "Whether a member whose key kind does not match the others may be skipped silently in generator-only builds.",
+      "why_ai_cannot_decide": "After the new 'continue' the member is not collected, so the generated formatter omits it. The diagnostic that explains this comes from the analyzer; if the analyzer is not running or its severity is none, data silently stops being serialized. The reviewer cannot know which build configurations the maintainers promise to support.",
+      "question_for_owner": "Is an analyzer-only diagnostic enough, or must the generator itself fail or warn when it skips a member?",
+      "options": [
+        "Analyzer diagnostic is enough",
+        "Require a generator-side diagnostic",
+        "Reject"
+      ],
+      "resolvable_by": "Partly: a generator-only run on a mixed-key type shows whether the member is dropped (hypothesis H5). The policy choice stays human.",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1008,
+          "quote": "continue; // The key kind does not match the other members; the diagnostic is reported, so skip this member."
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1007,
+          "quote": "Diagnostic.Create(MsgPack00xMessagePackAnalyzer.DoNotMixStringAndIntKeys"
+        }
+      ],
+      "evidence_refs": [],
+      "owner_decision": null,
+      "owner_note": null
+    },
+    {
+      "id": "R-2234-3",
+      "rule": "R8-requirement-ambiguity",
+      "claims": [
+        "C7",
+        "C8"
+      ],
+      "what": "Which diagnostics must apply to a type with SuppressSourceGeneration = true.",
+      "why_ai_cannot_decide": "The issue states one sentence and names no diagnostic. The README the agent wrote picks a contract: five rules validated, three not. A different but defensible reading would keep MsgPack011 when AllowPrivate is set, because private members need a nested formatter only if one is generated. The reviewer cannot choose between readings.",
+      "question_for_owner": "Is the README list the contract you want for suppressed types?",
+      "options": [
+        "Yes, the README list",
+        "Change the list (state which)",
+        "Document as 'subject to change'"
+      ],
+      "resolvable_by": "human only",
+      "citations": [
+        {
+          "path": "README.md",
+          "line": 1625,
+          "quote": "The analyzer still validates these types, because they are serialized at run time and must still have a valid contract:"
+        },
+        {
+          "path": "README.md",
+          "line": 1632,
+          "quote": "The analyzer does not report the partial-class requirement ([MsgPack011]"
+        }
+      ],
+      "evidence_refs": [],
+      "owner_decision": null,
+      "owner_note": null
+    },
+    {
+      "id": "R-2234-4",
+      "rule": "R6-doc-overclaim",
+      "claims": [
+        "C7",
+        "C8"
+      ],
+      "what": "Whether the README may state behaviour for MsgPack012 and MsgPack016 on suppressed types that no test exercises.",
+      "why_ai_cannot_decide": "Docs written by the same agent that wrote the code describe five validations; the new tests cover four of them and one of the three 'not reported' rules. An untested documented behaviour becomes a contract the next change can break without any red test.",
+      "question_for_owner": "Do you require a test for each documented diagnostic before merge, or accept the README as written?",
+      "options": [
+        "Require tests for 012 and 016",
+        "Accept README as written",
+        "Trim the README to what is tested"
+      ],
+      "resolvable_by": "Mechanical: new tests for MsgPack012 and the derived-key path would move C7 and C8 to executed evidence.",
+      "citations": [
+        {
+          "path": "README.md",
+          "line": 1630,
+          "quote": "Types are accessible to the resolver ([MsgPack012](doc/analyzers/MsgPack012.md))."
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 169,
+          "quote": "public async Task SourceGenerationOnlyDiagnosticsAreNotReportedWhenSuppressed()"
+        }
+      ],
+      "evidence_refs": [],
+      "owner_decision": null,
+      "owner_note": null
+    }
+  ]
+}

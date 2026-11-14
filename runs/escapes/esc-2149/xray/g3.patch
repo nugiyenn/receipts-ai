@@ -1,0 +1,13 @@
+diff --git a/src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedNamedTypeName.cs b/src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedNamedTypeName.cs
+index 5023ed83..97d51d97 100644
+--- a/src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedNamedTypeName.cs
++++ b/src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedNamedTypeName.cs
+@@ -39,7 +37,7 @@ public record QualifiedNamedTypeName : QualifiedTypeName, IComparable<QualifiedN
+     }
+ 
+     [SetsRequiredMembers]
+-    public QualifiedNamedTypeName(INamedTypeSymbol symbol)
++    public QualifiedNamedTypeName(INamedTypeSymbol symbol, ImmutableStack<GenericTypeParameterInfo>? recursionGuard = null)
+     {
+         this.Name = symbol.Name;
+         this.Kind = symbol.TypeKind;

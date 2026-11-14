@@ -1,0 +1,138 @@
+{
+  "rehearsal": true,
+  "rehearsal_note": "Rehearsal for the demo. The decisions and the risk statement were written for practice, not by an accountable owner. Not a real sign-off.",
+  "change": "2283",
+  "requirements": [
+    "REQ-2283"
+  ],
+  "base": "32258fdbee4bcd653c79f51b4376b5103c6f4d27",
+  "head": "9df83c38409c8bfad0517aebffe48211eda4a5b4",
+  "owner": "Rehearsal Owner",
+  "signed_at": "2026-11-15T00:35:00+02:00",
+  "lane": "L2",
+  "reading_budget": {
+    "lines": 90,
+    "hunks": 7,
+    "total_changed_lines": 228,
+    "ratio": 0.3947,
+    "basis": "line-level: flagged src/template hunks whole; doc/test hunks only lines near cited evidence gaps",
+    "inputs": {
+      "xray": true,
+      "regen": false,
+      "refusals": true,
+      "claims": true
+    },
+    "provisional": false,
+    "hunk_level_lines": 226
+  },
+  "checked": [
+    {
+      "claim": "C1",
+      "text": "For a [MessagePackObject] type whose member is a closed generic value type from a referenced assembly, the analyzer no longer throws IndexOutOfRangeException (AD0001).",
+      "by": "timemachine (executed)",
+      "evidence_level": "E3",
+      "evidence_sha256": "bb9259a1ff4c222b511554a5cd362ce371b38b1711fbade8ac7b49fb07a7826e"
+    },
+    {
+      "claim": "C2",
+      "text": "For the same input the generator no longer throws (no CS8785) and a GeneratedMessagePackResolver is emitted.",
+      "by": "timemachine (executed)",
+      "evidence_level": "E3",
+      "evidence_sha256": "bb9259a1ff4c222b511554a5cd362ce371b38b1711fbade8ac7b49fb07a7826e"
+    }
+  ],
+  "not_checked": [
+    {
+      "what": "claim C3: Only struct<T> and record struct<T> from metadata change behaviour; struct, record struct, class<T> and record class<T> from metadata behave exactly as before.",
+      "why": "evidence level E1, status refused"
+    },
+    {
+      "what": "claim C4: No diagnostic that was reported before the change for a type declared in source is lost, moved or changed by the new constructor-level filter.",
+      "why": "evidence level E2, status refused"
+    },
+    {
+      "what": "claim C5: No safety-relevant diagnostic is silently dropped for types the user controls.",
+      "why": "evidence level E1, status refused"
+    },
+    {
+      "what": "claim C6: Diagnostics about the members of a closed generic type from a referenced assembly are reported by the assembly that defines it, so any problem must be fixed there.",
+      "why": "evidence level E1, status refused"
+    },
+    {
+      "what": "claim C7: An unattributed public member of a type defined in a referenced assembly is reported by the project that defines that type.",
+      "why": "evidence level E1, status refused"
+    },
+    {
+      "what": "claim C8: Dropping a diagnostic that has no location in the compilation is required because analyzers are not permitted to report against a location that does not exist.",
+      "why": "evidence level E1, status unproven"
+    },
+    {
+      "what": "claim C9: No live DeclaringSyntaxReferences[0] indexing remains in TypeCollector.cs; the only remaining occurrence is commented out.",
+      "why": "evidence level E1, status refused"
+    },
+    {
+      "what": "claim C10: GetPropertyIdentifierLocation returns null only for properties that have no source declaration (metadata), so no source-declared property loses its diagnostic.",
+      "why": "evidence level E1, status unproven"
+    },
+    {
+      "what": "hunks h4 (X-Ray group g2)",
+      "why": "no test fails when this code is reverted; owner read it by eye"
+    },
+    {
+      "what": "the three new tests on the 3.1.x branch",
+      "why": "this branch is based on an older commit and the owner has not rebuilt on master yet"
+    }
+  ],
+  "refusal_decisions": [
+    {
+      "id": "R-2283-1",
+      "rule": "R2-silent-suppression",
+      "question": "Do you accept a blanket drop of unlocated diagnostics, or must the drop be limited to symbols that are actually declared in metadata?",
+      "decision": "Require narrowing to metadata symbols",
+      "note": "The crash only needs two null-safe lookups. A filter on all 28 call sites can hide a diagnostic nobody planned to hide, and the record case already shows one."
+    },
+    {
+      "id": "R-2283-2",
+      "rule": "R6-doc-overclaim",
+      "question": "Is the documented guarantee true for the packages your users reference, and should it say 'may be reported' instead?",
+      "decision": "Soften to 'may be reported by the defining assembly'",
+      "note": "A NuGet package built without our analyzer reports nothing, so the doc sentence promises more than we can check."
+    },
+    {
+      "id": "R-2283-3",
+      "rule": "R1-product-decision",
+      "question": "Should a consuming project get at least an informational diagnostic when a referenced generic type has an unattributed public member?",
+      "decision": "Decide later, track in an issue",
+      "note": "Whether consumers get an informational hint is a product call for the maintainers. It should not block the crash fix."
+    },
+    {
+      "id": "R-2283-4",
+      "rule": "R3-unverified-root-cause",
+      "question": "Which branch does this fix target, and must the new tests be re-run on that branch before you sign?",
+      "decision": "Re-run on master (3.1.x) first",
+      "note": "The branch sits on an older base. I want the three new tests green on the branch we ship from before this merges."
+    }
+  ],
+  "residual_risk_owner_words": "I read the diagnostic filter and the helper by hand. Three tests fail on the old code, so the crash fix is real. What I did not run: the other 3.1.x branch, packages built without the analyzer, and any record shape beyond the three tests. If the filter is wider than it should be, a user could lose a diagnostic and see a clean build, and I accept that until the narrowing lands.",
+  "own_words_guard": {
+    "overlap_with_ai_text": 0.291,
+    "limit": 0.6,
+    "min_words": 15
+  },
+  "citations_summary": {
+    "citations": 28,
+    "valid": 28,
+    "invalid": 0,
+    "claims": 10,
+    "claims_invalid": 0,
+    "hallucination_rate": 0.0
+  },
+  "reviewer": {
+    "models": "claude-code session, cached",
+    "prompt_sha256": null,
+    "policy_version": "areas-1+routing-1",
+    "advisory_only": true
+  },
+  "bundle_sha256": "2697663dd4e1c01249847cf57a47ab9efff9160b980e4541a71318b53f0e8e6d",
+  "bundle_files": 44
+}

@@ -1,0 +1,41 @@
+{
+ "change": "2283",
+ "method": "head's GenericsFormatterTests.cs copied onto base worktree (32258fdb); same 3 tests run on base+test-file and on head (9df83c38)",
+ "command": "dotnet test tests/MessagePack.SourceGenerator.Tests -f net8.0 --filter <3 test names>",
+ "tests": [
+  {
+   "name": "GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference",
+   "base": "fail",
+   "head": "pass",
+   "base_exception_excerpt": "threw an exception of type 'System.IndexOutOfRangeException' with message 'Index was outside the bounds of the array.'."
+  },
+  {
+   "name": "GenericsFormatterTests.ClosedGenericRecordStruct_FromMetadataReference",
+   "base": "fail",
+   "head": "pass",
+   "base_exception_excerpt": "threw an exception of type 'System.IndexOutOfRangeException' with message 'Index was outside the bounds of the array.'."
+  },
+  {
+   "name": "GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference_UnkeyedMember",
+   "base": "fail",
+   "head": "pass",
+   "base_exception_excerpt": "threw an exception of type 'System.IndexOutOfRangeException' with message 'Index was outside the bounds of the array.'."
+  }
+ ],
+ "base_exception_excerpts": {
+  "analyzer_AD0001": "threw an exception of type 'System.IndexOutOfRangeException' with message 'Index was outside the bounds of the array.'.",
+  "generator_CS8785": "Generator 'MessagePackGenerator' failed to generate source. It will not contribute to the output and compilation errors may occur as a result. Exception was of type 'IndexOutOfRangeException' with message 'Index was outside the bounds of the array.'."
+ },
+ "issue_quote": "Both MessagePackGenerator (CS8785) and MsgPack00xMessagePackAnalyzer (AD0001) throw IndexOutOfRangeException ... Index was outside the bounds of the array.",
+ "timings": {
+  "base_build_seconds": 171,
+  "base_test_run": "exit=1 secs=80",
+  "head_test_run": "exit=0 secs=85"
+ },
+ "logs": {
+  "base": "runs/2283/timemachine/base.log",
+  "head": "runs/2283/timemachine/head.log",
+  "base_build": "runs/2283/timemachine/base-build.log"
+ },
+ "verdict": "E3-proven: all 3 new tests fail on base with the issue's IndexOutOfRangeException (AD0001 + CS8785) and pass on head"
+}

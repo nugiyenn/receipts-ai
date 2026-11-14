@@ -1,0 +1,63 @@
+{
+  "change": "2297",
+  "method": "match if (cited lines in same file within 8 lines AND token jaccard>=0.12) OR jaccard>=0.35; greedy per Claude claim. Heuristic, not semantic; unmatched claims need human read.",
+  "overlap": [
+    {
+      "claude": "C1",
+      "gemini": "c1",
+      "cited_lines_near": true,
+      "text_jaccard": 0.45
+    },
+    {
+      "claude": "C3",
+      "gemini": "c6",
+      "cited_lines_near": true,
+      "text_jaccard": 0.18
+    },
+    {
+      "claude": "C4",
+      "gemini": "c2",
+      "cited_lines_near": true,
+      "text_jaccard": 0.75
+    },
+    {
+      "claude": "C5",
+      "gemini": "c2",
+      "cited_lines_near": true,
+      "text_jaccard": 0.15
+    },
+    {
+      "claude": "C6",
+      "gemini": "c5",
+      "cited_lines_near": true,
+      "text_jaccard": 0.55
+    }
+  ],
+  "only_claude": [
+    "C2",
+    "C7",
+    "C8"
+  ],
+  "only_gemini": [
+    {
+      "id": "c3",
+      "requirement": "REQ-2297-NF2",
+      "text": "Template sources (.tt) and their generated .cs outputs stay consistent."
+    },
+    {
+      "id": "c4",
+      "requirement": "REQ-2297-S1",
+      "text": "Generated code semantics for (de)serialisation are unchanged."
+    }
+  ],
+  "counts": {
+    "claude": 8,
+    "gemini": 6,
+    "overlap": 5
+  },
+  "only_claude_texts": {
+    "C2": "The new test verifies that every type the generator emits is decorated.",
+    "C7": "All snapshot files affected by the change were regenerated: 222 of the 225 .g.cs snapshots were updated and the 3 left untouched are not consumed by any test.",
+    "C8": "The change affects only generated code: coverage exclusion is limited to code the generator emits."
+  }
+}

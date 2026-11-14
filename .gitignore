@@ -1,0 +1,27 @@
+# Local environment and secrets
+.venv/
+.env
+.env.*
+*.key
+
+# Python and OS noise
+__pycache__/
+*.pyc
+.DS_Store
+docs/
+# Internal working notes, not part of the submission
+docs/internal/
+
+# Generated or heavy media (rebuild with scripts/ or keep outside git)
+docs/media/*.webm
+docs/media/*.mp4
+docs/deck/deck-preview/
+web/index.mock.html
+web/fixtures/
+
+# Scratch
+*.orig
+*.tmp
+
+# Synthetic voice cache
+docs/media/tts_cache/

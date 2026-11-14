@@ -1,0 +1,15 @@
+diff --git a/src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedTypeName.cs b/src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedTypeName.cs
+index d2d5679f..5eda4f6c 100644
+--- a/src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedTypeName.cs
++++ b/src/MessagePack.SourceGenerator/CodeAnalysis/QualifiedTypeName.cs
+@@ -2,10 +2,7 @@
+ // Licensed under the MIT license. See LICENSE file in the project root for full license information.
+ 
+ using System.Collections.Immutable;
+-using System.Diagnostics;
+-using System.Text;
+ using Microsoft.CodeAnalysis;
+-using Microsoft.CodeAnalysis.CSharp.Syntax;
+ 
+ namespace MessagePack.SourceGenerator.CodeAnalysis;
+ 

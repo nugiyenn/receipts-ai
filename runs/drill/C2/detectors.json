@@ -1,0 +1,16 @@
+{
+  "signals": {
+    "R4": null,
+    "R2": null,
+    "R6": null,
+    "assertion_drop": null
+  },
+  "fired": [],
+  "planted_ranges": [
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "start": 1443,
+      "end": 1449
+    }
+  ]
+}

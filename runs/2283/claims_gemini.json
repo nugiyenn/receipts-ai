@@ -1,0 +1,188 @@
+{
+  "claims": [
+    {
+      "id": "c1",
+      "requirement": "REQ-2283-F1, REQ-2283-F2, REQ-2283-F3",
+      "text": "The analyzer and generator do not crash on closed generic value types (struct<T> and record struct<T>) from referenced assemblies, and the generator successfully emits the resolver.",
+      "source": "commit",
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 507,
+          "quote": "public async Task ClosedGenericStruct_FromMetadataReference()"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 551,
+          "quote": "public async Task ClosedGenericRecordStruct_FromMetadataReference()"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 658,
+          "quote": "Assert.Contains(expectedResolverHintName, hintNames);"
+        }
+      ],
+      "verifier": "regen",
+      "citations_checked": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 507,
+          "quote": "public async Task ClosedGenericStruct_FromMetadataReference()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h8"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 551,
+          "quote": "public async Task ClosedGenericRecordStruct_FromMetadataReference()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h8"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 658,
+          "quote": "Assert.Contains(expectedResolverHintName, hintNames);",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h8"
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "requirement": "REQ-2283-F1, REQ-2283-F3",
+      "text": "The analyzer avoids IndexOutOfRangeException by using FirstOrDefault() on DeclaringSyntaxReferences and safely handling properties without source declarations.",
+      "source": "commit",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1077,
+          "quote": "item.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation()"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1434,
+          "quote": "private static Location? GetPropertyIdentifierLocation(IPropertySymbol property) => (property.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as PropertyDeclarationSyntax)?.Identifier.GetLocation();"
+        }
+      ],
+      "verifier": "static",
+      "citations_checked": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1077,
+          "quote": "item.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation()",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h5"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1434,
+          "quote": "private static Location? GetPropertyIdentifierLocation(IPropertySymbol property) => (property.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as PropertyDeclarationSyntax)?.Identifier.GetLocation();",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h6"
+        }
+      ]
+    },
+    {
+      "id": "c3",
+      "requirement": "REQ-2283-NF1, REQ-2283-S1",
+      "text": "Diagnostics are only reported if their location is in source and belongs to the current compilation, ensuring no existing diagnostics for user-controlled types are lost or suppressed.",
+      "source": "commit",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1446,
+          "quote": "if (diagnostic.Location.IsInSource && this.compilation.ContainsSyntaxTree(diagnostic.Location.SourceTree))"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1448,
+          "quote": "report(diagnostic);"
+        }
+      ],
+      "verifier": "static",
+      "citations_checked": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1446,
+          "quote": "if (diagnostic.Location.IsInSource && this.compilation.ContainsSyntaxTree(diagnostic.Location.SourceTree))",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h6"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1448,
+          "quote": "report(diagnostic);",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h6"
+        }
+      ]
+    },
+    {
+      "id": "c4",
+      "requirement": "REQ-2283-NF2",
+      "text": "Documentation correctly states that diagnostics for types from referenced assemblies are reported by the defining project, not the consuming project.",
+      "source": "commit",
+      "citations": [
+        {
+          "path": "README.md",
+          "line": 1642,
+          "quote": "Diagnostics about the members of such a type are reported by the assembly that defines it rather than by the consuming project"
+        },
+        {
+          "path": "doc/analyzers/MsgPack004.md",
+          "line": 51,
+          "quote": "This analyzer only reports on members declared in the project being compiled."
+        }
+      ],
+      "verifier": "argued",
+      "citations_checked": [
+        {
+          "path": "README.md",
+          "line": 1642,
+          "quote": "Diagnostics about the members of such a type are reported by the assembly that defines it rather than by the consuming project",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h1"
+        },
+        {
+          "path": "doc/analyzers/MsgPack004.md",
+          "line": 51,
+          "quote": "This analyzer only reports on members declared in the project being compiled.",
+          "valid": true,
+          "reason": "exact quote at cited line",
+          "in_diff": true,
+          "hunk": "h2"
+        }
+      ]
+    }
+  ],
+  "uncovered_requirements": [],
+  "change": "2283",
+  "kind": "claims_gemini",
+  "model": "gemini-3.1-pro-preview",
+  "produced_by": "gemini api, cached",
+  "produced_at": "2026-11-14T23:21:27+02:00",
+  "prompt_sha256": "daea705525bb098e67bfaad73279a0ce8c5b2f1d76c1fe160096c9f3380cd214",
+  "prompt": "You are a code-review claim extractor. You do NOT judge whether the change is good.\nProduce the minimal set of falsifiable claims this change makes or must satisfy.\nRules:\n1. Every requirement item (F*, NF*, S*) must be covered by >=1 claim, or listed in uncovered_requirements.\n2. Statements from the commit message, README or docs written by the author agent are\n   CLAIMS TO TEST (source=\"author-narrative\"), never evidence.\n3. Every claim must cite >=1 exact diff line: {path, line, quote}. 'line' is the NEW-file line number shown\n   in the numbered diff; 'quote' must be a verbatim substring of that line.\n4. For each claim propose a verifier: timemachine | xray | regen | matrix | static | argued.\n5. Never output confidence numbers or words like \"likely correct\".\nOutput JSON: {\"claims\":[{\"id\",\"requirement\",\"text\",\"source\",\"citations\":[{\"path\",\"line\",\"quote\"}],\"verifier\"}],\"uncovered_requirements\":[...]}. No prose.",
+  "citation_summary": {
+    "citations": 9,
+    "invalid": 0,
+    "hallucinated": 0,
+    "wrong_line_only": 0
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "change": "2234",
+  "kind": "hypotheses_static",
+  "produced_by": "claude-code session, cached",
+  "model": "claude-sonnet-5-5",
+  "produced_at": "2026-11-14T23:19",
+  "static_analysis_only": true,
+  "prompt": "List (a) facts verified statically, each with the exact command run and its captured output, and (b) hypotheses for the evidence engine to confirm or reject,\neach with a concrete test sketch and the outcome that would confirm or reject it. Static analysis only: do not run dotnet. No confidence numbers.",
+  "prompt_sha256": "16483aa1400755943731183936595a953906d028e7270724d9883f95a60608fb",
+  "inputs": [
+    "git show origin/ju26-issue-2234",
+    "issue #2234 body (github.com page, fetched 2026-11-14)",
+    "receipts/requirements/REQ-2234.yaml",
+    "git history: commit 1a74a620, v3.1.0..v3.1.1 TypeCollector.cs diff"
+  ],
+  "verified_facts": [
+    {
+      "id": "F-2234-1",
+      "statement": "Commit 1a74a620 (\"stop collect field when object marked SuppressSourceGeneration\") is the change that moved the suppression early return to the top of GetObjectInfo.",
+      "command": "git -C /Users/andy/Downloads/Junction2/repo log -1 --format=%h %ad %s --date=short 1a74a620",
+      "exit_code": 0,
+      "output": "1a74a620 2024-12-25 stop collect field when object marked SuppressSourceGeneration",
+      "status": "verified-static"
+    },
+    {
+      "id": "F-2234-2",
+      "statement": "Commit 1a74a620 is not an ancestor of the branch base (exit code 1 = not an ancestor).",
+      "command": "git -C /Users/andy/Downloads/Junction2/repo merge-base --is-ancestor 1a74a620 32258fdb",
+      "exit_code": 1,
+      "output": "",
+      "status": "verified-static"
+    },
+    {
+      "id": "F-2234-3",
+      "statement": "Line of the 'Skip any source generation' early return: end of the method in v3.1.0, base and head; top of the method in v3.1.1, v3.1.12 and master.",
+      "command": "bash -c for r in v3.1.0 v3.1.1 v3.1.12 origin/master 32258fdb origin/ju26-issue-2234; do echo -n \"$r: \"; git -C /Users/andy/Downloads/Junction2/repo show $r:src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs | grep -n 'Skip any source generation' | tr '\\n' ' '; echo; done",
+      "exit_code": 0,
+      "output": "v3.1.0: 1371:            // Skip any source generation \nv3.1.1: 725:            // Skip any source generation \nv3.1.12: 725:            // Skip any source generation \norigin/master: 725:            // Skip any source generation \n32258fdb: 1371:            // Skip any source generation \norigin/ju26-issue-2234: 1385:            // Skip any source generation",
+      "status": "verified-static"
+    },
+    {
+      "id": "F-2234-4",
+      "statement": "The new analyzer test file has 8 [Fact] methods.",
+      "command": "bash -c git -C /Users/andy/Downloads/Junction2/repo show origin/ju26-issue-2234:tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs | grep -c '\\[Fact\\]'",
+      "exit_code": 0,
+      "output": "8",
+      "status": "verified-static"
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "H4",
+      "rule": "R3",
+      "statement": "The regression named in #2234 is not present in the branch base, so the new tests pass on base (pass-to-pass in Time Machine).",
+      "status": "unconfirmed",
+      "static_evidence_note": "Verified facts F-2234-1..3: the cause commit is not an ancestor of the base, and the early return sits at the end of the method in the base and in head.",
+      "static_evidence": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1383,
+          "quote": "if (suppressSourceGeneration is true)"
+        }
+      ],
+      "how_to_confirm": "P-2234-1 and P-2234-4.",
+      "if_confirmed": "refusal R-2234-1 resolved against the claim: the tests do not evidence a regression fix",
+      "if_rejected": "refusal narrows to the target-branch question"
+    },
+    {
+      "id": "H5",
+      "rule": "R2",
+      "statement": "The 'continue' on a mismatched key kind makes the generator silently omit the member when the analyzer does not run.",
+      "status": "unconfirmed",
+      "static_evidence": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1008,
+          "quote": "continue; // The key kind does not match the other members; the diagnostic is reported, so skip this member."
+        }
+      ],
+      "how_to_confirm": "P-2234-6.",
+      "if_confirmed": "R2 finding",
+      "if_rejected": "generator reports or fails"
+    },
+    {
+      "id": "H-2234-A",
+      "rule": "R6",
+      "statement": "MsgPack012 and the MsgPack016 derived-key path described in the README have no test.",
+      "status": "static-fact",
+      "static_evidence": [
+        {
+          "path": "README.md",
+          "line": 1630,
+          "quote": "Types are accessible to the resolver ([MsgPack012](doc/analyzers/MsgPack012.md))."
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 921,
+          "quote": "if (derivedKeyAttribute is null || suppressSourceGeneration is not true)"
+        }
+      ],
+      "static_evidence_note": "The test file's methods are listed in claims C1..C8; none targets an inaccessible suppressed type or a derived key attribute.",
+      "how_to_confirm": "P-2234-7, P-2234-8.",
+      "if_confirmed": "R-2234-4 stands",
+      "if_rejected": "n/a"
+    }
+  ]
+}

@@ -1,0 +1,654 @@
+
+  Determining projects to restore...
+/Users/andy/Downloads/Junction2/wt/canary-2283-C3/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+  Restored /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/MessagePack.SourceGenerator.csproj (in 350 ms).
+  Restored /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.Annotations/MessagePack.Annotations.csproj (in 351 ms).
+  Restored /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack/MessagePack.csproj (in 352 ms).
+  Restored /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.Analyzers.CodeFixes/MessagePack.Analyzers.CodeFixes.csproj (in 351 ms).
+  Restored /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.Analyzers/MessagePack.Analyzers.csproj (in 377 ms).
+  Restored /Users/andy/Downloads/Junction2/wt/canary-2283-C3/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj (in 484 ms).
+
+Build succeeded.
+
+/Users/andy/Downloads/Junction2/wt/canary-2283-C3/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:02.28
+
+/Users/andy/Downloads/Junction2/wt/canary-2283-C3/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+  MessagePack.SourceGenerator -> /Users/andy/Downloads/Junction2/wt/canary-2283-C3/bin/MessagePack.SourceGenerator/Debug/netstandard2.0/MessagePack.SourceGenerator.dll
+  MessagePack.Analyzers.CodeFixes -> /Users/andy/Downloads/Junction2/wt/canary-2283-C3/bin/MessagePack.Analyzers.CodeFixes/Debug/netstandard2.0/MessagePack.Analyzers.CodeFixes.dll
+  MessagePack.Analyzers -> /Users/andy/Downloads/Junction2/wt/canary-2283-C3/bin/MessagePack.Analyzers/Debug/netstandard2.0/MessagePack.Analyzers.dll
+  MessagePack.Annotations -> /Users/andy/Downloads/Junction2/wt/canary-2283-C3/bin/MessagePack.Annotations/Debug/netstandard2.0/MessagePack.Annotations.dll
+  MessagePack -> /Users/andy/Downloads/Junction2/wt/canary-2283-C3/bin/MessagePack/Debug/net8.0/MessagePack.dll
+  MessagePack.SourceGenerator.Tests -> /Users/andy/Downloads/Junction2/wt/canary-2283-C3/bin/MessagePack.SourceGenerator.Tests/Debug/net8.0/MessagePack.SourceGenerator.Tests.dll
+Test run for /Users/andy/Downloads/Junction2/wt/canary-2283-C3/bin/MessagePack.SourceGenerator.Tests/Debug/net8.0/MessagePack.SourceGenerator.Tests.dll (.NETCoreApp,Version=v8.0)
+VSTest version 17.11.0 (arm64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.8)
+[xUnit.net 00:00:00.21]   Discovering: MessagePack.SourceGenerator.Tests
+[xUnit.net 00:00:00.42]   Discovered:  MessagePack.SourceGenerator.Tests
+[xUnit.net 00:00:00.43]   Starting:    MessagePack.SourceGenerator.Tests
+  Passed MsgPack012InaccessibleDataTypeTests.InaccessibleNestedDataType_OuterNesting [4 s]
+  Passed GenericsFormatterTests.RecursiveGenerics_Direct [4 s]
+  Passed MsgPack012InaccessibleDataTypeTests.InaccessibleNestedDataType [583 ms]
+  Passed MsgPack015AllowPrivateRequiredTests.SetWhenNonPublicPropertyIsAnnotated [5 s]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToTypeForRecord1 [5 s]
+  Passed MsgPack011PartialTypeRequiredTests.NestedPartialTypeRequiresPartialSelfAndDeclaringType [5 s]
+  Passed MsgPack015AllowPrivateRequiredTests.AddForPublicTypeNestedUnderNonPublicType [226 ms]
+[xUnit.net 00:00:06.85]       System.InvalidOperationException : Mismatch between number of diagnostics returned, expected "0" actual "2"
+[xUnit.net 00:00:06.85]       
+[xUnit.net 00:00:06.85]       Diagnostics:
+[xUnit.net 00:00:06.85]       // error AD0001: Analyzer 'MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer' threw an exception of type 'System.IndexOutOfRangeException' with message 'Index was outside the bounds of the array.'.
+[xUnit.net 00:00:06.85]       Exception occurred with following context:
+[xUnit.net 00:00:06.85]       Compilation: TestProject
+[xUnit.net 00:00:06.85]       ISymbol: Cmd (NamedType)
+[xUnit.net 00:00:06.85]       
+[xUnit.net 00:00:06.85]       System.IndexOutOfRangeException: Index was outside the bounds of the array.
+[xUnit.net 00:00:06.85]          at System.Collections.Immutable.ImmutableArray`1.get_Item(Int32 index)
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1075
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectGeneric(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 651
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 363
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1043
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectObject(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 678
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 378
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 292
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect(Compilation compilation, AnalyzerOptions options, ReferenceSymbols referenceSymbols, Action`1 reportAnalyzerDiagnostic, ITypeSymbol targetType, CancellationToken cancellationToken) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 271
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer.AnalyzeSymbol(SymbolAnalysisContext context, ReferenceSymbols typeReferences, AnalyzerOptions options) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs:line 430
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer.<>c__DisplayClass55_1.<Initialize>b__1(SymbolAnalysisContext context) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs:line 357
+[xUnit.net 00:00:06.85]          at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.<>c.<ExecuteSymbolActions>b__45_1(ValueTuple`2 data)
+[xUnit.net 00:00:06.85]          at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.ExecuteAndCatchIfThrows_NoLock[TArg](DiagnosticAnalyzer analyzer, Action`1 analyze, TArg argument, Nullable`1 info, CancellationToken cancellationToken)
+[xUnit.net 00:00:06.85]       -----
+[xUnit.net 00:00:06.85]       
+[xUnit.net 00:00:06.85]       Suppress the following diagnostics to disable this analyzer: MsgPack003, MsgPack004, MsgPack005, MsgPack006, MsgPack007, MsgPack008, MsgPack009, MsgPack010, MsgPack011, MsgPack012, MsgPack013, MsgPack014, MsgPack015, MsgPack016, MsgPack017, MsgPack018
+[xUnit.net 00:00:06.85]       DiagnosticResult.CompilerError("AD0001").WithArguments("MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer", "System.IndexOutOfRangeException", "Index was outside the bounds of the array.", "Exception occurred with following context:
+[xUnit.net 00:00:06.85]       Compilation: TestProject
+[xUnit.net 00:00:06.85]       ISymbol: Cmd (NamedType)
+[xUnit.net 00:00:06.85]       
+[xUnit.net 00:00:06.85]       System.IndexOutOfRangeException: Index was outside the bounds of the array.
+[xUnit.net 00:00:06.85]          at System.Collections.Immutable.ImmutableArray`1.get_Item(Int32 index)
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1075
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectGeneric(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 651
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 363
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1043
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectObject(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 678
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 378
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 292
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect(Compilation compilation, AnalyzerOptions options, ReferenceSymbols referenceSymbols, Action`1 reportAnalyzerDiagnostic, ITypeSymbol targetType, CancellationToken cancellationToken) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 271
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer.AnalyzeSymbol(SymbolAnalysisContext context, ReferenceSymbols typeReferences, AnalyzerOptions options) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs:line 430
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer.<>c__DisplayClass55_1.<Initialize>b__1(SymbolAnalysisContext context) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs:line 357
+[xUnit.net 00:00:06.85]          at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.<>c.<ExecuteSymbolActions>b__45_1(ValueTuple`2 data)
+[xUnit.net 00:00:06.85]          at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.ExecuteAndCatchIfThrows_NoLock[TArg](DiagnosticAnalyzer analyzer, Action`1 analyze, TArg argument, Nullable`1 info, CancellationToken cancellationToken)
+[xUnit.net 00:00:06.85]       -----
+[xUnit.net 00:00:06.85]       
+[xUnit.net 00:00:06.85]       Suppress the following diagnostics to disable this analyzer: MsgPack003, MsgPack004, MsgPack005, MsgPack006, MsgPack007, MsgPack008, MsgPack009, MsgPack010, MsgPack011, MsgPack012, MsgPack013, MsgPack014, MsgPack015, MsgPack016, MsgPack017, MsgPack018"),
+[xUnit.net 00:00:06.85]       // warning CS8785: Generator 'MessagePackGenerator' failed to generate source. It will not contribute to the output and compilation errors may occur as a result. Exception was of type 'IndexOutOfRangeException' with message 'Index was outside the bounds of the array.'.
+[xUnit.net 00:00:06.85]       System.IndexOutOfRangeException: Index was outside the bounds of the array.
+[xUnit.net 00:00:06.85]          at System.Collections.Immutable.ImmutableArray`1.get_Item(Int32 index)
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1075
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectGeneric(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 651
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 363
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1043
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectObject(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 678
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 378
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 292
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect(Compilation compilation, AnalyzerOptions options, ReferenceSymbols referenceSymbols, Action`1 reportAnalyzerDiagnostic, ITypeSymbol targetType, CancellationToken cancellationToken) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 271
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.MessagePackGenerator.<>c__DisplayClass0_0.<Initialize>g__Collect|8(ITypeSymbol typeSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/MessagePackGenerator.cs:line 47
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.MessagePackGenerator.<>c.<Initialize>b__0_4(ValueTuple`2 s, CancellationToken ct) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/MessagePackGenerator.cs:line 55
+[xUnit.net 00:00:06.85]          at Microsoft.CodeAnalysis.TransformNode`2.<>c__DisplayClass6_0.<.ctor>b__0(TInput i, CancellationToken token)
+[xUnit.net 00:00:06.85]          at Microsoft.CodeAnalysis.TransformNode`2.UpdateStateTable(Builder builder, NodeStateTable`1 previousTable, CancellationToken cancellationToken)
+[xUnit.net 00:00:06.85]       -----
+[xUnit.net 00:00:06.85]       
+[xUnit.net 00:00:06.85]       DiagnosticResult.CompilerWarning("CS8785").WithArguments("MessagePackGenerator", "IndexOutOfRangeException", "Index was outside the bounds of the array.", "System.IndexOutOfRangeException: Index was outside the bounds of the array.
+[xUnit.net 00:00:06.85]          at System.Collections.Immutable.ImmutableArray`1.get_Item(Int32 index)
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1075
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectGeneric(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 651
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 363
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1043
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectObject(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 678
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 378
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 292
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect(Compilation compilation, AnalyzerOptions options, ReferenceSymbols referenceSymbols, Action`1 reportAnalyzerDiagnostic, ITypeSymbol targetType, CancellationToken cancellationToken) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 271
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.MessagePackGenerator.<>c__DisplayClass0_0.<Initialize>g__Collect|8(ITypeSymbol typeSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/MessagePackGenerator.cs:line 47
+[xUnit.net 00:00:06.85]          at MessagePack.SourceGenerator.MessagePackGenerator.<>c.<Initialize>b__0_4(ValueTuple`2 s, CancellationToken ct) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/MessagePackGenerator.cs:line 55
+[xUnit.net 00:00:06.85]          at Microsoft.CodeAnalysis.TransformNode`2.<>c__DisplayClass6_0.<.ctor>b__0(TInput i, CancellationToken token)
+[xUnit.net 00:00:06.85]          at Microsoft.CodeAnalysis.TransformNode`2.UpdateStateTable(Builder builder, NodeStateTable`1 previousTable, CancellationToken cancellationToken)
+[xUnit.net 00:00:06.85]       -----
+[xUnit.net 00:00:06.85]       "),
+[xUnit.net 00:00:06.85]       
+[xUnit.net 00:00:06.85]       
+[xUnit.net 00:00:06.86]       Stack Trace:
+[xUnit.net 00:00:06.86]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/DefaultVerifier.cs(79,0): at Microsoft.CodeAnalysis.Testing.DefaultVerifier.Equal[T](T expected, T actual, String message)
+[xUnit.net 00:00:06.86]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(546,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticResults(IEnumerable`1 actualResults, ImmutableArray`1 analyzers, DiagnosticResult[] expectedResults, IVerifier verifier)
+[xUnit.net 00:00:06.86]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(449,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticsAsync(EvaluatedProjectState primaryProject, ImmutableArray`1 additionalProjects, DiagnosticResult[] expected, IVerifier verifier, CancellationToken cancellationToken)
+[xUnit.net 00:00:06.86]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(203,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunImplAsync(CancellationToken cancellationToken)
+[xUnit.net 00:00:06.86]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(172,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunAsync(CancellationToken cancellationToken)
+[xUnit.net 00:00:06.86]         /Users/andy/Downloads/Junction2/wt/canary-2283-C3/tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs(648,0): at GenericsFormatterTests.RunWithMetadataReferenceAsync(String defineSource, String usageSource, String expectedResolverHintName, LanguageVersion languageVersion)
+[xUnit.net 00:00:06.86]         /Users/andy/Downloads/Junction2/wt/canary-2283-C3/tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs(579,0): at GenericsFormatterTests.ClosedGenericRecordStruct_FromMetadataReference()
+[xUnit.net 00:00:06.86]         --- End of stack trace from previous location ---
+  Passed MsgPack011PartialTypeRequiredTests.NestedPartialTypeRequiresPartialDeclaringType [398 ms]
+  Passed MsgPack015AllowPrivateRequiredTests.AddWhenNonPublicPropertyIsAnnotated [415 ms]
+  Failed GenericsFormatterTests.ClosedGenericRecordStruct_FromMetadataReference [1 s]
+  Error Message:
+   System.InvalidOperationException : Mismatch between number of diagnostics returned, expected "0" actual "2"
+
+Diagnostics:
+// error AD0001: Analyzer 'MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer' threw an exception of type 'System.IndexOutOfRangeException' with message 'Index was outside the bounds of the array.'.
+Exception occurred with following context:
+Compilation: TestProject
+ISymbol: Cmd (NamedType)
+
+System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.Collections.Immutable.ImmutableArray`1.get_Item(Int32 index)
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1075
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectGeneric(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 651
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 363
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1043
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectObject(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 678
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 378
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 292
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect(Compilation compilation, AnalyzerOptions options, ReferenceSymbols referenceSymbols, Action`1 reportAnalyzerDiagnostic, ITypeSymbol targetType, CancellationToken cancellationToken) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 271
+   at MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer.AnalyzeSymbol(SymbolAnalysisContext context, ReferenceSymbols typeReferences, AnalyzerOptions options) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs:line 430
+   at MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer.<>c__DisplayClass55_1.<Initialize>b__1(SymbolAnalysisContext context) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs:line 357
+   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.<>c.<ExecuteSymbolActions>b__45_1(ValueTuple`2 data)
+   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.ExecuteAndCatchIfThrows_NoLock[TArg](DiagnosticAnalyzer analyzer, Action`1 analyze, TArg argument, Nullable`1 info, CancellationToken cancellationToken)
+-----
+
+Suppress the following diagnostics to disable this analyzer: MsgPack003, MsgPack004, MsgPack005, MsgPack006, MsgPack007, MsgPack008, MsgPack009, MsgPack010, MsgPack011, MsgPack012, MsgPack013, MsgPack014, MsgPack015, MsgPack016, MsgPack017, MsgPack018
+DiagnosticResult.CompilerError("AD0001").WithArguments("MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer", "System.IndexOutOfRangeException", "Index was outside the bounds of the array.", "Exception occurred with following context:
+Compilation: TestProject
+ISymbol: Cmd (NamedType)
+
+System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.Collections.Immutable.ImmutableArray`1.get_Item(Int32 index)
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1075
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectGeneric(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 651
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 363
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1043
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectObject(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 678
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 378
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 292
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect(Compilation compilation, AnalyzerOptions options, ReferenceSymbols referenceSymbols, Action`1 reportAnalyzerDiagnostic, ITypeSymbol targetType, CancellationToken cancellationToken) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 271
+   at MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer.AnalyzeSymbol(SymbolAnalysisContext context, ReferenceSymbols typeReferences, AnalyzerOptions options) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs:line 430
+   at MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer.<>c__DisplayClass55_1.<Initialize>b__1(SymbolAnalysisContext context) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs:line 357
+   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.<>c.<ExecuteSymbolActions>b__45_1(ValueTuple`2 data)
+   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.ExecuteAndCatchIfThrows_NoLock[TArg](DiagnosticAnalyzer analyzer, Action`1 analyze, TArg argument, Nullable`1 info, CancellationToken cancellationToken)
+-----
+
+Suppress the following diagnostics to disable this analyzer: MsgPack003, MsgPack004, MsgPack005, MsgPack006, MsgPack007, MsgPack008, MsgPack009, MsgPack010, MsgPack011, MsgPack012, MsgPack013, MsgPack014, MsgPack015, MsgPack016, MsgPack017, MsgPack018"),
+// warning CS8785: Generator 'MessagePackGenerator' failed to generate source. It will not contribute to the output and compilation errors may occur as a result. Exception was of type 'IndexOutOfRangeException' with message 'Index was outside the bounds of the array.'.
+System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.Collections.Immutable.ImmutableArray`1.get_Item(Int32 index)
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1075
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectGeneric(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 651
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 363
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1043
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectObject(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 678
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 378
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 292
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect(Compilation compilation, AnalyzerOptions options, ReferenceSymbols referenceSymbols, Action`1 reportAnalyzerDiagnostic, ITypeSymbol targetType, CancellationToken cancellationToken) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 271
+   at MessagePack.SourceGenerator.MessagePackGenerator.<>c__DisplayClass0_0.<Initialize>g__Collect|8(ITypeSymbol typeSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/MessagePackGenerator.cs:line 47
+   at MessagePack.SourceGenerator.MessagePackGenerator.<>c.<Initialize>b__0_4(ValueTuple`2 s, CancellationToken ct) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/MessagePackGenerator.cs:line 55
+   at Microsoft.CodeAnalysis.TransformNode`2.<>c__DisplayClass6_0.<.ctor>b__0(TInput i, CancellationToken token)
+   at Microsoft.CodeAnalysis.TransformNode`2.UpdateStateTable(Builder builder, NodeStateTable`1 previousTable, CancellationToken cancellationToken)
+-----
+
+DiagnosticResult.CompilerWarning("CS8785").WithArguments("MessagePackGenerator", "IndexOutOfRangeException", "Index was outside the bounds of the array.", "System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.Collections.Immutable.ImmutableArray`1.get_Item(Int32 index)
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1075
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectGeneric(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 651
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 363
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1043
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectObject(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 678
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 378
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 292
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect(Compilation compilation, AnalyzerOptions options, ReferenceSymbols referenceSymbols, Action`1 reportAnalyzerDiagnostic, ITypeSymbol targetType, CancellationToken cancellationToken) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 271
+   at MessagePack.SourceGenerator.MessagePackGenerator.<>c__DisplayClass0_0.<Initialize>g__Collect|8(ITypeSymbol typeSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/MessagePackGenerator.cs:line 47
+   at MessagePack.SourceGenerator.MessagePackGenerator.<>c.<Initialize>b__0_4(ValueTuple`2 s, CancellationToken ct) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/MessagePackGenerator.cs:line 55
+   at Microsoft.CodeAnalysis.TransformNode`2.<>c__DisplayClass6_0.<.ctor>b__0(TInput i, CancellationToken token)
+   at Microsoft.CodeAnalysis.TransformNode`2.UpdateStateTable(Builder builder, NodeStateTable`1 previousTable, CancellationToken cancellationToken)
+-----
+"),
+
+
+  Stack Trace:
+     at Microsoft.CodeAnalysis.Testing.DefaultVerifier.Equal[T](T expected, T actual, String message) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/DefaultVerifier.cs:line 79
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticResults(IEnumerable`1 actualResults, ImmutableArray`1 analyzers, DiagnosticResult[] expectedResults, IVerifier verifier) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 546
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticsAsync(EvaluatedProjectState primaryProject, ImmutableArray`1 additionalProjects, DiagnosticResult[] expected, IVerifier verifier, CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 449
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunImplAsync(CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 203
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunAsync(CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 172
+   at GenericsFormatterTests.RunWithMetadataReferenceAsync(String defineSource, String usageSource, String expectedResolverHintName, LanguageVersion languageVersion) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs:line 648
+   at GenericsFormatterTests.ClosedGenericRecordStruct_FromMetadataReference() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs:line 579
+--- End of stack trace from previous location ---
+  Passed MsgPack015AllowPrivateRequiredTests.AddForNonPublicDeserializingConstructor [527 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributesToMembersOfRecordStruct [1 s]
+  Passed MsgPack011PartialTypeRequiredTests.CodeFixOffered [801 ms]
+  Passed MsgPack015AllowPrivateRequiredTests.AddForNonPublicType [526 ms]
+  Passed GenericsFormatterTests.Generics_Constraints_Struct [630 ms]
+  Passed MsgPack00xAnalyzerTests.CodeFixAppliesAcrossFiles [585 ms]
+  Passed GenericsFormatterTests.GenericsUnionFormatter_Nested [360 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributesToMembersOfRecordWithPrimaryCtor [301 ms]
+  Passed MsgPack00xAnalyzerTests.DerivedAttributes [207 ms]
+  Passed GenericsFormatterTests.Generics_Constraints_NullableReferenceType [728 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToType_Properties [590 ms]
+  Passed MsgPack00xAnalyzerTests.MessageFormatterAttribute [94 ms]
+  Passed GenericsFormatterTests.GenericsOfTFormatter [185 ms]
+[xUnit.net 00:00:08.94]       System.InvalidOperationException : Mismatch between number of diagnostics returned, expected "0" actual "2"
+[xUnit.net 00:00:08.94]       
+[xUnit.net 00:00:08.94]       Diagnostics:
+[xUnit.net 00:00:08.94]       // error AD0001: Analyzer 'MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer' threw an exception of type 'System.IndexOutOfRangeException' with message 'Index was outside the bounds of the array.'.
+[xUnit.net 00:00:08.94]       Exception occurred with following context:
+[xUnit.net 00:00:08.94]       Compilation: TestProject
+[xUnit.net 00:00:08.94]       ISymbol: MyObject (NamedType)
+[xUnit.net 00:00:08.94]       
+[xUnit.net 00:00:08.94]       System.IndexOutOfRangeException: Index was outside the bounds of the array.
+[xUnit.net 00:00:08.94]          at System.Collections.Immutable.ImmutableArray`1.get_Item(Int32 index)
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1075
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectGeneric(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 651
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 363
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1043
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectObject(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 678
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 378
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 292
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect(Compilation compilation, AnalyzerOptions options, ReferenceSymbols referenceSymbols, Action`1 reportAnalyzerDiagnostic, ITypeSymbol targetType, CancellationToken cancellationToken) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 271
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer.AnalyzeSymbol(SymbolAnalysisContext context, ReferenceSymbols typeReferences, AnalyzerOptions options) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs:line 430
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer.<>c__DisplayClass55_1.<Initialize>b__1(SymbolAnalysisContext context) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs:line 357
+[xUnit.net 00:00:08.94]          at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.<>c.<ExecuteSymbolActions>b__45_1(ValueTuple`2 data)
+[xUnit.net 00:00:08.94]          at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.ExecuteAndCatchIfThrows_NoLock[TArg](DiagnosticAnalyzer analyzer, Action`1 analyze, TArg argument, Nullable`1 info, CancellationToken cancellationToken)
+[xUnit.net 00:00:08.94]       -----
+[xUnit.net 00:00:08.94]       
+[xUnit.net 00:00:08.94]       Suppress the following diagnostics to disable this analyzer: MsgPack003, MsgPack004, MsgPack005, MsgPack006, MsgPack007, MsgPack008, MsgPack009, MsgPack010, MsgPack011, MsgPack012, MsgPack013, MsgPack014, MsgPack015, MsgPack016, MsgPack017, MsgPack018
+[xUnit.net 00:00:08.94]       DiagnosticResult.CompilerError("AD0001").WithArguments("MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer", "System.IndexOutOfRangeException", "Index was outside the bounds of the array.", "Exception occurred with following context:
+[xUnit.net 00:00:08.94]       Compilation: TestProject
+[xUnit.net 00:00:08.94]       ISymbol: MyObject (NamedType)
+[xUnit.net 00:00:08.94]       
+[xUnit.net 00:00:08.94]       System.IndexOutOfRangeException: Index was outside the bounds of the array.
+[xUnit.net 00:00:08.94]          at System.Collections.Immutable.ImmutableArray`1.get_Item(Int32 index)
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1075
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectGeneric(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 651
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 363
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1043
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectObject(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 678
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 378
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 292
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect(Compilation compilation, AnalyzerOptions options, ReferenceSymbols referenceSymbols, Action`1 reportAnalyzerDiagnostic, ITypeSymbol targetType, CancellationToken cancellationToken) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 271
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer.AnalyzeSymbol(SymbolAnalysisContext context, ReferenceSymbols typeReferences, AnalyzerOptions options) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs:line 430
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer.<>c__DisplayClass55_1.<Initialize>b__1(SymbolAnalysisContext context) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs:line 357
+[xUnit.net 00:00:08.94]          at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.<>c.<ExecuteSymbolActions>b__45_1(ValueTuple`2 data)
+[xUnit.net 00:00:08.94]          at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.ExecuteAndCatchIfThrows_NoLock[TArg](DiagnosticAnalyzer analyzer, Action`1 analyze, TArg argument, Nullable`1 info, CancellationToken cancellationToken)
+[xUnit.net 00:00:08.94]       -----
+[xUnit.net 00:00:08.94]       
+[xUnit.net 00:00:08.94]       Suppress the following diagnostics to disable this analyzer: MsgPack003, MsgPack004, MsgPack005, MsgPack006, MsgPack007, MsgPack008, MsgPack009, MsgPack010, MsgPack011, MsgPack012, MsgPack013, MsgPack014, MsgPack015, MsgPack016, MsgPack017, MsgPack018"),
+[xUnit.net 00:00:08.94]       // warning CS8785: Generator 'MessagePackGenerator' failed to generate source. It will not contribute to the output and compilation errors may occur as a result. Exception was of type 'IndexOutOfRangeException' with message 'Index was outside the bounds of the array.'.
+[xUnit.net 00:00:08.94]       System.IndexOutOfRangeException: Index was outside the bounds of the array.
+[xUnit.net 00:00:08.94]          at System.Collections.Immutable.ImmutableArray`1.get_Item(Int32 index)
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1075
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectGeneric(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 651
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 363
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1043
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectObject(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 678
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 378
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 292
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect(Compilation compilation, AnalyzerOptions options, ReferenceSymbols referenceSymbols, Action`1 reportAnalyzerDiagnostic, ITypeSymbol targetType, CancellationToken cancellationToken) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 271
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.MessagePackGenerator.<>c__DisplayClass0_0.<Initialize>g__Collect|8(ITypeSymbol typeSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/MessagePackGenerator.cs:line 47
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.MessagePackGenerator.<>c.<Initialize>b__0_4(ValueTuple`2 s, CancellationToken ct) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/MessagePackGenerator.cs:line 55
+[xUnit.net 00:00:08.94]          at Microsoft.CodeAnalysis.TransformNode`2.<>c__DisplayClass6_0.<.ctor>b__0(TInput i, CancellationToken token)
+[xUnit.net 00:00:08.94]          at Microsoft.CodeAnalysis.TransformNode`2.UpdateStateTable(Builder builder, NodeStateTable`1 previousTable, CancellationToken cancellationToken)
+[xUnit.net 00:00:08.94]       -----
+[xUnit.net 00:00:08.94]       
+[xUnit.net 00:00:08.94]       DiagnosticResult.CompilerWarning("CS8785").WithArguments("MessagePackGenerator", "IndexOutOfRangeException", "Index was outside the bounds of the array.", "System.IndexOutOfRangeException: Index was outside the bounds of the array.
+[xUnit.net 00:00:08.94]          at System.Collections.Immutable.ImmutableArray`1.get_Item(Int32 index)
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1075
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectGeneric(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 651
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 363
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1043
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectObject(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 678
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 378
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 292
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect(Compilation compilation, AnalyzerOptions options, ReferenceSymbols referenceSymbols, Action`1 reportAnalyzerDiagnostic, ITypeSymbol targetType, CancellationToken cancellationToken) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 271
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.MessagePackGenerator.<>c__DisplayClass0_0.<Initialize>g__Collect|8(ITypeSymbol typeSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/MessagePackGenerator.cs:line 47
+[xUnit.net 00:00:08.94]          at MessagePack.SourceGenerator.MessagePackGenerator.<>c.<Initialize>b__0_4(ValueTuple`2 s, CancellationToken ct) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/MessagePackGenerator.cs:line 55
+[xUnit.net 00:00:08.94]          at Microsoft.CodeAnalysis.TransformNode`2.<>c__DisplayClass6_0.<.ctor>b__0(TInput i, CancellationToken token)
+[xUnit.net 00:00:08.94]          at Microsoft.CodeAnalysis.TransformNode`2.UpdateStateTable(Builder builder, NodeStateTable`1 previousTable, CancellationToken cancellationToken)
+[xUnit.net 00:00:08.94]       -----
+[xUnit.net 00:00:08.94]       "),
+[xUnit.net 00:00:08.94]       
+[xUnit.net 00:00:08.94]       
+[xUnit.net 00:00:08.94]       Stack Trace:
+[xUnit.net 00:00:08.94]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/DefaultVerifier.cs(79,0): at Microsoft.CodeAnalysis.Testing.DefaultVerifier.Equal[T](T expected, T actual, String message)
+[xUnit.net 00:00:08.94]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(546,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticResults(IEnumerable`1 actualResults, ImmutableArray`1 analyzers, DiagnosticResult[] expectedResults, IVerifier verifier)
+[xUnit.net 00:00:08.94]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(449,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticsAsync(EvaluatedProjectState primaryProject, ImmutableArray`1 additionalProjects, DiagnosticResult[] expected, IVerifier verifier, CancellationToken cancellationToken)
+[xUnit.net 00:00:08.94]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(203,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunImplAsync(CancellationToken cancellationToken)
+[xUnit.net 00:00:08.95]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(172,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunAsync(CancellationToken cancellationToken)
+[xUnit.net 00:00:08.95]         /Users/andy/Downloads/Junction2/wt/canary-2283-C3/tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs(648,0): at GenericsFormatterTests.RunWithMetadataReferenceAsync(String defineSource, String usageSource, String expectedResolverHintName, LanguageVersion languageVersion)
+[xUnit.net 00:00:08.95]         /Users/andy/Downloads/Junction2/wt/canary-2283-C3/tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs(625,0): at GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference_UnkeyedMember()
+[xUnit.net 00:00:08.95]         --- End of stack trace from previous location ---
+  Failed GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference_UnkeyedMember [194 ms]
+  Error Message:
+   System.InvalidOperationException : Mismatch between number of diagnostics returned, expected "0" actual "2"
+
+Diagnostics:
+// error AD0001: Analyzer 'MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer' threw an exception of type 'System.IndexOutOfRangeException' with message 'Index was outside the bounds of the array.'.
+Exception occurred with following context:
+Compilation: TestProject
+ISymbol: MyObject (NamedType)
+
+System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.Collections.Immutable.ImmutableArray`1.get_Item(Int32 index)
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1075
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectGeneric(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 651
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 363
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1043
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectObject(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 678
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 378
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 292
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect(Compilation compilation, AnalyzerOptions options, ReferenceSymbols referenceSymbols, Action`1 reportAnalyzerDiagnostic, ITypeSymbol targetType, CancellationToken cancellationToken) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 271
+   at MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer.AnalyzeSymbol(SymbolAnalysisContext context, ReferenceSymbols typeReferences, AnalyzerOptions options) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs:line 430
+   at MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer.<>c__DisplayClass55_1.<Initialize>b__1(SymbolAnalysisContext context) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs:line 357
+   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.<>c.<ExecuteSymbolActions>b__45_1(ValueTuple`2 data)
+   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.ExecuteAndCatchIfThrows_NoLock[TArg](DiagnosticAnalyzer analyzer, Action`1 analyze, TArg argument, Nullable`1 info, CancellationToken cancellationToken)
+-----
+
+Suppress the following diagnostics to disable this analyzer: MsgPack003, MsgPack004, MsgPack005, MsgPack006, MsgPack007, MsgPack008, MsgPack009, MsgPack010, MsgPack011, MsgPack012, MsgPack013, MsgPack014, MsgPack015, MsgPack016, MsgPack017, MsgPack018
+DiagnosticResult.CompilerError("AD0001").WithArguments("MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer", "System.IndexOutOfRangeException", "Index was outside the bounds of the array.", "Exception occurred with following context:
+Compilation: TestProject
+ISymbol: MyObject (NamedType)
+
+System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.Collections.Immutable.ImmutableArray`1.get_Item(Int32 index)
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1075
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectGeneric(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 651
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 363
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1043
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectObject(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 678
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 378
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 292
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect(Compilation compilation, AnalyzerOptions options, ReferenceSymbols referenceSymbols, Action`1 reportAnalyzerDiagnostic, ITypeSymbol targetType, CancellationToken cancellationToken) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 271
+   at MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer.AnalyzeSymbol(SymbolAnalysisContext context, ReferenceSymbols typeReferences, AnalyzerOptions options) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs:line 430
+   at MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer.<>c__DisplayClass55_1.<Initialize>b__1(SymbolAnalysisContext context) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs:line 357
+   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.<>c.<ExecuteSymbolActions>b__45_1(ValueTuple`2 data)
+   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.ExecuteAndCatchIfThrows_NoLock[TArg](DiagnosticAnalyzer analyzer, Action`1 analyze, TArg argument, Nullable`1 info, CancellationToken cancellationToken)
+-----
+
+Suppress the following diagnostics to disable this analyzer: MsgPack003, MsgPack004, MsgPack005, MsgPack006, MsgPack007, MsgPack008, MsgPack009, MsgPack010, MsgPack011, MsgPack012, MsgPack013, MsgPack014, MsgPack015, MsgPack016, MsgPack017, MsgPack018"),
+// warning CS8785: Generator 'MessagePackGenerator' failed to generate source. It will not contribute to the output and compilation errors may occur as a result. Exception was of type 'IndexOutOfRangeException' with message 'Index was outside the bounds of the array.'.
+System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.Collections.Immutable.ImmutableArray`1.get_Item(Int32 index)
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1075
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectGeneric(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 651
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 363
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1043
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectObject(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 678
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 378
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 292
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect(Compilation compilation, AnalyzerOptions options, ReferenceSymbols referenceSymbols, Action`1 reportAnalyzerDiagnostic, ITypeSymbol targetType, CancellationToken cancellationToken) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 271
+   at MessagePack.SourceGenerator.MessagePackGenerator.<>c__DisplayClass0_0.<Initialize>g__Collect|8(ITypeSymbol typeSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/MessagePackGenerator.cs:line 47
+   at MessagePack.SourceGenerator.MessagePackGenerator.<>c.<Initialize>b__0_4(ValueTuple`2 s, CancellationToken ct) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/MessagePackGenerator.cs:line 55
+   at Microsoft.CodeAnalysis.TransformNode`2.<>c__DisplayClass6_0.<.ctor>b__0(TInput i, CancellationToken token)
+   at Microsoft.CodeAnalysis.TransformNode`2.UpdateStateTable(Builder builder, NodeStateTable`1 previousTable, CancellationToken cancellationToken)
+-----
+
+DiagnosticResult.CompilerWarning("CS8785").WithArguments("MessagePackGenerator", "IndexOutOfRangeException", "Index was outside the bounds of the array.", "System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.Collections.Immutable.ImmutableArray`1.get_Item(Int32 index)
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1075
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectGeneric(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 651
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 363
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1043
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectObject(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 678
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 378
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 292
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect(Compilation compilation, AnalyzerOptions options, ReferenceSymbols referenceSymbols, Action`1 reportAnalyzerDiagnostic, ITypeSymbol targetType, CancellationToken cancellationToken) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 271
+   at MessagePack.SourceGenerator.MessagePackGenerator.<>c__DisplayClass0_0.<Initialize>g__Collect|8(ITypeSymbol typeSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/MessagePackGenerator.cs:line 47
+   at MessagePack.SourceGenerator.MessagePackGenerator.<>c.<Initialize>b__0_4(ValueTuple`2 s, CancellationToken ct) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/MessagePackGenerator.cs:line 55
+   at Microsoft.CodeAnalysis.TransformNode`2.<>c__DisplayClass6_0.<.ctor>b__0(TInput i, CancellationToken token)
+   at Microsoft.CodeAnalysis.TransformNode`2.UpdateStateTable(Builder builder, NodeStateTable`1 previousTable, CancellationToken cancellationToken)
+-----
+"),
+
+
+  Stack Trace:
+     at Microsoft.CodeAnalysis.Testing.DefaultVerifier.Equal[T](T expected, T actual, String message) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/DefaultVerifier.cs:line 79
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticResults(IEnumerable`1 actualResults, ImmutableArray`1 analyzers, DiagnosticResult[] expectedResults, IVerifier verifier) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 546
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticsAsync(EvaluatedProjectState primaryProject, ImmutableArray`1 additionalProjects, DiagnosticResult[] expected, IVerifier verifier, CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 449
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunImplAsync(CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 203
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunAsync(CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 172
+   at GenericsFormatterTests.RunWithMetadataReferenceAsync(String defineSource, String usageSource, String expectedResolverHintName, LanguageVersion languageVersion) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs:line 648
+   at GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference_UnkeyedMember() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs:line 625
+--- End of stack trace from previous location ---
+  Passed MsgPack00xAnalyzerTests.InitPropertyInitializer [224 ms]
+  Passed GenericsFormatterTests.GenericsUnionFormatter [623 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributesToMembers [728 ms]
+  Passed MsgPack00xAnalyzerTests.NoMessagePackReference [13 ms]
+  Passed GenericsFormatterTests.GenericsOfTFormatter_WithKnownTypes [296 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToField_WithComment [371 ms]
+  Passed GenericsFormatterTests.Generics_Constraints_ReferenceType_Nullable [349 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToTypeForRecord2 [689 ms]
+  Passed GenericsFormatterTests.NullableFormatter [661 ms]
+  Passed GenericsFormatterTests.Generics_Constraints_Type [144 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributesToMembersOfRecordStructWithPrimaryCtor [292 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToGenericType [464 ms]
+  Passed GenericsFormatterTests.Generics_Defined_In_ReferencedProject [499 ms]
+  Passed GenericsFormatterTests.WellKnownGenericsFormatter [142 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToType_Generic [197 ms]
+[xUnit.net 00:00:11.77]       System.InvalidOperationException : Mismatch between number of diagnostics returned, expected "0" actual "2"
+[xUnit.net 00:00:11.77]       
+[xUnit.net 00:00:11.77]       Diagnostics:
+[xUnit.net 00:00:11.77]       // error AD0001: Analyzer 'MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer' threw an exception of type 'System.IndexOutOfRangeException' with message 'Index was outside the bounds of the array.'.
+[xUnit.net 00:00:11.77]       Exception occurred with following context:
+[xUnit.net 00:00:11.77]       Compilation: TestProject
+[xUnit.net 00:00:11.77]       ISymbol: MyObject (NamedType)
+[xUnit.net 00:00:11.77]       
+[xUnit.net 00:00:11.77]       System.IndexOutOfRangeException: Index was outside the bounds of the array.
+[xUnit.net 00:00:11.77]          at System.Collections.Immutable.ImmutableArray`1.get_Item(Int32 index)
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1075
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectGeneric(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 651
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 363
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1043
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectObject(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 678
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 378
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 292
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect(Compilation compilation, AnalyzerOptions options, ReferenceSymbols referenceSymbols, Action`1 reportAnalyzerDiagnostic, ITypeSymbol targetType, CancellationToken cancellationToken) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 271
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer.AnalyzeSymbol(SymbolAnalysisContext context, ReferenceSymbols typeReferences, AnalyzerOptions options) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs:line 430
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer.<>c__DisplayClass55_1.<Initialize>b__1(SymbolAnalysisContext context) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs:line 357
+[xUnit.net 00:00:11.77]          at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.<>c.<ExecuteSymbolActions>b__45_1(ValueTuple`2 data)
+[xUnit.net 00:00:11.77]          at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.ExecuteAndCatchIfThrows_NoLock[TArg](DiagnosticAnalyzer analyzer, Action`1 analyze, TArg argument, Nullable`1 info, CancellationToken cancellationToken)
+[xUnit.net 00:00:11.77]       -----
+[xUnit.net 00:00:11.77]       
+[xUnit.net 00:00:11.77]       Suppress the following diagnostics to disable this analyzer: MsgPack003, MsgPack004, MsgPack005, MsgPack006, MsgPack007, MsgPack008, MsgPack009, MsgPack010, MsgPack011, MsgPack012, MsgPack013, MsgPack014, MsgPack015, MsgPack016, MsgPack017, MsgPack018
+[xUnit.net 00:00:11.77]       DiagnosticResult.CompilerError("AD0001").WithArguments("MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer", "System.IndexOutOfRangeException", "Index was outside the bounds of the array.", "Exception occurred with following context:
+[xUnit.net 00:00:11.77]       Compilation: TestProject
+[xUnit.net 00:00:11.77]       ISymbol: MyObject (NamedType)
+[xUnit.net 00:00:11.77]       
+[xUnit.net 00:00:11.77]       System.IndexOutOfRangeException: Index was outside the bounds of the array.
+[xUnit.net 00:00:11.77]          at System.Collections.Immutable.ImmutableArray`1.get_Item(Int32 index)
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1075
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectGeneric(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 651
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 363
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1043
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectObject(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 678
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 378
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 292
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect(Compilation compilation, AnalyzerOptions options, ReferenceSymbols referenceSymbols, Action`1 reportAnalyzerDiagnostic, ITypeSymbol targetType, CancellationToken cancellationToken) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 271
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer.AnalyzeSymbol(SymbolAnalysisContext context, ReferenceSymbols typeReferences, AnalyzerOptions options) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs:line 430
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer.<>c__DisplayClass55_1.<Initialize>b__1(SymbolAnalysisContext context) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs:line 357
+[xUnit.net 00:00:11.77]          at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.<>c.<ExecuteSymbolActions>b__45_1(ValueTuple`2 data)
+[xUnit.net 00:00:11.77]          at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.ExecuteAndCatchIfThrows_NoLock[TArg](DiagnosticAnalyzer analyzer, Action`1 analyze, TArg argument, Nullable`1 info, CancellationToken cancellationToken)
+[xUnit.net 00:00:11.77]       -----
+[xUnit.net 00:00:11.77]       
+[xUnit.net 00:00:11.77]       Suppress the following diagnostics to disable this analyzer: MsgPack003, MsgPack004, MsgPack005, MsgPack006, MsgPack007, MsgPack008, MsgPack009, MsgPack010, MsgPack011, MsgPack012, MsgPack013, MsgPack014, MsgPack015, MsgPack016, MsgPack017, MsgPack018"),
+[xUnit.net 00:00:11.77]       // warning CS8785: Generator 'MessagePackGenerator' failed to generate source. It will not contribute to the output and compilation errors may occur as a result. Exception was of type 'IndexOutOfRangeException' with message 'Index was outside the bounds of the array.'.
+[xUnit.net 00:00:11.77]       System.IndexOutOfRangeException: Index was outside the bounds of the array.
+[xUnit.net 00:00:11.77]          at System.Collections.Immutable.ImmutableArray`1.get_Item(Int32 index)
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1075
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectGeneric(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 651
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 363
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1043
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectObject(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 678
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 378
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 292
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect(Compilation compilation, AnalyzerOptions options, ReferenceSymbols referenceSymbols, Action`1 reportAnalyzerDiagnostic, ITypeSymbol targetType, CancellationToken cancellationToken) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 271
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.MessagePackGenerator.<>c__DisplayClass0_0.<Initialize>g__Collect|8(ITypeSymbol typeSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/MessagePackGenerator.cs:line 47
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.MessagePackGenerator.<>c.<Initialize>b__0_4(ValueTuple`2 s, CancellationToken ct) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/MessagePackGenerator.cs:line 55
+[xUnit.net 00:00:11.77]          at Microsoft.CodeAnalysis.TransformNode`2.<>c__DisplayClass6_0.<.ctor>b__0(TInput i, CancellationToken token)
+[xUnit.net 00:00:11.77]          at Microsoft.CodeAnalysis.TransformNode`2.UpdateStateTable(Builder builder, NodeStateTable`1 previousTable, CancellationToken cancellationToken)
+[xUnit.net 00:00:11.77]       -----
+[xUnit.net 00:00:11.77]       
+[xUnit.net 00:00:11.77]       DiagnosticResult.CompilerWarning("CS8785").WithArguments("MessagePackGenerator", "IndexOutOfRangeException", "Index was outside the bounds of the array.", "System.IndexOutOfRangeException: Index was outside the bounds of the array.
+[xUnit.net 00:00:11.77]          at System.Collections.Immutable.ImmutableArray`1.get_Item(Int32 index)
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1075
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectGeneric(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 651
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 363
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1043
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectObject(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 678
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 378
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 292
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect(Compilation compilation, AnalyzerOptions options, ReferenceSymbols referenceSymbols, Action`1 reportAnalyzerDiagnostic, ITypeSymbol targetType, CancellationToken cancellationToken) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 271
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.MessagePackGenerator.<>c__DisplayClass0_0.<Initialize>g__Collect|8(ITypeSymbol typeSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/MessagePackGenerator.cs:line 47
+[xUnit.net 00:00:11.77]          at MessagePack.SourceGenerator.MessagePackGenerator.<>c.<Initialize>b__0_4(ValueTuple`2 s, CancellationToken ct) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/MessagePackGenerator.cs:line 55
+[xUnit.net 00:00:11.77]          at Microsoft.CodeAnalysis.TransformNode`2.<>c__DisplayClass6_0.<.ctor>b__0(TInput i, CancellationToken token)
+[xUnit.net 00:00:11.77]          at Microsoft.CodeAnalysis.TransformNode`2.UpdateStateTable(Builder builder, NodeStateTable`1 previousTable, CancellationToken cancellationToken)
+[xUnit.net 00:00:11.77]       -----
+[xUnit.net 00:00:11.77]       "),
+[xUnit.net 00:00:11.77]       
+[xUnit.net 00:00:11.77]       
+[xUnit.net 00:00:11.77]       Stack Trace:
+[xUnit.net 00:00:11.77]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/DefaultVerifier.cs(79,0): at Microsoft.CodeAnalysis.Testing.DefaultVerifier.Equal[T](T expected, T actual, String message)
+[xUnit.net 00:00:11.77]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(546,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticResults(IEnumerable`1 actualResults, ImmutableArray`1 analyzers, DiagnosticResult[] expectedResults, IVerifier verifier)
+[xUnit.net 00:00:11.77]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(449,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticsAsync(EvaluatedProjectState primaryProject, ImmutableArray`1 additionalProjects, DiagnosticResult[] expected, IVerifier verifier, CancellationToken cancellationToken)
+[xUnit.net 00:00:11.77]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(203,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunImplAsync(CancellationToken cancellationToken)
+[xUnit.net 00:00:11.77]         /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs(172,0): at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunAsync(CancellationToken cancellationToken)
+[xUnit.net 00:00:11.77]         /Users/andy/Downloads/Junction2/wt/canary-2283-C3/tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs(648,0): at GenericsFormatterTests.RunWithMetadataReferenceAsync(String defineSource, String usageSource, String expectedResolverHintName, LanguageVersion languageVersion)
+[xUnit.net 00:00:11.77]         /Users/andy/Downloads/Junction2/wt/canary-2283-C3/tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs(540,0): at GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference()
+[xUnit.net 00:00:11.77]         --- End of stack trace from previous location ---
+  Failed GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference [88 ms]
+  Error Message:
+   System.InvalidOperationException : Mismatch between number of diagnostics returned, expected "0" actual "2"
+
+Diagnostics:
+// error AD0001: Analyzer 'MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer' threw an exception of type 'System.IndexOutOfRangeException' with message 'Index was outside the bounds of the array.'.
+Exception occurred with following context:
+Compilation: TestProject
+ISymbol: MyObject (NamedType)
+
+System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.Collections.Immutable.ImmutableArray`1.get_Item(Int32 index)
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1075
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectGeneric(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 651
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 363
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1043
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectObject(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 678
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 378
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 292
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect(Compilation compilation, AnalyzerOptions options, ReferenceSymbols referenceSymbols, Action`1 reportAnalyzerDiagnostic, ITypeSymbol targetType, CancellationToken cancellationToken) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 271
+   at MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer.AnalyzeSymbol(SymbolAnalysisContext context, ReferenceSymbols typeReferences, AnalyzerOptions options) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs:line 430
+   at MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer.<>c__DisplayClass55_1.<Initialize>b__1(SymbolAnalysisContext context) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs:line 357
+   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.<>c.<ExecuteSymbolActions>b__45_1(ValueTuple`2 data)
+   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.ExecuteAndCatchIfThrows_NoLock[TArg](DiagnosticAnalyzer analyzer, Action`1 analyze, TArg argument, Nullable`1 info, CancellationToken cancellationToken)
+-----
+
+Suppress the following diagnostics to disable this analyzer: MsgPack003, MsgPack004, MsgPack005, MsgPack006, MsgPack007, MsgPack008, MsgPack009, MsgPack010, MsgPack011, MsgPack012, MsgPack013, MsgPack014, MsgPack015, MsgPack016, MsgPack017, MsgPack018
+DiagnosticResult.CompilerError("AD0001").WithArguments("MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer", "System.IndexOutOfRangeException", "Index was outside the bounds of the array.", "Exception occurred with following context:
+Compilation: TestProject
+ISymbol: MyObject (NamedType)
+
+System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.Collections.Immutable.ImmutableArray`1.get_Item(Int32 index)
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1075
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectGeneric(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 651
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 363
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1043
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectObject(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 678
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 378
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 292
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect(Compilation compilation, AnalyzerOptions options, ReferenceSymbols referenceSymbols, Action`1 reportAnalyzerDiagnostic, ITypeSymbol targetType, CancellationToken cancellationToken) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 271
+   at MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer.AnalyzeSymbol(SymbolAnalysisContext context, ReferenceSymbols typeReferences, AnalyzerOptions options) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs:line 430
+   at MessagePack.SourceGenerator.Analyzers.MsgPack00xMessagePackAnalyzer.<>c__DisplayClass55_1.<Initialize>b__1(SymbolAnalysisContext context) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/Analyzers/MsgPack00xMessagePackAnalyzer.cs:line 357
+   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.<>c.<ExecuteSymbolActions>b__45_1(ValueTuple`2 data)
+   at Microsoft.CodeAnalysis.Diagnostics.AnalyzerExecutor.ExecuteAndCatchIfThrows_NoLock[TArg](DiagnosticAnalyzer analyzer, Action`1 analyze, TArg argument, Nullable`1 info, CancellationToken cancellationToken)
+-----
+
+Suppress the following diagnostics to disable this analyzer: MsgPack003, MsgPack004, MsgPack005, MsgPack006, MsgPack007, MsgPack008, MsgPack009, MsgPack010, MsgPack011, MsgPack012, MsgPack013, MsgPack014, MsgPack015, MsgPack016, MsgPack017, MsgPack018"),
+// warning CS8785: Generator 'MessagePackGenerator' failed to generate source. It will not contribute to the output and compilation errors may occur as a result. Exception was of type 'IndexOutOfRangeException' with message 'Index was outside the bounds of the array.'.
+System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.Collections.Immutable.ImmutableArray`1.get_Item(Int32 index)
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1075
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectGeneric(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 651
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 363
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1043
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectObject(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 678
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 378
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 292
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect(Compilation compilation, AnalyzerOptions options, ReferenceSymbols referenceSymbols, Action`1 reportAnalyzerDiagnostic, ITypeSymbol targetType, CancellationToken cancellationToken) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 271
+   at MessagePack.SourceGenerator.MessagePackGenerator.<>c__DisplayClass0_0.<Initialize>g__Collect|8(ITypeSymbol typeSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/MessagePackGenerator.cs:line 47
+   at MessagePack.SourceGenerator.MessagePackGenerator.<>c.<Initialize>b__0_4(ValueTuple`2 s, CancellationToken ct) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/MessagePackGenerator.cs:line 55
+   at Microsoft.CodeAnalysis.TransformNode`2.<>c__DisplayClass6_0.<.ctor>b__0(TInput i, CancellationToken token)
+   at Microsoft.CodeAnalysis.TransformNode`2.UpdateStateTable(Builder builder, NodeStateTable`1 previousTable, CancellationToken cancellationToken)
+-----
+
+DiagnosticResult.CompilerWarning("CS8785").WithArguments("MessagePackGenerator", "IndexOutOfRangeException", "Index was outside the bounds of the array.", "System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.Collections.Immutable.ImmutableArray`1.get_Item(Int32 index)
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1075
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectGeneric(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 651
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 363
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.GetObjectInfo(INamedTypeSymbol formattedType, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 1043
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectObject(INamedTypeSymbol type, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 678
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.CollectCore(ITypeSymbol typeSymbol, ISymbol callerSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 378
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 292
+   at MessagePack.SourceGenerator.CodeAnalysis.TypeCollector.Collect(Compilation compilation, AnalyzerOptions options, ReferenceSymbols referenceSymbols, Action`1 reportAnalyzerDiagnostic, ITypeSymbol targetType, CancellationToken cancellationToken) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs:line 271
+   at MessagePack.SourceGenerator.MessagePackGenerator.<>c__DisplayClass0_0.<Initialize>g__Collect|8(ITypeSymbol typeSymbol) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/MessagePackGenerator.cs:line 47
+   at MessagePack.SourceGenerator.MessagePackGenerator.<>c.<Initialize>b__0_4(ValueTuple`2 s, CancellationToken ct) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/src/MessagePack.SourceGenerator/MessagePackGenerator.cs:line 55
+   at Microsoft.CodeAnalysis.TransformNode`2.<>c__DisplayClass6_0.<.ctor>b__0(TInput i, CancellationToken token)
+   at Microsoft.CodeAnalysis.TransformNode`2.UpdateStateTable(Builder builder, NodeStateTable`1 previousTable, CancellationToken cancellationToken)
+-----
+"),
+
+
+  Stack Trace:
+     at Microsoft.CodeAnalysis.Testing.DefaultVerifier.Equal[T](T expected, T actual, String message) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/DefaultVerifier.cs:line 79
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticResults(IEnumerable`1 actualResults, ImmutableArray`1 analyzers, DiagnosticResult[] expectedResults, IVerifier verifier) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 546
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.VerifyDiagnosticsAsync(EvaluatedProjectState primaryProject, ImmutableArray`1 additionalProjects, DiagnosticResult[] expected, IVerifier verifier, CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 449
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunImplAsync(CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 203
+   at Microsoft.CodeAnalysis.Testing.AnalyzerTest`1.RunAsync(CancellationToken cancellationToken) in /_/src/Microsoft.CodeAnalysis.Testing/Microsoft.CodeAnalysis.Analyzer.Testing/AnalyzerTest`1.cs:line 172
+   at GenericsFormatterTests.RunWithMetadataReferenceAsync(String defineSource, String usageSource, String expectedResolverHintName, LanguageVersion languageVersion) in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs:line 648
+   at GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference() in /Users/andy/Downloads/Junction2/wt/canary-2283-C3/tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs:line 540
+--- End of stack trace from previous location ---
+  Passed MsgPack00xAnalyzerTests.NameCollisionsInForceMapMode [59 ms]
+  Passed MsgPack00xAnalyzerTests.NullStringKey [44 ms]
+  Passed GenericsFormatterTests.Generics_Constraints_Multiple [235 ms]
+  Passed GenericsFormatterTests.GenericsOfTFormatter_FormatterOnly [220 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributesToMembersOfRecord [451 ms]
+  Passed MsgPack00xAnalyzerTests.DerivedAttributes_SourceGenerationDisabled [42 ms]
+  Passed GenericsFormatterTests.GenericsOfT1T2Formatter [182 ms]
+  Passed GenericsFormatterTests.NestedGenericTypes [432 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToType_Nullable [536 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToTypeForRecordPrimaryConstructor [387 ms]
+  Passed MsgPack00xAnalyzerTests.PrivateMembersInBaseClassNeedNoAttribution [39 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributeToType_Fields [266 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributesToMembers_AllowPrivateAttribute [316 ms]
+[xUnit.net 00:00:15.15]   Finished:    MessagePack.SourceGenerator.Tests
+  Passed MsgPack00xAnalyzerTests.DoNotAddAttributesToClassWithPrimaryCtor [221 ms]
+  Passed MsgPack00xAnalyzerTests.AbstractFormatterDoesNotAttractAttention [16 ms]
+  Passed MsgPack00xAnalyzerTests.InvalidMessageFormatterType [103 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributesToMembers_MixedVisibility [375 ms]
+  Passed MsgPack00xAnalyzerTests.AddAttributesToMembers_PublicOnly [360 ms]
+  Passed MsgPack00xAnalyzerTests.AddIgnoreAttributesToMembers [177 ms]
+
+Total tests: 59
+     Passed: 56
+     Failed: 3
+ Total time: 16.7131 Seconds
+
+Build FAILED.
+
+/Users/andy/Downloads/Junction2/wt/canary-2283-C3/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:01:21.31
+[xUnit.net 00:00:06.85]     GenericsFormatterTests.ClosedGenericRecordStruct_FromMetadataReference [FAIL]
+[xUnit.net 00:00:08.94]     GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference_UnkeyedMember [FAIL]
+[xUnit.net 00:00:11.77]     GenericsFormatterTests.ClosedGenericStruct_FromMetadataReference [FAIL]
+Test Run Failed.

@@ -1,0 +1,56 @@
+{
+  "canary": "C11",
+  "type": "plausible-false-doc",
+  "caught": true,
+  "by": [
+    "llm:claude"
+  ],
+  "by_family": {
+    "tests": false,
+    "deterministic-rules": false,
+    "gemini": false,
+    "claude": true
+  },
+  "note": "doc/analyzers/MsgPack004.md claims the consuming project's analyzer still reports missing [Key] for members of types from an assembly built without the analyzer; the change drops exactly those diagnostics. Phrased without universal-claim words.",
+  "tests": {
+    "ran": true,
+    "compiled": true,
+    "failing_tests": [],
+    "summary_line": "",
+    "outcome": "green",
+    "seconds": 63.2,
+    "log": "runs/drill/C11/tests.log"
+  },
+  "detectors": [],
+  "gemini": {
+    "caught": false,
+    "hits": [],
+    "near_but_off_target": [],
+    "n_findings": 1
+  },
+  "claude": {
+    "caught": true,
+    "hits": [
+      {
+        "path": "doc/analyzers/MsgPack004.md",
+        "line": 52,
+        "severity": "high",
+        "issue": "The doc says members of referenced types are reported by the defining project, then line 53 says the consuming analyzer still reports the missing [Key] attributes. The second claim contradicts the first and the code, which drops these diagnostics. It is misleading documentation (violates NF2)."
+      }
+    ],
+    "near_but_off_target": [],
+    "n_findings": 6
+  },
+  "xray_routed_to_human_NOT_counted": {
+    "routed": false,
+    "why": "doc/analyzers/MsgPack004.md is not a src hunk; X-Ray only covers src hunks"
+  },
+  "evidence_refs": [
+    "runs/drill/C11/tests.json",
+    "runs/drill/C11/tests.log",
+    "runs/drill/C11/detectors.json",
+    "runs/drill/C11/gemini_review.json",
+    "runs/drill/C11/claude_findings.json",
+    "runs/drill/C11/review_input.diff"
+  ]
+}

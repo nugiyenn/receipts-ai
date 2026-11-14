@@ -1,0 +1,102 @@
+{
+  "change": "esc-2300",
+  "lane": "L3",
+  "reasons": [
+    {
+      "rule": "areas",
+      "lane": "L3",
+      "why": "highest default lane of the touched areas"
+    },
+    {
+      "rule": "LR1",
+      "lane": "L3",
+      "why": "touches ceiling area(s): runtime-serializer"
+    },
+    {
+      "rule": "LR4",
+      "lane": "L2",
+      "why": "4 source hunk(s) not yet proven protected (xray pending)"
+    }
+  ],
+  "areas": [
+    "runtime-serializer",
+    "tests"
+  ],
+  "ceiling_areas": [
+    "runtime-serializer"
+  ],
+  "blast_radius": {
+    "threshold": 10,
+    "max_references": 0,
+    "top_symbol": null,
+    "per_hunk": {
+      "h1": [],
+      "h2": [],
+      "h3": [],
+      "h4": []
+    }
+  },
+  "flagged_hunks": {
+    "h1": [
+      "xray-pending: not yet shown to be protected by a test"
+    ],
+    "h2": [
+      "xray-pending: not yet shown to be protected by a test"
+    ],
+    "h3": [
+      "xray-pending: not yet shown to be protected by a test"
+    ],
+    "h4": [
+      "xray-pending: not yet shown to be protected by a test"
+    ]
+  },
+  "reading_budget": {
+    "lines": 97,
+    "hunks": 9,
+    "total_changed_lines": 97,
+    "ratio": 1.0,
+    "basis": "L3: full read",
+    "inputs": {
+      "xray": false,
+      "regen": false,
+      "refusals": false,
+      "claims": false
+    },
+    "provisional": true
+  },
+  "files": [
+    {
+      "path": "src/MessagePack/MessagePackWriter.cs",
+      "area": "runtime-serializer",
+      "kind": "src",
+      "lane": "L3",
+      "changed_lines": 25,
+      "flagged_hunks": [
+        "h1",
+        "h2",
+        "h3",
+        "h4"
+      ]
+    },
+    {
+      "path": "tests/MessagePack.Tests/MessagePackWriterTests.cs",
+      "area": "tests",
+      "kind": "test",
+      "lane": "L3",
+      "changed_lines": 64,
+      "flagged_hunks": []
+    },
+    {
+      "path": "tests/MessagePack.Tests/OldSpecBinaryFormatterTest.cs",
+      "area": "tests",
+      "kind": "test",
+      "lane": "L3",
+      "changed_lines": 8,
+      "flagged_hunks": []
+    }
+  ],
+  "policy": {
+    "areas": "areas-1",
+    "routing": "routing-1"
+  }
+}

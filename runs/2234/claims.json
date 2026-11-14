@@ -1,0 +1,312 @@
+{
+  "change": "2234",
+  "kind": "claims",
+  "produced_by": "claude-code session, cached",
+  "model": "claude-sonnet-5-5",
+  "produced_at": "2026-11-14T23:19",
+  "static_analysis_only": true,
+  "prompt": "You are a code-review claim extractor. You do NOT judge whether the change is good.\nProduce the minimal set of falsifiable claims this change makes or must satisfy.\nRules:\n1. Every requirement item (F*, NF*, S*) must be covered by >=1 claim, or listed in uncovered_requirements.\n2. Statements from the commit message, README or docs written by the author agent are\n   CLAIMS TO TEST (source=\"author-narrative\"), never evidence.\n3. Every claim must cite >=1 exact diff line: {path, new_line, quote}. Quote must be verbatim.\n4. For each claim propose a verifier: timemachine | xray | regen | matrix | static | argued.\n5. Never output confidence numbers or words like \"likely correct\".\nOutput JSON matching the schema. No prose.",
+  "prompt_sha256": "6fa10c1d36a7f9dbe83081c922aac0dae15dbd4a6a35c6a5db18767b372c1144",
+  "inputs": [
+    "git show origin/ju26-issue-2234",
+    "issue #2234 body (github.com page, fetched 2026-11-14)",
+    "receipts/requirements/REQ-2234.yaml",
+    "git history: commit 1a74a620, v3.1.0..v3.1.1 TypeCollector.cs diff"
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "requirement": "REQ-2234-F1",
+      "text": "For [MessagePackObject(SuppressSourceGeneration = true)] types the analyzer reports its contract diagnostics (MsgPack004 missing key, MsgPack015 AllowPrivate required, MsgPack003 member type not serializable).",
+      "source": "requirement",
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 21,
+          "quote": "public async Task MemberWithoutKeyIsReported()"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 39,
+          "quote": "public async Task AllowPrivateRequiredIsReported()"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 58,
+          "quote": "public async Task MemberTypeMustBeMessagePackObjectIsReported()"
+        }
+      ],
+      "verifier": "timemachine",
+      "evidence_level": "E1",
+      "evidence_refs": [
+        "runs/2234/timemachine.json#AllowPrivateRequiredIsReported",
+        "runs/2234/timemachine.json#MemberTypeMustBeMessagePackObjectIsReported",
+        "runs/2234/timemachine.json#MemberWithoutKeyIsReported"
+      ],
+      "status": "refused",
+      "verifier_notes": "Run the three tests against base. The issue says the analyzer stopped working in 3.1.1; if these tests already pass on base they are not evidence of a fix (see claim C4).",
+      "adjudication": {
+        "rule": "E1: every cited test already passes on base, so the tests do not reproduce the bug (tests-prove-nothing)",
+        "flags": [
+          "tests-prove-nothing: MemberWithoutKeyIsReported, AllowPrivateRequiredIsReported, MemberTypeMustBeMessagePackObjectIsReported"
+        ]
+      }
+    },
+    {
+      "id": "C2",
+      "requirement": "REQ-2234-F1",
+      "text": "Duplicate keys and mixed key kinds on a suppressed type are reported (MsgPack005) without the analyzer throwing.",
+      "source": "diff",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1008,
+          "quote": "continue; // The key kind does not match the other members; the diagnostic is reported, so skip this member."
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1023,
+          "quote": "if (!intMembers.ContainsKey(member.IntKey))"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 834,
+          "quote": "if (!stringMembers.ContainsKey(member.StringKey))"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 81,
+          "quote": "public async Task DuplicateIntKeysAreReportedWithoutAnalyzerFailure()"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 125,
+          "quote": "public async Task MixedKeyKindsAreReportedWithoutAnalyzerFailure()"
+        }
+      ],
+      "verifier": "timemachine",
+      "evidence_level": "E3",
+      "evidence_refs": [
+        "runs/2234/timemachine.json#DuplicateIntKeysAreReportedWithoutAnalyzerFailure",
+        "runs/2234/timemachine.json#MixedKeyKindsAreReportedWithoutAnalyzerFailure"
+      ],
+      "status": "proven",
+      "verifier_notes": "Expect failure on base only if duplicate-key Add throws there; record whichever happens.",
+      "adjudication": {
+        "rule": "E3: 2 test(s) fail on base and pass on head: DuplicateIntKeysAreReportedWithoutAnalyzerFailure, MixedKeyKindsAreReportedWithoutAnalyzerFailure",
+        "flags": []
+      }
+    },
+    {
+      "id": "C3",
+      "requirement": "REQ-2234-NF2",
+      "text": "Behaviour for types without SuppressSourceGeneration is unchanged except that duplicate keys no longer throw; diagnostics for valid contracts are unchanged.",
+      "source": "diff",
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 147,
+          "quote": "public async Task DuplicateKeysAreReportedWithoutAnalyzerFailureForGeneratedTypes()"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1023,
+          "quote": "if (!intMembers.ContainsKey(member.IntKey))"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1148,
+          "quote": "continue; // The key kind does not match the other members; the diagnostic is reported, so skip this member."
+        }
+      ],
+      "verifier": "xray",
+      "evidence_level": "E1",
+      "evidence_refs": [
+        "runs/2234/xray.json#g3",
+        "runs/2234/xray.json#g5"
+      ],
+      "status": "unproven",
+      "verifier_notes": "The key-collection hunks run for every type, not only suppressed ones. Run the whole existing analyzer suite with each hunk reverted.",
+      "adjudication": {
+        "rule": "E1: cited hunk(s) h5 unprotected, so the claim cannot be fully backed (load-bearing: h3)",
+        "flags": [
+          "unprotected hunk(s): h5"
+        ]
+      }
+    },
+    {
+      "id": "C4",
+      "requirement": "REQ-2234-NF1",
+      "text": "The change fixes the cause of the 3.1.1 regression, namely analyzer member validation being skipped for suppressed types.",
+      "source": "requirement",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1383,
+          "quote": "if (suppressSourceGeneration is true)"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 21,
+          "quote": "public async Task MemberWithoutKeyIsReported()"
+        }
+      ],
+      "verifier": "static",
+      "evidence_level": "E1",
+      "evidence_refs": [
+        "runs/2234/hypotheses.json#H4"
+      ],
+      "status": "refuted",
+      "verifier_notes": "The early 'return null' for suppressed types sits at the end of the member-collection method in head, untouched by this diff. In v3.1.1 the same return was moved to the top (commit 1a74a620), which is not an ancestor of the base; see hypotheses_static F-2234-1.",
+      "adjudication": {
+        "rule": "E1: static claim, citations validate, no deterministic check implemented for it",
+        "flags": []
+      }
+    },
+    {
+      "id": "C5",
+      "requirement": "REQ-2234-F2",
+      "text": "No formatter is generated for suppressed types and they still serialize at run time through the dynamic resolver.",
+      "source": "requirement",
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.ExecutionTests/SuppressedSourceGenerationTests.cs",
+          "line": 23,
+          "quote": "Assert.Null(GeneratedMessagePackResolver.Instance.GetFormatter<SuppressedSourceGenerationType>());"
+        }
+      ],
+      "verifier": "timemachine",
+      "evidence_level": "E1",
+      "evidence_refs": [],
+      "status": "unproven",
+      "verifier_notes": "Expected to pass on both base and head: the change should not alter this behaviour.",
+      "adjudication": {
+        "rule": "E1: no test cited by this claim appears in timemachine.json, so nothing was executed for it",
+        "flags": []
+      }
+    },
+    {
+      "id": "C6",
+      "requirement": "REQ-2234-S1",
+      "text": "Skipping a member whose key kind does not match, and skipping a duplicate-key insert, never hides a contract violation: a diagnostic is always reported first.",
+      "source": "diff",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1007,
+          "quote": "Diagnostic.Create(MsgPack00xMessagePackAnalyzer.DoNotMixStringAndIntKeys"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1008,
+          "quote": "continue; // The key kind does not match the other members; the diagnostic is reported, so skip this member."
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1016,
+          "quote": "Diagnostic.Create(MsgPack00xMessagePackAnalyzer.KeysMustBeUnique"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1023,
+          "quote": "if (!intMembers.ContainsKey(member.IntKey))"
+        }
+      ],
+      "verifier": "xray",
+      "evidence_level": "E2",
+      "evidence_refs": [
+        "runs/2234/hypotheses.json#H5",
+        "runs/2234/xray.json#g2",
+        "runs/2234/xray.json#g3"
+      ],
+      "status": "refused",
+      "verifier_notes": "True only while the analyzer runs and its severity is not suppressed. In generator-only builds the member is omitted from the formatter with no diagnostic (hypothesis H5).",
+      "adjudication": {
+        "rule": "E2: all cited source hunks are load-bearing (h2, h3); protected by a test, not an executed demonstration of the claim",
+        "flags": []
+      }
+    },
+    {
+      "id": "C7",
+      "requirement": "REQ-2234-F1",
+      "text": "The README lists exactly which diagnostics are and are not reported for suppressed types: 011, 016 and 017 are not reported, and 004, 005, 015, 003, 012 are.",
+      "source": "author-narrative",
+      "citations": [
+        {
+          "path": "README.md",
+          "line": 1625,
+          "quote": "The analyzer still validates these types, because they are serialized at run time and must still have a valid contract:"
+        },
+        {
+          "path": "README.md",
+          "line": 1632,
+          "quote": "The analyzer does not report the partial-class requirement ([MsgPack011]"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 169,
+          "quote": "public async Task SourceGenerationOnlyDiagnosticsAreNotReportedWhenSuppressed()"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 174,
+          "quote": "[MessagePackObject(AllowPrivate = true, SuppressSourceGeneration = true)]"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 181,
+          "quote": "public string Prop1 { get; init; }"
+        }
+      ],
+      "verifier": "xray",
+      "evidence_level": "E1",
+      "evidence_refs": [],
+      "status": "refused",
+      "verifier_notes": "The one negative test exercises the partial-class and init-property checks; the derived-key (MsgPack016) path guarded by the cited condition has no test.",
+      "adjudication": {
+        "rule": "E1: claim cites no source hunk (docs/tests only), so X-Ray has nothing to say",
+        "flags": []
+      }
+    },
+    {
+      "id": "C8",
+      "requirement": "REQ-2234-F1",
+      "text": "MsgPack012 (data type inaccessible to the resolver) is reported for suppressed types.",
+      "source": "author-narrative",
+      "citations": [
+        {
+          "path": "README.md",
+          "line": 1630,
+          "quote": "Types are accessible to the resolver ([MsgPack012](doc/analyzers/MsgPack012.md))."
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+          "line": 58,
+          "quote": "public async Task MemberTypeMustBeMessagePackObjectIsReported()"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 921,
+          "quote": "if (derivedKeyAttribute is null || suppressSourceGeneration is not true)"
+        }
+      ],
+      "verifier": "matrix",
+      "evidence_level": "E1",
+      "evidence_refs": [],
+      "status": "refused",
+      "verifier_notes": "No test in the new file exercises MsgPack012. Needs a new test with an inaccessible suppressed type.",
+      "adjudication": {
+        "rule": "E1: verifier 'matrix' has no executed evidence (argued; citations validate)",
+        "flags": []
+      }
+    }
+  ],
+  "uncovered_requirements": [],
+  "coverage_gaps": [
+    "The requirement set has no item for the generator path (analyzer disabled) although the diff changes member collection that the generator also uses (see S1 and C6).",
+    "MsgPack012 and the MsgPack016 derived-key path have no test (see C7, C8)."
+  ],
+  "adjudicated_at": "2026-11-14T23:55:23+02:00",
+  "adjudicator": "adjudicator-1",
+  "adjudication_note": "evidence_level and status are set by receipts/evidence/adjudicate.py from runs/ artifacts; the LLM-written original is runs/2234/claims.llm.json"
+}

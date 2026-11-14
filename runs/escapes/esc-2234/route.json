@@ -1,0 +1,94 @@
+{
+  "change": "esc-2234",
+  "lane": "L2",
+  "reasons": [
+    {
+      "rule": "areas",
+      "lane": "L2",
+      "why": "highest default lane of the touched areas"
+    },
+    {
+      "rule": "LR4",
+      "lane": "L2",
+      "why": "3 source hunk(s) not yet proven protected (xray pending)"
+    }
+  ],
+  "areas": [
+    "analyzer-core",
+    "other"
+  ],
+  "ceiling_areas": [],
+  "blast_radius": {
+    "threshold": 10,
+    "max_references": 1,
+    "top_symbol": "SetValue",
+    "per_hunk": {
+      "h1": [
+        {
+          "symbol": "SetValue",
+          "why": "declared",
+          "references": 1
+        },
+        {
+          "symbol": "PrimaryKeyItem",
+          "why": "declared",
+          "references": 0
+        }
+      ],
+      "h2": [],
+      "h3": []
+    }
+  },
+  "flagged_hunks": {
+    "h1": [
+      "xray-pending: not yet shown to be protected by a test"
+    ],
+    "h2": [
+      "xray-pending: not yet shown to be protected by a test"
+    ],
+    "h3": [
+      "xray-pending: not yet shown to be protected by a test"
+    ]
+  },
+  "reading_budget": {
+    "lines": 185,
+    "hunks": 3,
+    "total_changed_lines": 185,
+    "ratio": 1.0,
+    "basis": "lines in flagged hunks",
+    "inputs": {
+      "xray": false,
+      "regen": false,
+      "refusals": false,
+      "claims": false
+    },
+    "provisional": true
+  },
+  "files": [
+    {
+      "path": "sandbox/Sandbox/Program.cs",
+      "area": "other",
+      "kind": "src",
+      "lane": "L2",
+      "changed_lines": 170,
+      "flagged_hunks": [
+        "h1"
+      ]
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "area": "analyzer-core",
+      "kind": "src",
+      "lane": "L2",
+      "changed_lines": 15,
+      "flagged_hunks": [
+        "h2",
+        "h3"
+      ]
+    }
+  ],
+  "policy": {
+    "areas": "areas-1",
+    "routing": "routing-1"
+  }
+}

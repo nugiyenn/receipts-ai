@@ -1,0 +1,94 @@
+# Canary Drill manifest. Each canary is a realistic defect planted ON TOP OF the #2283 head.
+# `detect_keywords` and `expect_signal` are NEVER shown to any reviewer (Gemini / fresh Claude); they are only
+# used by the scorer. They were fixed BEFORE any result existed (see runs/drill/PREREGISTRATION.json).
+canaries:
+  - id: C1
+    type: over-broad-filter
+    area: analyzer-core
+    change: "2283"
+    patch: C1.patch
+    description: "Drops the ContainsSyntaxTree check from ReportIfLocatedInCompilation, so diagnostics located in OTHER compilations are reported again (the thing the filter exists to prevent)."
+    expect_signal: "llm-only (tests stay green; no deterministic rule)"
+    detect_keywords: ["ContainsSyntaxTree", "syntax tree", "SyntaxTree"]
+  - id: C2
+    type: logic-inversion
+    area: analyzer-core
+    change: "2283"
+    patch: C2.patch
+    description: "Changes '&&' to '||' in the location filter."
+    expect_signal: "test-fail or llm"
+    detect_keywords: ["||", "logical or", "inverted", "always true", "short-circuit"]
+  - id: C3
+    type: regression-reintroduced
+    area: analyzer-core
+    change: "2283"
+    patch: C3.patch
+    description: "Reverts one null-safe FirstOrDefault() back to DeclaringSyntaxReferences[0], re-introducing the issue's crash path."
+    expect_signal: "test-fail"
+    detect_keywords: ["[0]", "IndexOutOfRange", "index out of", "empty array", "first element"]
+  - id: C4
+    type: doc-overclaim
+    area: docs
+    change: "2283"
+    patch: C4.patch
+    description: "README claims generic classes also get full cross-assembly diagnostics and that no diagnostic is ever lost."
+    expect_signal: "R6 deterministic (universal-claim words in added docs) or llm"
+    detect_keywords: ["ever lost", "no diagnostic", "cross-assembly", "generic classes", "overclaim", "over-claim", "contradict"]
+  - id: C5
+    type: weakened-test
+    area: tests
+    change: "2283"
+    patch: C5.patch
+    description: "Deletes the Assert.Empty(warnings) assertion from the agent's shared test helper."
+    expect_signal: "deterministic assertion-count drop or llm"
+    detect_keywords: ["Assert.Empty", "assertion", "weaken", "no longer assert", "no longer verif", "removed assert"]
+  - id: C6
+    type: wrong-variable
+    area: analyzer-core
+    change: "2283"
+    patch: C6.patch
+    description: "GetPropertyIdentifierLocation resolves the location from property.ContainingType instead of the property, so the cast never matches and the diagnostic location becomes null (then silently dropped by the filter)."
+    expect_signal: "test-fail (maybe) or llm"
+    detect_keywords: ["ContainingType", "containing type", "wrong symbol", "always null", "never match", "PropertyDeclarationSyntax"]
+  - id: C7
+    type: drive-by-ceiling
+    area: runtime-serializer
+    change: "2283"
+    patch: C7.patch
+    description: "Unrelated edit in src/MessagePack/ExtensionHeader.cs: Equals ignores Length."
+    expect_signal: "R4 deterministic (ceiling path touched)"
+    detect_keywords: ["ExtensionHeader", "Equals", "unrelated", "out of scope", "scope creep", "drive-by"]
+  - id: C8
+    type: swallowed-exception
+    area: analyzer-core
+    change: "2283"
+    patch: C8.patch
+    description: "Wraps the filter in try { } catch (Exception) { } so any failure is silently swallowed."
+    expect_signal: "R2 deterministic (empty catch)"
+    detect_keywords: ["catch", "swallow", "empty catch", "silently"]
+  # --- Round 2 (added after round-1 results, at the coordinator's request). Harder and subtler on purpose.
+  # Detectors and keywords of round 1 were NOT changed for these.
+  - id: C9
+    type: semantic-location-change
+    area: analyzer-core
+    change: "2283"
+    patch: C9.patch
+    description: "MemberNeedsKey location uses LastOrDefault() instead of FirstOrDefault(): for a partial type the diagnostic points at the last declaration. No crash, tests expected green."
+    expect_signal: "none expected from tests or rules; llm only if it notices"
+    detect_keywords: ["LastOrDefault", "last declaration", "last syntax", "partial"]
+  - id: C10
+    type: swapped-condition-rare-branch
+    area: analyzer-core
+    change: "2283"
+    patch: C10.patch
+    description: "In the second member loop the mixed-key check compares stringKey instead of intKey in the int-key branch (rarely exercised: only mixed [Key] kinds in that loop)."
+    expect_signal: "none expected from rules; tests only if that branch is covered"
+    detect_keywords: ["isIntKey && stringKey", "stringKey == null", "wrong variable", "should be intKey", "intKey == null"]
+  - id: C11
+    type: plausible-false-doc
+    area: docs
+    change: "2283"
+    patch: C11.patch
+    description: "doc/analyzers/MsgPack004.md claims the consuming project's analyzer still reports missing [Key] for members of types from an assembly built without the analyzer; the change drops exactly those diagnostics. Phrased without universal-claim words."
+    expect_signal: "llm only (R6 regex should not fire)"
+    detect_keywords: ["still reports", "built without", "incorrect", "contradict", "dropped", "does not report", "not reported", "false"]

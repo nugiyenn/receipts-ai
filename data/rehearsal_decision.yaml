@@ -1,0 +1,22 @@
+# REHEARSAL decisions for the demo. Written for practice, not by an accountable owner.
+owner: Rehearsal Owner
+refusal_decisions:
+  - id: R-2283-1
+    decision: Require narrowing to metadata symbols
+    note: The crash only needs two null-safe lookups. A filter on all 28 call sites can hide a diagnostic nobody planned to hide, and the record case already shows one.
+  - id: R-2283-2
+    decision: "Soften to 'may be reported by the defining assembly'"
+    note: A NuGet package built without our analyzer reports nothing, so the doc sentence promises more than we can check.
+  - id: R-2283-3
+    decision: Decide later, track in an issue
+    note: Whether consumers get an informational hint is a product call for the maintainers. It should not block the crash fix.
+  - id: R-2283-4
+    decision: Re-run on master (3.1.x) first
+    note: The branch sits on an older base. I want the three new tests green on the branch we ship from before this merges.
+residual_risk_owner_words: >
+  I read the diagnostic filter and the helper by hand. Three tests fail on the old code, so the crash fix is real.
+  What I did not run: the other 3.1.x branch, packages built without the analyzer, and any record shape beyond the three tests.
+  If the filter is wider than it should be, a user could lose a diagnostic and see a clean build, and I accept that until the narrowing lands.
+not_checked_extra:
+  - what: the three new tests on the 3.1.x branch
+    why: this branch is based on an older commit and the owner has not rebuilt on master yet

@@ -1,0 +1,8 @@
+S7_metadata_mixed_keys	(no diagnostics)
+S5_metadata_no_deserializing_ctor_private	(no diagnostics)
+S2_metadata_class_unkeyed	(no diagnostics)
+S8_metadata_dup_keys	(no diagnostics)
+S1_source_member_of_non_MPO_metadata_type	(no diagnostics)
+S6_metadata_ctor_param_mismatch	(no diagnostics)
+S3_metadata_struct_unkeyed	(no diagnostics)
+S4_metadata_generic_class_unkeyed	(no diagnostics)

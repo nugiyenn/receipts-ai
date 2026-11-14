@@ -1,0 +1,57 @@
+{
+ "change": "2234",
+ "generated_at": "2026-11-14T23:16:52+02:00",
+ "hypotheses": [
+  {
+   "id": "H4",
+   "change": "2234",
+   "rule": "R3-unverified-root-cause",
+   "outcome": "CONFIRMED (refusal stands)",
+   "what": "Issue says the analyzer stopped working in 3.1.1 (worked in 3.1.0). Root-cause commit found: 1a74a620 \"stop collect field when object marked SuppressSourceGeneration\" (neuecc, 2024-12-25, first in v3.1.1) moved an early `return null` for suppressSourceGeneration to the top of GetObjectInfo, before member collection, so the analyzer never visits members.",
+   "evidence": [
+    "git tag --contains 1a74a620 -> v3.1.1..",
+    "git merge-base --is-ancestor 1a74a620 origin/ju26-issue-2234~1 -> NOT an ancestor",
+    "base (v3.0.238-rc.1+66, 32258fdb) still has the suppress-check at the END of GetObjectInfo (line 1369), as in v3.1.0",
+    "runs/2234/timemachine.json"
+   ],
+   "finding": "The agent patched a base that does not contain the 3.1.1 regression. The fix (duplicate-key/mixed-key guards) addresses a DIFFERENT real crash (AD0001 ArgumentException / InvalidOperationException on invalid keys) that the base does reproduce. The commit message and README present it as the fix for the issue headline. The AI cannot establish that the headline bug is fixed on the branch that has the regression.",
+   "refusal_question": "The regression commit is on the v3.1 line, not on this base. Do you accept this change as the fix for #2234 (headline), or require it be re-applied and re-tested on the v3.1.x line first?"
+  },
+  {
+   "id": "H5",
+   "change": "2234",
+   "rule": "R2-silent-suppression",
+   "outcome": "PARTIALLY CONFIRMED (generator emits silently; analyzer carries the error)",
+   "what": "Generator passes reportAnalyzerDiagnostic: null to TypeCollector.Collect (MessagePackGenerator.cs:47), so it never reports collector diagnostics itself. After the fix, invalid keys no longer crash; the generator now emits a formatter + resolver for types with duplicate or mixed keys.",
+   "evidence": [
+    "runs/2234/h5-probe-2234-base.log (base: AD0001 crash)",
+    "runs/2234/h5-probe-2234-head.log (head: generator emits GeneratedMessagePackResolver + formatters for Dup and Mixed)",
+    "receipts/evidence/t2234_probe.cs.txt"
+   ],
+   "finding": "Before: crash (no resolver). After: resolver generated with a member silently skipped; the only build error comes from the analyzer (MsgPack005/007). If the analyzer is disabled or downgraded by .editorconfig, bad contracts now compile silently. Not verified: the exact generated member list (probe only confirmed files are emitted); severity configuration scenario not run.",
+   "refusal_question": "Is relying on the analyzer alone to flag duplicate/mixed keys acceptable, given the generator itself no longer fails?"
+  },
+  {
+   "id": "X1",
+   "change": "2234",
+   "rule": "evidence",
+   "outcome": "CONFIRMED",
+   "what": "Fix hunks are covered by tests.",
+   "finding": "3 of 6 src hunks (all in the PROPERTY loop) are load-bearing; the 3 hunks in the FIELD loop (line ~1138-1176) are not noticed by any of the 8 new tests (11 changed lines unprotected).",
+   "evidence": [
+    "runs/2234/xray.json"
+   ]
+  },
+  {
+   "id": "X2",
+   "change": "2234",
+   "rule": "evidence",
+   "outcome": "CONFIRMED",
+   "what": "Agent tests prove the fix.",
+   "finding": "4 of 8 new analyzer tests also pass on the old code (do not reproduce the bug). 4 are genuine fail->pass.",
+   "evidence": [
+    "runs/2234/timemachine.json"
+   ]
+  }
+ ]
+}

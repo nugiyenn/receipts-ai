@@ -1,0 +1,14 @@
+/Users/andy/Downloads/Junction2/wt/esc-2225-head/src/MessagePack.SourceGenerator/AnalyzerReleases.Shipped.md(16,1): warning RS2007: Analyzer release file 'AnalyzerReleases.Shipped.md' has a missing or invalid release header '## Release 2.3.73-alpha' (https://github.com/dotnet/roslyn-analyzers/blob/main/src/Microsoft.CodeAnalysis.Analyzers/ReleaseTrackingAnalyzers.Help.md) [/Users/andy/Downloads/Junction2/wt/esc-2225-head/src/MessagePack.SourceGenerator/MessagePack.SourceGenerator.csproj]
+Test run for /Users/andy/Downloads/Junction2/wt/esc-2225-head/bin/MessagePack.Tests/Debug/net9.0/MessagePack.Tests.dll (.NETCoreApp,Version=v9.0)
+A total of 1 test files matched the specified pattern.
+
+Failed!  - Failed:     1, Passed:     7, Skipped:     0, Total:     8, Duration: 125 ms - MessagePack.Tests.dll (net9.0)
+
+Build FAILED.
+
+/Users/andy/Downloads/Junction2/wt/esc-2225-head/src/MessagePack.SourceGenerator/AnalyzerReleases.Shipped.md(16,1): warning RS2007: Analyzer release file 'AnalyzerReleases.Shipped.md' has a missing or invalid release header '## Release 2.3.73-alpha' (https://github.com/dotnet/roslyn-analyzers/blob/main/src/Microsoft.CodeAnalysis.Analyzers/ReleaseTrackingAnalyzers.Help.md) [/Users/andy/Downloads/Junction2/wt/esc-2225-head/src/MessagePack.SourceGenerator/MessagePack.SourceGenerator.csproj]
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:48.57
+[xUnit.net 00:00:02.86]     MessagePack.Tests.FormatterTest.DateTimeOffsetTest [FAIL]

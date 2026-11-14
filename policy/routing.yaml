@@ -1,0 +1,21 @@
+version: routing-1
+lanes:
+  L0: {name: mechanical, human_reads: "one-line summary"}
+  L1: {name: skim,       human_reads: "claims + story only"}
+  L2: {name: focused,    human_reads: "flagged hunks (unprotected, refused, E1-only)"}
+  L3: {name: full read,  human_reads: "whole diff"}
+rules:
+  - {id: LR1, when: "any file in a ceiling/security_critical area", lane: L3}
+  - {id: LR2, when: "refusal rule R4 or R7 fired", lane: L3}
+  - {id: LR3, when: "blast radius of a changed symbol >= blast_threshold", lane: L2, min: true}
+  - {id: LR4, when: "any src hunk is unprotected by tests (xray)", lane: L2, min: true}
+  - {id: LR5, when: "all changed files are generated snapshots and regeneration/pattern check passes", lane: L0}
+  - {id: LR6, when: "only tests/docs changed and claims proven", lane: L1}
+  - {id: LR7, when: "area demoted by trust ledger", lane: L3}
+blast_threshold: 10          # references (git grep) to a changed symbol/field
+reading_budget:
+  flagged_kinds: [src, template]
+  note: "Budget = lines of hunks flagged L2/L3. Until xray.json exists every src/template hunk is flagged."
+cold_start_lane: L2
+promotion: {consecutive_clean: 20, min_canary_recall: 0.90}
+demotion:  {on_escape: L3, clean_to_leave_l3: 10, canary_recall_below: 0.80}

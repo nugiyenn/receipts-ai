@@ -1,0 +1,74 @@
+{
+  "change": "2129",
+  "method": "match if (cited lines in same file within 8 lines AND token jaccard>=0.12) OR jaccard>=0.35; greedy per Claude claim. Heuristic, not semantic; unmatched claims need human read.",
+  "overlap": [
+    {
+      "claude": "C1",
+      "gemini": "claim-REQ-2129-F1",
+      "cited_lines_near": false,
+      "text_jaccard": 0.55
+    },
+    {
+      "claude": "C4",
+      "gemini": "claim-REQ-2129-F4",
+      "cited_lines_near": true,
+      "text_jaccard": 0.33
+    },
+    {
+      "claude": "C7",
+      "gemini": "claim-REQ-2129-NF3",
+      "cited_lines_near": true,
+      "text_jaccard": 0.36
+    },
+    {
+      "claude": "C8",
+      "gemini": "claim-REQ-2129-S1",
+      "cited_lines_near": true,
+      "text_jaccard": 0.2
+    },
+    {
+      "claude": "C9",
+      "gemini": "claim-REQ-2129-F1",
+      "cited_lines_near": true,
+      "text_jaccard": 0.13
+    }
+  ],
+  "only_claude": [
+    "C2",
+    "C3",
+    "C5",
+    "C6",
+    "C10",
+    "C11"
+  ],
+  "only_gemini": [
+    {
+      "id": "claim-REQ-2129-F2",
+      "requirement": "REQ-2129-F2",
+      "text": "With no MessagePack attributes on T, serialization defaults to contractless behaviour over public members."
+    },
+    {
+      "id": "claim-REQ-2129-NF1",
+      "requirement": "REQ-2129-NF1",
+      "text": "Nothing needs to be added to the assembly that declares T, and no new runtime dependency or runtime reflection over user-defined attribute copies is introduced."
+    },
+    {
+      "id": "claim-REQ-2129-NF2",
+      "requirement": "REQ-2129-NF2",
+      "text": "Behaviour of existing [MessagePackObject] types and existing formatters is unchanged."
+    }
+  ],
+  "counts": {
+    "claude": 11,
+    "gemini": 7,
+    "overlap": 5
+  },
+  "only_claude_texts": {
+    "C2": "Without a surrogate, the generated formatter writes every public read-write instance property and field of T as a string-keyed map entry named after the member.",
+    "C3": "Attributes that are present on T are used for the wire contract.",
+    "C5": "The fixture assembly that declares the formatted types has no MessagePack reference, so the feature works without adding anything to the assembly that owns T.",
+    "C6": "Hand-written formatters and existing generated formatters are unaffected: the exclusion in the formatter search only matches classes carrying the new attribute, and the template keeps 'internal sealed class' for every other formatter.",
+    "C10": "A surrogate type's [Key] and [IgnoreMember] attributes decide which members are written and under which keys, with members matched by name and type.",
+    "C11": "Adding the public attribute class GeneratedMessagePackFormatterAttribute to the MessagePack.Annotations assembly is additive and does not change existing public API."
+  }
+}

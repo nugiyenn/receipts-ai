@@ -1,0 +1,293 @@
+{
+  "change": "2283",
+  "kind": "claims",
+  "produced_by": "claude-code session, cached",
+  "model": "claude-sonnet-5-5",
+  "produced_at": "2026-11-14T23:19",
+  "static_analysis_only": true,
+  "prompt": "You are a code-review claim extractor. You do NOT judge whether the change is good.\nProduce the minimal set of falsifiable claims this change makes or must satisfy.\nRules:\n1. Every requirement item (F*, NF*, S*) must be covered by >=1 claim, or listed in uncovered_requirements.\n2. Statements from the commit message, README or docs written by the author agent are\n   CLAIMS TO TEST (source=\"author-narrative\"), never evidence.\n3. Every claim must cite >=1 exact diff line: {path, new_line, quote}. Quote must be verbatim.\n4. For each claim propose a verifier: timemachine | xray | regen | matrix | static | argued.\n5. Never output confidence numbers or words like \"likely correct\".\nOutput JSON matching the schema. No prose.",
+  "prompt_sha256": "6fa10c1d36a7f9dbe83081c922aac0dae15dbd4a6a35c6a5db18767b372c1144",
+  "inputs": [
+    "git show origin/ju26-issue-2283",
+    "issue #2283 body (github.com page, fetched 2026-11-14)",
+    "receipts/requirements/REQ-2283.yaml",
+    "git history: v3.1.8 TypeCollector.cs"
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "requirement": "REQ-2283-F1",
+      "text": "For a [MessagePackObject] type whose member is a closed generic value type from a referenced assembly, the analyzer no longer throws IndexOutOfRangeException (AD0001).",
+      "source": "requirement",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 985,
+          "quote": "GetPropertyIdentifierLocation(item), formattedType.ToDisplayString"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1077,
+          "quote": "Diagnostic.Create(MsgPack00xMessagePackAnalyzer.MemberNeedsKey, item.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation()"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 507,
+          "quote": "public async Task ClosedGenericStruct_FromMetadataReference()"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 551,
+          "quote": "public async Task ClosedGenericRecordStruct_FromMetadataReference()"
+        }
+      ],
+      "verifier": "timemachine",
+      "evidence_level": null,
+      "evidence_refs": [],
+      "status": "pending",
+      "verifier_notes": "Run the new tests against base: expect failure with IndexOutOfRangeException; on head: pass. Also reveals which of the two patched sites actually fired (the issue says the reporter did not narrow this down)."
+    },
+    {
+      "id": "C2",
+      "requirement": "REQ-2283-F2",
+      "text": "For the same input the generator no longer throws (no CS8785) and a GeneratedMessagePackResolver is emitted.",
+      "source": "requirement",
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 658,
+          "quote": "Assert.Contains(expectedResolverHintName, hintNames);"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 656,
+          "quote": "Assert.Empty(runResult.Diagnostics.Where(d => d.Severity >= DiagnosticSeverity.Warning));"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1077,
+          "quote": "Diagnostic.Create(MsgPack00xMessagePackAnalyzer.MemberNeedsKey, item.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation()"
+        }
+      ],
+      "verifier": "timemachine",
+      "evidence_level": null,
+      "evidence_refs": [],
+      "status": "pending",
+      "verifier_notes": "The shared test helper asserts the resolver hint name is present, so this is not only a no-crash claim."
+    },
+    {
+      "id": "C3",
+      "requirement": "REQ-2283-F3",
+      "text": "Only struct<T> and record struct<T> from metadata change behaviour; struct, record struct, class<T> and record class<T> from metadata behave exactly as before.",
+      "source": "requirement",
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 507,
+          "quote": "public async Task ClosedGenericStruct_FromMetadataReference()"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 551,
+          "quote": "public async Task ClosedGenericRecordStruct_FromMetadataReference()"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 590,
+          "quote": "public async Task ClosedGenericStruct_FromMetadataReference_UnkeyedMember()"
+        }
+      ],
+      "verifier": "matrix",
+      "evidence_level": null,
+      "evidence_refs": [],
+      "status": "pending",
+      "verifier_notes": "The new tests cover 2 of the 6 declaration forms in the issue's table; the 4 'ok' rows have no regression test. Run all 6 rows on base and head."
+    },
+    {
+      "id": "C4",
+      "requirement": "REQ-2283-NF1",
+      "text": "No diagnostic that was reported before the change for a type declared in source is lost, moved or changed by the new constructor-level filter.",
+      "source": "diff",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 239,
+          "quote": "this.reportDiagnostic = reportAnalyzerDiagnostic is null ? null : diagnostic => ReportIfLocatedInCompilation(reportAnalyzerDiagnostic, diagnostic);"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1446,
+          "quote": "if (diagnostic.Location.IsInSource && this.compilation.ContainsSyntaxTree(diagnostic.Location.SourceTree))"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1341,
+          "quote": "Location location = callerSymbol is not null ? callerSymbol.Locations[0] : formattedType.Locations[0];"
+        }
+      ],
+      "verifier": "xray",
+      "evidence_level": null,
+      "evidence_refs": [],
+      "status": "pending",
+      "verifier_notes": "Revert the filter hunk and run the existing analyzer suite; additionally diff the diagnostic multiset (id, span) base vs head over the existing analyzer test inputs."
+    },
+    {
+      "id": "C5",
+      "requirement": "REQ-2283-S1",
+      "text": "No safety-relevant diagnostic is silently dropped for types the user controls.",
+      "source": "requirement",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 239,
+          "quote": "this.reportDiagnostic = reportAnalyzerDiagnostic is null ? null : diagnostic => ReportIfLocatedInCompilation(reportAnalyzerDiagnostic, diagnostic);"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1446,
+          "quote": "if (diagnostic.Location.IsInSource && this.compilation.ContainsSyntaxTree(diagnostic.Location.SourceTree))"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 248,
+          "quote": "reportAnalyzerDiagnostic?.Invoke(Diagnostic.Create(MsgPack00xMessagePackAnalyzer.InaccessibleDataType"
+        }
+      ],
+      "verifier": "argued",
+      "evidence_level": null,
+      "evidence_refs": [],
+      "status": "pending",
+      "verifier_notes": "The filter wraps 28 reporting call sites; one reporting call (InaccessibleDataType) in the same constructor bypasses it. Proof by absence of failures is not possible: see refusal R-2283-1."
+    },
+    {
+      "id": "C6",
+      "requirement": "REQ-2283-NF2",
+      "text": "Diagnostics about the members of a closed generic type from a referenced assembly are reported by the assembly that defines it, so any problem must be fixed there.",
+      "source": "author-narrative",
+      "citations": [
+        {
+          "path": "README.md",
+          "line": 1642,
+          "quote": "Diagnostics about the members of such a type are reported by the assembly that defines it rather than by the consuming project"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 584,
+          "quote": "since its member diagnostics belong to the defining assembly."
+        }
+      ],
+      "verifier": "argued",
+      "evidence_level": null,
+      "evidence_refs": [],
+      "status": "pending",
+      "verifier_notes": "True only if the defining assembly was compiled with this analyzer at a version that reports those diagnostics. See refusal R-2283-2."
+    },
+    {
+      "id": "C7",
+      "requirement": "REQ-2283-NF2",
+      "text": "An unattributed public member of a type defined in a referenced assembly is reported by the project that defines that type.",
+      "source": "author-narrative",
+      "citations": [
+        {
+          "path": "doc/analyzers/MsgPack004.md",
+          "line": 52,
+          "quote": "Members of a type defined in a referenced assembly are reported by the project that defines that type"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 603,
+          "quote": "public int Unkeyed { get; set; }"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+          "line": 667,
+          "quote": "Microsoft.CodeAnalysis.Emit.EmitResult emitResult = compilation.Emit(stream);"
+        }
+      ],
+      "verifier": "argued",
+      "evidence_level": null,
+      "evidence_refs": [],
+      "status": "pending",
+      "verifier_notes": "The unkeyed-member test compiles the defining assembly with Compilation.Emit and runs no analyzer on it, so nothing in the test reports the member anywhere."
+    },
+    {
+      "id": "C8",
+      "requirement": "REQ-2283-NF2",
+      "text": "Dropping a diagnostic that has no location in the compilation is required because analyzers are not permitted to report against a location that does not exist.",
+      "source": "author-narrative",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1442,
+          "quote": "against a location that does not exist, which analyzers are not permitted to do."
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1446,
+          "quote": "if (diagnostic.Location.IsInSource && this.compilation.ContainsSyntaxTree(diagnostic.Location.SourceTree))"
+        }
+      ],
+      "verifier": "argued",
+      "evidence_level": null,
+      "evidence_refs": [],
+      "status": "pending",
+      "verifier_notes": "Factual claim about the Roslyn contract, stated in a code comment. Test by reporting Location.None and a metadata location from a minimal analyzer."
+    },
+    {
+      "id": "C9",
+      "requirement": "REQ-2283-F1",
+      "text": "No live DeclaringSyntaxReferences[0] indexing remains in TypeCollector.cs; the only remaining occurrence is commented out.",
+      "source": "diff",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 715,
+          "quote": "////this.reportDiagnostic?.Invoke(Diagnostic.Create(MsgPack00xMessagePackAnalyzer.TypeMustBeMessagePackObject"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1077,
+          "quote": "Diagnostic.Create(MsgPack00xMessagePackAnalyzer.MemberNeedsKey, item.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation()"
+        }
+      ],
+      "verifier": "static",
+      "evidence_level": null,
+      "evidence_refs": [],
+      "status": "pending",
+      "verifier_notes": "Mechanical: grep the head file. Other index-based accessors remain (Arguments[0] at the MessageFormatterMustBeMessagePackFormatter site, Locations[0] at the TypeMustBeMessagePackObject site) and are outside this claim."
+    },
+    {
+      "id": "C10",
+      "requirement": "REQ-2283-NF1",
+      "text": "GetPropertyIdentifierLocation returns null only for properties that have no source declaration (metadata), so no source-declared property loses its diagnostic.",
+      "source": "diff",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1434,
+          "quote": "private static Location? GetPropertyIdentifierLocation(IPropertySymbol property)"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 1432,
+          "quote": "It may be declared in metadata, in which case"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+          "line": 985,
+          "quote": "GetPropertyIdentifierLocation(item), formattedType.ToDisplayString"
+        }
+      ],
+      "verifier": "matrix",
+      "evidence_level": null,
+      "evidence_refs": [],
+      "status": "pending",
+      "verifier_notes": "The helper uses 'as PropertyDeclarationSyntax', which is also null for a record primary-constructor property declared in source (its syntax is a parameter). Test: [property: Key((string)null)] on a positional record."
+    }
+  ],
+  "uncovered_requirements": [],
+  "coverage_gaps": [
+    "The issue's repro is a two-project ProjectReference build (mp-repro.zip); the tests use an in-memory MetadataReference. No claim exercises a real dotnet build of the repro.",
+    "No claim covers the issue's stated workaround ([MessagePackFormatter(typeof(ItemFormatter<>))]) still working."
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "canary": "C6",
+  "type": "wrong-variable",
+  "caught": true,
+  "by": [
+    "test-fail",
+    "llm:gemini",
+    "llm:claude"
+  ],
+  "by_family": {
+    "tests": true,
+    "deterministic-rules": false,
+    "gemini": true,
+    "claude": true
+  },
+  "note": "GetPropertyIdentifierLocation resolves the location from property.ContainingType instead of the property, so the cast never matches and the diagnostic location becomes null (then silently dropped by the filter).",
+  "tests": {
+    "ran": true,
+    "compiled": true,
+    "failing_tests": [
+      "MsgPack00xAnalyzerTests.NullStringKey"
+    ],
+    "summary_line": "",
+    "outcome": "red",
+    "seconds": 127.1,
+    "log": "runs/drill/C6/tests.log"
+  },
+  "detectors": [],
+  "gemini": {
+    "caught": true,
+    "hits": [
+      {
+        "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+        "line": 1434,
+        "severity": "high",
+        "issue": "Using `property.ContainingType.DeclaringSyntaxReferences` retrieves the syntax of the containing type (e.g., class or struct) rather than the property itself. This will never cast to `PropertyDeclarationSyntax`, causing the method to always return null and silently swallow the diagnostic for all source-declared properties."
+      }
+    ],
+    "near_but_off_target": [],
+    "n_findings": 1
+  },
+  "claude": {
+    "caught": true,
+    "hits": [
+      {
+        "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+        "line": 1434,
+        "severity": "high",
+        "issue": "GetPropertyIdentifierLocation reads `property.ContainingType.DeclaringSyntaxReferences` instead of `property.DeclaringSyntaxReferences`. The syntax it gets is a type declaration, so the `as PropertyDeclarationSyntax` cast always yields null. The BothStringAndIntKeyAreNull diagnostic (used at line 985) therefore always has no location and is now silently dropped by the filter, including for source-declared properties. This is a regression of an existing diagnostic and contradicts C4, C5 and C10."
+      }
+    ],
+    "near_but_off_target": [],
+    "n_findings": 5
+  },
+  "xray_routed_to_human_NOT_counted": {
+    "routed": false,
+    "why": "planted lines fall inside agent hunk h6 whose X-Ray result is 'structural' (hunk granularity cannot see a planted change inside it)"
+  },
+  "evidence_refs": [
+    "runs/drill/C6/tests.json",
+    "runs/drill/C6/tests.log",
+    "runs/drill/C6/detectors.json",
+    "runs/drill/C6/gemini_review.json",
+    "runs/drill/C6/claude_findings.json",
+    "runs/drill/C6/review_input.diff"
+  ]
+}

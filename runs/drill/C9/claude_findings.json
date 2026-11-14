@@ -1,0 +1,43 @@
+{
+  "produced_by": "fresh `claude -p` session, model claude-sonnet-5-5, no tools, empty working dir, no conversation context; never told a canary exists",
+  "prompt_sha256": "9c11160f4ad7a1ca199d16dfd0d64fb9e29934b80c8cb54b0ce6cfc5f18494a0",
+  "findings": [
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1446,
+      "severity": "high",
+      "issue": "The filter drops every diagnostic whose location is not in a source tree of the compilation. That includes diagnostics with Location.None, which are legal for analyzers. Diagnostics on source-declared types whose helpers return a null location are now silently lost, for example implicit or primary-constructor cases from GetParameterListLocation or GetLocation(parameter). This contradicts C4, C5, NF1 and S1, and the C8 rationale is wrong."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 239,
+      "severity": "medium",
+      "issue": "The blanket wrapper applies to all analyzer diagnostics, not just the metadata-type ones that caused the crash. A narrower fix would guard only the sites that dereference DeclaringSyntaxReferences[0]. As written, the change goes beyond the requirement and no test shows source diagnostics still being reported."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1434,
+      "severity": "high",
+      "issue": "The helper returns null whenever the syntax is not a PropertyDeclarationSyntax, not only for metadata. A source-declared positional record property is declared by a ParameterSyntax. Its BothStringAndIntKeyAreNull diagnostic now gets a null location and is dropped by the filter, so C10 is false. Source-declared properties can lose their diagnostic."
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "line": 1077,
+      "severity": "medium",
+      "issue": "The code changes from DeclaringSyntaxReferences[0] to LastOrDefault(). For symbols with several declarations, such as partial members, the diagnostic location moves from the first declaration to the last. That is a behaviour change for source types, and it is inconsistent with the FirstOrDefault used elsewhere. It also contradicts C4. For metadata symbols the diagnostic is then silently dropped."
+    },
+    {
+      "path": "README.md",
+      "line": 1642,
+      "severity": "low",
+      "issue": "The text says diagnostics for members of such a type are reported by the defining assembly, so the problem must be fixed there. That over-claims. The analyzer may not run in the defining project, and the change simply suppresses these diagnostics in the consumer."
+    },
+    {
+      "path": "doc/analyzers/MsgPack004.md",
+      "line": 51,
+      "severity": "low",
+      "issue": "The doc says an unattributed public member of a referenced type is reported by its defining project. That is not guaranteed, because the defining project may not use the analyzer. The statement is unverified and over-claims behaviour (NF2)."
+    }
+  ],
+  "raw": null
+}

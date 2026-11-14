@@ -1,0 +1,19 @@
+{
+ "text": "{\n  \"findings\": [\n    {\n      \"path\": \"src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs\",\n      \"line\": 1434,\n      \"severity\": \"high\",\n      \"issue\": \"GetPropertyIdentifierLocation returns null for properties synthesized from record primary constructor parameters because their syntax is ParameterSyntax, not PropertyDeclarationSyntax. This causes the BothStringAndIntKeyAreNull diagnostic to be created with Location.None and subsequently dropped, violating C10 and C5.\"\n    },\n    {\n      \"path\": \"src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs\",\n      \"line\": 1446,\n      \"severity\": \"high\",\n      \"issue\": \"ReportIfLocatedInCompilation silently drops any diagnostic with Location.None. This suppresses existing diagnostics for source types where location resolution fails (e.g., GetParameterListLocation returning null for record primary constructors), violating REQ-2283-NF1 and C4.\"\n    }\n  ]\n}",
+ "model": "gemini-3.1-pro-preview",
+ "prompt_sha256": "e77d8ca0a6f809bd349f4fc6fb4e4a6b5e2208471da6de83c809f5972c9006ab",
+ "ts": "2026-11-14T23:26:37+0200",
+ "usage": {
+  "promptTokenCount": 5990,
+  "candidatesTokenCount": 230,
+  "totalTokenCount": 18942,
+  "promptTokensDetails": [
+   {
+    "modality": "TEXT",
+    "tokenCount": 5990
+   }
+  ],
+  "thoughtsTokenCount": 12722,
+  "serviceTier": "standard"
+ }
+}

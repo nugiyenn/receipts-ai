@@ -1,0 +1,367 @@
+{
+  "change": "2129",
+  "kind": "claims",
+  "produced_by": "claude-code session, cached",
+  "model": "claude-sonnet-5-5",
+  "produced_at": "2026-11-14T23:50",
+  "static_analysis_only": false,
+  "inputs": [
+    "git show origin/ju26-issue-2129",
+    "issue #2129 body and maintainer reply (github.com page, fetched 2026-11-14)",
+    "receipts/requirements/REQ-2129.yaml",
+    "runs/2129/timemachine.json",
+    "runs/2129/probe/ (executed probes)"
+  ],
+  "prompt": "You are a code-review claim extractor. You do NOT judge whether the change is good.\nProduce the minimal set of falsifiable claims this change makes or must satisfy.\nRules:\n1. Every requirement item (F*, NF*, S*) must be covered by >=1 claim, or listed in uncovered_requirements.\n2. Statements from the commit message, README or docs written by the author agent are\n   CLAIMS TO TEST (source=\"author-narrative\"), never evidence.\n3. Every claim must cite >=1 exact diff line: {path, new_line, quote}. Quote must be verbatim.\n4. For each claim propose a verifier: timemachine | xray | regen | matrix | static | argued.\n5. Never output confidence numbers or words like \"likely correct\".\nOutput JSON matching the schema. No prose.",
+  "prompt_sha256": "6fa10c1d36a7f9dbe83081c922aac0dae15dbd4a6a35c6a5db18767b372c1144",
+  "claims": [
+    {
+      "id": "C1",
+      "requirement": "REQ-2129-F1",
+      "source": "requirement",
+      "verifier": "timemachine",
+      "text": "A partial class marked [GeneratedMessagePackFormatter] that implements IMessagePackFormatter<T> for a type T from another assembly gets its Serialize and Deserialize members generated in the consuming project.",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/MessagePackGenerator.cs",
+          "line": 29,
+          "quote": "var generatedFormatters = context.SyntaxProvider.ForAttributeWithMetadataName("
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 118,
+          "quote": "IsUserDeclaredFormatter = true,"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypesTests.cs",
+          "line": 12,
+          "quote": "public void ContractlessClassRoundTrips()"
+        }
+      ],
+      "verifier_notes": "Execution tests build only when the generator writes the bodies (they fail to build on base).",
+      "evidence_level": "E3",
+      "status": "proven",
+      "evidence_refs": [
+        "runs/2129/timemachine.json#ContractlessClassRoundTrips"
+      ],
+      "adjudication": {
+        "rule": "E3: 1 test(s) fail on base and pass on head: ContractlessClassRoundTrips",
+        "flags": [],
+        "partially_refused": [
+          "R-2129-5"
+        ]
+      }
+    },
+    {
+      "id": "C2",
+      "requirement": "REQ-2129-F2",
+      "source": "requirement",
+      "verifier": "timemachine",
+      "text": "Without a surrogate, the generated formatter writes every public read-write instance property and field of T as a string-keyed map entry named after the member.",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 133,
+          "quote": "List<ISymbol> targets = GetInstanceMembers(type).Where(IsPublicReadWrite).OrderBy(m => m.Name, StringComparer.Ordinal).ToList();"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypesTests.cs",
+          "line": 24,
+          "quote": "public void ContractlessClassUsesStringKeysForPublicReadWriteMembers()"
+        }
+      ],
+      "verifier_notes": "Probe runs/2129/probe/*.txt compares the wire output with ContractlessStandardResolver.",
+      "evidence_level": "E3",
+      "status": "proven",
+      "evidence_refs": [
+        "runs/2129/timemachine.json#ContractlessClassUsesStringKeysForPublicReadWriteMembers"
+      ],
+      "adjudication": {
+        "rule": "E3: 1 test(s) fail on base and pass on head: ContractlessClassUsesStringKeysForPublicReadWriteMembers",
+        "flags": [],
+        "partially_refused": [
+          "R-2129-2"
+        ]
+      }
+    },
+    {
+      "id": "C3",
+      "requirement": "REQ-2129-F3",
+      "source": "requirement",
+      "verifier": "argued",
+      "text": "Attributes that are present on T are used for the wire contract.",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 91,
+          "quote": "members = CreateContractlessMembers(type);"
+        },
+        {
+          "path": "README.md",
+          "line": 1655,
+          "quote": "By default the formatter serializes the type in *contractless* mode"
+        }
+      ],
+      "verifier_notes": "The collector never reads attributes on T; only a surrogate type carries [Key] and [IgnoreMember]. The maintainer's reply asked for the attribute-first behaviour.",
+      "evidence_level": "E1",
+      "status": "refused",
+      "evidence_refs": [],
+      "adjudication": {
+        "rule": "E1: verifier 'argued' has no executed evidence (argued; citations validate)",
+        "flags": []
+      }
+    },
+    {
+      "id": "C4",
+      "requirement": "REQ-2129-F4",
+      "source": "requirement",
+      "verifier": "timemachine",
+      "text": "The generated resolver registers each generated formatter, so GeneratedMessagePackResolver.Instance returns it for the formatted type.",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 123,
+          "quote": "ObjectInfos = ImmutableSortedSet.Create(info),"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypesTests.cs",
+          "line": 89,
+          "quote": "public void GeneratedFormattersAreRegisteredInGeneratedResolver()"
+        }
+      ],
+      "evidence_level": "E3",
+      "status": "proven",
+      "evidence_refs": [
+        "runs/2129/timemachine.json#GeneratedFormattersAreRegisteredInGeneratedResolver"
+      ],
+      "adjudication": {
+        "rule": "E3: 1 test(s) fail on base and pass on head: GeneratedFormattersAreRegisteredInGeneratedResolver",
+        "flags": [],
+        "partially_refused": [
+          "R-2129-5"
+        ]
+      }
+    },
+    {
+      "id": "C5",
+      "requirement": "REQ-2129-NF1",
+      "source": "diff",
+      "verifier": "static",
+      "text": "The fixture assembly that declares the formatted types has no MessagePack reference, so the feature works without adding anything to the assembly that owns T.",
+      "citations": [
+        {
+          "path": "tests/MessagePack.SourceGenerator.ExternalTypes/MessagePack.SourceGenerator.ExternalTypes.csproj",
+          "line": 4,
+          "quote": "This assembly deliberately does NOT reference MessagePack."
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypesTests.cs",
+          "line": 37,
+          "quote": "public void ContractlessClassNullRoundTrips()"
+        }
+      ],
+      "evidence_level": "E1",
+      "status": "unproven",
+      "evidence_refs": [],
+      "adjudication": {
+        "rule": "E1: static claim, citations validate, no deterministic check implemented for it",
+        "flags": []
+      }
+    },
+    {
+      "id": "C6",
+      "requirement": "REQ-2129-NF2",
+      "source": "diff",
+      "verifier": "xray",
+      "text": "Hand-written formatters and existing generated formatters are unaffected: the exclusion in the formatter search only matches classes carrying the new attribute, and the template keeps 'internal sealed class' for every other formatter.",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/GeneratorUtilities.cs",
+          "line": 38,
+          "quote": "&& !symbol.GetAttributes().Any(a => a.AttributeClass?.ToDisplayString() =="
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/Transforms/FormatterTemplate.cs",
+          "line": 34,
+          "quote": "Info.IsUserDeclaredFormatter ? \"partial class\" : \"internal sealed class\""
+        }
+      ],
+      "evidence_level": "E2",
+      "status": "supported",
+      "evidence_refs": [
+        "runs/2129/xray.json#g1"
+      ],
+      "adjudication": {
+        "rule": "E2: all cited source hunks are load-bearing (h16); protected by a test, not an executed demonstration of the claim",
+        "flags": []
+      }
+    },
+    {
+      "id": "C7",
+      "requirement": "REQ-2129-NF3",
+      "source": "author-narrative",
+      "verifier": "argued",
+      "text": "The new attribute, the four analyzer diagnostics and the surrogate option are documented in the README, in per-diagnostic pages and in the analyzer release notes.",
+      "citations": [
+        {
+          "path": "README.md",
+          "line": 1639,
+          "quote": "### Formatters for types from other assemblies"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/AnalyzerReleases.Unshipped.md",
+          "line": 26,
+          "quote": "MsgPack019 | Usage | Error | Generated formatter must be partial"
+        },
+        {
+          "path": "doc/analyzers/index.md",
+          "line": 26,
+          "quote": "[MsgPack019](MsgPack019.md) | Generated formatter must be partial"
+        }
+      ],
+      "evidence_level": "E1",
+      "status": "unproven",
+      "evidence_refs": [],
+      "adjudication": {
+        "rule": "E1: verifier 'argued' has no executed evidence (argued; citations validate)",
+        "flags": []
+      }
+    },
+    {
+      "id": "C8",
+      "requirement": "REQ-2129-S1",
+      "source": "diff",
+      "verifier": "argued",
+      "text": "Only public read-write members are written. Read-only members and members with a non-public setter are skipped, and no diagnostic says so.",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 282,
+          "quote": "IFieldSymbol field => field.DeclaredAccessibility == Accessibility.Public && !field.IsReadOnly && !field.IsConst,"
+        },
+        {
+          "path": "README.md",
+          "line": 1656,
+          "quote": "Read-only members are skipped because they cannot be deserialized."
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.ExternalTypes/ExternalPerson.cs",
+          "line": 14,
+          "quote": "public int Doubled => this.Id * 2;"
+        }
+      ],
+      "evidence_level": "E1",
+      "status": "refused",
+      "evidence_refs": [],
+      "adjudication": {
+        "rule": "E1: verifier 'argued' has no executed evidence (argued; citations validate)",
+        "flags": []
+      }
+    },
+    {
+      "id": "C9",
+      "requirement": "REQ-2129-F1",
+      "source": "diff",
+      "verifier": "timemachine",
+      "text": "Misuse of the attribute is reported as a compile error: a non-partial formatter (MsgPack019), a class that does not implement IMessagePackFormatter<T> (MsgPack020), an abstract type (MsgPack021) and surrogate mismatches (MsgPack022, MsgPack005).",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 49,
+          "quote": "reportDiagnostic?.Invoke(Diagnostic.Create(MsgPack00xMessagePackAnalyzer.GeneratedFormatterMustBePartial, location, formatterName));"
+        },
+        {
+          "path": "src/MessagePack.SourceGenerator/MessagePackGenerator.cs",
+          "line": 131,
+          "quote": "context.RegisterSourceOutput(generatedFormatterDiagnostics, static (context, diagnostic) => context.ReportDiagnostic(diagnostic));"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GeneratedMessagePackFormatterTests.cs",
+          "line": 29,
+          "quote": "public async Task FormatterMustBePartial()"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.Tests/GeneratedMessagePackFormatterTests.cs",
+          "line": 173,
+          "quote": "public async Task SurrogateKeysMustNotMixStringAndInt()"
+        }
+      ],
+      "evidence_level": "E3",
+      "status": "proven",
+      "evidence_refs": [
+        "runs/2129/timemachine.json#FormatterMustBePartial",
+        "runs/2129/timemachine.json#SurrogateKeysMustNotMixStringAndInt"
+      ],
+      "adjudication": {
+        "rule": "E3: 2 test(s) fail on base and pass on head: FormatterMustBePartial, SurrogateKeysMustNotMixStringAndInt",
+        "flags": []
+      }
+    },
+    {
+      "id": "C10",
+      "requirement": "REQ-2129-F3",
+      "source": "diff",
+      "verifier": "timemachine",
+      "text": "A surrogate type's [Key] and [IgnoreMember] attributes decide which members are written and under which keys, with members matched by name and type.",
+      "citations": [
+        {
+          "path": "src/MessagePack.SourceGenerator/CodeAnalysis/GeneratedFormatterCollector.cs",
+          "line": 189,
+          "quote": "ISymbol? target = targetMembers.FirstOrDefault(m => m.Name == surrogateMember.Name);"
+        },
+        {
+          "path": "tests/MessagePack.SourceGenerator.ExecutionTests/GeneratedFormatterForExternalTypesTests.cs",
+          "line": 55,
+          "quote": "public void SurrogateControlsKeysAndMembership()"
+        }
+      ],
+      "evidence_level": "E3",
+      "status": "proven",
+      "evidence_refs": [
+        "runs/2129/timemachine.json#SurrogateControlsKeysAndMembership"
+      ],
+      "adjudication": {
+        "rule": "E3: 1 test(s) fail on base and pass on head: SurrogateControlsKeysAndMembership",
+        "flags": [],
+        "partially_refused": [
+          "R-2129-6"
+        ]
+      }
+    },
+    {
+      "id": "C11",
+      "requirement": "REQ-2129-NF3",
+      "source": "diff",
+      "verifier": "argued",
+      "text": "Adding the public attribute class GeneratedMessagePackFormatterAttribute to the MessagePack.Annotations assembly is additive and does not change existing public API.",
+      "citations": [
+        {
+          "path": "src/MessagePack.Annotations/Attributes.cs",
+          "line": 166,
+          "quote": "public class GeneratedMessagePackFormatterAttribute : Attribute"
+        },
+        {
+          "path": "src/MessagePack.Annotations/Attributes.cs",
+          "line": 176,
+          "quote": "public Type? SurrogateType { get; set; }"
+        }
+      ],
+      "evidence_level": "E1",
+      "status": "refused",
+      "evidence_refs": [],
+      "adjudication": {
+        "rule": "E1: verifier 'argued' has no executed evidence (argued; citations validate)",
+        "flags": []
+      }
+    }
+  ],
+  "uncovered_requirements": [],
+  "coverage_gaps": [
+    "The issue's second and third alternatives (user-defined attribute copies, generated attributes) are not implemented and not claimed.",
+    "No claim covers generic types, abstract types, unions or constructor-only types: the README lists them as unsupported and MsgPack021 / NoDeserializingConstructor reject them.",
+    "Only classes and structs with public members were exercised end to end; nested types, base-class members and indexers have no test."
+  ],
+  "adjudicated_at": "2026-11-14T23:55:26+02:00",
+  "adjudicator": "adjudicator-1",
+  "adjudication_note": "evidence_level and status are set by receipts/evidence/adjudicate.py from runs/ artifacts; the LLM-written original is runs/2129/claims.llm.json"
+}

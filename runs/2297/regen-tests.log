@@ -1,0 +1,46 @@
+Sat Nov 14 23:07:01 EET 2026
+
+  Determining projects to restore...
+/Users/andy/Downloads/Junction2/wt/2297-head/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+  Restored /Users/andy/Downloads/Junction2/wt/2297-head/src/MessagePack.Analyzers.CodeFixes/MessagePack.Analyzers.CodeFixes.csproj (in 2.33 sec).
+  Restored /Users/andy/Downloads/Junction2/wt/2297-head/src/MessagePack.Analyzers/MessagePack.Analyzers.csproj (in 2.34 sec).
+  Restored /Users/andy/Downloads/Junction2/wt/2297-head/src/MessagePack.Annotations/MessagePack.Annotations.csproj (in 2.33 sec).
+  Restored /Users/andy/Downloads/Junction2/wt/2297-head/src/MessagePack.SourceGenerator/MessagePack.SourceGenerator.csproj (in 2.33 sec).
+  Restored /Users/andy/Downloads/Junction2/wt/2297-head/src/MessagePack/MessagePack.csproj (in 2.33 sec).
+  Restored /Users/andy/Downloads/Junction2/wt/2297-head/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj (in 3.22 sec).
+
+Build succeeded.
+
+/Users/andy/Downloads/Junction2/wt/2297-head/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:07.77
+
+/Users/andy/Downloads/Junction2/wt/2297-head/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+  MessagePack.SourceGenerator -> /Users/andy/Downloads/Junction2/wt/2297-head/bin/MessagePack.SourceGenerator/Debug/netstandard2.0/MessagePack.SourceGenerator.dll
+  MessagePack.Analyzers.CodeFixes -> /Users/andy/Downloads/Junction2/wt/2297-head/bin/MessagePack.Analyzers.CodeFixes/Debug/netstandard2.0/MessagePack.Analyzers.CodeFixes.dll
+  MessagePack.Analyzers -> /Users/andy/Downloads/Junction2/wt/2297-head/bin/MessagePack.Analyzers/Debug/netstandard2.0/MessagePack.Analyzers.dll
+  MessagePack.Annotations -> /Users/andy/Downloads/Junction2/wt/2297-head/bin/MessagePack.Annotations/Debug/netstandard2.0/MessagePack.Annotations.dll
+  MessagePack -> /Users/andy/Downloads/Junction2/wt/2297-head/bin/MessagePack/Debug/net8.0/MessagePack.dll
+  MessagePack.SourceGenerator.Tests -> /Users/andy/Downloads/Junction2/wt/2297-head/bin/MessagePack.SourceGenerator.Tests/Debug/net8.0/MessagePack.SourceGenerator.Tests.dll
+Test run for /Users/andy/Downloads/Junction2/wt/2297-head/bin/MessagePack.SourceGenerator.Tests/Debug/net8.0/MessagePack.SourceGenerator.Tests.dll (.NETCoreApp,Version=v8.0)
+VSTest version 17.11.0 (arm64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+
+Passed!  - Failed:     0, Passed:    46, Skipped:     0, Total:    46, Duration: 9 s - MessagePack.SourceGenerator.Tests.dll (net8.0)
+
+Build succeeded.
+
+/Users/andy/Downloads/Junction2/wt/2297-head/tests/MessagePack.SourceGenerator.Tests/MessagePack.SourceGenerator.Tests.csproj : warning NU1901: Package 'NuGet.Protocol' 6.8.0 has a known low severity vulnerability, https://github.com/advisories/GHSA-g4vj-cjjj-v7hg
+    1 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:03:33.91
+
+real	3m41.968s
+user	0m31.170s
+sys	0m7.502s
+Sat Nov 14 23:10:43 EET 2026

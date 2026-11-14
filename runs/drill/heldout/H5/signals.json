@@ -1,0 +1,62 @@
+{
+  "canary": "H5",
+  "type": "false documentation claim",
+  "authored_by": "gemini-3.1-pro-preview",
+  "caught": true,
+  "by": [
+    "llm:claude"
+  ],
+  "by_family": {
+    "tests": false,
+    "deterministic-rules": false,
+    "gemini": false,
+    "claude": true
+  },
+  "location_only_secondary": {
+    "gemini": false,
+    "claude": true,
+    "any": true
+  },
+  "note": "Falsely claims that members of a type defined in a referenced assembly are reported by the consuming project, contradicting the actual behavior implemented in the PR.",
+  "tests": {
+    "ran": true,
+    "compiled": true,
+    "failing_tests": [],
+    "summary_line": "",
+    "outcome": "green",
+    "seconds": 92.0,
+    "log": "runs/drill/heldout/H5/tests.log"
+  },
+  "detectors": [],
+  "gemini": {
+    "caught": false,
+    "hits": [],
+    "near_but_off_target": [],
+    "n_findings": 1
+  },
+  "claude": {
+    "caught": true,
+    "hits": [
+      {
+        "path": "doc/analyzers/MsgPack004.md",
+        "line": 52,
+        "severity": "medium",
+        "issue": "The doc says members of a referenced type are reported 'by the project that consumes that type'. That is backwards: the README and the code comments say the defining project reports them. As written, it is misleading and contradicts C7."
+      }
+    ],
+    "near_but_off_target": [],
+    "n_findings": 6
+  },
+  "xray_routed_to_human_NOT_counted": {
+    "routed": false,
+    "why": "doc/analyzers/MsgPack004.md is not a src hunk; X-Ray only covers src hunks"
+  },
+  "evidence_refs": [
+    "runs/drill/heldout/H5/tests.json",
+    "runs/drill/heldout/H5/tests.log",
+    "runs/drill/heldout/H5/detectors.json",
+    "runs/drill/heldout/H5/gemini_review.json",
+    "runs/drill/heldout/H5/claude_findings.json",
+    "runs/drill/heldout/H5/review_input.diff"
+  ]
+}

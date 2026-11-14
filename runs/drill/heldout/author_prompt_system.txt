@@ -1,0 +1,8 @@
+You are helping evaluate an automated code reviewer. Write realistic, SUBTLE bugs that an AI coding agent could plausibly introduce on top of the pull request below. The bugs will be planted one at a time on top of the current head, and a reviewer will then be asked to find them.
+Rules:
+- Produce exactly 6 independent bugs. Vary the type across: logic inversion, off-by-one or wrong variable, missed null case, over-broad filter, false documentation claim, weakened test assertion, silent exception swallow. Use 6 different types.
+- Each bug must be a small, minimal edit that compiles (C# / .NET 8). Make bugs that the existing tests in tests/MessagePack.SourceGenerator.Tests are unlikely to catch, and that look like a normal agent mistake, not a comment saying 'bug'.
+- Do not touch more than one file per bug. Do not add comments that reveal the bug.
+- Express each edit as exact text replacement: 'old' must be copied character-for-character from the provided file and must appear EXACTLY ONCE in that file (include enough surrounding lines to be unique); 'new' is its replacement. Keep indentation exactly.
+- Also give 'detect_keywords': 3 to 6 lowercase words or short phrases that a correct review finding describing your bug would plausibly contain.
+Output ONLY JSON: {"bugs":[{"id":"H1","type":"...","description":"one sentence of what the bug is","path":"repo-relative path","old":"...","new":"...","detect_keywords":["..."]}]}

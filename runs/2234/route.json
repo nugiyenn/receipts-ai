@@ -1,0 +1,154 @@
+{
+  "change": "2234",
+  "lane": "L2",
+  "reasons": [
+    {
+      "rule": "areas",
+      "lane": "L2",
+      "why": "highest default lane of the touched areas"
+    },
+    {
+      "rule": "LR4",
+      "lane": "L2",
+      "why": "3 source hunk(s) unprotected by tests"
+    }
+  ],
+  "areas": [
+    "analyzer-core",
+    "docs",
+    "tests"
+  ],
+  "ceiling_areas": [],
+  "blast_radius": {
+    "threshold": 10,
+    "max_references": 0,
+    "top_symbol": null,
+    "per_hunk": {
+      "h2": [],
+      "h3": [],
+      "h4": [],
+      "h5": [],
+      "h6": [],
+      "h7": []
+    }
+  },
+  "flagged_hunks": {
+    "h1": [
+      "refusal R-2234-3 (R8-requirement-ambiguity)",
+      "refusal R-2234-3 (R8-requirement-ambiguity)",
+      "refusal R-2234-4 (R6-doc-overclaim)",
+      "claim C7 has only E1 evidence",
+      "claim C7 has only E1 evidence",
+      "claim C8 has only E1 evidence"
+    ],
+    "h2": [
+      "refusal R-2234-1 (R3-unverified-root-cause)",
+      "refusal R-2234-2 (R2-silent-suppression)",
+      "refusal R-2234-2 (R2-silent-suppression)",
+      "claim C6 has only E2 evidence",
+      "claim C6 has only E2 evidence"
+    ],
+    "h3": [
+      "claim C3 has only E1 evidence",
+      "claim C6 has only E2 evidence"
+    ],
+    "h5": [
+      "unprotected: reverting this hunk breaks no test",
+      "claim C3 has only E1 evidence"
+    ],
+    "h6": [
+      "unprotected: reverting this hunk breaks no test"
+    ],
+    "h7": [
+      "unprotected: reverting this hunk breaks no test"
+    ],
+    "h8": [
+      "claim C5 has only E1 evidence"
+    ],
+    "h9": [
+      "refusal R-2234-1 (R3-unverified-root-cause)",
+      "refusal R-2234-4 (R6-doc-overclaim)",
+      "claim C1 has only E1 evidence",
+      "claim C1 has only E1 evidence",
+      "claim C1 has only E1 evidence",
+      "claim C3 has only E1 evidence",
+      "claim C4 has only E1 evidence",
+      "claim C7 has only E1 evidence",
+      "claim C7 has only E1 evidence",
+      "claim C7 has only E1 evidence",
+      "claim C8 has only E1 evidence"
+    ]
+  },
+  "reading_budget": {
+    "lines": 97,
+    "hunks": 8,
+    "total_changed_lines": 266,
+    "ratio": 0.3647,
+    "basis": "line-level: flagged src/template hunks whole; doc/test hunks only lines near cited evidence gaps",
+    "inputs": {
+      "xray": true,
+      "regen": false,
+      "refusals": true,
+      "claims": true
+    },
+    "provisional": false,
+    "hunk_level_lines": 261
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "area": "docs",
+      "kind": "doc",
+      "lane": "L2",
+      "changed_lines": 14,
+      "flagged_hunks": [
+        "h1"
+      ]
+    },
+    {
+      "path": "src/MessagePack.SourceGenerator/CodeAnalysis/TypeCollector.cs",
+      "area": "analyzer-core",
+      "kind": "src",
+      "lane": "L2",
+      "changed_lines": 22,
+      "flagged_hunks": [
+        "h5",
+        "h6",
+        "h7",
+        "h2",
+        "h3"
+      ]
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.ExecutionTests/SuppressedSourceGenerationTests.cs",
+      "area": "tests",
+      "kind": "test",
+      "lane": "L2",
+      "changed_lines": 37,
+      "flagged_hunks": [
+        "h8"
+      ]
+    },
+    {
+      "path": "tests/MessagePack.SourceGenerator.Tests/SuppressSourceGenerationAnalyzerTests.cs",
+      "area": "tests",
+      "kind": "test",
+      "lane": "L2",
+      "changed_lines": 193,
+      "flagged_hunks": [
+        "h9"
+      ]
+    }
+  ],
+  "policy": {
+    "areas": "areas-1",
+    "routing": "routing-1"
+  },
+  "budget_note": {
+    "headline_line_level": 97,
+    "hunk_level": 261,
+    "regen_ceiling": null,
+    "explanation": "Headline 97 of 266 changed lines is the line-level budget (route.json). 261 is the same flags counted as whole hunks.",
+    "derived_by": "receipts/budget.py"
+  }
+}

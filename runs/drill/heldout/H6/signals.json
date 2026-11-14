@@ -1,0 +1,62 @@
+{
+  "canary": "H6",
+  "type": "silent exception swallow",
+  "authored_by": "gemini-3.1-pro-preview",
+  "caught": true,
+  "by": [
+    "llm:claude"
+  ],
+  "by_family": {
+    "tests": false,
+    "deterministic-rules": false,
+    "gemini": false,
+    "claude": true
+  },
+  "location_only_secondary": {
+    "gemini": false,
+    "claude": true,
+    "any": true
+  },
+  "note": "Swallows the compilation failure by removing the exception throw and instead just logging to the console, which will cause downstream failures when trying to use the invalid image.",
+  "tests": {
+    "ran": true,
+    "compiled": true,
+    "failing_tests": [],
+    "summary_line": "",
+    "outcome": "green",
+    "seconds": 85.7,
+    "log": "runs/drill/heldout/H6/tests.log"
+  },
+  "detectors": [],
+  "gemini": {
+    "caught": false,
+    "hits": [],
+    "near_but_off_target": [],
+    "n_findings": 2
+  },
+  "claude": {
+    "caught": true,
+    "hits": [
+      {
+        "path": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs",
+        "line": 670,
+        "severity": "medium",
+        "issue": "A failed compilation of the referenced assembly only calls Console.WriteLine and the test continues. The test can then pass against an invalid or empty reference, which gives false confidence. It should assert emitResult.Success."
+      }
+    ],
+    "near_but_off_target": [],
+    "n_findings": 8
+  },
+  "xray_routed_to_human_NOT_counted": {
+    "routed": false,
+    "why": "tests/MessagePack.SourceGenerator.Tests/GenericsFormatterTests.cs is not a src hunk; X-Ray only covers src hunks"
+  },
+  "evidence_refs": [
+    "runs/drill/heldout/H6/tests.json",
+    "runs/drill/heldout/H6/tests.log",
+    "runs/drill/heldout/H6/detectors.json",
+    "runs/drill/heldout/H6/gemini_review.json",
+    "runs/drill/heldout/H6/claude_findings.json",
+    "runs/drill/heldout/H6/review_input.diff"
+  ]
+}
